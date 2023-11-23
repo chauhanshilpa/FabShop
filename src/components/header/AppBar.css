@@ -1,0 +1,9 @@
+.navbar {
+  background-color: #CD5C08 !important;
+}
+
+.cart-icon, .app-logo{
+  margin: 10px;
+  cursor: pointer;
+}
+
