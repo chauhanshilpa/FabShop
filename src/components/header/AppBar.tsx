@@ -3,7 +3,6 @@ import "./AppBar.css";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,10 +14,13 @@ import MenuItem from "@mui/material/MenuItem";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import Badge, { BadgeProps } from "@mui/material/Badge";
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link, NavLink } from "react-router-dom";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Men", "Women", "Kids"];
+const actions = ["Profile", "Wishlists", "Orders", "Logout"];
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -65,6 +67,15 @@ function ResponsiveAppBar() {
     null
   );
 
+  const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      right: 6,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }));
+
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -88,7 +99,7 @@ function ResponsiveAppBar() {
   }
 
   return (
-    <AppBar position="static" className="navbar">
+    <AppBar position="sticky" className="navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* for small screen */}
@@ -122,9 +133,13 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <Link to={`/category/${page}`} key={page}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center" sx={{ color: "black" }}>
+                      {page}
+                    </Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -133,42 +148,47 @@ function ResponsiveAppBar() {
               display: { xs: "flex", md: "none" },
             }}
           >
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: "500",
-              }}
-              className="app-logo"
-            >
-              FabShop
-            </Typography>
+            <NavLink to="/">
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: "500",
+                }}
+                className="app-logo"
+              >
+                FabShop
+              </Typography>
+            </NavLink>
           </Box>
-          {/* for medium screen */}
+          {/* for other larger screens */}
           <Box
             sx={{
               display: { xs: "none", md: "flex" },
               mr: 1,
             }}
           >
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: "500",
-              }}
-              className="app-logo"
-            >
-              FabShop
-            </Typography>
+            <NavLink to="/">
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: "500",
+                }}
+                className="app-logo"
+              >
+                FabShop
+              </Typography>
+            </NavLink>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
+              <NavLink to={`/category/${page}`} key={page}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              </NavLink>
             ))}
           </Box>
           <Search>
@@ -182,9 +202,13 @@ function ResponsiveAppBar() {
               onChange={handleNavbarSearchChange}
             />
           </Search>
-          <AddShoppingCartOutlinedIcon className="cart-icon" />
+          <IconButton aria-label="cart">
+            <StyledBadge badgeContent={1} color="primary">
+              <ShoppingCartIcon className="cart-icon" />
+            </StyledBadge>
+          </IconButton>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="user actions">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Username" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -205,10 +229,14 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+              {actions.map((action) => (
+                <Link to={`/user/${action}`} key={action}>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center" sx={{ color: "black" }}>
+                      {action}
+                    </Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>

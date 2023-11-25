@@ -55,7 +55,20 @@ import img_54 from "./images/img_54.jpg";
 import img_55 from "./images/img_55.jpg";
 import img_56 from "./images/img_56.jpg";
 
-export const products = [
+interface product {
+  id: number;
+  category: string;
+  sub_category: string;
+  type: string;
+  price: number;
+  image: string;
+  name: string;
+  description: string;
+  shipping_charge: number;
+  ratings: number;
+  colors: string[];
+}
+export const products: product[] = [
   {
     id: 1,
     category: "Men",
