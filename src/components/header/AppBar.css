@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #CD5C08;
+  background-color: #cd5c08;
 }
 
 .cart-icon {
@@ -8,7 +8,7 @@
   color: white;
 }
 
-.app-logo{
+.app-logo {
   margin: 0.625rem;
   color: white;
 }
@@ -19,10 +19,10 @@ a {
 
 /* these are the classes for mui badge, that I saw in Elements(dev tools)*/
 .css-10iycjc-MuiBadge-root .MuiBadge-badge {
- border: unset;
+  border: unset;
 }
 
-.css-106c1u2-MuiBadge-badge{
+.css-106c1u2-MuiBadge-badge {
   background-color: #f8f07a;
-  color: black
+  color: black;
 }

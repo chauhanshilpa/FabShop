@@ -8,20 +8,10 @@ import banner3 from "../../assets/images/coming soon.jpg";
 const ReactCarousel = () => {
   return (
     <div className="slider-container">
-      <Carousel
-        className="home-carousel"
-        showArrows={true}
-        showThumbs={false}
-      >
-        <div>
-          <img src={banner1} alt="special offer" />
-          </div>
-        <div>
-          <img src={banner2} alt="fashion collection for women" />
-        </div>
-        <div>
-          <img src={banner3} alt="coming soon..." />
-        </div>
+      <Carousel className="home-carousel" showArrows={true} showThumbs={false}>
+        <img src={banner1} alt="special offer" />
+        <img src={banner2} alt="fashion collection for women" />
+        <img src={banner3} alt="coming soon..." />
       </Carousel>
     </div>
   );

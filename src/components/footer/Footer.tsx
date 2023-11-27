@@ -24,25 +24,25 @@ const defaultTheme = createTheme();
 export default function StickyFooter() {
   return (
     <ThemeProvider theme={defaultTheme}>
-        <Box
-          component="footer"
-          sx={{
-            py: 3,
-            px: 2,
-            mt: 2,
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[200]
-                : theme.palette.grey[800],
-          }}
-        >
-          <Container maxWidth="sm">
-            <Typography variant="body1">
-              My sticky footer can be found here.
-            </Typography>
-            <Copyright />
-          </Container>
-        </Box>
+      <Box
+        component="footer"
+        sx={{
+          py: 3,
+          px: 2,
+          mt: 2,
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light"
+              ? theme.palette.grey[200]
+              : theme.palette.grey[800],
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography variant="body1">
+            My sticky footer can be found here.
+          </Typography>
+          <Copyright />
+        </Container>
+      </Box>
     </ThemeProvider>
   );
 }
