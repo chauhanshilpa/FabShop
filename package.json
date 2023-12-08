@@ -16,6 +16,7 @@
     "@types/node": "^16.18.62",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@types/uuid": "^9.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
@@ -24,6 +25,7 @@
     "react-scripts": "5.0.1",
     "styled-components": "^6.1.1",
     "typescript": "^4.9.5",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

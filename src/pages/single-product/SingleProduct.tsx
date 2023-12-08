@@ -1,9 +1,8 @@
-import "./Product.css";
+import "./SingleProduct.css";
 import { useParams } from "react-router";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
-import { products } from "../../assets/all_products";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -12,12 +11,19 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Button from "@mui/material/Button";
+import { Product, Image } from "../../server/classModels";
 
-const Product = () => {
-  const { id } = useParams();
-  const productId: number = parseInt(id ?? "");
-  const filteredProduct = products.filter(
-    (product) => product.id === productId
+interface Props {
+  allProducts: Product[];
+  allImages: {[key: string] : Image}
+}
+
+const SingleProduct = ({allProducts, allImages}: Props) => {
+
+  const { product_id } = useParams();
+
+  const filteredProduct = allProducts.filter(
+    (product) => product.product_id === product_id
   )[0];
 
   return (
@@ -25,7 +31,7 @@ const Product = () => {
       <Container>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid xs={12} sm={6} className="product-image">
-            <img src={filteredProduct.image} alt="product" />
+            <img src={allImages[filteredProduct.image_id]["url"]} alt="product" />
           </Grid>
           <Grid xs={12} sm={6} className="product-data">
             <Typography
@@ -59,38 +65,15 @@ const Product = () => {
               <Typography>{filteredProduct.price}</Typography>
             </Box>
             <Divider />
-            <Box
-              sx={{
-                display: "flex",
-              }}
-              className="common-style box"
-            >
-              <Typography fontWeight="fontWeightBold" className="item-padding">
-                Shipping charge:
-              </Typography>
-              <Typography className="item-padding">
-                {filteredProduct.shipping_charge}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-              }}
-              className="common-style box"
-            >
-              <Typography fontWeight="fontWeightBold" className="item-padding">
-                Available colors:
-              </Typography>
-              <Typography className="item-padding">
-                {filteredProduct.colors.map((color) => color + ", ")}
-              </Typography>
-            </Box>
             <Box className="buttons common-style">
-              <Button className="button" variant="contained">
+              <Button className="add-to-cart-button" variant="contained">
                 Add to cart
               </Button>
-              <Button className="button" variant="contained">
-                Wishlist
+              <Button
+                className="add-to-wishlist-button"
+                variant="contained"
+              >
+                wishlist
               </Button>
             </Box>
             <Divider />
@@ -127,4 +110,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default SingleProduct;

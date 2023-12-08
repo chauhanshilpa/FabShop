@@ -1,12 +1,20 @@
 import ProductList from "../components/productList/ProductList";
 import Carousel from "../components/carousel/Carousel";
-import banner from "../assets/images/thank_you.jpg";
+import banner from "../server/assets/images/thank_you.jpg";
+import { Product } from "../server/classModels";
+import { Image } from "../server/classModels";
 
-const Home = () => {
+const Home = ({
+  allProducts,
+  allImages,
+}: {
+  allProducts: Product[];
+  allImages: { [key: string]: Image };
+}) => {
   return (
     <>
       <Carousel />
-      <ProductList />
+      <ProductList allProducts={allProducts} allImages={allImages} />
       <img
         src={banner}
         alt="Thank you"

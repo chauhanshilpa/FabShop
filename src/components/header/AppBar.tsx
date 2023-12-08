@@ -58,6 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 function ResponsiveAppBar() {
   const [navbarSearchInput, setNavbarSearchInput] = useState("");
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -203,7 +204,7 @@ function ResponsiveAppBar() {
             />
           </Search>
           <IconButton aria-label="cart">
-            <StyledBadge badgeContent={1} color="primary">
+            <StyledBadge badgeContent={0} color="primary">
               <ShoppingCartIcon className="cart-icon" />
             </StyledBadge>
           </IconButton>

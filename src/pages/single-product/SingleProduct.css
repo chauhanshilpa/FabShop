@@ -38,10 +38,18 @@ li {
   margin-bottom: 1rem;
 }
 
-.button {
+.add-to-cart-button, .add-to-wishlist-button {
   background-color: #ffaf03;
 }
 
-.button:hover {
+.add-to-cart-button:hover, .add-to-wishlist-button:hover {
   background-color: #ffc436;
+}
+
+.button-is-clicked{
+  background-color: rgb(255, 0, 89)
+}
+
+.button-is-clicked:hover{
+  background-color: rgb(248, 91, 146)
 }

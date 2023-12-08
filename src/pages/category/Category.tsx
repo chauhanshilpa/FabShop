@@ -1,16 +1,23 @@
-import "./Category.css"
+import "./Category.css";
 import { useParams } from "react-router";
-import { products } from "../../assets/all_products";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import ProductCard from "../../components/productCard/ProductCard";
-import KidsBanner from "../../assets/images/kids_banner.jpg";
-import WomenBanner from "../../assets/images/women_banner.jpg";
-import MenBanner from "../../assets/images/men_banner.jpg";
+import KidsBanner from "../../server/assets/images/kids_banner.jpg";
+import WomenBanner from "../../server/assets/images/women_banner.jpg";
+import MenBanner from "../../server/assets/images/men_banner.jpg";
+import { Product, Image } from "../../server/classModels";
 
-const Category = () => {
+interface Props {
+  allProducts: Product[];
+  allImages: { [key: string]: Image };
+}
+
+const Category = ({ allProducts, allImages }: Props) => {
   let { page } = useParams();
-  const filteredProducts = products.filter(({ category }) => category === page);
+  const filteredProducts = allProducts.filter(
+    ({ category }) => category === page
+  );
 
   return (
     <>
@@ -30,17 +37,20 @@ const Category = () => {
       </div>
       <Container className="product-cards-container">
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {filteredProducts.map(({ id, name, description, image, price }) => (
-            <Grid item xs={6} sm={6} md={4} lg={3} xl={3} key={id}>
-              <ProductCard
-                id={id}
-                name={name}
-                image={image}
-                description={description}
-                price={price}
-              />
-            </Grid>
-          ))}
+          {filteredProducts.map(
+            ({ product_id, name, description, image_id, price }) => (
+              <Grid item xs={6} sm={6} md={4} lg={3} xl={3} key={product_id}>
+                <ProductCard
+                  allImages={allImages}
+                  product_id={product_id}
+                  name={name}
+                  image_id={image_id}
+                  description={description}
+                  price={price}
+                />
+              </Grid>
+            )
+          )}
         </Grid>
       </Container>
     </>
