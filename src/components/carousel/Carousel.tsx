@@ -1,17 +1,24 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import "./Carousel.css";
-import banner1 from "../../server/assets/images/special offer.jpg";
-import banner2 from "../../server/assets/images/fashion_collection_for_women.jpg";
-import banner3 from "../../server/assets/images/coming soon.jpg";
+import Image from "../image/Image";
 
 const ReactCarousel = () => {
   return (
     <div className="slider-container">
       <Carousel className="home-carousel" showArrows={true} showThumbs={false}>
-        <img src={banner1} alt="special offer" />
-        <img src={banner2} alt="fashion collection for women" />
-        <img src={banner3} alt="coming soon..." />
+        <Image
+          src="https://drive.google.com/uc?export=view&id=1HubrIW6Wek8lETxbZJ2q5Tztn8TvLqKy"
+          alt="special-offer"
+        />
+        <Image
+          src="https://drive.google.com/uc?export=view&id=11Sr6EgwMAZy1Va_oSKiGKEbUynCYT3Ca"
+          alt="fashion collection for women"
+        />
+        <Image
+          src="https://drive.google.com/uc?export=view&id=1d1ahHa1BINu5xnxbdrjkuEfmNX7SfZdy"
+          alt="coming soon..."
+        />
       </Carousel>
     </div>
   );
