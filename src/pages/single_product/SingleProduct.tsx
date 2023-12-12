@@ -12,13 +12,24 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Button from "@mui/material/Button";
 import Image from "../../components/image/Image";
+import { Product } from "../../api/classModels";
+import {addItemToWishlist} from "../../api/api";
 
-const SingleProduct = () => {
+interface Props {
+  setWishlist: (val: Product[]) => void;
+}
+
+const SingleProduct = ({setWishlist}: Props) => {
   const { state } = useLocation();
   const product = state?.product;
 
+  function handleWishlist(){
+    const response = addItemToWishlist(product)
+     setWishlist(response)
+  }
+
   return (
-    <Box>
+    <Box className="single-product">
       <Container>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid xs={12} sm={6} className="product-image">
@@ -60,7 +71,7 @@ const SingleProduct = () => {
               <Button className="add-to-cart-button" variant="contained">
                 Add to cart
               </Button>
-              <Button className="add-to-wishlist-button" variant="contained">
+              <Button className="add-to-wishlist-button" variant="contained" onClick={handleWishlist}>
                 wishlist
               </Button>
             </Box>

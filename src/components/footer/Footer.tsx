@@ -9,21 +9,27 @@ function Copyright() {
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
 
-export default function StickyFooter() {
+const Footer = () => {
   return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "30vh",
+      }}
+    >
       <Box
         component="footer"
         sx={{
           py: 3,
           px: 2,
-          mt: 2,
+          mt: "auto",
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
               ? theme.palette.grey[200]
@@ -32,10 +38,12 @@ export default function StickyFooter() {
       >
         <Container maxWidth="sm">
           <Typography variant="body1">
-            This is Footer of FabShop.
+            My sticky footer can be found here.
           </Typography>
           <Copyright />
         </Container>
       </Box>
+     </Box>
   );
-}
+};
+export default Footer;

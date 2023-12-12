@@ -1,7 +1,11 @@
+import { Product } from "./classModels";
+
 // all logic that a backend do
-import React from 'react'
 
+let wishlists: Product[] = [];
 
-
-export {}
+export function addItemToWishlist(product: Product) {
+  wishlists.push(product);
+  return wishlists;
+}
 

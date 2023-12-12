@@ -6,10 +6,10 @@ import { Product } from "../../api/classModels";
 
 const ProductList = ({ allProducts }: { allProducts: Product[] }) => {
   return (
-    <Container className="product-cards">
+    <Container>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {allProducts.slice(0, 24).map((product) => (
-          <Grid item xs={6} sm={6} md={4} lg={3} xl={3} key={product.id}>
+          <Grid item xs={6} sm={6} md={3} lg={3} xl={3} key={product.id}>
             <ProductCard product={product} />
           </Grid>
         ))}

@@ -3,6 +3,7 @@
   margin-bottom: 2rem;
 }
 
+/* get this class name from elements in developer tools */
 .carousel .slide img {
   max-height: 22rem;
   width: 100%;

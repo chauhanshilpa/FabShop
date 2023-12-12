@@ -1,0 +1,33 @@
+.wishlist-card {
+  margin-top: 1rem;
+}
+
+.wishlist-card .card-media {
+    position: relative;
+}
+
+.wishlist-card .remove-item{
+  position: absolute;
+  color: rgb(135, 135, 135);
+  right:0;
+  margin: 5px;
+}
+
+.wishlist-card .remove-item:hover{
+  color: rgb(166, 165, 165);
+}
+
+.wishlist-card .card-media img {
+  height: 200px;
+  object-fit: fill; 
+  display: block;
+}
+
+.wishlist-card .add-to-cart-button {
+  width: 100%;
+  background-color: #ffaf03;
+}
+
+.wishlist-card .add-to-cart-button:hover {
+  background-color: #ffc436;
+}

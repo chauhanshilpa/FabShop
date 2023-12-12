@@ -1,0 +1,8 @@
+.empty-wishlist-container {
+  height: 80vh;
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
