@@ -1,8 +1,22 @@
 .empty-wishlist-container {
-  height: 80vh;
-  background-color: aqua;
+   position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+}
+
+.empty-wishlist-container img {
+  position: relative;
+  object-fit: fill;
+  max-height: 90vh;
+  opacity: 0.4;
+}
+
+.empty-wishlist-container .empty-wishlist-text {
+  width: 20rem;
+  height: 20rem;
+  position: absolute;
+  text-align: right;
+  right: 0;
+  margin-right: 6.25rem;
+  color: #cd5c08;
 }

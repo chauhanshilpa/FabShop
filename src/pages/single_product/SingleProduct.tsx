@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import "./SingleProduct.css";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -11,22 +12,45 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Button from "@mui/material/Button";
-import Image from "../../components/image/Image";
+import Image from "../../components/display_Image/Image";
 import { Product } from "../../api/classModels";
-import {addItemToWishlist} from "../../api/api";
+import {
+  addItemToWishlist,
+  removeItemFromWishlist,
+  getWishlist,
+} from "../../api/api";
 
 interface Props {
-  setWishlist: (val: Product[]) => void;
+  activeUserId: string;
+  setWishlist: (value: React.SetStateAction<Product[]>) => void;
 }
 
-const SingleProduct = ({setWishlist}: Props) => {
-  const { state } = useLocation();
-  const product = state?.product;
+const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
+  const [isProductInWishlist, setIsProductInWishlist] = useState(false);
 
-  function handleWishlist(){
-    const response = addItemToWishlist(product)
-     setWishlist(response)
+  const { state } = useLocation();
+  const product: Product = state?.product;
+  let { product_id } = useParams();
+  const productId: string = product_id!;
+
+  async function handleWishlist() {
+    if (isProductInWishlist) {
+      await removeItemFromWishlist(activeUserId, productId);
+    } else {
+      await addItemToWishlist(activeUserId, productId);
+    }
+    const response = await getWishlist(activeUserId);
+    setWishlist(response);
   }
+
+  useEffect(() => {
+    async function isWishlistIncludesProduct() {
+      const response = await getWishlist(activeUserId);
+      const isWishlisted = response.some((product) => product.id === productId);
+      setIsProductInWishlist(isWishlisted);
+    }
+    isWishlistIncludesProduct();
+  });
 
   return (
     <Box className="single-product">
@@ -71,8 +95,14 @@ const SingleProduct = ({setWishlist}: Props) => {
               <Button className="add-to-cart-button" variant="contained">
                 Add to cart
               </Button>
-              <Button className="add-to-wishlist-button" variant="contained" onClick={handleWishlist}>
-                wishlist
+              <Button
+                className={`add-to-wishlist-button ${
+                  isProductInWishlist && "button-is-clicked"
+                }`}
+                variant="contained"
+                onClick={handleWishlist}
+              >
+                {isProductInWishlist ? "wishlisted" : "wishlist"}
               </Button>
             </Box>
             <Divider />

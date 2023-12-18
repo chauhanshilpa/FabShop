@@ -18,6 +18,7 @@ function Copyright() {
 const Footer = () => {
   return (
     <Box
+      className="footer"
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -43,7 +44,7 @@ const Footer = () => {
           <Copyright />
         </Container>
       </Box>
-     </Box>
+    </Box>
   );
 };
 export default Footer;
