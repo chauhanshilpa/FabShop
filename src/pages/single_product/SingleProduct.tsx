@@ -43,6 +43,10 @@ const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
     setWishlist(response);
   }
 
+  async function handleCart() {
+    //change
+  }
+
   useEffect(() => {
     async function isWishlistIncludesProduct() {
       const response = await getWishlist(activeUserId);
@@ -92,7 +96,7 @@ const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
             </Box>
             <Divider />
             <Box className="buttons common-style">
-              <Button className="add-to-cart-button" variant="contained">
+              <Button className="add-to-cart-button" variant="contained" onClick={handleCart}>
                 Add to cart
               </Button>
               <Button

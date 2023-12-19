@@ -1,4 +1,5 @@
 import "./WishlistedItemCard.css";
+import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -17,6 +18,8 @@ interface Props {
 }
 
 const WishlistCard = ({ activeUserId, product, setWishlist }: Props) => {
+  const navigate = useNavigate();
+
   async function handleRemoveItemFromWishlist() {
     await removeItemFromWishlist(activeUserId, product.id);
     const response = await getWishlist(activeUserId);
@@ -27,6 +30,10 @@ const WishlistCard = ({ activeUserId, product, setWishlist }: Props) => {
     console.log("Item added to cart");
   }
 
+  function showProduct(navigate: Function, product_id: string) {
+    navigate(`/product/${product_id}`, { state: { product } });
+  }
+
   return (
     <Card sx={{ maxWidth: 250 }} className="wishlist-card">
       <Box className="card-media">
@@ -34,7 +41,9 @@ const WishlistCard = ({ activeUserId, product, setWishlist }: Props) => {
           className="remove-item"
           onClick={handleRemoveItemFromWishlist}
         />
-        <Image src={product.image.url} alt={product.name} />
+        <Box onClick={() => showProduct(navigate, product.id)}>
+          <Image src={product.image.url} alt={product.name} />
+        </Box>
       </Box>
       <CardContent>
         <Typography variant="body1" color="text.secondary">

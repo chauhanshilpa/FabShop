@@ -143,11 +143,13 @@ function Navbar() {
             ))}
           </Box>
           <SearchBar />
-          <IconButton aria-label="cart">
-            <StyledBadge badgeContent={0} color="primary">
-              <ShoppingCartIcon className="cart-icon" />
-            </StyledBadge>
-          </IconButton>
+          <NavLink to="/cart">
+            <IconButton aria-label="cart">
+              <StyledBadge badgeContent={0} color="primary">
+                <ShoppingCartIcon className="cart-icon" />
+              </StyledBadge>
+            </IconButton>
+          </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="user actions">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

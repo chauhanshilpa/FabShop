@@ -7,7 +7,8 @@ import Category from "./pages/category/Category";
 import SingleProduct from "./pages/single_product/SingleProduct";
 import Profile from "./pages/profile/Profile";
 import Wishlist from "./pages/wishlist/Wishlist";
-import Orders from "./pages/all_orders/Orders";
+import Orders from "./pages/orders/Orders";
+import Cart from "./pages/cart/Cart";
 import Footer from "./components/footer/Footer";
 import { products } from "./api/assets/productsData";
 import { Product } from "./api/classModels";
@@ -81,6 +82,7 @@ function App() {
           }
         />
         <Route path="/user/Orders" element={<Orders />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </BrowserRouter>
