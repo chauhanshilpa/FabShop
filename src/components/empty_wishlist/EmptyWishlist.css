@@ -1,13 +1,12 @@
 .empty-wishlist-container {
-   position: relative;
+  position: relative;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .empty-wishlist-container img {
   position: relative;
   object-fit: fill;
-  max-height: 90vh;
   opacity: 0.4;
 }
 

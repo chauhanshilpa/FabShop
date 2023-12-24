@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 
 const Profile = () => {
   return (
-    <Box>
+    <Box className="main">
       <Container>This is profile of user</Container>
     </Box>
   );

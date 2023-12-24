@@ -10,7 +10,7 @@
   position: absolute;
   color: rgb(190, 187, 187);
   right:0;
-  margin: 5px;
+  margin: 0.313rem;
 }
 
 .wishlist-card .remove-item:hover{
@@ -18,7 +18,7 @@
 }
 
 .wishlist-card .card-media img {
-  height: 200px;
+  height: 12.5rem;
   object-fit: fill; 
   display: block;
 }

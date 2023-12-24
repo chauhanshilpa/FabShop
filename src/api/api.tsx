@@ -1,12 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
-import { products } from "./assets/productsData";
+import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product } from "./classModels";
 
 // all logic that a backend will do
 
 let usersList: User[] = [];
-let allProducts: Product[] = [...products];
+let allProducts: Product[] = [...STARTING_PRODUCTS];
 let wishlist: Product[] = [];
+let cartProductsList: Product[] = [];
 
 export async function addNewUser(
   email: string,
@@ -55,6 +56,20 @@ export async function removeItemFromWishlist(
 }
 
 export async function getWishlist(userId: string) {
-  let newWishlist = [...wishlist];
+  const newWishlist = [...wishlist];
   return newWishlist;
+}
+
+export async function addItemToCart(userId: string, productId: string ){
+ const product = allProducts.filter((product) => product.id === productId)[0];
+ cartProductsList.push(product);
+}
+
+export async function removeItemFromCart() {
+  //todo
+}
+
+export async function getCartProductsList(userId:string) {
+  const newCartProductsList = [...cartProductsList]
+  return newCartProductsList;
 }

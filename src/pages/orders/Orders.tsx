@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 
 const Orders = () => {
   return (
-    <Box>
+    <Box className="main">
       <Container>These are your orders</Container>
     </Box>
   );

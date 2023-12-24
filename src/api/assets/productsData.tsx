@@ -1,6 +1,6 @@
 import { Product } from "../classModels";
 
-export const products: Product[] = [
+export const STARTING_PRODUCTS: Product[] = [
   {
     id: "7e0478cc-decc-432b-92e4-6dfc78c25222",
     category: "Men",

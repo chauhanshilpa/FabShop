@@ -15,11 +15,11 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Card
       sx={{ maxWidth: 345 }}
-      className="card"
+      className="product-card"
       onClick={() => showProduct(navigate, product.id)}
     >
       <CardMedia
-        sx={{ height: 330 }}
+        // sx={{ height: 330 }}
         image={product.image.url}
         title="product card"
         className="card-image"
@@ -28,7 +28,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         <Typography gutterBottom variant="h6" component="div">
           {product.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography className="product-description" variant="body2" color="text.secondary">
           {product.description}
         </Typography>
         <Typography color="text.secondary" className="pricing">

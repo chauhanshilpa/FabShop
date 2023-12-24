@@ -18,14 +18,21 @@ import {
   addItemToWishlist,
   removeItemFromWishlist,
   getWishlist,
+  addItemToCart,
+  getCartProductsList,
 } from "../../api/api";
 
 interface Props {
   activeUserId: string;
-  setWishlist: (value: React.SetStateAction<Product[]>) => void;
+  setWishlistProductsList: (value: React.SetStateAction<Product[]>) => void;
+  setCartProductsList: (value: React.SetStateAction<Product[]>) => void;
 }
 
-const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
+const SingleProduct = ({
+  activeUserId,
+  setWishlistProductsList,
+  setCartProductsList,
+}: Props) => {
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
 
   const { state } = useLocation();
@@ -40,11 +47,13 @@ const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
       await addItemToWishlist(activeUserId, productId);
     }
     const response = await getWishlist(activeUserId);
-    setWishlist(response);
+    setWishlistProductsList(response);
   }
 
-  async function handleCart() {
-    //change
+  async function addToCart() {
+    await addItemToCart(activeUserId, productId);
+    const response = await getCartProductsList(activeUserId);
+    setCartProductsList(response)
   }
 
   useEffect(() => {
@@ -57,7 +66,7 @@ const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
   });
 
   return (
-    <Box className="single-product">
+    <Box className="single-product main">
       <Container>
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid xs={12} sm={6} className="product-image">
@@ -72,7 +81,10 @@ const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
               {product.name}
             </Typography>
             <Divider />
-            <Typography variant={"body1"} className="common-style item-padding">
+            <Typography
+              variant={"body1"}
+              className="product-description common-style item-padding"
+            >
               {product.description}
             </Typography>
             <Box sx={{ display: "flex" }} className="box common-style">
@@ -87,7 +99,7 @@ const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
                 name="read-only"
                 value={product.ratings}
                 readOnly
-                className="item-padding"
+                className="rating item-padding"
               />
             </Box>
             <Box sx={{ display: "flex" }} className="common-style box">
@@ -96,7 +108,11 @@ const SingleProduct = ({ activeUserId, setWishlist }: Props) => {
             </Box>
             <Divider />
             <Box className="buttons common-style">
-              <Button className="add-to-cart-button" variant="contained" onClick={handleCart}>
+              <Button
+                className="add-to-cart-button"
+                variant="contained"
+                onClick={addToCart}
+              >
                 Add to cart
               </Button>
               <Button

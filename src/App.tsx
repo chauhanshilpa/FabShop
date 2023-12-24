@@ -10,14 +10,19 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import Orders from "./pages/orders/Orders";
 import Cart from "./pages/cart/Cart";
 import Footer from "./components/footer/Footer";
-import { products } from "./api/assets/productsData";
+import { STARTING_PRODUCTS } from "./api/assets/productsData";
 import { Product } from "./api/classModels";
 import { addNewUser, getActiveUserId } from "./api/api";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
-  const [allProducts, setAllProducts] = useState([...products]);
-  const [wishlist, setWishlist] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([
+    ...STARTING_PRODUCTS,
+  ]);
+  const [wishlistProductsList, setWishlistProductsList] = useState<Product[]>(
+    []
+  );
+  const [cartProductsList, setCartProductsList] = useState<Product[]>([]);
 
   //these values are hard coded as for now
   const email: string = "user@gmail.com";
@@ -65,8 +70,9 @@ function App() {
           path="/product/:product_id"
           element={
             <SingleProduct
-              setWishlist={setWishlist}
               activeUserId={activeUserId}
+              setWishlistProductsList={setWishlistProductsList}
+              setCartProductsList={setCartProductsList}
             />
           }
         />
@@ -76,13 +82,16 @@ function App() {
           element={
             <Wishlist
               activeUserId={activeUserId}
-              wishlist={wishlist}
-              setWishlist={setWishlist}
+              wishlistProductsList={wishlistProductsList}
+              setWishlistProductsList={setWishlistProductsList}
             />
           }
         />
         <Route path="/user/Orders" element={<Orders />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/cart"
+          element={<Cart cartProductsList={cartProductsList} />}
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

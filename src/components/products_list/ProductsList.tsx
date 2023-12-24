@@ -1,4 +1,3 @@
-import "./ProductsList.css";
 import ProductCard from "../product_card/ProductCard";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";

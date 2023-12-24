@@ -10,20 +10,19 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Box from "@mui/material/Box";
 import { Product } from "../../api/classModels";
 import { removeItemFromWishlist, getWishlist } from "../../api/api";
-
 interface Props {
   activeUserId: string;
   product: Product;
-  setWishlist: (val: Product[]) => void;
+  setWishlistProductsList: (val: Product[]) => void;
 }
 
-const WishlistCard = ({ activeUserId, product, setWishlist }: Props) => {
+const WishlistCard = ({ activeUserId, product, setWishlistProductsList }: Props) => {
   const navigate = useNavigate();
 
   async function handleRemoveItemFromWishlist() {
     await removeItemFromWishlist(activeUserId, product.id);
     const response = await getWishlist(activeUserId);
-    setWishlist(response);
+    setWishlistProductsList(response);
   }
 
   async function handleAddToCartButton() {

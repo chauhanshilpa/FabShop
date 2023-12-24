@@ -1,4 +1,5 @@
 import "./Category.css";
+import Box from "@mui/material/Box";
 import { useParams } from "react-router";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -13,8 +14,8 @@ const Category = ({ allProducts }: { allProducts: Product[] }) => {
   );
 
   return (
-    <>
-      <div className="category-banner">
+    <Box className="main">
+      <Box className="category-banner">
         <Image
           src={
             page === "Men"
@@ -25,7 +26,7 @@ const Category = ({ allProducts }: { allProducts: Product[] }) => {
           }
           alt={`${page}Banner`}
         />
-      </div>
+      </Box>
       <Container className="product-cards-container">
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {filteredProducts.map((product) => (
@@ -35,7 +36,7 @@ const Category = ({ allProducts }: { allProducts: Product[] }) => {
           ))}
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 };
 
