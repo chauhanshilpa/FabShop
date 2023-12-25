@@ -12,9 +12,9 @@
 
 .empty-wishlist-container .empty-wishlist-text {
   width: 20rem;
-  height: 20rem;
+  display: inline;
   position: absolute;
-  text-align: right;
+  text-align: left;
   right: 0;
   margin-right: 6.25rem;
   color: #cd5c08;

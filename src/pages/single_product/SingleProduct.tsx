@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SingleProduct.css";
 import { useLocation, useParams } from "react-router";
 import Box from "@mui/material/Box";
@@ -21,7 +22,6 @@ import {
   addItemToCart,
   getCartProductsList,
 } from "../../api/api";
-
 interface Props {
   activeUserId: string;
   setWishlistProductsList: (value: React.SetStateAction<Product[]>) => void;
@@ -34,27 +34,13 @@ const SingleProduct = ({
   setCartProductsList,
 }: Props) => {
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
+  const [isProductInCart, setIsProductInCart] = useState(false);
 
   const { state } = useLocation();
   const product: Product = state?.product;
   let { product_id } = useParams();
   const productId: string = product_id!;
-
-  async function handleWishlist() {
-    if (isProductInWishlist) {
-      await removeItemFromWishlist(activeUserId, productId);
-    } else {
-      await addItemToWishlist(activeUserId, productId);
-    }
-    const response = await getWishlist(activeUserId);
-    setWishlistProductsList(response);
-  }
-
-  async function addToCart() {
-    await addItemToCart(activeUserId, productId);
-    const response = await getCartProductsList(activeUserId);
-    setCartProductsList(response)
-  }
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function isWishlistIncludesProduct() {
@@ -63,7 +49,30 @@ const SingleProduct = ({
       setIsProductInWishlist(isWishlisted);
     }
     isWishlistIncludesProduct();
+
+    async function isCartIncludesProduct() {
+      const response = await getCartProductsList(activeUserId);
+      const isInCart = response.some((product) => product.id === productId);
+      setIsProductInCart(isInCart);
+    }
+    isCartIncludesProduct();
   });
+
+  async function handleWishlist() {
+    isProductInWishlist
+      ? await removeItemFromWishlist(activeUserId, productId)
+      : await addItemToWishlist(activeUserId, productId);
+    const response = await getWishlist(activeUserId);
+    setWishlistProductsList(response);
+  }
+
+  async function addToCart() {
+    isProductInCart
+      ? navigate("/cart")
+      : await addItemToCart(activeUserId, productId);
+    const response = await getCartProductsList(activeUserId);
+    setCartProductsList(response);
+  }
 
   return (
     <Box className="single-product main">
@@ -113,7 +122,7 @@ const SingleProduct = ({
                 variant="contained"
                 onClick={addToCart}
               >
-                Add to cart
+                {isProductInCart ? "Go to cart " : "Add To cart"}
               </Button>
               <Button
                 className={`add-to-wishlist-button ${
