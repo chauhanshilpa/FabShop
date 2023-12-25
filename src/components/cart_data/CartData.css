@@ -23,6 +23,10 @@
   color: black;
 }
 
+/* .shopping-cart button {
+  color: black;
+} */
+
 .shopping-cart button:hover {
   background: transparent;
 }
@@ -67,6 +71,7 @@
   text-transform: uppercase;
   margin: auto 1.25rem;
   font-size: 1rem;
+  color:black;
 }
 
 .product-quantity {

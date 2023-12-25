@@ -7,27 +7,26 @@ import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import CartActionButton from ".././CartActionButton";
 
 interface Props {
+  activeUserId: string;
   product: Product;
+  setCartProductsList: (value: React.SetStateAction<Product[]>) => void;
 }
 
-const CartProduct = ({product}: Props) => {
-
-  function removeItemFromCart() {
-    console.log("remove item");
-  }
+const CartProduct = ({ activeUserId, product, setCartProductsList }: Props) => {
 
   function moveItemToWishlist() {
     console.log("add");
   }
 
-  function removeQuantity(){
-    console.log("remove by 1")
+  function removeQuantity() {
+    console.log("remove by 1");
   }
 
-  function addQuantity(){
-    console.log("add by 1")
+  function addQuantity() {
+    console.log("add by 1");
   }
 
   return (
@@ -59,9 +58,16 @@ const CartProduct = ({product}: Props) => {
             <AddCircleOutlineIcon />
           </Button>
         </Box>
-        <Typography className="remove-from-cart" onClick={removeItemFromCart}>
-          remove
-        </Typography>
+        <CartActionButton
+          variant={"text"}
+          isProductInCart={true}
+          text={"remove"}
+          action="remove"
+          activeUserId={activeUserId}
+          productId={product.id}
+          setCartProductsList={setCartProductsList}
+          buttonClass="remove-from-cart"
+        />
         <Typography className="move-to-wishlist" onClick={moveItemToWishlist}>
           move to Wishlist
         </Typography>

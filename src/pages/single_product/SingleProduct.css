@@ -38,12 +38,12 @@ li {
   margin-bottom: 1rem;
 }
 
-.single-product .add-to-cart-button,
+.single-product .cart-action-button,
 .single-product .add-to-wishlist-button {
   background-color: #ffaf03;
 }
 
-.single-product .add-to-cart-button:hover,
+.single-product .cart-action-button:hover,
 .single-product .add-to-wishlist-button:hover {
   background-color: #ffc436;
 }

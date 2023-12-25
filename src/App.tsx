@@ -90,7 +90,13 @@ function App() {
         <Route path="/user/Orders" element={<Orders />} />
         <Route
           path="/cart"
-          element={<Cart cartProductsList={cartProductsList} />}
+          element={
+            <Cart
+              cartProductsList={cartProductsList}
+              activeUserId={activeUserId}
+              setCartProductsList={setCartProductsList}
+            />
+          }
         />
       </Routes>
       <Footer />

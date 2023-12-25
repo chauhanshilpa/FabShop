@@ -9,7 +9,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import EmptyCart from "../../components/empty__cart/EmptyCart";
 interface Props {
+  activeUserId: string;
   cartProductsList: Product[];
+  setCartProductsList: (value: React.SetStateAction<Product[]>) => void;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -20,7 +22,11 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Cart = ({ cartProductsList }: Props) => {
+const Cart = ({
+  activeUserId,
+  cartProductsList,
+  setCartProductsList,
+}: Props) => {
   return (
     <>
       {cartProductsList.length > 0 ? (
@@ -30,7 +36,11 @@ const Cart = ({ cartProductsList }: Props) => {
               {cartProductsList.map((product) => (
                 <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
                   <Item>
-                    <CartProductCard product={product} />
+                    <CartProductCard
+                      product={product}
+                      activeUserId={activeUserId}
+                      setCartProductsList={setCartProductsList}
+                    />
                   </Item>
                 </Grid>
               ))}

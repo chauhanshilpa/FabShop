@@ -65,8 +65,11 @@ export async function addItemToCart(userId: string, productId: string ){
  cartProductsList.push(product);
 }
 
-export async function removeItemFromCart() {
-  //todo
+export async function removeItemFromCart(userId: string, productId: string) {
+  const productIndex = cartProductsList.findIndex(
+    (product) => product.id === productId
+  );
+  cartProductsList.splice(productIndex, productIndex + 1);
 }
 
 export async function getCartProductsList(userId:string) {
