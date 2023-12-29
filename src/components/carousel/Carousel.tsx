@@ -1,7 +1,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import "./Carousel.css";
-import Image from "../display_Image/Image";
+import Image from "../Image/Image";
 
 const ReactCarousel = () => {
   return (

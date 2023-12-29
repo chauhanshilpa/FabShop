@@ -1,14 +1,15 @@
-import React from 'react'
-import "./EmptyCart.css"
+import "./EmptyCart.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import empty_cart from "../../api/assets/empty_cart.jpg"
-import Image from '../display_Image/Image';
+import Image from "../Image/Image";
 
 const EmptyCart = () => {
   return (
     <Box className="empty-cart-container">
-      <Image src={empty_cart} alt="empty wishlist" />
+      <Image
+        src="https://drive.google.com/uc?export=view&id=1QSzQei0JUJk5vZXHwDYhkn64-u8Wk8ox"
+        alt="empty wishlist"
+      />
       <Box className="empty-cart-text">
         <Typography
           variant="h5"
@@ -19,6 +20,6 @@ const EmptyCart = () => {
       </Box>
     </Box>
   );
-}
+};
 
-export default EmptyCart
+export default EmptyCart;

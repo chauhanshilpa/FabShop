@@ -76,3 +76,4 @@ export async function getCartProductsList(userId:string) {
   const newCartProductsList = [...cartProductsList]
   return newCartProductsList;
 }
+

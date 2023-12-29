@@ -1,20 +1,22 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import WishlistCard from "../../components/wishlist_card/WishlistedItemCard";
+import WishlistedItemCard from "../../components/wishlist_card/WishlistedItemCard";
 import { Product } from "../../api/classModels";
 import EmptyWishlist from "../../components/empty_wishlist/EmptyWishlist";
 
 interface Props {
   activeUserId: string;
   wishlistProductsList: Product[];
-  setWishlistProductsList: (value: React.SetStateAction<Product[]>) => void;
+  removeFromWishlist: (productId: string) => Promise<void>;
+  addToCart: (productId: string) => Promise<void>;
 }
 
 const Wishlist = ({
   activeUserId,
   wishlistProductsList,
-  setWishlistProductsList,
+  removeFromWishlist,
+  addToCart,
 }: Props) => {
   return (
     <Box className="main">
@@ -27,11 +29,12 @@ const Wishlist = ({
           >
             {wishlistProductsList.map((product) => (
               <Grid item xs={12} sm={4} md={3} lg={3} xl={3} key={product.id}>
-                <WishlistCard
+                <WishlistedItemCard
                   key={product.id}
                   activeUserId={activeUserId}
                   product={product}
-                  setWishlistProductsList={setWishlistProductsList}
+                  removeFromWishlist={removeFromWishlist}
+                  addToCart={addToCart}
                 />
               </Grid>
             ))}

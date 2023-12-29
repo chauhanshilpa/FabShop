@@ -12,7 +12,16 @@ import Cart from "./pages/cart/Cart";
 import Footer from "./components/footer/Footer";
 import { STARTING_PRODUCTS } from "./api/assets/productsData";
 import { Product } from "./api/classModels";
-import { addNewUser, getActiveUserId } from "./api/api";
+import {
+  addNewUser,
+  getActiveUserId,
+  addItemToCart,
+  removeItemFromCart,
+  addItemToWishlist,
+  removeItemFromWishlist,
+  getCartProductsList,
+  getWishlist,
+} from "./api/api";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -23,6 +32,7 @@ function App() {
     []
   );
   const [cartProductsList, setCartProductsList] = useState<Product[]>([]);
+  const [totalProductsInCart, setTotalProductsInCart] = useState<number>(0);
 
   //these values are hard coded as for now
   const email: string = "user@gmail.com";
@@ -57,9 +67,40 @@ function App() {
     signUpAndFetchUserId();
   }, []);
 
+  async function addToCart(productId: string) {
+    await addItemToCart(activeUserId, productId);
+    const response = await getCartProductsList(activeUserId);
+    setCartProductsList(response);
+    setTotalProductsInCart(response.length);
+  }
+
+  async function removeFromCart(productId: string) {
+    await removeItemFromCart(activeUserId, productId);
+    const response = await getCartProductsList(activeUserId);
+    setCartProductsList(response);
+    setTotalProductsInCart(response.length);
+  }
+
+  async function addToWishlist(productId: string) {
+    const isWishlisted = wishlistProductsList.some(
+      (product) => product.id === productId
+    );
+    if (!isWishlisted) {
+      await addItemToWishlist(activeUserId, productId);
+      const response = await getWishlist(activeUserId);
+      setWishlistProductsList(response);
+    }
+  }
+
+  async function removeFromWishlist(productId: string) {
+    await removeItemFromWishlist(activeUserId, productId);
+    const response = await getWishlist(activeUserId);
+    setWishlistProductsList(response);
+  }
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar totalProductsInCart={totalProductsInCart} />
       <Routes>
         <Route path="/" element={<Home allProducts={allProducts} />} />
         <Route
@@ -71,8 +112,10 @@ function App() {
           element={
             <SingleProduct
               activeUserId={activeUserId}
-              setWishlistProductsList={setWishlistProductsList}
-              setCartProductsList={setCartProductsList}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              addToWishlist={addToWishlist}
+              removeFromWishlist={removeFromWishlist}
             />
           }
         />
@@ -83,7 +126,8 @@ function App() {
             <Wishlist
               activeUserId={activeUserId}
               wishlistProductsList={wishlistProductsList}
-              setWishlistProductsList={setWishlistProductsList}
+              removeFromWishlist={removeFromWishlist}
+              addToCart={addToCart}
             />
           }
         />
@@ -93,8 +137,8 @@ function App() {
           element={
             <Cart
               cartProductsList={cartProductsList}
-              activeUserId={activeUserId}
-              setCartProductsList={setCartProductsList}
+              addToWishlist={addToWishlist}
+              removeFromCart={removeFromCart}
             />
           }
         />

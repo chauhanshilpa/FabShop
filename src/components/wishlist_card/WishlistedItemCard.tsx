@@ -1,46 +1,59 @@
+import { useState, useEffect } from "react";
 import "./WishlistedItemCard.css";
 import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import Image from "../display_Image/Image";
+import Image from "../Image/Image";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Box from "@mui/material/Box";
 import { Product } from "../../api/classModels";
-import { removeItemFromWishlist, getWishlist } from "../../api/api";
+import Button from "@mui/material/Button";
+import { getCartProductsList } from "../../api/api";
 interface Props {
   activeUserId: string;
   product: Product;
-  setWishlistProductsList: (val: Product[]) => void;
+  removeFromWishlist: (productId: string) => Promise<void>;
+  addToCart: (productId: string) => Promise<void>;
 }
 
-const WishlistCard = ({ activeUserId, product, setWishlistProductsList }: Props) => {
+const WishlistedItemCard = ({
+  activeUserId,
+  product,
+  removeFromWishlist,
+  addToCart,
+}: Props) => {
+  const [isProductInCart, setIsProductInCart] = useState(false);
+
   const navigate = useNavigate();
 
-  async function handleRemoveItemFromWishlist() {
-    await removeItemFromWishlist(activeUserId, product.id);
-    const response = await getWishlist(activeUserId);
-    setWishlistProductsList(response);
+  useEffect(() => {
+    async function isCartIncludesProduct() {
+      const response = await getCartProductsList(activeUserId);
+      const isInCart = response.some((product) => product.id);
+      setIsProductInCart(isInCart);
+    }
+    isCartIncludesProduct();
+  });
+
+  function openProduct(navigate: Function, product_id: string) {
+    navigate(`/product/${product_id}`, { state: { product } });
+  }
+
+  async function removeItemFromWishlist() {
+    await removeFromWishlist(product.id);
   }
 
   async function handleAddToCartButton() {
-    console.log("Item added to cart");
-  }
-
-  function showProduct(navigate: Function, product_id: string) {
-    navigate(`/product/${product_id}`, { state: { product } });
+    isProductInCart ? navigate("/cart") : await addToCart(product.id);
   }
 
   return (
     <Card sx={{ maxWidth: 250 }} className="wishlist-card">
       <Box className="card-media">
-        <CancelIcon
-          className="remove-item"
-          onClick={handleRemoveItemFromWishlist}
-        />
-        <Box onClick={() => showProduct(navigate, product.id)}>
+        <CancelIcon className="remove-item" onClick={removeItemFromWishlist} />
+        <Box onClick={() => openProduct(navigate, product.id)}>
           <Image src={product.image.url} alt={product.name} />
         </Box>
       </Box>
@@ -58,11 +71,11 @@ const WishlistCard = ({ activeUserId, product, setWishlistProductsList }: Props)
           className="add-to-cart-button"
           onClick={handleAddToCartButton}
         >
-          Add to Cart
+          {isProductInCart ? "Go to cart" : "Add to cart"}
         </Button>
       </CardActions>
     </Card>
   );
 };
 
-export default WishlistCard;
+export default WishlistedItemCard;

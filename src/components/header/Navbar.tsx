@@ -11,28 +11,17 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { styled } from "@mui/material/styles";
-import Badge, { BadgeProps } from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link, NavLink } from "react-router-dom";
 import SearchBar from "../search_bar/SearchBar";
+import NavbarCart from "./NavbarCart";
 
 const PAGES = ["Men", "Women", "Kids"];
 const ACTIONS = ["Profile", "Wishlists", "Orders", "Logout"];
 
-function Navbar() {
+function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
-  const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
-    "& .MuiBadge-badge": {
-      right: 6,
-      top: 13,
-      border: `2px solid ${theme.palette.background.paper}`,
-      padding: "0 4px",
-    },
-  }));
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -144,11 +133,7 @@ function Navbar() {
           </Box>
           <SearchBar />
           <NavLink to="/cart">
-            <IconButton aria-label="cart">
-              <StyledBadge badgeContent={0} color="primary">
-                <ShoppingCartIcon className="cart-icon" />
-              </StyledBadge>
-            </IconButton>
+            <NavbarCart totalProductsInCart={totalProductsInCart} />
           </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="user actions">

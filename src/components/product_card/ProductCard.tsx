@@ -8,7 +8,8 @@ import { Product } from "../../api/classModels";
 
 const ProductCard = ({ product }: { product: Product }) => {
   const navigate = useNavigate();
-  function showProduct(navigate: Function, product_id: string) {
+
+  function openProduct(navigate: Function, product_id: string) {
     navigate(`/product/${product_id}`, { state: { product } });
   }
 
@@ -16,7 +17,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <Card
       sx={{ maxWidth: 345 }}
       className="product-card"
-      onClick={() => showProduct(navigate, product.id)}
+      onClick={() => openProduct(navigate, product.id)}
     >
       <CardMedia
         // sx={{ height: 330 }}
@@ -28,7 +29,11 @@ const ProductCard = ({ product }: { product: Product }) => {
         <Typography gutterBottom variant="h6" component="div">
           {product.name}
         </Typography>
-        <Typography className="product-description" variant="body2" color="text.secondary">
+        <Typography
+          className="product-description"
+          variant="body2"
+          color="text.secondary"
+        >
           {product.description}
         </Typography>
         <Typography color="text.secondary" className="pricing">

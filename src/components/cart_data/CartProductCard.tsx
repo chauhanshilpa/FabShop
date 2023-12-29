@@ -1,32 +1,45 @@
+import { useState } from "react";
 import "./CartData.css";
 import { Product } from "../../api/classModels";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Image from "../display_Image/Image";
+import Image from "../Image/Image";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import CartActionButton from ".././CartActionButton";
-
 interface Props {
-  activeUserId: string;
   product: Product;
-  setCartProductsList: (value: React.SetStateAction<Product[]>) => void;
+  addToWishlist: (productId: string) => Promise<void>;
+  removeFromCart: (productId: string) => Promise<void>;
 }
 
-const CartProduct = ({ activeUserId, product, setCartProductsList }: Props) => {
+const CartProduct = ({ product, addToWishlist, removeFromCart }: Props) => {
+  const [productQuantity, setProductQuantity] = useState<number>(1);
 
-  function moveItemToWishlist() {
-    console.log("add");
+  async function moveItemToWishlist() {
+    await addToWishlist(product.id);
+    await removeFromCart(product.id);
+  }
+
+  async function removeItemFromCart() {
+    await removeFromCart(product.id);
   }
 
   function removeQuantity() {
-    console.log("remove by 1");
+    const count = productQuantity;
+    if (count > 1) {
+      setProductQuantity(count - 1);
+    }
   }
 
   function addQuantity() {
-    console.log("add by 1");
+    const count = productQuantity;
+    if (count < 5) {
+      setProductQuantity(count + 1);
+    } else {
+      alert("You can order maximum five product quantity at a time.");
+    }
   }
 
   return (
@@ -53,21 +66,14 @@ const CartProduct = ({ activeUserId, product, setCartProductsList }: Props) => {
           <Button className="quantity-remove-button" onClick={removeQuantity}>
             <RemoveCircleOutlineIcon />
           </Button>
-          <Box className="quantity-display-button">0</Box>
+          <Box className="quantity-display-button">{productQuantity}</Box>
           <Button className="quantity-add-button" onClick={addQuantity}>
             <AddCircleOutlineIcon />
           </Button>
         </Box>
-        <CartActionButton
-          variant={"text"}
-          isProductInCart={true}
-          text={"remove"}
-          action="remove"
-          activeUserId={activeUserId}
-          productId={product.id}
-          setCartProductsList={setCartProductsList}
-          buttonClass="remove-from-cart"
-        />
+        <Typography className="remove-from-cart" onClick={removeItemFromCart}>
+          remove
+        </Typography>
         <Typography className="move-to-wishlist" onClick={moveItemToWishlist}>
           move to Wishlist
         </Typography>

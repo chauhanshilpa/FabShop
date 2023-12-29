@@ -17,12 +17,12 @@ a {
   text-decoration: none;
 }
 
-/* these are the classes for mui badge, that I saw in Elements(dev tools)*/
+/* these are the classes for mui badge, that I saw in Elements(dev tools) to target exact class to change default properties*/
 .css-10iycjc-MuiBadge-root .MuiBadge-badge {
   border: unset;
 }
 
-.css-106c1u2-MuiBadge-badge {
+/* .css-106c1u2-MuiBadge-badge {
   background-color: #f8f07a;
   color: black;
-}
+} */

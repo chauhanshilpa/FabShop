@@ -39,12 +39,12 @@ li {
 }
 
 .single-product .cart-action-button,
-.single-product .add-to-wishlist-button {
+.single-product .wishlist-action-button {
   background-color: #ffaf03;
 }
 
 .single-product .cart-action-button:hover,
-.single-product .add-to-wishlist-button:hover {
+.single-product .wishlist-action-button:hover {
   background-color: #ffc436;
 }
 

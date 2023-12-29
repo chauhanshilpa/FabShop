@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import ProductCard from "../../components/product_card/ProductCard";
 import { Product } from "../../api/classModels";
-import Image from "../../components/display_Image/Image";
+import Image from "../../components/Image/Image";
 
 const Category = ({ allProducts }: { allProducts: Product[] }) => {
   let { page } = useParams();

@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import "./Cart.css";
 import { Product } from "../../api/classModels";
 import Grid from "@mui/material/Grid";
@@ -9,9 +10,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import EmptyCart from "../../components/empty__cart/EmptyCart";
 interface Props {
-  activeUserId: string;
   cartProductsList: Product[];
-  setCartProductsList: (value: React.SetStateAction<Product[]>) => void;
+  addToWishlist: (productId: string) => Promise<void>;
+  removeFromCart: (productId: string) => Promise<void>;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -22,11 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Cart = ({
-  activeUserId,
-  cartProductsList,
-  setCartProductsList,
-}: Props) => {
+const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
   return (
     <>
       {cartProductsList.length > 0 ? (
@@ -38,8 +35,8 @@ const Cart = ({
                   <Item>
                     <CartProductCard
                       product={product}
-                      activeUserId={activeUserId}
-                      setCartProductsList={setCartProductsList}
+                      addToWishlist={addToWishlist}
+                      removeFromCart={removeFromCart}
                     />
                   </Item>
                 </Grid>

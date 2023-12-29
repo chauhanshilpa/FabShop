@@ -7,30 +7,29 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import CartActionButton from "../../components/CartActionButton";
-import WishlistActionButton from "../../components/WishlistActionButton";
-import Image from "../../components/display_Image/Image";
+import Image from "../../components/Image/Image";
 import { Product } from "../../api/classModels";
-import {
-  addItemToWishlist,
-  removeItemFromWishlist,
-  getWishlist,
-  getCartProductsList,
-} from "../../api/api";
+import { getWishlist, getCartProductsList } from "../../api/api";
+import { useNavigate } from "react-router-dom";
+
 interface Props {
   activeUserId: string;
-  setWishlistProductsList: (value: React.SetStateAction<Product[]>) => void;
-  setCartProductsList: (value: React.SetStateAction<Product[]>) => void;
+  addToCart: (productId: string) => Promise<void>;
+  removeFromCart: (productId: string) => Promise<void>;
+  addToWishlist: (productId: string) => Promise<void>;
+  removeFromWishlist: (productId: string) => Promise<void>;
 }
 
 const SingleProduct = ({
   activeUserId,
-  setWishlistProductsList,
-  setCartProductsList,
+  addToCart,
+  addToWishlist,
+  removeFromWishlist,
 }: Props) => {
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
   const [isProductInCart, setIsProductInCart] = useState(false);
@@ -39,6 +38,7 @@ const SingleProduct = ({
   const product: Product = state?.product;
   let { product_id } = useParams();
   const productId: string = product_id!;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function isWishlistIncludesProduct() {
@@ -56,13 +56,15 @@ const SingleProduct = ({
     isCartIncludesProduct();
   });
 
-  // async function handleWishlist() {
-  //   isProductInWishlist
-  //     ? await removeItemFromWishlist(activeUserId, productId)
-  //     : await addItemToWishlist(activeUserId, productId);
-  //   const response = await getWishlist(activeUserId);
-  //   setWishlistProductsList(response);
-  // }
+  async function handleWishlist() {
+    isProductInWishlist
+      ? await removeFromWishlist(productId)
+      : await addToWishlist(productId);
+  }
+
+  async function handleCart() {
+    isProductInCart ? navigate("/cart") : await addToCart(productId);
+  }
 
   return (
     <Box className="single-product main">
@@ -107,37 +109,22 @@ const SingleProduct = ({
             </Box>
             <Divider />
             <Box className="buttons common-style">
-              <CartActionButton
-                variant={"contained"}
-                isProductInCart={isProductInCart}
-                text={isProductInCart ? "Go to cart " : "Add To cart"}
-                action="add"
-                activeUserId={activeUserId}
-                productId={productId}
-                setCartProductsList={setCartProductsList}
-                buttonClass="cart-action-button"
-              />
-              <WishlistActionButton
-                variant={"contained"}
-                isProductInWishlist={isProductInWishlist}
-                text={isProductInWishlist ? "wishlisted" : "wishlist"}
-                action={isProductInWishlist ? "remove" : "add"}
-                activeUserId={activeUserId}
-                productId={productId}
-                setWishlistProductsList={setWishlistProductsList}
-                buttonClass={`add-to-wishlist-button ${
-                  isProductInWishlist && "button-is-clicked"
-                }`}
-              />
-              {/* <Button
-                className={`add-to-wishlist-button ${
+              <Button
+                className="cart-action-button"
+                variant="contained"
+                onClick={handleCart}
+              >
+                {isProductInCart ? "Go to cart" : "Add to cart"}
+              </Button>
+              <Button
+                className={`wishlist-action-button ${
                   isProductInWishlist && "button-is-clicked"
                 }`}
                 variant="contained"
                 onClick={handleWishlist}
               >
                 {isProductInWishlist ? "wishlisted" : "wishlist"}
-              </Button> */}
+              </Button>
             </Box>
             <Divider />
             <Box className="box common-style">
