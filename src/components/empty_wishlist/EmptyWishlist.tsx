@@ -15,8 +15,7 @@ const EmptyWishlist = () => {
           variant="h5"
           sx={{ fontWeight: "regular", fontStyle: "italic" }}
         >
-          Uh-oh! It seems like your wishlist is as empty as a shopping cart on a
-          Sunday. 😱 Time to sprinkle some magic! Explore our enchanting
+          Uh-oh! It seems like your wishlist is is empty. Explore our enchanting
           collection and add a touch of joy to your list. Your wishes await
           fulfillment!
         </Typography>

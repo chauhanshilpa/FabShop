@@ -13,7 +13,18 @@
   margin-bottom: 0.25rem;
 }
 
-.product-card .card-image{
+.product-card .product-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-bottom: 0.25rem;
+}
+
+.product-card .card-image {
   height: 18.75rem;
+  width: auto;
   object-fit: fill;
 }

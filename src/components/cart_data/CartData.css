@@ -1,7 +1,6 @@
 .shopping-cart img {
-  width: 30%;
+  width: 10rem;
   height: 10rem;
-  object-fit: fill;
 }
 
 .cart-product-data {
@@ -71,7 +70,7 @@
   text-transform: uppercase;
   margin: auto 1.25rem;
   font-size: 1rem;
-  color:black;
+  color: black;
 }
 
 .product-quantity {

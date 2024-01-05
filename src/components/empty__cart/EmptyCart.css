@@ -1,23 +1,23 @@
 .empty-cart-container {
-  position: relative;
   display: flex;
-  align-items: center;
+  position: relative;
+  justify-content: center;
 }
 
 .empty-cart-container img {
   position: relative;
-  object-fit: fill;
   opacity: 0.6;
+  width: 100%;
+  height: calc(100vh - 70px);
+  text-align: center;
 }
 
 .empty-cart-text {
-  width: 15rem;
+  width: 50%;
   position: absolute;
-  display: block;
-  text-align: left;
-  right: 0;
-  margin-right: 12.25rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  margin: 2rem;
+  margin-top: 10rem;
   color: #cd5c08;
 }
-
-

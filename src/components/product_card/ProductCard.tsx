@@ -26,7 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         className="card-image"
       />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h6" component="div" className="product-name">
           {product.name}
         </Typography>
         <Typography

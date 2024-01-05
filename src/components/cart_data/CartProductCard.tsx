@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./CartData.css";
+import { useNavigate } from "react-router-dom";
 import { Product } from "../../api/classModels";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -16,6 +17,12 @@ interface Props {
 
 const CartProduct = ({ product, addToWishlist, removeFromCart }: Props) => {
   const [productQuantity, setProductQuantity] = useState<number>(1);
+
+  const navigate = useNavigate();
+
+  function openProduct(navigate: Function, product_id: string) {
+    navigate(`/product/${product_id}`, { state: { product } });
+  }
 
   async function moveItemToWishlist() {
     await addToWishlist(product.id);
@@ -45,7 +52,12 @@ const CartProduct = ({ product, addToWishlist, removeFromCart }: Props) => {
   return (
     <Box className="shopping-cart">
       <Box sx={{ display: "flex" }}>
-        <Image src={product.image.url} alt="smt" />
+        <Box
+          className="cart-image-box"
+          onClick={() => openProduct(navigate, product.id)}
+        >
+          <Image src={product.image.url} alt="cart-product" />
+        </Box>
         <Box className="cart-product-data">
           <Typography className="product-name">{product.name}</Typography>
           <Typography variant="caption">size: {}</Typography>

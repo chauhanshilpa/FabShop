@@ -39,11 +39,14 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
   };
 
   return (
-    <AppBar position="sticky" className="navbar">
+    <AppBar className="navbar">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters className="toolbar">
           {/* for small screen */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            className="menu-navbar"
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -82,24 +85,25 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
                 </Link>
               ))}
             </Menu>
+            <Box
+              sx={{
+                display: { xs: "flex", md: "none" },
+              }}
+            >
+              <NavLink to="/">
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: "500",
+                  }}
+                  className="app-logo"
+                >
+                  FabShop
+                </Typography>
+              </NavLink>
+            </Box>
           </Box>
-          <Box
-            sx={{
-              display: { xs: "flex", md: "none" },
-            }}
-          >
-            <NavLink to="/">
-              <Typography
-                variant="h4"
-                sx={{
-                  fontWeight: "500",
-                }}
-                className="app-logo"
-              >
-                FabShop
-              </Typography>
-            </NavLink>
-          </Box>
+
           {/* for other larger screens */}
           <Box
             sx={{
@@ -119,7 +123,12 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
               </Typography>
             </NavLink>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+            }}
+          >
             {PAGES.map((page) => (
               <NavLink to={`/category/${page}`} key={page}>
                 <Button
@@ -131,7 +140,9 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
               </NavLink>
             ))}
           </Box>
-          <SearchBar />
+          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
+            <SearchBar />
+          </Box>
           <NavLink to="/cart">
             <NavbarCart totalProductsInCart={totalProductsInCart} />
           </NavLink>
@@ -169,6 +180,14 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
             </Menu>
           </Box>
         </Toolbar>
+        <Box
+          sx={{
+            display: { sm: "none" },
+            mb: "10px",
+          }}
+        >
+          <SearchBar />
+        </Box>
       </Container>
     </AppBar>
   );

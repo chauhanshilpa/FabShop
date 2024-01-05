@@ -1,3 +1,4 @@
+import "./Wishlist.css";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -19,7 +20,7 @@ const Wishlist = ({
   addToCart,
 }: Props) => {
   return (
-    <Box className="main">
+    <Box className="main wishlist">
       {wishlistProductsList.length > 0 ? (
         <Container>
           <Grid

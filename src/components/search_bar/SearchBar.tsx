@@ -1,3 +1,4 @@
+import "./SearchBar.css";
 import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
@@ -51,7 +52,7 @@ const SearchBar = () => {
   }
 
   return (
-    <Search>
+    <Search className="search-bar">
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>

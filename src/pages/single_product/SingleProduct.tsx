@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./SingleProduct.css";
-import { useLocation, useParams } from "react-router";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -15,8 +15,6 @@ import ListItem from "@mui/material/ListItem";
 import Image from "../../components/Image/Image";
 import { Product } from "../../api/classModels";
 import { getWishlist, getCartProductsList } from "../../api/api";
-import { useNavigate } from "react-router-dom";
-
 interface Props {
   activeUserId: string;
   addToCart: (productId: string) => Promise<void>;

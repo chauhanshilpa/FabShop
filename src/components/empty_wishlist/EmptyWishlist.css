@@ -1,21 +1,22 @@
 .empty-wishlist-container {
   position: relative;
   display: flex;
-  /* align-items: center; */
+  justify-content: center;
 }
 
 .empty-wishlist-container img {
   position: relative;
-  object-fit: fill;
   opacity: 0.4;
+  object-fit: cover;
+  height: calc(100vh - 70px);
 }
 
 .empty-wishlist-container .empty-wishlist-text {
-  width: 20rem;
-  display: inline;
+  width: 50%;
   position: absolute;
-  text-align: left;
-  right: 0;
-  margin-right: 6.25rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  margin: 2rem;
+  margin-top: 10rem;
   color: #cd5c08;
 }

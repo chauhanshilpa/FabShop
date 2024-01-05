@@ -1,5 +1,6 @@
 .navbar {
   background-color: #cd5c08;
+  position: sticky;
 }
 
 .cart-icon {
@@ -8,21 +9,21 @@
   color: white;
 }
 
+.toolbar{
+  justify-content: space-between;
+}
+
 .app-logo {
   margin: 0.625rem;
   color: white;
+  font-weight: 600;
+}
+
+.menu-navbar {
+  max-width: min-content; 
 }
 
 a {
   text-decoration: none;
 }
 
-/* these are the classes for mui badge, that I saw in Elements(dev tools) to target exact class to change default properties*/
-.css-10iycjc-MuiBadge-root .MuiBadge-badge {
-  border: unset;
-}
-
-/* .css-106c1u2-MuiBadge-badge {
-  background-color: #f8f07a;
-  color: black;
-} */

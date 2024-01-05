@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import "./Cart.css";
 import { Product } from "../../api/classModels";
 import Grid from "@mui/material/Grid";
@@ -25,13 +24,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
   return (
-    <>
+    <Box sx={{ flexGrow: 1 }} className="main cart">
       {cartProductsList.length > 0 ? (
-        <Box sx={{ flexGrow: 1 }} className="main cart">
-          <Container>
-            <Grid container spacing={2} sx={{ display: "flex" }}>
+        <Container>
+          <Grid container spacing={2} sx={{ display: "flex" }}>
+            <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
               {cartProductsList.map((product) => (
-                <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
+                <Grid item className="cart-product-card" key={product.id}>
                   <Item>
                     <CartProductCard
                       product={product}
@@ -41,18 +40,18 @@ const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
                   </Item>
                 </Grid>
               ))}
-              <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
-                <Item>
-                  <CartPriceDetails />
-                </Item>
-              </Grid>
             </Grid>
-          </Container>
-        </Box>
+            <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
+              <Item>
+                <CartPriceDetails />
+              </Item>
+            </Grid>
+          </Grid>
+        </Container>
       ) : (
         <EmptyCart />
       )}
-    </>
+    </Box>
   );
 };
 

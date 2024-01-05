@@ -6,6 +6,10 @@ body {
   flex-direction: column;
 }
 
-.main:not(.footer) {
-  min-height: 100vh;
+.navbar {
+  max-height: 7rem;
+}
+
+.main {
+  min-height: calc(100vh - 70px);
 }
