@@ -3,6 +3,11 @@
   margin-top: 0.938rem;
 }
 
+.cart-left{
+ display: flex;
+ flex-direction: column-reverse;
+}
+
 .cart-product-card{
   margin-bottom: 15px;
 }

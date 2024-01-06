@@ -20,7 +20,7 @@ const NavbarCart = ({
   totalProductsInCart: number;
 }) => {
   return (
-    <IconButton aria-label="cart">
+    <IconButton aria-label="navbar-cart">
       <StyledBadge badgeContent={totalProductsInCart} color="primary">
         <ShoppingCartIcon className="cart-icon" />
       </StyledBadge>

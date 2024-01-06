@@ -7,7 +7,7 @@ import CartProductCard from "../../components/cart_data/CartProductCard";
 import CartPriceDetails from "../../components/cart_data/CartPriceDetails";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import EmptyCart from "../../components/empty__cart/EmptyCart";
+import EmptyCart from "../../components/empty_cart/EmptyCart";
 interface Props {
   cartProductsList: Product[];
   addToWishlist: (productId: string) => Promise<void>;
@@ -28,7 +28,7 @@ const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
       {cartProductsList.length > 0 ? (
         <Container>
           <Grid container spacing={2} sx={{ display: "flex" }}>
-            <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
+            <Grid item xs={12} sm={12} md={7} lg={7} xl={7} className="cart-left">
               {cartProductsList.map((product) => (
                 <Grid item className="cart-product-card" key={product.id}>
                   <Item>
@@ -41,7 +41,7 @@ const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
                 </Grid>
               ))}
             </Grid>
-            <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
+            <Grid item xs={12} sm={12} md={5} lg={5} xl={5} className="cart-right">
               <Item>
                 <CartPriceDetails />
               </Item>
