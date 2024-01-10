@@ -9,7 +9,7 @@
   color: white;
 }
 
-.toolbar{
+.toolbar {
   justify-content: space-between;
 }
 
@@ -19,11 +19,14 @@
   font-weight: 600;
 }
 
+.app-logo:hover {
+  transform: scale(1.2);
+}
+
 .menu-navbar {
-  max-width: min-content; 
+  max-width: min-content;
 }
 
 a {
   text-decoration: none;
 }
-

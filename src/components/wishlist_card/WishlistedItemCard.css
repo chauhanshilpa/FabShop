@@ -3,23 +3,23 @@
 }
 
 .wishlist-card .card-media {
-    position: relative;
+  position: relative;
 }
 
-.wishlist-card .remove-item{
+.wishlist-card .remove-item {
   position: absolute;
   color: rgb(190, 187, 187);
-  right:0;
+  right: 0;
   margin: 0.313rem;
 }
 
-.wishlist-card .remove-item:hover{
+.wishlist-card .remove-item:hover {
   color: rgb(166, 165, 165);
 }
 
 .wishlist-card .card-media img {
   height: 12.5rem;
-  object-fit: fill; 
+  object-fit: fill;
   display: block;
 }
 

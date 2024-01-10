@@ -32,7 +32,6 @@ function App() {
     []
   );
   const [cartProductsList, setCartProductsList] = useState<Product[]>([]);
-  const [totalProductsInCart, setTotalProductsInCart] = useState<number>(0);
 
   //these values are hard coded as for now
   const email: string = "user@gmail.com";
@@ -65,7 +64,9 @@ function App() {
       await getUserId(email, name, password, contact);
     };
     signUpAndFetchUserId();
-    allProducts.forEach(product=>localStorage.setItem(product.image.id,product.image.url))
+    allProducts.forEach((product) =>
+      localStorage.setItem(product.image.id, product.image.url)
+    );
     //eslint-disable-next-line
   }, []);
 
@@ -73,14 +74,12 @@ function App() {
     await addItemToCart(activeUserId, productId);
     const response = await getCartProductsList(activeUserId);
     setCartProductsList(response);
-    setTotalProductsInCart(response.length);
   }
 
   async function removeFromCart(productId: string) {
     await removeItemFromCart(activeUserId, productId);
     const response = await getCartProductsList(activeUserId);
     setCartProductsList(response);
-    setTotalProductsInCart(response.length);
   }
 
   async function addToWishlist(productId: string) {
@@ -102,7 +101,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar totalProductsInCart={totalProductsInCart} />
+      <Navbar totalProductsInCart={cartProductsList.length} />
       <Routes>
         <Route path="/" element={<Home allProducts={allProducts} />} />
         <Route

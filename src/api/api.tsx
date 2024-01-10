@@ -1,13 +1,20 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product } from "./classModels";
+interface cart extends Product {
+  quantity: number;
+}
 
-// all logic that a backend will do
+/**
+ * A separate file which is created with a thinking that, later I have to integrate backend. Instead making changes in different files, I wrote all logic here so that changes happen to this file only.
+ * all logic that a backend do
+ */
 
 let usersList: User[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let wishlist: Product[] = [];
-let cartProductsList: Product[] = [];
+let cartProductsList: cart[] = [];
+let cartTotalPrice: number = 0;
 
 export async function addNewUser(
   email: string,
@@ -60,9 +67,9 @@ export async function getWishlist(userId: string) {
   return newWishlist;
 }
 
-export async function addItemToCart(userId: string, productId: string ){
- const product = allProducts.filter((product) => product.id === productId)[0];
- cartProductsList.push(product);
+export async function addItemToCart(userId: string, productId: string) {
+  const product = allProducts.filter((product) => product.id === productId)[0];
+  cartProductsList.push({ ...product, quantity: 1 });
 }
 
 export async function removeItemFromCart(userId: string, productId: string) {
@@ -72,8 +79,33 @@ export async function removeItemFromCart(userId: string, productId: string) {
   cartProductsList.splice(productIndex, productIndex + 1);
 }
 
-export async function getCartProductsList(userId:string) {
-  const newCartProductsList = [...cartProductsList]
+export async function getCartProductsList(userId: string) {
+  const newCartProductsList = [...cartProductsList];
   return newCartProductsList;
 }
 
+export async function handleProductQuantityInCart(
+  productId: string,
+  quantity: number
+) {
+  const newCartProductsList = [...cartProductsList];
+  const product = newCartProductsList.filter(
+    (product) => product.id === productId
+  )[0];
+  product.quantity = quantity;
+}
+
+export async function getProductQuantityInCart(productId: string) {
+  const newCartProductsList = [...cartProductsList];
+  const product = newCartProductsList.filter(
+    (product) => product.id === productId
+  )[0];
+  return product.quantity;
+}
+
+export async function handlecartTotalAmountInCart() {
+  cartTotalPrice = cartProductsList.reduce((accumulator, product) => {
+    return accumulator + product.price * product.quantity;
+  }, 0);
+  return cartTotalPrice;
+}

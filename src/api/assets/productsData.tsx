@@ -33,7 +33,7 @@ export const STARTING_PRODUCTS: Product[] = [
   },
   {
     id: "58a977e6-18f8-400a-a931-8fa8d183ab11",
-    category: "Kid",
+    category: "Kids",
     sub_category: "Girl",
     type: "frock",
     price: 779,
@@ -48,7 +48,7 @@ export const STARTING_PRODUCTS: Product[] = [
   },
   {
     id: "a948a84c-aeba-4214-9826-236328f5b669",
-    category: "Kid",
+    category: "Kids",
     sub_category: "Boy",
     type: "t-shirt",
     price: 399,
@@ -831,7 +831,7 @@ export const STARTING_PRODUCTS: Product[] = [
     category: "Kids",
     type: "frock",
     sub_category: "Girls",
-    price: 69,
+    price: 999,
     image: {
       id: "efe2fedf-b10c-45e5-acb8-501cafd477b9",
       url: "https://drive.google.com/uc?export=view&id=13o_TvCeO1np6nON8EXll_hiMXwrjU1g_",

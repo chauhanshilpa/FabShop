@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import "./SingleProduct.css";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";

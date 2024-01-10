@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./Category.css";
 import Box from "@mui/material/Box";
 import { useParams } from "react-router";

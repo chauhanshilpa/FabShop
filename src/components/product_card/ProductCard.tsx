@@ -9,10 +9,7 @@ import { Product } from "../../api/classModels";
 const ProductCard = ({ product }: { product: Product }) => {
   const navigate = useNavigate();
 
-  function openProduct(
-    navigate: Function,
-    product_id: string
-  ) {
+  function openProduct(navigate: Function, product_id: string) {
     window.scrollTo({ top: 0, behavior: "auto" });
     navigate(`/product/${product_id}`, { state: { product } });
   }
@@ -21,7 +18,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <Card
       sx={{ maxWidth: 345 }}
       className="product-card"
-      onClick={() => openProduct( navigate, product.id)}
+      onClick={() => openProduct(navigate, product.id)}
     >
       <CardMedia
         // sx={{ height: 330 }}

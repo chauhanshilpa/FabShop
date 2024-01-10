@@ -31,7 +31,9 @@ const WishlistedItemCard = ({
   useEffect(() => {
     async function isCartIncludesProduct() {
       const response = await getCartProductsList(activeUserId);
-      const isInCart = response.some((product) => product.id);
+      const isInCart = response.some(
+        (cartProduct) => cartProduct.id === product.id
+      );
       setIsProductInCart(isInCart);
     }
     isCartIncludesProduct();
