@@ -9,7 +9,7 @@ import CartPriceDetails from "../../components/cart_data/CartPriceDetails";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import EmptyCart from "../../components/empty_cart/EmptyCart";
-import { handlecartTotalAmountInCart } from "../../api/api";
+import { handleCartProductsPrice, handleCartTotalAmount } from "../../api/api";
 interface Props {
   cartProductsList: Product[];
   addToWishlist: (productId: string) => Promise<void>;
@@ -25,15 +25,22 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
-  const [cartTotalPrice, setCartTotalPrice] = useState<number>(0);
+  const [cartProductsPrice, setCartProductsPrice] = useState<number>(0);
+  const [cartTotalAmount, setCartTotalAmount] = useState<number>(0);
 
   useEffect(() => {
-    async function getCartTotal() {
-      const response = await handlecartTotalAmountInCart();
-      setCartTotalPrice(response);
+    async function getCartTotalPrice() {
+      const response = await handleCartProductsPrice();
+      setCartProductsPrice(response);
     }
-    getCartTotal();
-  }, [cartTotalPrice]);
+    getCartTotalPrice();
+
+    async function getCartTotalAmount() {
+      const response = await handleCartTotalAmount();
+      setCartTotalAmount(response);
+    }
+    getCartTotalAmount();
+  }, [cartProductsPrice]);
 
   return (
     <Box sx={{ flexGrow: 1 }} className="main cart">
@@ -56,7 +63,7 @@ const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
                       product={product}
                       addToWishlist={addToWishlist}
                       removeFromCart={removeFromCart}
-                      setCartTotalPrice={setCartTotalPrice}
+                      setCartProductsPrice={setCartProductsPrice}
                     />
                   </Item>
                 </Grid>
@@ -73,7 +80,8 @@ const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
             >
               <Item>
                 <CartPriceDetails
-                  cartTotalPrice={cartTotalPrice}
+                  cartProductsPrice={cartProductsPrice}
+                  cartTotalAmount={cartTotalAmount}
                   numberOfProductsInCart={cartProductsList.length}
                 />
               </Item>

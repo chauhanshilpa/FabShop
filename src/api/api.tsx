@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product } from "./classModels";
-interface cart extends Product {
+import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
+interface Cart extends Product {
   quantity: number;
 }
 
@@ -13,7 +14,7 @@ interface cart extends Product {
 let usersList: User[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let wishlist: Product[] = [];
-let cartProductsList: cart[] = [];
+let cartProductsList: Cart[] = [];
 let cartTotalPrice: number = 0;
 
 export async function addNewUser(
@@ -103,9 +104,15 @@ export async function getProductQuantityInCart(productId: string) {
   return product.quantity;
 }
 
-export async function handlecartTotalAmountInCart() {
+export async function handleCartProductsPrice() {
   cartTotalPrice = cartProductsList.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
   return cartTotalPrice;
+}
+
+export async function handleCartTotalAmount() {
+  const totalAmount =
+    cartTotalPrice - (DISCOUNT * cartTotalPrice) / 100 + SHIPPING_CHARGE;
+  return totalAmount;
 }

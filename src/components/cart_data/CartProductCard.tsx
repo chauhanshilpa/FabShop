@@ -12,20 +12,20 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import {
   getProductQuantityInCart,
   handleProductQuantityInCart,
-  handlecartTotalAmountInCart,
+  handleCartProductsPrice,
 } from "../../api/api";
 interface Props {
   product: Product;
   addToWishlist: (productId: string) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
-  setCartTotalPrice: React.Dispatch<React.SetStateAction<number>>;
+  setCartProductsPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const CartProduct = ({
   product,
   addToWishlist,
   removeFromCart,
-  setCartTotalPrice,
+  setCartProductsPrice,
 }: Props) => {
   const [productQuantity, setProductQuantity] = useState<number>(1);
 
@@ -51,6 +51,8 @@ const CartProduct = ({
 
   async function removeItemFromCart() {
     await removeFromCart(product.id);
+    const response = await handleCartProductsPrice();
+    setCartProductsPrice(response);
   }
 
   async function removeQuantity() {
@@ -58,8 +60,8 @@ const CartProduct = ({
       const count = productQuantity - 1;
       setProductQuantity(count);
       await handleProductQuantityInCart(product.id, count);
-      const response = await handlecartTotalAmountInCart();
-      setCartTotalPrice(response);
+      const response = await handleCartProductsPrice();
+      setCartProductsPrice(response);
     }
   }
 
@@ -68,8 +70,8 @@ const CartProduct = ({
       const count = productQuantity + 1;
       setProductQuantity(count);
       await handleProductQuantityInCart(product.id, count);
-      const response = await handlecartTotalAmountInCart();
-      setCartTotalPrice(response);
+      const response = await handleCartProductsPrice();
+      setCartProductsPrice(response);
     } else {
       alert("You can order maximum five product quantity at a time.");
     }

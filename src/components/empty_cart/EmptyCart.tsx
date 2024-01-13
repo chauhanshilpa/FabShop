@@ -8,7 +8,7 @@ const EmptyCart = () => {
     <Box className="empty-cart-container">
       <Image
         src="https://drive.google.com/uc?export=view&id=1QSzQei0JUJk5vZXHwDYhkn64-u8Wk8ox"
-        alt="empty wishlist"
+        alt="empty cart"
       />
       <Box className="empty-cart-text">
         <Typography

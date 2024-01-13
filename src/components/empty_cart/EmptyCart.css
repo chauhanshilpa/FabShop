@@ -9,10 +9,9 @@
   opacity: 0.6;
   width: 100%;
   height: calc(100vh - 70px);
-  text-align: center;
 }
 
-.empty-cart-text {
+.empty-cart-container .empty-cart-text {
   width: 50%;
   position: absolute;
   display: -webkit-box;

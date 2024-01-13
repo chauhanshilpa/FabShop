@@ -2,14 +2,17 @@ import "./CartData.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import { DISCOUNT, SHIPPING_CHARGE } from "../../FabShop_constants";
 interface Props {
-  cartTotalPrice: number;
+  cartTotalAmount: number;
+  cartProductsPrice: number;
   numberOfProductsInCart: number;
 }
 
 const CartPriceDetails = ({
+  cartTotalAmount,
+  cartProductsPrice,
   numberOfProductsInCart,
-  cartTotalPrice,
 }: Props) => {
   return (
     <Box className="cart-price-details">
@@ -17,22 +20,22 @@ const CartPriceDetails = ({
       <Divider />
       <Box className="row-1">
         <Typography>Total MRP</Typography>
-        <Typography>{cartTotalPrice}</Typography>
+        <Typography>₹{cartProductsPrice}</Typography>
       </Box>
       <Box className="row-2">
         <Typography>Discount</Typography>
         {/* hardcoded */}
-        <Typography>{-15}%</Typography>
+        <Typography>-{DISCOUNT}%</Typography>
       </Box>
       <Box className="row-3">
         <Typography>Shipping Fee</Typography>
         {/* hardcoded */}
-        <Typography>{20}</Typography>
+        <Typography>₹{SHIPPING_CHARGE}</Typography>
       </Box>
       <Divider />
       <Box className="row-4">
         <Typography className="total-amount">Total Amount</Typography>
-        <Typography className="total-amount">total</Typography>
+        <Typography className="total-amount">₹{cartTotalAmount}</Typography>
       </Box>
     </Box>
   );
