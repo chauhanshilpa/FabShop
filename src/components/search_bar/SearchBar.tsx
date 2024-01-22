@@ -3,6 +3,9 @@ import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+import { getSearchedProducts } from "../../api/api";
+import { ENTER_KEY } from "../../FabShop_constants";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -42,13 +45,27 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const SearchBar = () => {
-  const [navbarSearchInput, setNavbarSearchInput] = useState("");
+  const [query, setQuery] = useState<string>("");
 
-  //will use later
+  const navigate = useNavigate();
+
   function handleNavbarSearchChange(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
-    setNavbarSearchInput(event.target.value);
+    const queryText = event.target.value;
+    setQuery(queryText);
+  }
+
+  async function handleSearchedProduct(
+    event: React.KeyboardEvent<HTMLElement>
+  ) {
+    if (event.key === ENTER_KEY) {
+      const newSearchedProducts = await getSearchedProducts(
+        query.toLowerCase()
+      );
+      navigate(`/search/${query}`, { state: { newSearchedProducts } });
+      setQuery("");
+    }
   }
 
   return (
@@ -59,8 +76,10 @@ const SearchBar = () => {
       <StyledInputBase
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
-        value={navbarSearchInput}
+        value={query}
         onChange={handleNavbarSearchChange}
+        onKeyDown={handleSearchedProduct}
+        className="search-bar-input"
       />
     </Search>
   );

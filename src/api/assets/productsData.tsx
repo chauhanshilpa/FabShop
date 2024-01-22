@@ -9,7 +9,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 499,
     image: {
       id: "c8c4809a-49ee-4df3-ad31-cfe2acc36049",
-      url: "https://drive.google.com/uc?export=view&id=1cjF5axKW55uLOydxhebVLjFlxe9eRqQh",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_1.jpg",
     },
     name: "T-shirt",
     description:
@@ -24,7 +24,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 629,
     image: {
       id: "ddec5fce-cce7-41b4-8190-b0b23dfb19f2",
-      url: "https://drive.google.com/uc?export=view&id=1d2Sv0OfSUMgFF5icOf5S1_4VDPOASBiU",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_2.jpg",
     },
     name: "Off-shoulder crop top",
     description:
@@ -39,7 +39,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 779,
     image: {
       id: "fc2f6101-7722-4d46-8ae2-f17b4059004a",
-      url: "https://drive.google.com/uc?export=view&id=1LPeuaA4pMh-AbSjvm0CJTiJhnpaQGscR",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_3.jpg",
     },
     name: "Frock",
     description:
@@ -54,7 +54,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 399,
     image: {
       id: "d1acc6e4-ec0c-46b0-b0b9-6e6f32a67972",
-      url: "https://drive.google.com/uc?export=view&id=1Bf_Rb3LXgj2YyRxX6YMg2FDRIRBYDLb5",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_4.jpg",
     },
     name: "Cotton t-shirt",
     description:
@@ -69,7 +69,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 3099,
     image: {
       id: "c293ee5d-2c88-41a0-bb39-f63de0f8f627",
-      url: "https://drive.google.com/uc?export=view&id=1zWWeMDT5evuQNvYOU-83ItjGOurC_slJ",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_5.jpg",
     },
     name: "Leather boots",
     description:
@@ -84,7 +84,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 879,
     image: {
       id: "fbac8c3f-7c11-44bb-a396-9ee16ce270fd",
-      url: "https://drive.google.com/uc?export=view&id=153JiaJOuihwltFfcFYAlajfx-iZRnGUJ",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_6.jpg",
     },
     name: "Handbag",
     description:
@@ -99,7 +99,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 599,
     image: {
       id: "47e2677e-8e93-4382-bcb0-da2b93ffbf1a",
-      url: "https://drive.google.com/uc?export=view&id=1n5MSYRAmaHXnNpbRQDesp5iyBsP5j4g_",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_7.jpg",
     },
     name: "Shrug",
     description:
@@ -114,7 +114,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 1049,
     image: {
       id: "4364c666-1a83-4926-a0fc-af637e7ce8a2",
-      url: "https://drive.google.com/uc?export=view&id=1Vxt_7xRzJfjM8-RSKHgJ4JhHPwJ_Rxbc",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_8.jpg",
     },
     name: "Faded boyfriend jeans",
     description:
@@ -129,7 +129,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 589,
     image: {
       id: "e2debc74-127d-4df6-b2b5-1024ae824aa0",
-      url: "https://drive.google.com/uc?export=view&id=1eWen_yFMcokcHGhoKO7BSvHtzjsT5i3F",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_9.jpg",
     },
     name: "Sling bag",
     description:
@@ -144,7 +144,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2069,
     image: {
       id: "578bae79-9f6d-424f-8214-68be396492b4",
-      url: "https://drive.google.com/uc?export=view&id=1XZEIIWo1vP42lPmbjRqdD-J3FJBQfXla",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_10.jpg",
     },
     name: "Sneakers",
     description:
@@ -159,7 +159,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 669,
     image: {
       id: "f4c50c9a-7b5e-45be-8106-6f5feaa7b2fa",
-      url: "https://drive.google.com/uc?export=view&id=1K0_xWVW4QzdqhESiQz9whuG0zRWWKbVY",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_11.jpg",
     },
     name: "Denim jacket",
     description:
@@ -174,7 +174,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 869,
     image: {
       id: "5de78f8c-9af6-48c6-a2d2-60b977f23221",
-      url: "https://drive.google.com/uc?export=view&id=1MXHJv7A-Iftu_ooemaer4cZ0nYYwi50F",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_12.jpg",
     },
     name: "Bottom tied top",
     description:
@@ -189,7 +189,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 969,
     image: {
       id: "ec44cf1b-f0a2-420e-aad1-b18fa3032c90",
-      url: "https://drive.google.com/uc?export=view&id=1bkocc7nG4OjDmBvjr2szhUO0h21RWAUI",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_13.jpg",
     },
     name: "Set of 5 sling bags",
     description:
@@ -204,7 +204,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 539,
     image: {
       id: "729640ce-7ac8-4ad5-a5c2-87a1de8ed883",
-      url: "https://drive.google.com/uc?export=view&id=1irZ1GTaQtdarR075BOKZ2g85eIriVKw3",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_14.jpg",
     },
     name: "frock",
     description:
@@ -219,7 +219,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 369,
     image: {
       id: "4fa17480-0121-4152-a9d7-bd63643995ad",
-      url: "https://drive.google.com/uc?export=view&id=1EOVnyqgGnzcHiftHpj-x1mv8DCJx4eF5",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_15.jpg",
     },
     name: "T-shirt",
     description:
@@ -234,7 +234,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 1039,
     image: {
       id: "ea12ecc2-b8f4-4938-8f5d-b3a15f77d754",
-      url: "https://drive.google.com/uc?export=view&id=1Awsvm6cRIvrnuHA3JuncfqrR1lYK-Fsf",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_16.jpg",
     },
     name: "Black Plastic band watch",
     description:
@@ -249,7 +249,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 969,
     image: {
       id: "8c596560-efd8-44f6-93d0-2103e60a5655",
-      url: "https://drive.google.com/uc?export=view&id=1QDyivaYFzw8mwbiu1GU1l0hFPACpWfXU",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_17.jpg",
     },
     name: "Glittered dress",
     description:
@@ -264,7 +264,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 1069,
     image: {
       id: "bbebea5a-38e8-4758-af72-9a5f43b9d66b",
-      url: "https://drive.google.com/uc?export=view&id=1TO8WlbyS3T-lqMrpbEU0QIL_8oKQvtfA",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_18.jpg",
     },
     name: "Jeans",
     description:
@@ -279,7 +279,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 4889,
     image: {
       id: "1c790549-fb5b-4765-b33b-214333bdee1c",
-      url: "https://drive.google.com/uc?export=view&id=1_030b0sFkrZnwDOReNF3LU-HUCjPUXw9",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_19.jpg",
     },
     name: "Leather jacket",
     description:
@@ -294,7 +294,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 1209,
     image: {
       id: "7b922737-9d56-44ae-a38f-5ffc2367d61f",
-      url: "https://drive.google.com/uc?export=view&id=1yhI6WTeRlmz8dK4pS2Z_UHjXCYz8It_J",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_20.jpg",
     },
     name: "Traditional shoes",
     description:
@@ -309,7 +309,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 4999,
     image: {
       id: "7f829ed5-37e6-4d7b-8bdd-2a1581ace9d1",
-      url: "https://drive.google.com/uc?export=view&id=16y-axb-zesuXKvVLTofzLb7RDlUvuBaf",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_21.jpg",
     },
     name: "Royal watch",
     description:
@@ -324,7 +324,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 569,
     image: {
       id: "043fa603-6914-49f4-b067-62761dd6e9ec",
-      url: "https://drive.google.com/uc?export=view&id=1i7gGN-6huCHf5y82T9Hxou1Z2NaK8IWK",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_22.jpg",
     },
     name: "denim shorts",
     description:
@@ -339,7 +339,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2069,
     image: {
       id: "5bde9700-77bb-480d-b3ba-762571bf7d67",
-      url: "https://drive.google.com/uc?export=view&id=18kPYyL-_6P_7CFtZQUR0lNUEC4Ftt9pQ",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_23.jpg",
     },
     name: "Boots",
     description:
@@ -354,7 +354,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 669,
     image: {
       id: "8ef96255-14fb-476c-b723-47a0f15c842a",
-      url: "https://drive.google.com/uc?export=view&id=1qJJ2-q8WmhyujoFBRQXQhytOETsTgtYP",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_24.jpg",
     },
     name: "Denim shorts",
     description:
@@ -369,7 +369,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 989,
     image: {
       id: "45713619-c12e-489c-a27c-88fa287b6fd5",
-      url: "https://drive.google.com/uc?export=view&id=1taiDUX05eRmf8CRzyNaWTDI8zqG1-1Jc",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_25.jpg",
     },
     name: "Lightly scratched jeans",
     description:
@@ -384,7 +384,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 789,
     image: {
       id: "b2f0fbc2-1d86-4795-b2af-77d85eee8cb9",
-      url: "https://drive.google.com/uc?export=view&id=1Q5tzYLKzMC4nSTZAhnwkEZOL1eFIDvXT",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_26.jpg",
     },
     name: "Hoodie",
     description:
@@ -399,7 +399,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2079,
     image: {
       id: "0dcc82ec-c83e-4395-817d-d62ec89a830d",
-      url: "https://drive.google.com/uc?export=view&id=1CC1jqMn3r5O-tJNHPm55JAugy1I7YatU",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_27.jpg",
     },
     name: "Sandal block heels",
     description:
@@ -414,7 +414,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 1099,
     image: {
       id: "d911f450-129a-4257-9d33-866bb3f2a188",
-      url: "https://drive.google.com/uc?export=view&id=17x_X0s2GwFTNzB9458RKftNP_pgUTPY6",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_28.jpg",
     },
     name: "bellies",
     description:
@@ -429,7 +429,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2039,
     image: {
       id: "4d673780-2ede-4fd9-bc4a-8eebd830e4c5",
-      url: "https://drive.google.com/uc?export=view&id=1b6yqlObHio3psfDkUMC2kRMPVg6BR51b",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_29.jpg",
     },
     name: "blue sneakers",
     description:
@@ -444,7 +444,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 5029,
     image: {
       id: "b7803398-8711-44f1-a980-4ecbb313b1b2",
-      url: "https://drive.google.com/uc?export=view&id=14BYnXBUBj4uKna9WGD_tfLbaqVUfQV-x",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_30.jpg",
     },
     name: "Glittered bellies",
     description:
@@ -459,7 +459,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2319,
     image: {
       id: "865282ae-9c70-4bfc-bef9-49810dd002ac",
-      url: "https://drive.google.com/uc?export=view&id=1WSfQ0kZkofRqsFeFRfZTk4FCitXhN38H",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_31.jpg",
     },
     name: "Co-ords",
     description:
@@ -474,7 +474,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 709,
     image: {
       id: "ed015c3f-ce91-4e4d-bec1-aa4ce2b3afae",
-      url: "https://drive.google.com/uc?export=view&id=194TjPrszszmu2VcncRciVpiTOzMQV49G",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_32.jpg",
     },
     name: "Check shirt",
     description:
@@ -489,7 +489,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 879,
     image: {
       id: "a6db02e1-28ed-46da-8d5e-837ec2e9379e",
-      url: "https://drive.google.com/uc?export=view&id=1jNoAqvBf8tI6XATwDD81xXIAGRMDYoV2",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_33.jpg",
     },
     name: "Shirt",
     description:
@@ -504,7 +504,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 999,
     image: {
       id: "259a1ebb-0410-4bd9-9ed3-63a708cb0728",
-      url: "https://drive.google.com/uc?export=view&id=1ZQrZR_rWRiFAHehaOH885a7MyRNOj8Zd",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_34.jpg",
     },
     name: "Checkered shirt",
     description:
@@ -519,7 +519,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 959,
     image: {
       id: "0e2f85db-5331-42e7-881d-43464b5ac3ad",
-      url: "https://drive.google.com/uc?export=view&id=1BzXYvGzmnHiPymEgOM35nnpWdFOJKMWc",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_35.jpg",
     },
     name: "Formal shirt",
     description:
@@ -534,7 +534,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 339,
     image: {
       id: "aee1d7d6-d45a-4e39-ae88-1c252f3cbe4a",
-      url: "https://drive.google.com/uc?export=view&id=1wvVwuaYHjJfdKPSIj1NE84l3ghkavFFN",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_36.jpg",
     },
     name: "Top",
     description:
@@ -549,7 +549,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 819,
     image: {
       id: "6d026793-101a-4d53-9c18-3ec72b99ac3c",
-      url: "https://drive.google.com/uc?export=view&id=1QqSPvzZD_62vIri3LWutvqsBLOWn1j7x",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_37.jpg",
     },
     name: "Trouser",
     description:
@@ -564,7 +564,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 459,
     image: {
       id: "6fe94542-56e6-4add-aa9c-4c99946ef668",
-      url: "https://drive.google.com/uc?export=view&id=1Awo0VxZnZTwCgLlD_L-0agfccOb9XQKr",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_38.jpg",
     },
     name: "T-shirt",
     description:
@@ -579,7 +579,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 449,
     image: {
       id: "0bbb78a8-ea1f-4d32-95e3-02aa269e0358",
-      url: "https://drive.google.com/uc?export=view&id=1qfD-97Xx8H-P0XJDVSOcFBguVMVSf3sK",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_39.jpg",
     },
     name: "Plain t-shirt",
     description:
@@ -594,7 +594,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2069,
     image: {
       id: "72a65566-6938-43f4-acea-875939e7cede",
-      url: "https://drive.google.com/uc?export=view&id=11T5PsFhzerUnpxOQhmJMK-3D--1ixx6h",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_40.jpg",
     },
     name: "Casual shoes",
     description:
@@ -609,7 +609,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 989,
     image: {
       id: "8a122ac4-ed75-4349-bb6e-3d6f0f5501d8",
-      url: "https://drive.google.com/uc?export=view&id=1wK9yUn_A74sSPwqQeh679JCvowYwK8un",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_41.jpg",
     },
     name: "Solid jeans",
     description:
@@ -624,7 +624,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2099,
     image: {
       id: "daa26b6a-b34a-4d9e-8601-c3191421f85a",
-      url: "https://drive.google.com/uc?export=view&id=1aKjQAgJAt3gjNXqiKzzmXQ96wKC1WKvF",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_42.jpg",
     },
     name: "Watch",
     description:
@@ -639,7 +639,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2069,
     image: {
       id: "8ebe2475-e08b-4a35-9941-1d90960b32c9",
-      url: "https://drive.google.com/uc?export=view&id=1jGLLMR4CPgs4z0YpCNMuz-Zo4RB6W3N2",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_43.jpg",
     },
     name: "Metal watch",
     description:
@@ -654,7 +654,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2019,
     image: {
       id: "f588d4a8-5fdd-4761-a22a-d1e88e01ccf1",
-      url: "https://drive.google.com/uc?export=view&id=1hh-AcgFtuivB13BbW1k_3LWE0LMFqWdn",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_44.jpg",
     },
     name: "Furred bodysuit",
     description:
@@ -669,7 +669,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 7029,
     image: {
       id: "374d7c55-344b-4624-96fa-547e3b8208e7",
-      url: "https://drive.google.com/uc?export=view&id=1C_Z7WZZKORo2nhMmKeDc8zI6ZQwp8lBp",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_45.jpg",
     },
     name: "Silver metal watch",
     description:
@@ -684,7 +684,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 3069,
     image: {
       id: "fa305c51-1082-4228-a89b-975b7ba43edb",
-      url: "https://drive.google.com/uc?export=view&id=1Z2wQdEDc_Lq-8baSsei-Bt5IUak3nMZi",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_46.jpg",
     },
     name: "blue metal watch",
     description:
@@ -699,7 +699,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 999,
     image: {
       id: "cd89c9ee-e594-454d-b037-88eef69fe450",
-      url: "https://drive.google.com/uc?export=view&id=1k_2zTvWbRvdwKEumOgpUiyHvqiJZH3w6",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_47.jpg",
     },
     name: "fully covering bodysuit",
     description:
@@ -714,7 +714,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 919,
     image: {
       id: "2e70de43-ca64-4e1c-9525-2cd7be26305e",
-      url: "https://drive.google.com/uc?export=view&id=1z2nnawm65z4H2FhnnERdQjd78oGH83Xp",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_48.jpg",
     },
     name: "Check hoodie",
     description:
@@ -729,7 +729,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 5099,
     image: {
       id: "b30a32b4-1205-4bce-8692-db38b3b2a1d4",
-      url: "https://drive.google.com/uc?export=view&id=1AArutdqQ1kWIT1xH-ZEN3fEcH77Bm9ap",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_49.jpg",
     },
     name: "Fox leather boots",
     description:
@@ -744,7 +744,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 1029,
     image: {
       id: "62b49c72-88b9-4a10-a9c3-2bf37780daad",
-      url: "https://drive.google.com/uc?export=view&id=14MSl5YZDbdIpOyDe3Wi7pqdgwDru8_3A",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_50.jpg",
     },
     name: "Jump suit with belt",
     description:
@@ -759,7 +759,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2039,
     image: {
       id: "b029f6df-0f34-453a-aadb-d750e420f55f",
-      url: "https://drive.google.com/uc?export=view&id=1iY3bHpjaVlMnguY5VQXYsevsZwlw90bB",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_51.jpg",
     },
     name: "White bellies",
     description:
@@ -774,7 +774,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 2019,
     image: {
       id: "6c916d3e-ee22-42e8-94d2-ec9ea167ac61",
-      url: "https://drive.google.com/uc?export=view&id=1SNPak89ItAogJsK-HgtCSMc0FO1x7sHk",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_52.jpg",
     },
     name: "Flower print bellies",
     description:
@@ -789,7 +789,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 69,
     image: {
       id: "60c66ce7-9e7a-47e0-bde4-e22ab947f7a9",
-      url: "https://drive.google.com/uc?export=view&id=1EeQ1pWWCudTho7xwHyvwmkdpwkP5Na5e",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_53.jpg",
     },
     name: "Multi color sneakers",
     description:
@@ -801,10 +801,10 @@ export const STARTING_PRODUCTS: Product[] = [
     category: "Men",
     type: "jeans",
     sub_category: "Boys",
-    price: 69,
+    price: 969,
     image: {
       id: "adec3d11-04b8-4f75-9d5c-e9dce95a0d53",
-      url: "https://drive.google.com/uc?export=view&id=10NdQgVlOc3qbwzfNDO7WTRX5JH-NvUAn",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_54.jpg",
     },
     name: "Solid jeans",
     description:
@@ -816,10 +816,10 @@ export const STARTING_PRODUCTS: Product[] = [
     category: "Men",
     type: "pants",
     sub_category: "Boys",
-    price: 69,
+    price: 869,
     image: {
       id: "6472fc5e-607f-4e94-892f-c2077e0f3834",
-      url: "https://drive.google.com/uc?export=view&id=1c-XoxA9CE4nm95ztELR9Fdzc1zcU8SR-",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_55.jpg",
     },
     name: "Casual pants",
     description:
@@ -834,7 +834,7 @@ export const STARTING_PRODUCTS: Product[] = [
     price: 999,
     image: {
       id: "efe2fedf-b10c-45e5-acb8-501cafd477b9",
-      url: "https://drive.google.com/uc?export=view&id=13o_TvCeO1np6nON8EXll_hiMXwrjU1g_",
+      url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_56.jpg",
     },
     name: "Wooven frock",
     description:

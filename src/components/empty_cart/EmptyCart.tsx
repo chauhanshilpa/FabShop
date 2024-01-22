@@ -7,7 +7,7 @@ const EmptyCart = () => {
   return (
     <Box className="empty-cart-container">
       <Image
-        src="https://drive.google.com/uc?export=view&id=1QSzQei0JUJk5vZXHwDYhkn64-u8Wk8ox"
+        src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/empty_cart.jpg"
         alt="empty cart"
       />
       <Box className="empty-cart-text">

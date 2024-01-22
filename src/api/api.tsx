@@ -116,3 +116,14 @@ export async function handleCartTotalAmount() {
     cartTotalPrice - (DISCOUNT * cartTotalPrice) / 100 + SHIPPING_CHARGE;
   return totalAmount;
 }
+
+export async function getSearchedProducts(text: string) {
+  const searchedProducts = allProducts.filter(
+    (product) =>
+      product.category.toLowerCase().includes(text) ||
+      product.type.toLowerCase().includes(text) ||
+      product.sub_category.toLowerCase().includes(text) ||
+      product.name.includes(text)
+  );
+  return searchedProducts;
+}

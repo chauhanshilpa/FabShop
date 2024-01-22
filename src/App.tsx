@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/header/Navbar";
 import Home from "./pages/home_page/Home";
+import SearchedProducts from "./pages/searched_products/SearchedProducts";
 import Category from "./pages/category/Category";
 import SingleProduct from "./pages/single_product/SingleProduct";
 import Profile from "./pages/profile/Profile";
@@ -103,7 +104,11 @@ function App() {
     <BrowserRouter>
       <Navbar totalProductsInCart={cartProductsList.length} />
       <Routes>
-        <Route path="/" element={<Home allProducts={allProducts} />} />
+        <Route
+          path="/"
+          element={<Home productsList={allProducts.slice(0, 24)} />}
+        />
+        <Route path="/search/:text" element={<SearchedProducts />} />
         <Route
           path="/category/:page"
           element={<Category allProducts={allProducts} />}

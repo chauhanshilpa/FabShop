@@ -9,15 +9,15 @@ const ReactCarousel = () => {
     <Box className="slider-container">
       <Carousel className="home-carousel" showArrows={true} showThumbs={false}>
         <Image
-          src="https://drive.google.com/uc?export=view&id=1HubrIW6Wek8lETxbZJ2q5Tztn8TvLqKy"
+          src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/special+offer.jpg"
           alt="special-offer"
         />
         <Image
-          src="https://drive.google.com/uc?export=view&id=11Sr6EgwMAZy1Va_oSKiGKEbUynCYT3Ca"
+          src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/fashion_collection_for_women.jpg"
           alt="fashion collection for women"
         />
         <Image
-          src="https://drive.google.com/uc?export=view&id=1d1ahHa1BINu5xnxbdrjkuEfmNX7SfZdy"
+          src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/coming+soon.jpg"
           alt="coming soon..."
         />
       </Carousel>

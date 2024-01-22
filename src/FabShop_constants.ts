@@ -3,3 +3,5 @@
 export const DISCOUNT: number = 15;
 
 export const SHIPPING_CHARGE: number = 20;
+
+export const ENTER_KEY: string = "Enter";

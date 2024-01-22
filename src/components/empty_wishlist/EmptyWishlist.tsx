@@ -7,7 +7,7 @@ const EmptyWishlist = () => {
   return (
     <Box className="empty-wishlist-container">
       <Image
-        src="https://drive.google.com/uc?export=view&id=1Gu-cncD6Rld6S2NufGwPARi3esz5NSp4"
+        src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/empty+wishlist.jpg"
         alt="empty wishlist"
       />
       <Box className="empty-wishlist-text">
@@ -15,7 +15,7 @@ const EmptyWishlist = () => {
           variant="h5"
           sx={{ fontWeight: "regular", fontStyle: "italic" }}
         >
-          Uh-oh! It seems like your wishlist is is empty. Explore our enchanting
+          Uh-oh! It seems like your wishlist is empty. Explore our enchanting
           collection and add a touch of joy to your list. Your wishes await
           fulfillment!
         </Typography>

@@ -19,10 +19,10 @@ const Category = ({ allProducts }: { allProducts: Product[] }) => {
         <Image
           src={
             page === "Men"
-              ? "https://drive.google.com/uc?export=view&id=154VljOC4-7HVzwjzikQ-61iWlXrgAHWP"
+              ? "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/men_banner.jpg"
               : page === "Women"
-              ? "https://drive.google.com/uc?export=view&id=1dUqyyxp1kR0ju1509vRiLWTjrDh9xT3Q"
-              : "https://drive.google.com/uc?export=view&id=1_NBMAm4WECWObR_q7TVnJQlyY3wrXPPo"
+              ? "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/women_banner.jpg"
+              : "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/kids_banner.jpg"
           }
           alt={`${page}Banner`}
         />
