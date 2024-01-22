@@ -12,7 +12,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import Image from "../../components/Image/Image";
+import Image from "../../components/utils/Image";
 import { Product } from "../../api/classModels";
 import { getWishlist, getCartProductsList } from "../../api/api";
 interface Props {

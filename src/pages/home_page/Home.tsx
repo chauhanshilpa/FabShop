@@ -3,6 +3,7 @@ import Carousel from "../../components/carousel/Carousel";
 import { Product } from "../../api/classModels";
 
 const Home = ({ productsList }: { productsList: Product[] }) => {
+
   return (
     <>
       <Carousel />

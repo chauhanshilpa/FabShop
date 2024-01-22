@@ -10,7 +10,6 @@ const ProductCard = ({ product }: { product: Product }) => {
   const navigate = useNavigate();
 
   function openProduct(navigate: Function, product_id: string) {
-    window.scrollTo({ top: 0, behavior: "auto" });
     navigate(`/product/${product_id}`, { state: { product } });
   }
 

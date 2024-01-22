@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/utils/ScrollToTop";
 import Navbar from "./components/header/Navbar";
 import Home from "./pages/home_page/Home";
 import SearchedProducts from "./pages/searched_products/SearchedProducts";
@@ -101,7 +102,8 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <>
+    <ScrollToTop/>
       <Navbar totalProductsInCart={cartProductsList.length} />
       <Routes>
         <Route
@@ -150,7 +152,7 @@ function App() {
         />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 

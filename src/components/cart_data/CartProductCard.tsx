@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Product } from "../../api/classModels";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Image from "../Image/Image";
+import Image from "../utils/Image";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";

@@ -1,7 +1,7 @@
 import "./EmptyWishlist.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Image from "../Image/Image";
+import Image from "../utils/Image";
 
 const EmptyWishlist = () => {
   return (

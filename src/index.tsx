@@ -4,16 +4,19 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StyledEngineProvider } from "@mui/material/styles";
+import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </StyledEngineProvider>
-  // </React.StrictMode>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
