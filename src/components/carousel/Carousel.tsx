@@ -8,11 +8,11 @@ const ReactCarousel = () => {
   return (
     <Box className="slider-container">
       <Carousel
+        className="home-carousel"
         autoPlay
         interval={4000}
         transitionTime={1000}
         infiniteLoop
-        className="home-carousel"
         showArrows={true}
         showThumbs={false}
       >
