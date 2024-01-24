@@ -7,7 +7,15 @@ import Box from "@mui/material/Box";
 const ReactCarousel = () => {
   return (
     <Box className="slider-container">
-      <Carousel className="home-carousel" showArrows={true} showThumbs={false}>
+      <Carousel
+        autoPlay
+        interval={4000}
+        transitionTime={1000}
+        infiniteLoop
+        className="home-carousel"
+        showArrows={true}
+        showThumbs={false}
+      >
         <Image
           src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/special+offer.jpg"
           alt="special-offer"
