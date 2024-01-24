@@ -1,46 +1,45 @@
-# Getting Started with Create React App
+# FabShop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FabShop is a frontend e-commerce platform developed using [React with Typescript](https://react.dev/learn/typescript) and [Material UI](https://mui.com/material-ui/getting-started/). It has a variety of products in the Men, Women and Kids category.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
 
-### `npm start`
+- clone the repository
+- run command `npm install`
+- run command `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Key Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Build the user interface to easily connect with additional features and data in the future.
+- Implemented sign up or log in options for a personalized shopping experience.
+- It has varieties of products in Men, Women and kids category.
+- It includes a search field to search products.
+- It allows to add multiple items to Wishlist.
+- It allows to add multiple items to Cart.
+- It allows to order multiple items with diverse payment options.
 
-### `npm test`
+## User Interface Overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### User Authentication:
 
-### `npm run build`
+- Seamlessly sign up or log in for a personalized shopping experience.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Intuitive Navigation:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- User-friendly navbar showcasing links for different categories.
+- It has convenient search bar for quick product discovery.
+- It has cart option to show total items in cart for easy ordering of selected items.
+- It has user profile icon provides access to profile details, wishlist, orders, and more.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Homepage Showcase:
 
-### `npm run eject`
+- Visually appealing homepage featuring few products.
+- Engaged carousel to highlight the latest trends and exclusive offers.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Cart and Wishlist:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Able to move products easily from Cart to Wishlist or from Wishlist to Cart.
+- Has quotes with beautiful background if Cart or Wishlist is empty.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+.
