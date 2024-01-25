@@ -66,9 +66,6 @@ function App() {
       await getUserId(email, name, password, contact);
     };
     signUpAndFetchUserId();
-    allProducts.forEach((product) =>
-      localStorage.setItem(product.image.id, product.image.url)
-    );
     //eslint-disable-next-line
   }, []);
 

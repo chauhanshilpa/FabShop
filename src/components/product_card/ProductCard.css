@@ -23,8 +23,12 @@
   margin-bottom: 0.25rem;
 }
 
-.product-card .card-image {
+.product-card .card-image{
   height: 18.75rem;
-  width: auto;
-  object-fit: fill;
+}
+
+.product-card .card-image img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }

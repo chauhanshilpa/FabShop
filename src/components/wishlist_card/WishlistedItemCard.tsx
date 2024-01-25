@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-import Image from "../utils/Image";
+import Image from "../utils/Image/Image";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Box from "@mui/material/Box";
 import { Product } from "../../api/classModels";

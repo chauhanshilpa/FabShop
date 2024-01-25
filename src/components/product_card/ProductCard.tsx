@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import Image from "../utils/Image/Image";
 import Typography from "@mui/material/Typography";
 import { Product } from "../../api/classModels";
 
@@ -19,12 +20,9 @@ const ProductCard = ({ product }: { product: Product }) => {
       className="product-card"
       onClick={() => openProduct(navigate, product.id)}
     >
-      <CardMedia
-        // sx={{ height: 330 }}
-        image={product.image.url}
-        title="product card"
-        className="card-image"
-      />
+      <CardMedia title="product card" className="card-image">
+        <Image src={product.image.url} alt={product.name} />
+      </CardMedia>
       <CardContent>
         <Typography
           gutterBottom
