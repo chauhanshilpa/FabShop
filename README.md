@@ -13,11 +13,13 @@ FabShop is a frontend e-commerce platform developed using [React with Typescript
 
 - Build the user interface to easily connect with additional features and data in the future.
 - Implemented sign up or log in options for a personalized shopping experience.
-- It has varieties of products in Men, Women and kids category.
-- It includes a search field to search products.
+- Users & sellers can sign up and sign in to their accounts.
+- It has varieties of products in Men, Women and kids categories.
+- It includes a search field for quick product discovery.
 - It allows to add multiple items to Wishlist.
 - It allows to add multiple items to Cart.
-- It allows to order multiple items with diverse payment options.
+- Improved website performance through image lazy loading.
+- It has ability to order multiple items together.
 
 ## User Interface Overview
 
@@ -52,6 +54,3 @@ FabShop is a frontend e-commerce platform developed using [React with Typescript
   <img width="960" alt="empty-wishlist-image" src="https://github.com/chauhanshilpa/FabShop/assets/101130846/0c48fef9-9c06-4fd9-9136-ea3e21fe4e6e">
   <img width="960" alt="empty-cart-image" src="https://github.com/chauhanshilpa/FabShop/assets/101130846/a3416e42-6f20-4c51-8a08-1d22ab049a7d">
 
-
-
-.
