@@ -22,10 +22,6 @@
   color: black;
 }
 
-/* .shopping-cart button {
-  color: black;
-} */
-
 .shopping-cart button:hover {
   background: transparent;
 }
@@ -95,4 +91,10 @@
 
 .cart-price-details .total-amount {
   font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.cart-price-details .place-order-button {
+  width: 100%;
+  background-color: #ffaf03;
 }

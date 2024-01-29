@@ -3,16 +3,19 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { DISCOUNT, SHIPPING_CHARGE } from "../../FabShop_constants";
+import Button from "@mui/material/Button";
 interface Props {
   cartTotalAmount: number;
   cartProductsPrice: number;
   numberOfProductsInCart: number;
+  handleOrderPlacement: () => void;
 }
 
 const CartPriceDetails = ({
   cartTotalAmount,
   cartProductsPrice,
   numberOfProductsInCart,
+  handleOrderPlacement,
 }: Props) => {
   return (
     <Box className="cart-price-details">
@@ -37,6 +40,13 @@ const CartPriceDetails = ({
         <Typography className="total-amount">Total Amount</Typography>
         <Typography className="total-amount">₹{cartTotalAmount}</Typography>
       </Box>
+      <Button
+        variant="contained"
+        className="place-order-button"
+        onClick={handleOrderPlacement}
+      >
+        Place Order
+      </Button>
     </Box>
   );
 };

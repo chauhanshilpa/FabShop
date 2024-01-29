@@ -6,7 +6,7 @@
 
 .empty-wishlist-container img {
   position: relative;
-  opacity: 0.4;
+  opacity: 0.4 !important;
   object-fit: cover;
   height: calc(100vh - 70px);
 }

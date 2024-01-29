@@ -10,7 +10,7 @@ import SingleProduct from "./pages/single_product/SingleProduct";
 import Profile from "./pages/profile/Profile";
 import Wishlist from "./pages/wishlist/Wishlist";
 import Orders from "./pages/orders/Orders";
-import Cart from "./pages/cart/Cart";
+import Checkout from "./pages/checkout/checkout_main/Checkout";
 import Footer from "./components/footer/Footer";
 import { STARTING_PRODUCTS } from "./api/assets/productsData";
 import { Product } from "./api/classModels";
@@ -100,7 +100,7 @@ function App() {
 
   return (
     <>
-    <ScrollToTop/>
+      <ScrollToTop />
       <Navbar totalProductsInCart={cartProductsList.length} />
       <Routes>
         <Route
@@ -138,9 +138,9 @@ function App() {
         />
         <Route path="/user/Orders" element={<Orders />} />
         <Route
-          path="/cart"
+          path="/checkout"
           element={
-            <Cart
+            <Checkout
               cartProductsList={cartProductsList}
               addToWishlist={addToWishlist}
               removeFromCart={removeFromCart}

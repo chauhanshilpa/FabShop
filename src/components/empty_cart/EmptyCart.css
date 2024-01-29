@@ -6,7 +6,7 @@
 
 .empty-cart-container img {
   position: relative;
-  opacity: 0.6;
+  opacity: 0.4 !important;
   width: 100%;
   height: calc(100vh - 70px);
 }

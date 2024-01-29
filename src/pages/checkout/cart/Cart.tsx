@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import "./Cart.css";
-import { Product } from "../../api/classModels";
+import { Product } from "../../../api/classModels";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import CartProductCard from "../../components/cart_data/CartProductCard";
-import CartPriceDetails from "../../components/cart_data/CartPriceDetails";
+import CartProductCard from "../../../components/cart_data/CartProductCard";
+import CartPriceDetails from "../../../components/cart_data/CartPriceDetails";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import EmptyCart from "../../components/empty_cart/EmptyCart";
-import { handleCartProductsPrice, handleCartTotalAmount } from "../../api/api";
+import EmptyCart from "../../../components/empty_cart/EmptyCart";
+import {
+  handleCartProductsPrice,
+  handleCartTotalAmount,
+} from "../../../api/api";
 interface Props {
   cartProductsList: Product[];
   addToWishlist: (productId: string) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
+  handleOrderPlacement: () => void;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -24,7 +28,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
+const Cart = ({
+  cartProductsList,
+  addToWishlist,
+  removeFromCart,
+  handleOrderPlacement,
+}: Props) => {
   const [cartProductsPrice, setCartProductsPrice] = useState<number>(0);
   const [cartTotalAmount, setCartTotalAmount] = useState<number>(0);
 
@@ -83,6 +92,7 @@ const Cart = ({ cartProductsList, addToWishlist, removeFromCart }: Props) => {
                   cartProductsPrice={cartProductsPrice}
                   cartTotalAmount={cartTotalAmount}
                   numberOfProductsInCart={cartProductsList.length}
+                  handleOrderPlacement={handleOrderPlacement}
                 />
               </Item>
             </Grid>

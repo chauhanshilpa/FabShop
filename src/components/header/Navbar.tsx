@@ -143,7 +143,7 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
             <SearchBar />
           </Box>
-          <NavLink to="/cart">
+          <NavLink to="/checkout">
             <NavbarCart totalProductsInCart={totalProductsInCart} />
           </NavLink>
           <Box sx={{ flexGrow: 0 }}>
