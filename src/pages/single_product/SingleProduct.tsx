@@ -61,7 +61,7 @@ const SingleProduct = ({
   }
 
   async function handleCart() {
-    isProductInCart ? navigate("/cart") : await addToCart(productId);
+    isProductInCart ? navigate("/checkout") : await addToCart(productId);
   }
 
   return (
