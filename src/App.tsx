@@ -24,6 +24,7 @@ import {
   getCartProductsList,
   getWishlist,
 } from "./api/api";
+import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -34,21 +35,6 @@ function App() {
     []
   );
   const [cartProductsList, setCartProductsList] = useState<Product[]>([]);
-
-  //these values are hard coded as for now
-  const email: string = "user@gmail.com";
-  const name: string = "user";
-  const password: string = "password";
-  const contact: number = 1234567892;
-
-  async function signUp(
-    email: string,
-    name: string,
-    password: string,
-    contact: number
-  ) {
-    await addNewUser(email, name, password, contact);
-  }
 
   async function getUserId(
     email: string,
@@ -62,8 +48,8 @@ function App() {
 
   useEffect(() => {
     const signUpAndFetchUserId = async () => {
-      await signUp(email, name, password, contact);
-      await getUserId(email, name, password, contact);
+      await addNewUser(EMAIL, NAME, PASSWORD, CONTACT);
+      await getUserId(EMAIL, NAME, PASSWORD, CONTACT);
     };
     signUpAndFetchUserId();
     //eslint-disable-next-line
@@ -141,6 +127,7 @@ function App() {
           path="/checkout"
           element={
             <Checkout
+              activeUserId={activeUserId}
               cartProductsList={cartProductsList}
               addToWishlist={addToWishlist}
               removeFromCart={removeFromCart}

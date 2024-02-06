@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Image from "../utils/Image/Image";
+import Image from "../Image/Image";
 import Typography from "@mui/material/Typography";
 import { Product } from "../../api/classModels";
 

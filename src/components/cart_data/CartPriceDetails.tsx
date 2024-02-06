@@ -17,6 +17,7 @@ const CartPriceDetails = ({
   numberOfProductsInCart,
   handleOrderPlacement,
 }: Props) => {
+  
   return (
     <Box className="cart-price-details">
       <Typography>PRICE DETAILS({numberOfProductsInCart})</Typography>

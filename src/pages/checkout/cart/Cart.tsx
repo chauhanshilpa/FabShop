@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./Cart.css";
 import { Product } from "../../../api/classModels";
 import Grid from "@mui/material/Grid";
@@ -9,15 +8,16 @@ import CartPriceDetails from "../../../components/cart_data/CartPriceDetails";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import EmptyCart from "../../../components/empty_cart/EmptyCart";
-import {
-  handleCartProductsPrice,
-  handleCartTotalAmount,
-} from "../../../api/api";
+
 interface Props {
+  activeUserId: string;
   cartProductsList: Product[];
   addToWishlist: (productId: string) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
   handleOrderPlacement: () => void;
+  cartProductsPrice: number;
+  cartTotalAmount: number;
+  setCartProductsPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -29,28 +29,15 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Cart = ({
+  activeUserId,
   cartProductsList,
   addToWishlist,
   removeFromCart,
   handleOrderPlacement,
+  cartProductsPrice,
+  cartTotalAmount,
+  setCartProductsPrice,
 }: Props) => {
-  const [cartProductsPrice, setCartProductsPrice] = useState<number>(0);
-  const [cartTotalAmount, setCartTotalAmount] = useState<number>(0);
-
-  useEffect(() => {
-    async function getCartTotalPrice() {
-      const response = await handleCartProductsPrice();
-      setCartProductsPrice(response);
-    }
-    getCartTotalPrice();
-
-    async function getCartTotalAmount() {
-      const response = await handleCartTotalAmount();
-      setCartTotalAmount(response);
-    }
-    getCartTotalAmount();
-  }, [cartProductsPrice]);
-
   return (
     <Box sx={{ flexGrow: 1 }} className="main cart">
       {cartProductsList.length > 0 ? (
@@ -69,6 +56,7 @@ const Cart = ({
                 <Grid item className="cart-product-card" key={product.id}>
                   <Item>
                     <CartProductCard
+                      activeUserId={activeUserId}
                       product={product}
                       addToWishlist={addToWishlist}
                       removeFromCart={removeFromCart}

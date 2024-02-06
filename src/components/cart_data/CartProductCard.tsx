@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Product } from "../../api/classModels";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Image from "../utils/Image/Image";
+import Image from "../Image/Image";
 import Rating from "@mui/material/Rating";
 import Button from "@mui/material/Button";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -15,6 +15,7 @@ import {
   handleCartProductsPrice,
 } from "../../api/api";
 interface Props {
+  activeUserId: string;
   product: Product;
   addToWishlist: (productId: string) => Promise<void>;
   removeFromCart: (productId: string) => Promise<void>;
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const CartProduct = ({
+  activeUserId,
   product,
   addToWishlist,
   removeFromCart,
@@ -31,7 +33,7 @@ const CartProduct = ({
 
   useEffect(() => {
     async function getQuantityOfProduct() {
-      const response = await getProductQuantityInCart(product.id);
+      const response = await getProductQuantityInCart(activeUserId, product.id);
       setProductQuantity(response);
     }
     getQuantityOfProduct();
@@ -51,7 +53,7 @@ const CartProduct = ({
 
   async function removeItemFromCart() {
     await removeFromCart(product.id);
-    const response = await handleCartProductsPrice();
+    const response = await handleCartProductsPrice(activeUserId);
     setCartProductsPrice(response);
   }
 
@@ -59,8 +61,8 @@ const CartProduct = ({
     if (productQuantity > 1) {
       const count = productQuantity - 1;
       setProductQuantity(count);
-      await handleProductQuantityInCart(product.id, count);
-      const response = await handleCartProductsPrice();
+      await handleProductQuantityInCart(activeUserId, product.id, count);
+      const response = await handleCartProductsPrice(activeUserId);
       setCartProductsPrice(response);
     }
   }
@@ -69,8 +71,8 @@ const CartProduct = ({
     if (productQuantity < 5) {
       const count = productQuantity + 1;
       setProductQuantity(count);
-      await handleProductQuantityInCart(product.id, count);
-      const response = await handleCartProductsPrice();
+      await handleProductQuantityInCart(activeUserId, product.id, count);
+      const response = await handleCartProductsPrice(activeUserId);
       setCartProductsPrice(response);
     } else {
       alert("You can order maximum five product quantity at a time.");

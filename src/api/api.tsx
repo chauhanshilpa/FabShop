@@ -1,9 +1,14 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
-import { User, Product } from "./classModels";
+import { User, Product, Address } from "./classModels";
 import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
+
 interface Cart extends Product {
   quantity: number;
+}
+
+interface CustomerAddress {
+  [key: string]: Address;
 }
 
 /**
@@ -16,6 +21,7 @@ let allProducts: Product[] = [...STARTING_PRODUCTS];
 let wishlist: Product[] = [];
 let cartProductsList: Cart[] = [];
 let cartTotalPrice: number = 0;
+let customerAddresses: CustomerAddress = {};
 
 export async function addNewUser(
   email: string,
@@ -86,6 +92,7 @@ export async function getCartProductsList(userId: string) {
 }
 
 export async function handleProductQuantityInCart(
+  userId: string,
   productId: string,
   quantity: number
 ) {
@@ -96,7 +103,10 @@ export async function handleProductQuantityInCart(
   product.quantity = quantity;
 }
 
-export async function getProductQuantityInCart(productId: string) {
+export async function getProductQuantityInCart(
+  userId: string,
+  productId: string
+) {
   const newCartProductsList = [...cartProductsList];
   const product = newCartProductsList.filter(
     (product) => product.id === productId
@@ -104,14 +114,14 @@ export async function getProductQuantityInCart(productId: string) {
   return product.quantity;
 }
 
-export async function handleCartProductsPrice() {
+export async function handleCartProductsPrice(userId: string) {
   cartTotalPrice = cartProductsList.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
   return cartTotalPrice;
 }
 
-export async function handleCartTotalAmount() {
+export async function handleCartTotalAmount(userId: string) {
   const totalAmount =
     cartTotalPrice - (DISCOUNT * cartTotalPrice) / 100 + SHIPPING_CHARGE;
   return totalAmount;
@@ -126,4 +136,35 @@ export async function getSearchedProducts(text: string) {
       product.name.includes(text)
   );
   return searchedProducts;
+}
+
+export async function customerAddressDetails(
+  user_id: string,
+  name: string,
+  phoneNumber: string,
+  pincode: string,
+  locality: string,
+  streetAddress: string,
+  city: string,
+  state: string | null,
+  landmark: string,
+  secondPhoneNumber: string
+) {
+  const completeAddress = new Address(
+    name,
+    phoneNumber,
+    pincode,
+    locality,
+    streetAddress,
+    city,
+    state,
+    landmark,
+    secondPhoneNumber
+  );
+  customerAddresses[user_id] = completeAddress;
+  console.log(customerAddresses[user_id]);
+}
+
+export async function getCustomerAddressDetails(userId: string) {
+  return customerAddresses[userId];
 }

@@ -1,11 +1,5 @@
-import React from 'react'
+const Payment = ({ activeUserId }: { activeUserId: string }) => {
+  return <p>You will pay here</p>;
+};
 
-const Payment = () => {
-  return (
-    <>
-      You will pay here
-    </>
-  )
-}
-
-export default Payment
+export default Payment;

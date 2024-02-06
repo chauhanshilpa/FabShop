@@ -60,3 +60,35 @@ export class Product {
     this.ratings = ratings;
   }
 }
+export class Address {
+  name: string;
+  phoneNumber: string;
+  pincode: string;
+  locality: string;
+  streetAddress: string;
+  city: string;
+  state: string | null;
+  landmark: string;
+  secondPhoneNumber: string;
+  constructor(
+    name: string,
+    phoneNumber: string,
+    pincode: string,
+    locality: string,
+    streetAddress: string,
+    city: string,
+    state: string | null,
+    landmark: string,
+    secondPhoneNumber: string
+  ) {
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.pincode = pincode;
+    this.locality = locality;
+    this.streetAddress = streetAddress;
+    this.city = city;
+    this.state = state;
+    this.landmark = landmark;
+    this.secondPhoneNumber = secondPhoneNumber;
+  }
+}

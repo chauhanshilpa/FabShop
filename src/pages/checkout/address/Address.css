@@ -1,30 +1,8 @@
-.address-box{
- background-color: #eeeeee;
- margin-top: 0.938rem;
+.address-box {
+  background-color: #eeeeee;
+  margin-top: 0.938rem;
 }
 
-.checkout-address-save-and-cancel-buttons{
-    text-align: left;
-    margin-left: 11.5%;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+.address-box .place-order-button {
+  display: none;
 }
-
-.checkout-address-save-and-cancel-buttons .save{
-    margin-right: 0.5rem;
-    padding: 0.6rem;
-}
-
-.checkout-address-save-and-cancel-buttons .cancel{
-    margin-left: 0.5rem;
-    padding: 0.5rem;
-}
-
-.multiline-address{
- width: 76% !important;
-}
-
-.autocomplete-states{
- display: inline;
-}
-

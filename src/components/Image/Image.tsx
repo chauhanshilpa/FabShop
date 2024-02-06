@@ -7,7 +7,7 @@ const Image = ({ src, alt }: { src: string; alt: string }) => {
       className="fabshop-image"
       alt={alt}
       height="100%"
-      src={src} 
+      src={src}
       width="100%"
       effect={"blur"}
       threshold={100}
