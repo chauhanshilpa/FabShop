@@ -49,6 +49,7 @@ export default function Checkout({
 
   const stepStyle = {
     "& .MuiStepLabel-iconContainer": { display: "none" },
+    "& .MuiStepLabel-label.Mui-completed": { color: "#20BD99" },
     "& .MuiStepLabel-label.Mui-active": { color: "#20BD99" },
   };
 

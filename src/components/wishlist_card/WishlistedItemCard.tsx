@@ -48,7 +48,7 @@ const WishlistedItemCard = ({
   }
 
   async function handleAddToCartButton() {
-    isProductInCart ? navigate("/cart") : await addToCart(product.id);
+    isProductInCart ? navigate("/checkout") : await addToCart(product.id);
   }
 
   return (

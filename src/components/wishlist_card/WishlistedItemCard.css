@@ -11,6 +11,7 @@
   color: rgb(190, 187, 187);
   right: 0;
   margin: 0.313rem;
+  z-index: 99;
 }
 
 .wishlist-card .remove-item:hover {
