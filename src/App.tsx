@@ -25,6 +25,7 @@ import {
   getWishlist,
 } from "./api/api";
 import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
+import OrderConfirmation from "./pages/order_placed/OrderConfirmation";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -134,6 +135,7 @@ function App() {
             />
           }
         />
+        <Route path="/checkout/confirmation" element={<OrderConfirmation />} />
       </Routes>
       <Footer />
     </>

@@ -162,7 +162,6 @@ export async function customerAddressDetails(
     secondPhoneNumber
   );
   customerAddresses[user_id] = completeAddress;
-  console.log(customerAddresses[user_id]);
 }
 
 export async function getCustomerAddressDetails(userId: string) {

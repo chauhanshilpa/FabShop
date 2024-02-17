@@ -4,7 +4,8 @@
 }
 
 .card-payment button,
-.COD-payment button {
+.COD-payment button,
+.UPI-payments button {
   width: 25%;
   background-color: #ffaf03;
   color: white;
@@ -13,7 +14,8 @@
 }
 
 .card-payment button:hover,
-.COD-payment button:hover {
+.COD-payment button:hover,
+.UPI-payments button:hover {
   background-color: #ffc436;
 }
 
@@ -37,4 +39,9 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.UPI-Id-form{
+ display: flex;
+ flex-direction: column;
 }
