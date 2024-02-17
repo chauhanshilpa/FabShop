@@ -54,3 +54,9 @@ FabShop is a frontend e-commerce platform developed using [React with Typescript
   <img width="960" alt="empty-wishlist-image" src="https://github.com/chauhanshilpa/FabShop/assets/101130846/0c48fef9-9c06-4fd9-9136-ea3e21fe4e6e">
   <img width="960" alt="empty-cart-image" src="https://github.com/chauhanshilpa/FabShop/assets/101130846/a3416e42-6f20-4c51-8a08-1d22ab049a7d">
 
+
+  #### Credits
+
+  * payment icons are taken by flaticons as png images and others icons are taken from MUI itself.
+
+

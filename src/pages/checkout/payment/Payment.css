@@ -1,0 +1,13 @@
+.payment-list img {
+  height: 2rem !important;
+  width: 2rem !important;
+  background-color: transparent;
+}
+
+.list-item-text {
+  margin-left: 1rem;
+}
+
+.payment-card {
+  min-height: 100%;
+}

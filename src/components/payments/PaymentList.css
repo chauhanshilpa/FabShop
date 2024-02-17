@@ -1,0 +1,10 @@
+.card-payment button,
+.COD-payment button {
+  width: 100%;
+  background-color: #ffaf03;
+}
+
+.card-payment button:hover,
+.COD-payment button:hover {
+  background-color: #ffc436;
+}

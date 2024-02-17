@@ -9,6 +9,11 @@
 .checkout-address-save-and-cancel-buttons .save {
   margin: 0.5rem;
   padding: 0.5rem;
+  background-color: #ffaf03;
+}
+
+.checkout-address-save-and-cancel-buttons .save:hover {
+  background-color: #ffc436;
 }
 
 .checkout-address-save-and-cancel-buttons .cancel {
@@ -19,4 +24,3 @@
 .autocomplete-states-field {
   display: inline;
 }
-
