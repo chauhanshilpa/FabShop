@@ -1,0 +1,47 @@
+.payment-card {
+  padding: 20px;
+  margin: 10px;
+}
+
+.card-payment button,
+.COD-payment button,
+.UPI-payments button {
+  width: 25%;
+  background-color: #ffaf03;
+  color: white;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.card-payment button:hover,
+.COD-payment button:hover,
+.UPI-payments button:hover {
+  background-color: #ffc436;
+}
+
+.text-field {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.validity-and-CVV {
+  display: flex;
+  gap: 10px;
+}
+
+.UPI-payments img {
+  height: 2rem;
+  width: 2rem;
+  background-color: transparent;
+}
+
+.UPI-payment-type {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.UPI-Id-form{
+ display: flex;
+ flex-direction: column;
+}

@@ -23,6 +23,11 @@ interface Props {
 
 const steps = ["Cart", "Address", "Payment"];
 
+const stepStyle = {
+  "& .MuiStepLabel-iconContainer": { display: "none" },
+  "& .MuiStepLabel-label.Mui-completed": { color: "#20BD99" },
+};
+
 export default function Checkout({
   activeUserId,
   cartProductsList,
@@ -46,11 +51,6 @@ export default function Checkout({
     }
     getCartTotalAmount();
   }, [cartProductsPrice, activeUserId]);
-
-  const stepStyle = {
-    "& .MuiStepLabel-iconContainer": { display: "none" },
-    "& .MuiStepLabel-label.Mui-active": { color: "#20BD99" },
-  };
 
   function handleOrderPlacement() {
     const prevStep = activeStep;

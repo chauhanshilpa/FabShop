@@ -204,7 +204,6 @@ const AddressForm = ({ activeUserId, activeStep, setActiveStep }: Props) => {
         <Box className="checkout-address-save-and-cancel-buttons">
           <Button
             variant="contained"
-            color="success"
             className="save"
             onClick={handleNextMove}
           >

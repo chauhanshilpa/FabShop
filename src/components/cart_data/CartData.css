@@ -97,4 +97,9 @@
 .cart-price-details .place-order-button {
   width: 100%;
   background-color: #ffaf03;
+  margin-bottom: 0.5rem;
+}
+
+.cart-price-details .place-order-button:hover {
+  background-color: #ffc436;
 }
