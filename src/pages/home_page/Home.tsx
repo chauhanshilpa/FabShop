@@ -1,13 +1,11 @@
-import ProductList from "../../components/products_list/ProductsList";
 import Carousel from "../../components/carousel/Carousel";
-import { Product } from "../../api/classModels";
+import HomeContents from "../../components/home_components/HomeContents";
 
-const Home = ({ productsList }: { productsList: Product[] }) => {
-
+const Home = ({ activeUserId }: { activeUserId :string}) => {
   return (
     <>
       <Carousel />
-      <ProductList productsList={productsList} />
+      <HomeContents activeUserId={activeUserId} />
     </>
   );
 };

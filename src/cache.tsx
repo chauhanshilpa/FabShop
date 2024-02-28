@@ -1,3 +1,11 @@
+// export function readFromCache(key: string, value:string){
+//   if (key in localStorage) {
+//     return localStorage.getItem(key)
+//   } else {
+//      localStorage.setItem(key, value);
+//   }
+// }
+
 import React from "react";
 
 // function DllNode(key: string, data: string) {

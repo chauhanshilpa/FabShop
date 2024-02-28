@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import { useParams } from "react-router";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import ProductCard from "../../components/product_card/ProductCard";
 import { Product } from "../../api/classModels";
 import Image from "../../components/Image/Image";
+import ProductsList from "../../components/products_list/ProductsList";
 
 const Category = ({ allProducts }: { allProducts: Product[] }) => {
   let { page } = useParams();
@@ -29,11 +29,7 @@ const Category = ({ allProducts }: { allProducts: Product[] }) => {
       </Box>
       <Container className="product-cards-container">
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {filteredProducts.map((product) => (
-            <Grid item xs={6} sm={6} md={4} lg={3} xl={3} key={product.id}>
-              <ProductCard product={product} />
-            </Grid>
-          ))}
+          <ProductsList productsList={filteredProducts} />
         </Grid>
       </Container>
     </Box>
