@@ -55,16 +55,16 @@ export async function getHomeCardProducts(userId: string) {
     "Under ₹499 | Pocket-friendly fashion for you",
     "Customers’ Most-Loved Fashion only for you",
     "Up to 70% off | Top picks by stores near you",
-    "Shop Smart | Surprise Yourself with Fashion",
+    "Shop smart | Surprise yourself with fashion",
     "Today's deals",
     "Up to 50% off | International brands",
     "Keep shopping for your loved one's",
     "Revamp your wardrobe in style",
-    "More fantastic items to consider",
-    "Dress to Impress | Your Daily Dose of Style",
-    "Fashion Finds Galore | Explore, Shop, Repeat",
+    "More fabulous items to consider",
+    "Dress to impress | Your daily dose of style",
+    "Fashion finds galore | Explore, Shop, Repeat",
     "Up to 30% off | New arrivals at nearby stores",
-    "Fabulous Finds at FabShop | Explore Your Style",
+    "Fabulous finds at FabShop | Explore your style",
   ];
   const homeCardProducts: { [key: string]: Product[] } = {};
   let copiedProducts1 = [...allProducts];

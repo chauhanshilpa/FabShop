@@ -3,7 +3,7 @@ import Image from "../Image/Image";
 import Typography from "@mui/material/Typography";
 
 interface Props {
-  imgSrc: string;
+  imgSrc: string; 
   alt: string;
   imgLabel: string;
 }

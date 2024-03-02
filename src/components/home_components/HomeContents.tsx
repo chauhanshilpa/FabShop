@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { Product } from "../../api/classModels";
 import { getHomeCardProducts } from "../../api/api";
+import { Carousel } from "react-responsive-carousel";
 
 const HomeContents = ({ activeUserId }: { activeUserId : string}) => {
   const [homeCardProducts, setHomeCardProducts] = useState<{
@@ -18,7 +19,6 @@ const HomeContents = ({ activeUserId }: { activeUserId : string}) => {
     homeCardProducts();
     // eslint-disable-next-line
   }, []);
-  console.log(homeCardProducts);
 
   return (
     <>
@@ -39,13 +39,6 @@ const HomeContents = ({ activeUserId }: { activeUserId : string}) => {
             </Grid>
           ))}
       </Grid>
-      <Box sx={{ marginTop: "30px" }} className="home-content-row-2">
-        {Object.keys(homeCardProducts)
-          .splice(4, 1)
-          .map((heading) => (
-            <HomeCards homeCardProducts={homeCardProducts} heading={heading} />
-          ))}
-      </Box>
       <Grid
         container
         rowSpacing={1}

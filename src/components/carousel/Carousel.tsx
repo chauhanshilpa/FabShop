@@ -1,33 +1,20 @@
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import "./Carousel.css";
 import Image from "../Image/Image";
 import Box from "@mui/material/Box";
 
-const ReactCarousel = () => {
+const ReactCarousel = ({
+  carouselImageList,
+}: {
+  carouselImageList: { src: string; alt: string }[];
+}) => {
   return (
     <Box className="slider-container">
-      <Carousel
-        className="home-carousel"
-        autoPlay
-        interval={4000}
-        transitionTime={1000}
-        infiniteLoop
-        showArrows={true}
-        showThumbs={false}
-      >
-        <Image
-          src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/special+offer.jpg"
-          alt="special-offer"
-        />
-        <Image
-          src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/fashion_collection_for_women.jpg"
-          alt="fashion collection for women"
-        />
-        <Image
-          src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/coming+soon.jpg"
-          alt="coming soon..."
-        />
+      <Carousel showArrows={true} showThumbs={false}>
+        {carouselImageList.map((image) => (
+          <Image src={image.src} alt={image.alt} />
+        ))}
       </Carousel>
     </Box>
   );

@@ -26,7 +26,6 @@ import {
 } from "./api/api";
 import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
 import OrderConfirmation from "./pages/order_placed/OrderConfirmation";
-import Container from "@mui/material/Container";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -90,7 +89,6 @@ function App() {
     <>
       <ScrollToTop />
       <Navbar totalProductsInCart={cartProductsList.length} />
-      <Container>
         <Routes>
           <Route path="/" element={<Home activeUserId={activeUserId} />} />
           <Route path="/search/:text" element={<SearchedProducts />} />
@@ -139,7 +137,6 @@ function App() {
             element={<OrderConfirmation />}
           />
         </Routes>
-      </Container>
       <Footer />
     </>
   );

@@ -1,3 +1,9 @@
-.products-list{
-    margin-top: 1rem;
+.products-list {
+  margin-top: 1rem;
+}
+
+.products-list>p {
+  margin-top: 5rem;
+  font-size: large;
+  text-align: center;
 }
