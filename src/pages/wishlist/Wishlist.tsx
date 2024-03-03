@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid";
 import WishlistedItemCard from "../../components/wishlist_card/WishlistedItemCard";
 import { Product } from "../../api/classModels";
 import EmptyWishlist from "../../components/empty_wishlist/EmptyWishlist";
-import { useEffect } from "react";
 
 interface Props {
   activeUserId: string;
@@ -20,7 +19,6 @@ const Wishlist = ({
   removeFromWishlist,
   addToCart,
 }: Props) => {
-
   return (
     <Box className="main wishlist">
       {wishlistProductsList.length > 0 ? (

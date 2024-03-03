@@ -2,7 +2,7 @@ import "./Home.css";
 import { Product } from "../../api/classModels";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
-import HomeCardImages from "./HomeCardImages";
+import HomeCardProduct from "./HomeCardProduct";
 import Typography from "@mui/material/Typography";
 
 interface Props {
@@ -13,19 +13,14 @@ interface Props {
 const HomeCards = ({ heading, homeCardProducts }: Props) => {
   return (
     <Card className="home-card">
-        <Typography variant="subtitle1" className="card-header">
-          {heading}
-        </Typography>
-        <Box className="home-card-images">
-          {homeCardProducts[heading].map((product) => (
-            <HomeCardImages
-              key={product.image.id}
-              imgSrc={product.image.url}
-              alt={product.type}
-              imgLabel={product.type}
-            />
-          ))}
-        </Box>
+      <Typography variant="subtitle1" className="card-header">
+        {heading}
+      </Typography>
+      <Box className="home-card-images">
+        {homeCardProducts[heading].map((product) => (
+          <HomeCardProduct key={product.id} product={product} />
+        ))}
+      </Box>
     </Card>
   );
 };

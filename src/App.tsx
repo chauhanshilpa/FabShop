@@ -89,54 +89,51 @@ function App() {
     <>
       <ScrollToTop />
       <Navbar totalProductsInCart={cartProductsList.length} />
-        <Routes>
-          <Route path="/" element={<Home activeUserId={activeUserId} />} />
-          <Route path="/search/:text" element={<SearchedProducts />} />
-          <Route
-            path="/category/:page"
-            element={<Category allProducts={allProducts} />}
-          />
-          <Route
-            path="/product/:product_id"
-            element={
-              <SingleProduct
-                activeUserId={activeUserId}
-                addToCart={addToCart}
-                removeFromCart={removeFromCart}
-                addToWishlist={addToWishlist}
-                removeFromWishlist={removeFromWishlist}
-              />
-            }
-          />
-          <Route path="/user/Profile" element={<Profile />} />
-          <Route
-            path="/user/Wishlists"
-            element={
-              <Wishlist
-                activeUserId={activeUserId}
-                wishlistProductsList={wishlistProductsList}
-                removeFromWishlist={removeFromWishlist}
-                addToCart={addToCart}
-              />
-            }
-          />
-          <Route path="/user/Orders" element={<Orders />} />
-          <Route
-            path="/checkout"
-            element={
-              <Checkout
-                activeUserId={activeUserId}
-                cartProductsList={cartProductsList}
-                addToWishlist={addToWishlist}
-                removeFromCart={removeFromCart}
-              />
-            }
-          />
-          <Route
-            path="/checkout/confirmation"
-            element={<OrderConfirmation />}
-          />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Home activeUserId={activeUserId} />} />
+        <Route path="/search/:text" element={<SearchedProducts />} />
+        <Route
+          path="/category/:page"
+          element={<Category allProducts={allProducts} />}
+        />
+        <Route
+          path="/product/:product_id"
+          element={
+            <SingleProduct
+              activeUserId={activeUserId}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
+              addToWishlist={addToWishlist}
+              removeFromWishlist={removeFromWishlist}
+            />
+          }
+        />
+        <Route path="/user/Profile" element={<Profile />} />
+        <Route
+          path="/user/Wishlists"
+          element={
+            <Wishlist
+              activeUserId={activeUserId}
+              wishlistProductsList={wishlistProductsList}
+              removeFromWishlist={removeFromWishlist}
+              addToCart={addToCart}
+            />
+          }
+        />
+        <Route path="/user/Orders" element={<Orders />} />
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              activeUserId={activeUserId}
+              cartProductsList={cartProductsList}
+              addToWishlist={addToWishlist}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
+        <Route path="/checkout/confirmation" element={<OrderConfirmation />} />
+      </Routes>
       <Footer />
     </>
   );

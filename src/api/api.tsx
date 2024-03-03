@@ -70,10 +70,18 @@ export async function getHomeCardProducts(userId: string) {
   let copiedProducts1 = [...allProducts];
   for (let i = 0; i < headings.length; i++) {
     homeCardProducts[headings[i]] = [];
-    while (homeCardProducts[headings[i]].length < 4) {
-      const index = Math.floor(Math.random() * copiedProducts1.length);
-      homeCardProducts[headings[i]].push(copiedProducts1[index]);
-      copiedProducts1.splice(index, 1);
+    if (i === 4) {
+      while (homeCardProducts[headings[i]].length < 8) {
+        const index = Math.floor(Math.random() * copiedProducts1.length);
+        homeCardProducts[headings[i]].push(copiedProducts1[index]);
+        copiedProducts1.splice(index, 1);
+      }
+    } else {
+      while (homeCardProducts[headings[i]].length < 4) {
+        const index = Math.floor(Math.random() * copiedProducts1.length);
+        homeCardProducts[headings[i]].push(copiedProducts1[index]);
+        copiedProducts1.splice(index, 1);
+      }
     }
   }
   return homeCardProducts;

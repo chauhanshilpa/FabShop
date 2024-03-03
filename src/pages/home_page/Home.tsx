@@ -1,5 +1,5 @@
 import "./Home.css";
-import Carousel from "../../components/carousel/Carousel";
+import Carousel from "../../components/carousel/react_responsive_carousel/Carousel";
 import Box from "@mui/material/Box";
 import HomeContents from "../../components/home_components/HomeContents";
 import Container from "@mui/material/Container";

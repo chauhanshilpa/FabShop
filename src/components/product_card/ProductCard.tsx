@@ -10,7 +10,7 @@ import { Product } from "../../api/classModels";
 const ProductCard = ({ product }: { product: Product }) => {
   const navigate = useNavigate();
 
-  function openProduct(navigate: Function, product_id: string) {
+  function openProduct(product_id: string) {
     navigate(`/product/${product_id}`, { state: { product } });
   }
 
@@ -18,7 +18,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <Card
       sx={{ maxWidth: 345 }}
       className="product-card"
-      onClick={() => openProduct(navigate, product.id)}
+      onClick={() => openProduct(product.id)}
     >
       <CardMedia title="product card" className="card-image">
         <Image src={product.image.url} alt={product.name} />

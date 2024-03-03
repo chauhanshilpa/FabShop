@@ -1,13 +1,15 @@
 .home-content-row-1 {
   margin-top: 1rem;
+  margin-bottom: 0;
 }
 
 .home-content-row-1 .home-card {
   padding: 10px;
-  height: 20rem;
+  height: 21rem;
 }
 
-.home-card .card-header {
+.home-card .card-header,
+.home-content-row-2-heading {
   max-height: 3.788rem;
   font-size: large;
   margin-bottom: 10px;
@@ -31,10 +33,30 @@
   position: absolute;
   height: 100%;
 }
-/* ------------------- */
 
+.multi-products-carousel {
+  min-height: 12rem;
+  max-height: auto;
+  margin: 30px auto;
+}
 
+.multi-products-carousel .carousel-item {
+  padding: 8px;
+}
 
+.multi-products-carousel .carousel-item img {
+  max-height: 12rem;
+}
+
+.home-card .inner-image .product-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  padding: 2px;
+}
 
 @media only screen and (max-width: 950px) {
   .home-content-row-1 .card-header {

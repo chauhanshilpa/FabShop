@@ -39,7 +39,7 @@ const WishlistedItemCard = ({
     isCartIncludesProduct();
   });
 
-  function openProduct(navigate: Function, product_id: string) {
+  function openProduct(product_id: string) {
     navigate(`/product/${product_id}`, { state: { product } });
   }
 
@@ -55,7 +55,7 @@ const WishlistedItemCard = ({
     <Card sx={{ maxWidth: 250 }} className="wishlist-card">
       <Box className="card-media">
         <CancelIcon className="remove-item" onClick={removeItemFromWishlist} />
-        <Box onClick={() => openProduct(navigate, product.id)}>
+        <Box onClick={() => openProduct(product.id)}>
           <Image src={product.image.url} alt={product.name} />
         </Box>
       </Box>

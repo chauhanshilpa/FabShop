@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 const CashOnDeliveryPayment = () => {
   const navigate = useNavigate();
 
-  function handleOrderConfirmation(){
-    navigate("/checkout/confirmation")
-  };
+  function handleOrderConfirmation() {
+    navigate("/checkout/confirmation");
+  }
 
   return (
     <Card className="payment-card">
