@@ -1,0 +1,9 @@
+.hero-carousel {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  max-height: 22rem;
+}
+
+.hero-carousel .slider-container img {
+  max-height: 22rem;
+}

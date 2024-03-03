@@ -50,6 +50,43 @@ export async function getActiveUserId(
   return activeUser.id;
 }
 
+export async function getHomeCardProducts(userId: string) {
+  const headings = [
+    "Under ₹499 | Pocket-friendly fashion for you",
+    "Customers’ Most-Loved Fashion only for you",
+    "Up to 70% off | Top picks by stores near you",
+    "Shop smart | Surprise yourself with fashion",
+    "Today's deals",
+    "Up to 50% off | International brands",
+    "Keep shopping for your loved one's",
+    "Revamp your wardrobe in style",
+    "More fabulous items to consider",
+    "Dress to impress | Your daily dose of style",
+    "Fashion finds galore | Explore, Shop, Repeat",
+    "Up to 30% off | New arrivals at nearby stores",
+    "Fabulous finds at FabShop | Explore your style",
+  ];
+  const homeCardProducts: { [key: string]: Product[] } = {};
+  let copiedProducts1 = [...allProducts];
+  for (let i = 0; i < headings.length; i++) {
+    homeCardProducts[headings[i]] = [];
+    if (i === 4) {
+      while (homeCardProducts[headings[i]].length < 8) {
+        const index = Math.floor(Math.random() * copiedProducts1.length);
+        homeCardProducts[headings[i]].push(copiedProducts1[index]);
+        copiedProducts1.splice(index, 1);
+      }
+    } else {
+      while (homeCardProducts[headings[i]].length < 4) {
+        const index = Math.floor(Math.random() * copiedProducts1.length);
+        homeCardProducts[headings[i]].push(copiedProducts1[index]);
+        copiedProducts1.splice(index, 1);
+      }
+    }
+  }
+  return homeCardProducts;
+}
+
 export async function addNewProduct() {
   console.log("This will add new product");
 }
@@ -130,10 +167,10 @@ export async function handleCartTotalAmount(userId: string) {
 export async function getSearchedProducts(text: string) {
   const searchedProducts = allProducts.filter(
     (product) =>
-      product.category.toLowerCase().includes(text) ||
-      product.type.toLowerCase().includes(text) ||
-      product.sub_category.toLowerCase().includes(text) ||
-      product.name.includes(text)
+      product.category.toLowerCase().includes(text.toLowerCase()) ||
+      product.type.toLowerCase().includes(text.toLowerCase()) ||
+      product.sub_category.toLowerCase().includes(text.toLowerCase()) ||
+      product.name.includes(text.toLowerCase())
   );
   return searchedProducts;
 }

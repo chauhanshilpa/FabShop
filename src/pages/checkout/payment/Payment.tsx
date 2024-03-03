@@ -9,7 +9,6 @@ import Grid from "@mui/material/Grid";
 import CardPayment from "../../../components/payments/CardPayment";
 import UPIPayments from "../../../components/payments/UPIPayments";
 import CashOnDeliveryPayment from "../../../components/payments/CashOnDeliveryPayment";
-import Card from "@mui/material/Card";
 
 export default function Payment(activeUserId: { activeUserId: string }) {
   const [openCashOnDeliverPayment, setOpenCashOnDeliverPayment] =

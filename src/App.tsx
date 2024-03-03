@@ -90,10 +90,7 @@ function App() {
       <ScrollToTop />
       <Navbar totalProductsInCart={cartProductsList.length} />
       <Routes>
-        <Route
-          path="/"
-          element={<Home productsList={allProducts.slice(0, 24)} />}
-        />
+        <Route path="/" element={<Home activeUserId={activeUserId} />} />
         <Route path="/search/:text" element={<SearchedProducts />} />
         <Route
           path="/category/:page"

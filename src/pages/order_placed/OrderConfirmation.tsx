@@ -1,4 +1,3 @@
-
 const OrderPlaced = () => {
   return <div>Your Order is placed successfully</div>;
 };

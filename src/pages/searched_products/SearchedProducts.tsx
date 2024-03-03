@@ -5,7 +5,6 @@ import { Product } from "../../api/classModels";
 const SearchedProducts = () => {
   const { state } = useLocation();
   const productsList: Product[] = state?.newSearchedProducts;
-
   return <ProductsList productsList={productsList} />;
 };
 

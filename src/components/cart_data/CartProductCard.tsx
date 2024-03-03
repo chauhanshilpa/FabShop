@@ -42,7 +42,7 @@ const CartProduct = ({
 
   const navigate = useNavigate();
 
-  function openProduct(navigate: Function, product_id: string) {
+  function openProduct(product_id: string) {
     navigate(`/product/${product_id}`, { state: { product } });
   }
 
@@ -82,10 +82,7 @@ const CartProduct = ({
   return (
     <Box className="shopping-cart">
       <Box sx={{ display: "flex" }}>
-        <Box
-          className="cart-image-box"
-          onClick={() => openProduct(navigate, product.id)}
-        >
+        <Box className="cart-image-box" onClick={() => openProduct(product.id)}>
           <Image src={product.image.url} alt="cart-product" />
         </Box>
         <Box className="cart-product-data">
