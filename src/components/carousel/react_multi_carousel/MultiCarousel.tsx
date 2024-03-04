@@ -36,7 +36,7 @@ const MultiCarousel = ({ listOfProducts }: { listOfProducts: Product[] }) => {
       infinite={true}
     >
       {listOfProducts.map((product) => (
-        <MultiCarouselProduct product={product} />
+        <MultiCarouselProduct key={product.id} product={product} />
       ))}
     </Carousel>
   );

@@ -44,7 +44,7 @@ export default function Checkout({
       setCartProductsPrice(response);
     }
     getCartTotalPrice();
-
+    console.log("checkout main")
     async function getCartTotalAmount() {
       const response = await handleCartTotalAmount(activeUserId);
       setCartTotalAmount(response);

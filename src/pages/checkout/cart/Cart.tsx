@@ -19,7 +19,7 @@ interface Props {
   cartTotalAmount: number;
   setCartProductsPrice: React.Dispatch<React.SetStateAction<number>>;
 }
-
+ console.log("cart")
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,

@@ -3,6 +3,10 @@
   height: 10rem;
 }
 
+.shopping-cart .cart-image-box{
+ cursor: pointer;
+}
+
 .cart-product-data {
   text-align: left;
   margin: 0px 0.625rem;
@@ -46,6 +50,10 @@
   min-width: 1.563rem;
   min-height: 1.563rem;
   color: rgb(83, 82, 82);
+}
+
+.quantity-display-button{
+  cursor: default !important;
 }
 
 .quantity-display-button {

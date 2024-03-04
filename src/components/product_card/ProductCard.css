@@ -1,3 +1,7 @@
+.product-card {
+  cursor: pointer;
+}
+
 .product-card .pricing {
   display: flex;
   margin-top: 0.125rem;
