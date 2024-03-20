@@ -61,7 +61,7 @@ const SearchBar = () => {
   ) {
     if (event.key === ENTER_KEY) {
       const newSearchedProducts = await getSearchedProducts(
-        query.toLowerCase()
+        query.trim().toLowerCase()
       );
       navigate(`/search/${query}`, { state: { newSearchedProducts } });
       setQuery("");

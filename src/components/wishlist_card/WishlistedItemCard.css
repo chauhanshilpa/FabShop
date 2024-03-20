@@ -2,6 +2,10 @@
   margin-top: 1rem;
 }
 
+.wishlist-card .wishlisted-product-image{
+ cursor: pointer;
+}
+
 .wishlist-card .card-media {
   position: relative;
 }
@@ -12,6 +16,7 @@
   right: 0;
   margin: 0.313rem;
   z-index: 99;
+  cursor: pointer;
 }
 
 .wishlist-card .remove-item:hover {

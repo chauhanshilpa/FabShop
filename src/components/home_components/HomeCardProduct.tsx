@@ -17,7 +17,7 @@ const HomeCardProduct = ({ product }: Props) => {
 
   return (
     <Box className="inner-image" onClick={() => openProduct(product.id)}>
-      <Image src={product.image.url} alt={product.type} />
+      <Image src={product.image.url} alt="product" />
       <Typography variant="subtitle2" className="product-name">
         {product.name}
       </Typography>

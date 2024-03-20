@@ -30,7 +30,7 @@ const CartProduct = ({
   setCartProductsPrice,
 }: Props) => {
   const [productQuantity, setProductQuantity] = useState<number>(1);
-
+  
   useEffect(() => {
     async function getQuantityOfProduct() {
       const response = await getProductQuantityInCart(activeUserId, product.id);
@@ -68,14 +68,14 @@ const CartProduct = ({
   }
 
   async function addQuantity() {
-    if (productQuantity < 5) {
+    if (productQuantity < 10) {
       const count = productQuantity + 1;
       setProductQuantity(count);
       await handleProductQuantityInCart(activeUserId, product.id, count);
       const response = await handleCartProductsPrice(activeUserId);
       setCartProductsPrice(response);
     } else {
-      alert("You can order maximum five product quantity at a time.");
+      alert("You can order maximum ten quantitity of a product at a time.");
     }
   }
 

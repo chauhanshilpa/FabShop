@@ -139,7 +139,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "c3e02b05-54ce-46cc-be6b-14777787021f",
     category: "Women",
-    type: "shoes",
+    type: "footwear shoes",
     sub_category: "Girl",
     price: 2069,
     image: {
@@ -289,7 +289,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "c015699b-6f0b-4b5a-b59e-64f7b72f826b",
     category: "Men",
-    type: "shoes",
+    type: "footwear shoes",
     sub_category: "Boy",
     price: 1209,
     image: {
@@ -334,7 +334,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "a937291c-765e-4f69-86c9-d18e7e430ead",
     category: "Men",
-    type: "shoes",
+    type: "footwear shoes",
     sub_category: "Boy",
     price: 2069,
     image: {
@@ -394,7 +394,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "2d2234ef-9294-4f06-86a4-2a6fe35baef4",
     category: "Women",
-    type: "sandals",
+    type: "footwear sandals",
     sub_category: "Girls",
     price: 2079,
     image: {
@@ -409,7 +409,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "3abc7ae6-4719-493c-9ec8-6237afce7f9b",
     category: "Women",
-    type: "Bellies",
+    type: "footwaer Bellies",
     sub_category: "Girl",
     price: 1099,
     image: {
@@ -424,7 +424,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "4ebc5008-e2c4-493b-86a9-84575574c2d7",
     category: "Women",
-    type: "sandals",
+    type: "footwear sandals",
     sub_category: "Girls",
     price: 2039,
     image: {
@@ -439,7 +439,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "20b9ab6a-3c1a-4fa6-bd96-007c110149fa",
     category: "Women",
-    type: "Bellies",
+    type: "footwear Bellies",
     sub_category: "Girl",
     price: 5029,
     image: {
@@ -589,7 +589,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "255515bf-8534-48d2-8a37-23ca66e00713",
     category: "Women",
-    type: "shoes",
+    type: "footwear shoes",
     sub_category: "Girls",
     price: 2069,
     image: {
@@ -724,7 +724,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "d107fa69-1ad3-424e-b596-123660e9fb7d",
     category: "Men",
-    type: "shoes",
+    type: "footwear shoes",
     sub_category: "Boys",
     price: 5099,
     image: {
@@ -754,7 +754,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "34ff88f1-94ae-4eec-8085-15f935a49f42",
     category: "Women",
-    type: "bellies",
+    type: "footwear bellies",
     sub_category: "Girls",
     price: 2039,
     image: {
@@ -769,7 +769,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "0e1e6f3c-23a5-46c7-a7ff-619fc04d606e",
     category: "Women",
-    type: "bellies",
+    type: "footwear bellies",
     sub_category: "Girls",
     price: 2019,
     image: {
@@ -784,7 +784,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "3fe29f2e-5341-4b50-8859-7b6392e6eef5",
     category: "Men",
-    type: "shoes",
+    type: "footwear shoes",
     sub_category: "Boys",
     price: 69,
     image: {

@@ -8,7 +8,6 @@ import CartPriceDetails from "../../../components/cart_data/CartPriceDetails";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import EmptyCart from "../../../components/empty_cart/EmptyCart";
-
 interface Props {
   activeUserId: string;
   cartProductsList: Product[];

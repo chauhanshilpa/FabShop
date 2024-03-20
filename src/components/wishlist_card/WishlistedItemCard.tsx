@@ -55,7 +55,10 @@ const WishlistedItemCard = ({
     <Card sx={{ maxWidth: 250 }} className="wishlist-card">
       <Box className="card-media">
         <CancelIcon className="remove-item" onClick={removeItemFromWishlist} />
-        <Box onClick={() => openProduct(product.id)}>
+        <Box
+          onClick={() => openProduct(product.id)}
+          className="wishlisted-product-image"
+        >
           <Image src={product.image.url} alt={product.name} />
         </Box>
       </Box>

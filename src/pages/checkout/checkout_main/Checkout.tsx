@@ -44,7 +44,6 @@ export default function Checkout({
       setCartProductsPrice(response);
     }
     getCartTotalPrice();
-
     async function getCartTotalAmount() {
       const response = await handleCartTotalAmount(activeUserId);
       setCartTotalAmount(response);
@@ -84,7 +83,9 @@ export default function Checkout({
         />
       );
     } else if (activeStep === 2) {
-      return <Payment activeUserId={activeUserId} />;
+      return (
+        <Payment activeUserId={activeUserId} />
+      );
     }
   }
 

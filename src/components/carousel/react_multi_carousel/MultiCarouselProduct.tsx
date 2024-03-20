@@ -18,7 +18,7 @@ const MultiCarouselProduct = ({ product }: { product: Product }) => {
       <Image
         key={product.image.id}
         src={product.image.url}
-        alt={product.type}
+        alt="product"
       />
     </Box>
   );

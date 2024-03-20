@@ -204,3 +204,8 @@ export async function customerAddressDetails(
 export async function getCustomerAddressDetails(userId: string) {
   return customerAddresses[userId];
 }
+
+export async function makeCartEmpty(userId: string) {
+  cartProductsList = [];
+  cartTotalPrice = 0;
+}

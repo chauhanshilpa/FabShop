@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./PaymentList.css";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
@@ -11,19 +12,23 @@ import Container from "@mui/material/Container";
 import Image from "../Image/Image";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import { useState } from "react";
+import { makeCartEmpty } from "../../api/api";
 
-const UPIPayments = () => {
+interface Props {
+  activeUserId: string;
+}
+
+const UPIPayments = ({ activeUserId }: Props) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
 
   const navigate = useNavigate();
 
-  function handleOrderConfirmation() {
+  async function handleOrderConfirmation() {
+    await makeCartEmpty(activeUserId);
     navigate("/checkout/confirmation");
   }
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     setSelectedOption(event.target.value);
   };
 

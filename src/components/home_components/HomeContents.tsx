@@ -6,6 +6,7 @@ import { Product } from "../../api/classModels";
 import { getHomeCardProducts } from "../../api/api";
 import MultiCarousel from "../carousel/react_multi_carousel/MultiCarousel";
 import Typography from "@mui/material/Typography";
+import { v4 as uuidv4 } from "uuid";
 
 const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
   const [homeCardProducts, setHomeCardProducts] = useState<{
@@ -32,7 +33,7 @@ const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
         {Object.keys(homeCardProducts)
           .splice(0, 4)
           .map((heading) => (
-            <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+            <Grid item xs={6} sm={6} md={3} lg={3} xl={3} key={uuidv4()}>
               <HomeCards
                 homeCardProducts={homeCardProducts}
                 heading={heading}
@@ -47,7 +48,10 @@ const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
         {Object.keys(homeCardProducts)
           .splice(4, 1)
           .map((heading) => (
-            <MultiCarousel listOfProducts={homeCardProducts[heading]} />
+            <MultiCarousel
+              key={uuidv4()}
+              listOfProducts={homeCardProducts[heading]}
+            />
           ))}
       </Box>
       <Grid
@@ -59,7 +63,7 @@ const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
         {Object.keys(homeCardProducts)
           .splice(5, 8)
           .map((heading) => (
-            <Grid item xs={6} sm={6} md={3} lg={3} xl={3}>
+            <Grid item xs={6} sm={6} md={3} lg={3} xl={3} key={uuidv4()}>
               <HomeCards
                 homeCardProducts={homeCardProducts}
                 heading={heading}
