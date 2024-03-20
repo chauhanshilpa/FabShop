@@ -6,11 +6,15 @@ import ListItemText from "@mui/material/ListItemText";
 import Image from "../../../components/Image/Image";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import CardPayment from "../../../components/payments/CardPayment";
-import UPIPayments from "../../../components/payments/UPIPayments";
-import CashOnDeliveryPayment from "../../../components/payments/CashOnDeliveryPayment";
+import CardPayment from "../../../components/payments_type/CardPayment";
+import UPIPayments from "../../../components/payments_type/UPIPayments";
+import CashOnDeliveryPayment from "../../../components/payments_type/CashOnDeliveryPayment";
 
-export default function Payment(activeUserId: { activeUserId: string }) {
+interface Props {
+  activeUserId: string;
+}
+
+export default function Payment({ activeUserId}: Props) {
   const [openCashOnDeliverPayment, setOpenCashOnDeliverPayment] =
     useState(false);
   const [openUPIPayment, setOpenUPIPayment] = useState(false);
@@ -79,9 +83,21 @@ export default function Payment(activeUserId: { activeUserId: string }) {
         </List>
       </Grid>
       <Grid item xs={12} sm={12} md={7} lg={7} xl={7} className="payment-type">
-          {openCashOnDeliverPayment && <CashOnDeliveryPayment />}
-          {openCardsPayment && <CardPayment />}
-          {openUPIPayment && <UPIPayments />}
+        {openCashOnDeliverPayment && (
+          <CashOnDeliveryPayment
+            activeUserId={activeUserId}
+          />
+        )}
+        {openCardsPayment && (
+          <CardPayment
+            activeUserId={activeUserId}
+          />
+        )}
+        {openUPIPayment && (
+          <UPIPayments
+            activeUserId={activeUserId}
+          />
+        )}
       </Grid>
     </Grid>
   );

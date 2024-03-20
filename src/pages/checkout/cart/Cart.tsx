@@ -8,7 +8,6 @@ import CartPriceDetails from "../../../components/cart_data/CartPriceDetails";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import EmptyCart from "../../../components/empty_cart/EmptyCart";
-
 interface Props {
   activeUserId: string;
   cartProductsList: Product[];
@@ -19,7 +18,7 @@ interface Props {
   cartTotalAmount: number;
   setCartProductsPrice: React.Dispatch<React.SetStateAction<number>>;
 }
- console.log("cart")
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
