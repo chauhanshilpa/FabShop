@@ -20,12 +20,17 @@ interface Props {
 
 const UPIPayments = ({ activeUserId }: Props) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
+  const [upiId, setUpiId] = useState<string>("")
 
   const navigate = useNavigate();
 
   async function handleOrderConfirmation() {
     await makeCartEmpty(activeUserId);
     navigate("/checkout/confirmation");
+  }
+
+  async function handleUpiIdChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setUpiId(event.target.value);
   }
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,8 +94,10 @@ const UPIPayments = ({ activeUserId }: Props) => {
               id="outlined-basic"
               label="Enter UPI ID here"
               variant="outlined"
+              value={upiId}
+              onChange={handleUpiIdChange}
             />
-            <Button onClick={handleOrderConfirmation}>PAY NOW</Button>
+            <Button onClick={handleOrderConfirmation} disabled={upiId.length > 0 ? false : true}>PAY NOW</Button>
           </Box>
         )}
       </Container>
