@@ -21,7 +21,7 @@ const heroImagesList: { src: string; alt: string }[] = [
 
 const Home = ({ activeUserId }: { activeUserId: string }) => {
   return (
-    <Container>
+    <Container className="main">
       <Box className="hero-carousel">
         <Carousel carouselImageList={heroImagesList} />
       </Box>

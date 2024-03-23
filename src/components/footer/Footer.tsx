@@ -1,15 +1,17 @@
 import "./Footer.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        FabShop
       </Link>
       {new Date().getFullYear()}
     </Typography>
@@ -31,12 +33,46 @@ const Footer = () => {
       }}
       className="footer"
     >
-      <Container maxWidth="sm">
-        <Typography variant="body1">
-          My sticky footer can be found here.
+      <Box className="row-1">
+        <Box>
+          <Typography variant="button" className="heading">
+            ONLINE SHOPPING
+          </Typography>
+          <Box className="content">
+            <Box>
+              <a href="/category/Men">Men</a>
+            </Box>
+            <Box>
+              <a href="/category/Women">Women</a>
+            </Box>
+            <Box>
+              <a href="/category/Kids">Kids</a>
+            </Box>
+          </Box>
+        </Box>
+        <Box>
+          <Typography variant="button" className="heading">
+            KEEP IN TOUCH
+          </Typography>
+          <Box className="content">
+            <InstagramIcon className="icon" />
+            <FacebookIcon className="icon" />
+            <TwitterIcon className="icon" />
+          </Box>
+        </Box>
+      </Box>
+      <Box className="row-2">
+        <Typography variant="button" className="heading">
+          POPULAR SEARCHES
         </Typography>
+        <Typography variant="body2" className="content">
+          Dresses | Bodysuit | T-Shirts | Sandals | Handbags | Watches | Bags |
+          Sport Shoes | Casual Shoes | Tops | Jeans | Shorts | Shirt
+        </Typography>
+      </Box>
+      <Box className="row-3 copyright">
         <Copyright />
-      </Container>
+      </Box>
     </Box>
   );
 };

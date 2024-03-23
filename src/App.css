@@ -11,5 +11,6 @@ body {
 }
 
 .main {
-  min-height: calc(100vh - 70px);
+  /* min-height: calc(100vh - 160px); */
+  min-height: 50vh;
 }

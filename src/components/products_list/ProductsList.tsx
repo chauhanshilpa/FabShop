@@ -3,12 +3,13 @@ import ProductCard from "../product_card/ProductCard";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { Product } from "../../api/classModels";
+import { Typography } from "@mui/material";
 
 const ProductList = ({ productsList }: { productsList: Product[] }) => {
   return (
     <Container className="products-list">
       {productsList.length === 0 ? (
-        <p>No Products To Display😣</p>
+        <Typography variant="body2" sx={{lineHeight: "8"}}>No Product To Display😣</Typography>
       ) : (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {productsList.map((product) => (

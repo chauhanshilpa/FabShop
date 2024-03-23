@@ -90,7 +90,7 @@ export default function Checkout({
   }
 
   return (
-    <Box sx={{ width: "100%" }} className="checkout">
+    <Box sx={{ width: "100%" }} className="checkout main">
       <Stepper activeStep={activeStep} className="stepper" sx={stepStyle}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
