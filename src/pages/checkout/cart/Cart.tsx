@@ -7,7 +7,7 @@ import CartProductCard from "../../../components/cart_data/CartProductCard";
 import CartPriceDetails from "../../../components/cart_data/CartPriceDetails";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import EmptyCart from "../../../components/empty_cart/EmptyCart";
+import Typography from "@mui/material/Typography";
 interface Props {
   activeUserId: string;
   cartProductsList: Product[];
@@ -86,7 +86,15 @@ const Cart = ({
           </Grid>
         </Container>
       ) : (
-        <EmptyCart />
+        <Box className="empty-cart-container">
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: "regular", fontStyle: "italic" }}
+            className="empty-cart-text"
+          >
+            Cart's a bit lonely! Fill it up and let the shopping fun begin
+          </Typography>
+        </Box>
       )}
     </Box>
   );

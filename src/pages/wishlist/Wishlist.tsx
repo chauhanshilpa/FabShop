@@ -4,8 +4,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import WishlistedItemCard from "../../components/wishlist_card/WishlistedItemCard";
 import { Product } from "../../api/classModels";
-import EmptyWishlist from "../../components/empty_wishlist/EmptyWishlist";
-
+import Typography from "@mui/material/Typography";
 interface Props {
   activeUserId: string;
   wishlistProductsList: Product[];
@@ -42,7 +41,17 @@ const Wishlist = ({
           </Grid>
         </Container>
       ) : (
-        <EmptyWishlist />
+        <Box className="empty-wishlist-container">
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: "regular", fontStyle: "italic" }}
+            className="empty-wishlist-text"
+          >
+            Uh-oh! It seems like your wishlist is empty. Explore our enchanting
+            collection and add a touch of joy to your list. Your wishes await
+            fulfillment!
+          </Typography>
+        </Box>
       )}
     </Box>
   );
