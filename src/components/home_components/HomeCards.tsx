@@ -1,4 +1,3 @@
-import "./Home.css";
 import { Product } from "../../api/classModels";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";

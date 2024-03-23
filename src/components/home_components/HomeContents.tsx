@@ -1,9 +1,13 @@
+import "./HomeComponents.css";
 import HomeCards from "./HomeCards";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { Product } from "../../api/classModels";
-import { getHomeCardProducts } from "../../api/api";
+import {
+  getHomeCardProducts,
+  getUsersBrowsingHistoryList,
+} from "../../api/api";
 import MultiCarousel from "../carousel/react_multi_carousel/MultiCarousel";
 import Typography from "@mui/material/Typography";
 import { v4 as uuidv4 } from "uuid";
@@ -12,11 +16,18 @@ const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
   const [homeCardProducts, setHomeCardProducts] = useState<{
     [key: string]: Product[];
   }>({});
+  const [recentlyViewedProductsList, setRecentlyViewedProductsList] = useState<
+    Product[]
+  >([]);
 
   useEffect(() => {
     async function homeCardProducts() {
-      const response = await getHomeCardProducts(activeUserId);
-      setHomeCardProducts(response);
+      const products = await getHomeCardProducts(activeUserId);
+      setHomeCardProducts(products);
+      const recentlyViewedProducts = await getUsersBrowsingHistoryList(
+        activeUserId
+      );
+      setRecentlyViewedProductsList(recentlyViewedProducts);
     }
     homeCardProducts();
     // eslint-disable-next-line
@@ -71,6 +82,20 @@ const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
             </Grid>
           ))}
       </Grid>
+      {recentlyViewedProductsList.length > 0 && (
+        <Box className="recently-viewed-products-carousel">
+          <Typography
+            variant="subtitle1"
+            className="recently-viewed-products-heading"
+          >
+            Your browsing history
+          </Typography>
+          <MultiCarousel
+            key={uuidv4()}
+            listOfProducts={recentlyViewedProductsList}
+          />
+        </Box>
+      )}
     </>
   );
 };

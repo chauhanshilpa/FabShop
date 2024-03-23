@@ -14,7 +14,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Image from "../../components/Image/Image";
 import { Product } from "../../api/classModels";
-import { getWishlist, getCartProductsList } from "../../api/api";
+import {
+  getWishlist,
+  getCartProductsList,
+  setUsersBrowsingHistoryList,
+  getUsersBrowsingHistoryList,
+} from "../../api/api";
 interface Props {
   activeUserId: string;
   addToCart: (productId: string) => Promise<void>;
@@ -37,6 +42,16 @@ const SingleProduct = ({
   let { product_id } = useParams();
   const productId: string = product_id!;
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (async function () {
+      const response = await getUsersBrowsingHistoryList(activeUserId);
+      const isProductInBrowsingHistory = response.some((product) => product.id === productId)
+      !isProductInBrowsingHistory &&
+        setUsersBrowsingHistoryList(activeUserId, product);
+    })();
+    // eslint-disable-next-line
+  },[]);
 
   useEffect(() => {
     async function isWishlistIncludesProduct() {

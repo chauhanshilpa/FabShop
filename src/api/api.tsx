@@ -18,6 +18,7 @@ interface CustomerAddress {
 
 let usersList: User[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
+let browsedProductsList: Product[] = [];
 let wishlist: Product[] = [];
 let cartProductsList: Cart[] = [];
 let cartTotalPrice: number = 0;
@@ -85,6 +86,15 @@ export async function getHomeCardProducts(userId: string) {
     }
   }
   return homeCardProducts;
+}
+
+export async function getUsersBrowsingHistoryList(userId: string) {
+  return browsedProductsList;
+}
+
+export async function setUsersBrowsingHistoryList(userId: string, product: Product) {
+  browsedProductsList.push(product);
+  // console.log(browsedProductsList);
 }
 
 export async function addNewProduct() {

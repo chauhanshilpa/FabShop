@@ -9,7 +9,8 @@
 }
 
 .home-card .card-header,
-.home-content-row-2-heading {
+.home-content-row-2-heading,
+.recently-viewed-products-heading {
   max-height: 3.788rem;
   font-size: large;
   margin-bottom: 10px;
@@ -35,17 +36,20 @@
   height: 100%;
 }
 
-.multi-products-carousel {
+.multi-products-carousel,
+.recently-viewed-products-carousel {
   min-height: 12rem;
   max-height: auto;
   margin: 30px auto;
 }
 
-.multi-products-carousel .carousel-item {
+.multi-products-carousel .carousel-item,
+.recently-viewed-products-carousel .carousel-item {
   padding: 8px;
 }
 
-.multi-products-carousel .carousel-item img {
+.multi-products-carousel .carousel-item img,
+.recently-viewed-products-carousel .carousel-item img {
   max-height: 12rem;
 }
 
