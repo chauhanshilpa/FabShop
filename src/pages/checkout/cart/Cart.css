@@ -1,5 +1,4 @@
 .cart {
-  background-color: #eeeeee;
   margin-top: 1rem;
 }
 
@@ -10,4 +9,16 @@
 
 .cart-product-card {
   margin-bottom: 15px;
+}
+
+.empty-cart-container {
+  display: flex;
+  justify-content: center;
+}
+
+.empty-cart-container .empty-cart-text {
+  width: 50%;
+  margin-top: 8rem;
+  color: #cd5c08;
+  text-align: center;
 }
