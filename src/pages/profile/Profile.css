@@ -1,0 +1,50 @@
+.my-account-section {
+  margin-top: 1rem;
+  padding: 0 20px;
+}
+
+.my-account-section .row-1,
+.my-account-section .row-2,
+.my-account-section .row-3,
+.my-account-section .row-4,
+.my-account-section .row-5,
+.my-account-section .row-6,
+.my-account-section .row-7 {
+  display: flex;
+  line-height: 4;
+  margin: auto;
+  height: 50%;
+}
+
+.my-account-section .row-1 {
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 1rem;
+}
+
+.my-account-section .first-heading {
+  font-weight: 500;
+  color: rgb(76, 75, 75);
+}
+
+.my-account-section .second-heading {
+  font-size: small;
+  color: #8e8c8c;
+}
+
+.my-account-section .card {
+  margin-bottom: 1rem;
+  padding: 10px;
+}
+
+.my-account-section .icon {
+  margin: auto 10px;
+  color: rgb(76, 75, 75);
+}
+
+.my-account-section .card.card-actions * {
+  font-weight: 600;
+  color: rgb(76, 75, 75);
+  line-height: 2;
+  margin-left: 1rem;
+}
