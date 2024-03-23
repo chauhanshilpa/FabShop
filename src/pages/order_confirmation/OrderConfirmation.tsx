@@ -23,7 +23,7 @@ const OrderPlaced = ({ activeUserId, setCartProductsList }: Props) => {
   }, []);
 
   return (
-    <Box className="order-confirmation">
+    <Box className="order-confirmation main">
       <Typography variant="h4" className="confirmation-heading"> Your Order is placed successfully!</Typography>
       <VerifiedIcon className="verified-icon" />
       <Typography variant="button">open orders page to know more about your order.</Typography>
