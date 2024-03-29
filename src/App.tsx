@@ -47,7 +47,7 @@ function App() {
     setActiveUserId(response);
   }
 
-    useEffect(() => {
+  useEffect(() => {
     const getCartAndWishlist = async () => {
       const cartProductList = await getCartProductsList(activeUserId);
       setCartProductsList(cartProductList);
@@ -131,7 +131,10 @@ function App() {
             />
           }
         />
-        <Route path="/user/Orders" element={<Orders />} />
+        <Route
+          path="/user/Orders"
+          element={<Orders activeUserId={activeUserId} />}
+        />
         <Route
           path="/checkout"
           element={

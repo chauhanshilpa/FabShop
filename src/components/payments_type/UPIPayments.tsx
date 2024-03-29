@@ -12,8 +12,6 @@ import Container from "@mui/material/Container";
 import Image from "../Image/Image";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import { makeCartEmpty } from "../../api/api";
-
 interface Props {
   activeUserId: string;
 }
@@ -25,7 +23,6 @@ const UPIPayments = ({ activeUserId }: Props) => {
   const navigate = useNavigate();
 
   async function handleOrderConfirmation() {
-    await makeCartEmpty(activeUserId);
     navigate("/checkout/confirmation");
   }
 

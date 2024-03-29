@@ -1,0 +1,27 @@
+.orders {
+  display: flex;
+  flex-direction: column;
+}
+
+.orders-search {
+  max-width: 50%;
+  margin-top: 1rem;
+}
+
+.orders .search-bar {
+  margin-bottom: 1rem;
+  margin-left: 0;
+  border: 2px solid rgb(198, 195, 195);
+}
+
+.empty-orders-container {
+  display: flex;
+  justify-content: center;
+}
+
+.empty-orders-container .empty-orders-text {
+  width: 50%;
+  margin-top: 8rem;
+  color: #cd5c08;
+  text-align: center;
+}

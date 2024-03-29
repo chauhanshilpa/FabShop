@@ -3,12 +3,16 @@ import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product, Address } from "./classModels";
 import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
 
-interface Cart extends Product {
+export interface Cart extends Product {
   quantity: number;
 }
 
 interface CustomerAddress {
   [key: string]: Address;
+}
+
+export interface Order {
+  [key: string]: Cart[];
 }
 
 /**
@@ -23,6 +27,7 @@ let wishlist: Product[] = [];
 let cartProductsList: Cart[] = [];
 let cartTotalPrice: number = 0;
 let customerAddresses: CustomerAddress = {};
+let orderedProducts: Order = {};
 
 export async function addNewUser(
   email: string,
@@ -92,9 +97,16 @@ export async function getUsersBrowsingHistoryList(userId: string) {
   return browsedProductsList;
 }
 
-export async function setUsersBrowsingHistoryList(userId: string, product: Product) {
-  browsedProductsList.push(product);
-  // console.log(browsedProductsList);
+export async function setUsersBrowsingHistoryList(
+  userId: string,
+  product: Product
+) {
+  if (browsedProductsList.length > 8) {
+    browsedProductsList.shift();
+    browsedProductsList.push(product);
+  } else {
+    browsedProductsList.push(product);
+  }
 }
 
 export async function addNewProduct() {
@@ -218,4 +230,12 @@ export async function getCustomerAddressDetails(userId: string) {
 export async function makeCartEmpty(userId: string) {
   cartProductsList = [];
   cartTotalPrice = 0;
+}
+
+export async function userOrdersWithDate(userId: string, productsList: Cart[]) {
+  orderedProducts[new Date().toLocaleString()] = productsList;
+}
+
+export async function getUserOrdersList(userId: string) {
+  return orderedProducts;
 }

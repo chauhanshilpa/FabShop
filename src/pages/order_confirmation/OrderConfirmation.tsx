@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./OrderConfirmation.css";
 import { Product } from "../../api/classModels";
 import Box from "@mui/material/Box";
-import { getCartProductsList } from "../../api/api";
+import { getCartProductsList,userOrdersWithDate, makeCartEmpty } from "../../api/api";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import Typography from "@mui/material/Typography";
 
@@ -12,13 +12,15 @@ interface Props {
   setCartProductsList: React.Dispatch<React.SetStateAction<Product[]>>;
 }
 
-const OrderPlaced = ({ activeUserId, setCartProductsList }: Props) => {
+const OrderConfirmation = ({ activeUserId, setCartProductsList }: Props) => {
+
   useEffect(() => {
-    const getEmptyCart = async () => {
+    (async function(){
       const cartProductList = await getCartProductsList(activeUserId);
-      setCartProductsList(cartProductList);
-    };
-    getEmptyCart();
+      await userOrdersWithDate(activeUserId, cartProductList);
+      await makeCartEmpty(activeUserId);
+      setCartProductsList([]);
+    })();
     //eslint-disable-next-line
   }, []);
 
@@ -31,4 +33,4 @@ const OrderPlaced = ({ activeUserId, setCartProductsList }: Props) => {
   );
 };
 
-export default OrderPlaced;
+export default OrderConfirmation;
