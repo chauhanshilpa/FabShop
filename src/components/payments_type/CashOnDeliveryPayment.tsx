@@ -4,8 +4,6 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
-import { makeCartEmpty } from "../../api/api";
-
 interface Props {
   activeUserId: string;
 }
@@ -14,7 +12,6 @@ const CashOnDeliveryPayment = ({ activeUserId }: Props) => {
   const navigate = useNavigate();
 
   async function handleOrderConfirmation() {
-    await makeCartEmpty(activeUserId);
     navigate("/checkout/confirmation");
   }
 

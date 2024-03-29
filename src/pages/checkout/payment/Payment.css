@@ -1,3 +1,7 @@
+.payment-container{
+  margin-top: 1rem;
+}
+
 .payment-list img {
   height: 2rem !important;
   width: 2rem !important;
