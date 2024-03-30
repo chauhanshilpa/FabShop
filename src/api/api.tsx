@@ -3,17 +3,22 @@ import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product, Address } from "./classModels";
 import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
 
-export interface Cart extends Product {
+export interface CartProductInterface extends Product {
   quantity: number;
 }
 
-interface CustomerAddress {
+export interface OrderInterface {
+  [key: string]: {
+    orderId: string;
+    address: Address;
+    orderedItemsList: CartProductInterface[];
+  };
+}
+
+interface CustomerAddressInterface {
   [key: string]: Address;
 }
 
-export interface Order {
-  [key: string]: Cart[];
-}
 
 /**
  * A separate file which is created with a thinking that, later I have to integrate backend. Instead making changes in different files, I wrote all logic here so that changes happen to this file only.
@@ -24,10 +29,10 @@ let usersList: User[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let browsedProductsList: Product[] = [];
 let wishlist: Product[] = [];
-let cartProductsList: Cart[] = [];
+let cartProductsList: CartProductInterface[] = [];
 let cartTotalPrice: number = 0;
-let customerAddresses: CustomerAddress = {};
-let orderedProducts: Order = {};
+let customerAddresses: CustomerAddressInterface = {};
+let orderedProducts: OrderInterface = {};
 
 export async function addNewUser(
   email: string,
@@ -232,10 +237,18 @@ export async function makeCartEmpty(userId: string) {
   cartTotalPrice = 0;
 }
 
-export async function userOrdersWithDate(userId: string, productsList: Cart[]) {
-  orderedProducts[new Date().toLocaleString()] = productsList;
+export async function userOrdersWithDate(
+  userId: string,
+  cartProductList: CartProductInterface[],
+  customerAddress: Address
+) {
+  orderedProducts[new Date().toLocaleString()] = {
+    orderId: uuidv4(),
+    orderedItemsList: cartProductList,
+    address: customerAddress,
+  };
 }
-
+ 
 export async function getUserOrdersList(userId: string) {
   return orderedProducts;
 }
