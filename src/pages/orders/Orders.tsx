@@ -36,7 +36,11 @@ const Orders = ({ ordersList }: Props) => {
               {Object.keys(ordersList).map((dateTime: string) => {
                 return ordersList[dateTime].orderedItemsList.map(
                   (cartProduct) => (
-                    <OrderCard key={cartProduct.id} cartProduct={cartProduct} />
+                    <OrderCard
+                      key={cartProduct.id}
+                      item_id={cartProduct.id}
+                      cartProduct={cartProduct}
+                    />
                   )
                 );
               })}

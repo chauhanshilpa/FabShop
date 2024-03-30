@@ -149,7 +149,7 @@ function App() {
             <Orders ordersList={ordersList} />
           }
         />
-        <Route path="/single-order" element={<SingleOrder />} />
+        <Route path="/single-order/:item_id" element={<SingleOrder />} />
         <Route
           path="/checkout"
           element={

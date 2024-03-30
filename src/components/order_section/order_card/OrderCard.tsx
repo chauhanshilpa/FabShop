@@ -6,10 +6,18 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { CartProductInterface } from "../../../api/api";
 
-const OrderCard = ({ cartProduct }: { cartProduct: CartProductInterface }) => {
+interface Props {
+  cartProduct: CartProductInterface;
+  item_id: string;
+}
+
+const OrderCard = ({ cartProduct, item_id }: Props) => {
   const navigate = useNavigate();
   return (
-    <Card className="order-card" onClick={() => navigate("/singleOrder")}>
+    <Card
+      className="order-card"
+      onClick={() => navigate(`/singleOrder/${item_id}`)}
+    >
       <Box className="order-image">
         <Image src={cartProduct.image.url} alt={cartProduct.name} />
       </Box>
