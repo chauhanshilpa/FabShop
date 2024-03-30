@@ -22,7 +22,7 @@ const OrderCard = ({ cartProduct, item_id }: Props) => {
         <Image src={cartProduct.image.url} alt={cartProduct.name} />
       </Box>
       <Typography variant="body1" className="order-name">
-        t-shirt
+        {cartProduct.name}
       </Typography>
       <Typography variant="body1" className="order-price">
         ₹{cartProduct.price}
