@@ -1,4 +1,5 @@
 import "./Orders.css";
+import { v4 as uuidv4 } from "uuid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -7,15 +8,14 @@ import {OrderInterface} from "../../api/api"
 import OrderCard from "../../components/order_section/order_card/OrderCard";
 
 interface Props {
-  ordersList: OrderInterface;
+  ordersData: OrderInterface;
 }
 
-const Orders = ({ ordersList }: Props) => {
-  
+const Orders = ({ ordersData }: Props) => {
   return (
     <Container>
       <Box className="orders main">
-        {Object.keys(ordersList).length === 0 ? (
+        {Object.keys(ordersData).length === 0 ? (
           <Box className="empty-orders-container">
             <Typography
               className="empty-orders-text"
@@ -33,13 +33,15 @@ const Orders = ({ ordersList }: Props) => {
               <SearchBar />
             </Box>
             <Box className="order-card-container">
-              {Object.keys(ordersList).map((dateTime: string) => {
-                return ordersList[dateTime].orderedItemsList.map(
-                  (cartProduct) => (
+              {Object.keys(ordersData).map((dateAndTimeKey) => {
+                const orderDetails = ordersData[dateAndTimeKey];
+                return ordersData[dateAndTimeKey].orderedProductList.map(
+                  (orderedProduct) => (
                     <OrderCard
-                      key={cartProduct.id}
-                      item_id={cartProduct.id}
-                      cartProduct={cartProduct}
+                      key={uuidv4()}
+                      productId={orderedProduct.id}
+                      cartProduct={orderedProduct}
+                      singleOrderDetails={orderDetails}
                     />
                   )
                 );
@@ -54,9 +56,3 @@ const Orders = ({ ordersList }: Props) => {
 
 export default Orders;
 
-// "date time":
-// Object{
-// address: Object { name: "", phoneNumber: "", pincode: "", … }
-// orderId: "8b12e434-b0b6-4c8a-9805-6d8601ed0993"
-// orderedItemsList: Array [ {…}, {…} ]
-// }

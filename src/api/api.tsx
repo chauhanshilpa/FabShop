@@ -7,18 +7,19 @@ export interface CartProductInterface extends Product {
   quantity: number;
 }
 
+export interface SingleOrderInterface {
+  orderId: string;
+  dateAndTime: string;
+  orderedProductList: CartProductInterface[];
+  address: Address;
+}
 export interface OrderInterface {
-  [key: string]: {
-    orderId: string;
-    address: Address;
-    orderedItemsList: CartProductInterface[];
-  };
+  [key: string]: SingleOrderInterface;
 }
 
 interface CustomerAddressInterface {
   [key: string]: Address;
 }
-
 
 /**
  * A separate file which is created with a thinking that, later I have to integrate backend. Instead making changes in different files, I wrote all logic here so that changes happen to this file only.
@@ -239,16 +240,20 @@ export async function makeCartEmpty(userId: string) {
 
 export async function userOrdersWithDate(
   userId: string,
-  cartProductList: CartProductInterface[],
+  orderedProductList: CartProductInterface[],
   customerAddress: Address
 ) {
-  orderedProducts[new Date().toLocaleString()] = {
-    orderId: uuidv4(),
-    orderedItemsList: cartProductList,
+  let dateTimeString = new Date().toLocaleString();
+  let order_id = uuidv4();
+  orderedProducts[dateTimeString] = {
+    orderId: order_id,
+    dateAndTime: dateTimeString,
+    orderedProductList: orderedProductList,
     address: customerAddress,
   };
+  console.log(orderedProducts);
 }
- 
+
 export async function getUserOrdersList(userId: string) {
   return orderedProducts;
 }

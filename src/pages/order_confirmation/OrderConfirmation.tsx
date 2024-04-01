@@ -18,26 +18,26 @@ interface Props {
   setCartProductsList: React.Dispatch<
     React.SetStateAction<CartProductInterface[]>
   >;
-  setOrdersList: React.Dispatch<React.SetStateAction<OrderInterface>>
+  setOrdersData: React.Dispatch<React.SetStateAction<OrderInterface>>;
 }
 
 const OrderConfirmation = ({
   activeUserId,
   setCartProductsList,
-  setOrdersList,
+  setOrdersData,
 }: Props) => {
 
   useEffect(() => {
     (async function () {
-      const cartProductList = await getCartProductsList(activeUserId);
+      let orderedProductsList = await getCartProductsList(activeUserId);
       const customerAddress = await getCustomerAddressDetails(activeUserId);
       await userOrdersWithDate(
         activeUserId,
-        cartProductList,
+        orderedProductsList,
         customerAddress
       );
-      const orderList = await getUserOrdersList(activeUserId);
-      setOrdersList(orderList);
+      const orderData = await getUserOrdersList(activeUserId);
+      setOrdersData(orderData);
       await makeCartEmpty(activeUserId);
       setCartProductsList([]);
     })();

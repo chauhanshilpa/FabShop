@@ -4,19 +4,27 @@ import Image from "../../Image/Image";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
-import { CartProductInterface } from "../../../api/api";
+import { CartProductInterface, SingleOrderInterface } from "../../../api/api";
 
 interface Props {
   cartProduct: CartProductInterface;
-  item_id: string;
+  productId: string;
+  singleOrderDetails: SingleOrderInterface;
 }
 
-const OrderCard = ({ cartProduct, item_id }: Props) => {
+const OrderCard = ({ cartProduct, productId, singleOrderDetails }: Props) => {
   const navigate = useNavigate();
   return (
     <Card
       className="order-card"
-      onClick={() => navigate(`/singleOrder/${item_id}`)}
+      onClick={() =>
+        navigate(
+          `/order-details?productId=${productId}&orderId=${singleOrderDetails.orderId}`,
+          {
+            state: { singleOrderDetails },
+          }
+        )
+      }
     >
       <Box className="order-image">
         <Image src={cartProduct.image.url} alt={cartProduct.name} />
