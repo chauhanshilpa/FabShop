@@ -202,17 +202,17 @@ const AddressForm = ({ activeUserId, activeStep, setActiveStep }: Props) => {
         <Box className="checkout-address-save-and-cancel-buttons">
           <Button
             variant="contained"
-            disabled={
-              customerName.length > 2 &&
-              phoneNumber.length > 1 &&
-              pincode.length > 1 &&
-              locality.length > 2 &&
-              streetAddress.length > 2 &&
-              city.length > 2 &&
-              inputState.length > 1
-                ? false
-                : true
-            }
+            // disabled={
+            //   customerName.length > 2 &&
+            //   phoneNumber.length > 1 &&
+            //   pincode.length > 1 &&
+            //   locality.length > 2 &&
+            //   streetAddress.length > 2 &&
+            //   city.length > 2 &&
+            //   inputState.length > 1
+            //     ? false
+            //     : true
+            // }
             className="save"
             onClick={handleNextMove}
           >

@@ -3,16 +3,22 @@ import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product, Address } from "./classModels";
 import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
 
-export interface Cart extends Product {
+export interface CartProductInterface extends Product {
   quantity: number;
 }
 
-interface CustomerAddress {
-  [key: string]: Address;
+export interface SingleOrderInterface {
+  orderId: string;
+  dateAndTime: string;
+  orderedProductList: CartProductInterface[];
+  address: Address;
+}
+export interface OrderInterface {
+  [key: string]: SingleOrderInterface;
 }
 
-export interface Order {
-  [key: string]: Cart[];
+interface CustomerAddressInterface {
+  [key: string]: Address;
 }
 
 /**
@@ -24,10 +30,10 @@ let usersList: User[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let browsedProductsList: Product[] = [];
 let wishlist: Product[] = [];
-let cartProductsList: Cart[] = [];
+let cartProductsList: CartProductInterface[] = [];
 let cartTotalPrice: number = 0;
-let customerAddresses: CustomerAddress = {};
-let orderedProducts: Order = {};
+let customerAddresses: CustomerAddressInterface = {};
+let orderedProducts: OrderInterface = {};
 
 export async function addNewUser(
   email: string,
@@ -232,8 +238,20 @@ export async function makeCartEmpty(userId: string) {
   cartTotalPrice = 0;
 }
 
-export async function userOrdersWithDate(userId: string, productsList: Cart[]) {
-  orderedProducts[new Date().toLocaleString()] = productsList;
+export async function userOrdersWithDate(
+  userId: string,
+  orderedProductList: CartProductInterface[],
+  customerAddress: Address
+) {
+  let dateTimeString = new Date().toLocaleString();
+  let order_id = uuidv4();
+  orderedProducts[dateTimeString] = {
+    orderId: order_id,
+    dateAndTime: dateTimeString,
+    orderedProductList: orderedProductList,
+    address: customerAddress,
+  };
+  console.log(orderedProducts);
 }
 
 export async function getUserOrdersList(userId: string) {

@@ -25,3 +25,8 @@
   color: #cd5c08;
   text-align: center;
 }
+
+.order-card-container{
+  display: flex;
+  flex-direction: column-reverse;
+}

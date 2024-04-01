@@ -23,9 +23,13 @@ import {
   removeItemFromWishlist,
   getCartProductsList,
   getWishlist,
+  getUserOrdersList,
+  CartProductInterface,
+  OrderInterface,
 } from "./api/api";
 import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
 import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
+import OrderDetails from "./components/order_section/order_details/OrderDetails";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -35,7 +39,10 @@ function App() {
   const [wishlistProductsList, setWishlistProductsList] = useState<Product[]>(
     []
   );
-  const [cartProductsList, setCartProductsList] = useState<Product[]>([]);
+  const [cartProductsList, setCartProductsList] = useState<
+    CartProductInterface[]
+  >([]);
+  const [ordersData, setOrdersData] = useState<OrderInterface>({});
 
   async function getUserId(
     email: string,
@@ -55,6 +62,11 @@ function App() {
       setWishlistProductsList(wishlist);
     };
     getCartAndWishlist();
+    const getOrderList = async () => {
+      const response = await getUserOrdersList(activeUserId);
+      setOrdersData(response);
+    };
+    getOrderList();
     //eslint-disable-next-line
   }, []);
 
@@ -133,7 +145,11 @@ function App() {
         />
         <Route
           path="/user/Orders"
-          element={<Orders activeUserId={activeUserId} />}
+          element={<Orders ordersData={ordersData} />}
+        />
+        <Route
+          path="/order-details"
+          element={<OrderDetails />}
         />
         <Route
           path="/checkout"
@@ -152,6 +168,7 @@ function App() {
             <OrderConfirmation
               activeUserId={activeUserId}
               setCartProductsList={setCartProductsList}
+              setOrdersData={setOrdersData}
             />
           }
         />
