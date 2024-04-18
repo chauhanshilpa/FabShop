@@ -18,9 +18,7 @@ const CashOnDeliveryPayment = ({ activeUserId }: Props) => {
   return (
     <Card className="payment-card">
       <Container className="COD-payment">
-        <Typography>
-          ₹29 will be charged extra for Cash On Delivery Option.
-        </Typography>
+        <Typography>Pay only when you receive your order!</Typography>
         <Button onClick={handleOrderConfirmation}>PLACE ORDER</Button>
       </Container>
     </Card>

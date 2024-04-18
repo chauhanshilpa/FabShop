@@ -12,6 +12,7 @@ export interface SingleOrderInterface {
   dateAndTime: string;
   orderedProductList: CartProductInterface[];
   address: Address;
+  cartValue: number;
 }
 export interface OrderInterface {
   [key: string]: SingleOrderInterface;
@@ -31,7 +32,7 @@ let allProducts: Product[] = [...STARTING_PRODUCTS];
 let browsedProductsList: Product[] = [];
 let wishlist: Product[] = [];
 let cartProductsList: CartProductInterface[] = [];
-let cartTotalPrice: number = 0;
+let cartTotalAmount: number = 0;
 let customerAddresses: CustomerAddressInterface = {};
 let orderedProducts: OrderInterface = {};
 
@@ -60,6 +61,12 @@ export async function getActiveUserId(
       user.contact === contact
   )[0];
   return activeUser.id;
+}
+
+// products
+
+export async function addNewProduct() {
+  console.log("This will add new product");
 }
 
 export async function getHomeCardProducts(userId: string) {
@@ -99,6 +106,7 @@ export async function getHomeCardProducts(userId: string) {
   return homeCardProducts;
 }
 
+// browsing history
 export async function getUsersBrowsingHistoryList(userId: string) {
   return browsedProductsList;
 }
@@ -115,10 +123,7 @@ export async function setUsersBrowsingHistoryList(
   }
 }
 
-export async function addNewProduct() {
-  console.log("This will add new product");
-}
-
+// wishlist
 export async function addItemToWishlist(userId: string, productId: string) {
   const product = allProducts.filter((product) => product.id === productId)[0];
   wishlist.push(product);
@@ -139,6 +144,7 @@ export async function getWishlist(userId: string) {
   return newWishlist;
 }
 
+// cart
 export async function addItemToCart(userId: string, productId: string) {
   const product = allProducts.filter((product) => product.id === productId)[0];
   cartProductsList.push({ ...product, quantity: 1 });
@@ -156,6 +162,12 @@ export async function getCartProductsList(userId: string) {
   return newCartProductsList;
 }
 
+export async function makeCartEmpty(userId: string) {
+  cartProductsList = [];
+  cartTotalAmount = 0;
+}
+
+// product quantity in cart
 export async function handleProductQuantityInCart(
   userId: string,
   productId: string,
@@ -179,19 +191,23 @@ export async function getProductQuantityInCart(
   return product.quantity;
 }
 
+// cart's value
 export async function handleCartProductsPrice(userId: string) {
-  cartTotalPrice = cartProductsList.reduce((accumulator, product) => {
+  cartTotalAmount = cartProductsList.reduce((accumulator, product) => {
     return accumulator + product.price * product.quantity;
   }, 0);
-  return cartTotalPrice;
+  return cartTotalAmount;
 }
 
 export async function handleCartTotalAmount(userId: string) {
   const totalAmount =
-    cartTotalPrice - (DISCOUNT * cartTotalPrice) / 100 + SHIPPING_CHARGE;
+    cartTotalAmount - (DISCOUNT * cartTotalAmount) / 100 + SHIPPING_CHARGE;
+    cartTotalAmount = totalAmount;
+    console.log("inCart", totalAmount)
   return totalAmount;
 }
 
+// search products
 export async function getSearchedProducts(text: string) {
   const searchedProducts = allProducts.filter(
     (product) =>
@@ -203,6 +219,7 @@ export async function getSearchedProducts(text: string) {
   return searchedProducts;
 }
 
+// address
 export async function customerAddressDetails(
   user_id: string,
   name: string,
@@ -233,16 +250,13 @@ export async function getCustomerAddressDetails(userId: string) {
   return customerAddresses[userId];
 }
 
-export async function makeCartEmpty(userId: string) {
-  cartProductsList = [];
-  cartTotalPrice = 0;
-}
-
+// orders
 export async function userOrdersWithDate(
   userId: string,
   orderedProductList: CartProductInterface[],
   customerAddress: Address
 ) {
+  console.log("order",cartTotalAmount);
   let dateTimeString = new Date().toLocaleString();
   let order_id = uuidv4();
   orderedProducts[dateTimeString] = {
@@ -250,8 +264,8 @@ export async function userOrdersWithDate(
     dateAndTime: dateTimeString,
     orderedProductList: orderedProductList,
     address: customerAddress,
+    cartValue: cartTotalAmount,
   };
-  console.log(orderedProducts);
 }
 
 export async function getUserOrdersList(userId: string) {
