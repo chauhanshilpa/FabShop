@@ -87,7 +87,7 @@ const CartProduct = ({
         </Box>
         <Box className="cart-product-data">
           <Typography className="product-name">{product.name}</Typography>
-          <Typography variant="caption">size: {}</Typography>
+          {/* <Typography variant="caption">size: {}</Typography> */}
           <Typography className="product-description">
             {product.description}
           </Typography>

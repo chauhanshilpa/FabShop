@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import SearchBar from "../../components/search_bar/SearchBar";
 import {OrderInterface} from "../../api/api"
-import OrderCard from "../../components/order_section/order_card/OrderCard";
+import OrderItemCard from "../../components/order_section/order_item_card/OrderItemCard";
 
 interface Props {
   ordersData: OrderInterface;
@@ -37,7 +37,7 @@ const Orders = ({ ordersData }: Props) => {
                 const orderDetails = ordersData[dateAndTimeKey];
                 return ordersData[dateAndTimeKey].orderedProductList.map(
                   (orderedProduct) => (
-                    <OrderCard
+                    <OrderItemCard
                       key={uuidv4()}
                       productId={orderedProduct.id}
                       cartProduct={orderedProduct}

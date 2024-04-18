@@ -29,7 +29,7 @@ import {
 } from "./api/api";
 import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
 import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
-import OrderDetails from "./components/order_section/order_details/OrderDetails";
+import OrderDetails from "./components/order_section/orders_details/OrdersDetails";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now

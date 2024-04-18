@@ -1,0 +1,18 @@
+.order-card {
+  display: grid;
+  padding: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.order-card img {
+  height: 7rem;
+  width: 7rem;
+  margin-right: 2rem;
+}
+
+.order-card:hover {
+  box-shadow: 4px 4px 3px 3px rgb(155, 150, 150);
+}
