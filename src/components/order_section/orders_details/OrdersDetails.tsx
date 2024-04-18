@@ -15,17 +15,46 @@ const OrderDetails = () => {
 
   return (
     <Container className="order-details main">
+      <Box sx={{ marginBottom: "1rem", padding: "10px" }}>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "rgba(0, 0, 0, 0.5)",
+            fontWeight: "600",
+          }}
+        >
+          OrderId: {orderId}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            marginTop: "0.5rem",
+            color: "rgba(0, 0, 0, 0.5)",
+            fontWeight: "600",
+          }}
+        >
+          Order Date: {dateAndTime}
+        </Typography>
+      </Box>
       <Card className="address-card">
-        <Typography variant="body2">Delivery Address</Typography>
-        <Typography>{address.name}</Typography>
+        <Typography
+          variant="h6"
+          sx={{ marginBottom: "0.5rem", fontWeight: "700", color: "black" }}
+        >
+          Delivery Address
+        </Typography>
+        <Typography sx={{ fontWeight: "550" }}>{address.name}</Typography>
         <Typography>{address.streetAddress}</Typography>
-        <Typography>{address.locality}</Typography>
         <Typography>{address.landmark}</Typography>
-        <Typography>{address.city}</Typography>
-        <Typography>{address.pincode}</Typography>
-        <Typography>{address.state}</Typography>
-        <Typography>{address.phoneNumber}</Typography>
-        <Typography>{address.secondPhoneNumber}</Typography>
+        <Typography>
+          {address.locality}, {address.pincode}
+        </Typography>
+        <Typography>
+          {address.city}, {address.state}
+        </Typography>
+        <Typography>
+          {address.phoneNumber}, {address.secondPhoneNumber}
+        </Typography>
       </Card>
       <Box className="together-ordered-products">
         <TogetherOrderedProducts
