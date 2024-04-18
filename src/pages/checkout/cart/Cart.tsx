@@ -37,66 +37,69 @@ const Cart = ({
   cartTotalAmount,
   setCartProductsPrice,
 }: Props) => {
+
   return (
-    <Box sx={{ flexGrow: 1 }} className="main cart">
-      {cartProductsList.length > 0 ? (
-        <Container>
-          <Grid container spacing={2} sx={{ display: "flex" }}>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={7}
-              lg={7}
-              xl={7}
-              className="cart-left"
-            >
-              {cartProductsList.map((product) => (
-                <Grid item className="cart-product-card" key={product.id}>
-                  <Item>
-                    <CartProductCard
-                      activeUserId={activeUserId}
-                      product={product}
-                      addToWishlist={addToWishlist}
-                      removeFromCart={removeFromCart}
-                      setCartProductsPrice={setCartProductsPrice}
-                    />
-                  </Item>
-                </Grid>
-              ))}
+    <>
+      <Box sx={{ flexGrow: 1 }} className="main cart">
+        {cartProductsList.length > 0 ? (
+          <Container>
+            <Grid container spacing={2} sx={{ display: "flex" }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={7}
+                lg={7}
+                xl={7}
+                className="cart-left"
+              >
+                {cartProductsList.map((product) => (
+                  <Grid item className="cart-product-card" key={product.id}>
+                    <Item>
+                      <CartProductCard
+                        activeUserId={activeUserId}
+                        product={product}
+                        addToWishlist={addToWishlist}
+                        removeFromCart={removeFromCart}
+                        setCartProductsPrice={setCartProductsPrice}
+                      />
+                    </Item>
+                  </Grid>
+                ))}
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={5}
+                lg={5}
+                xl={5}
+                className="cart-right"
+              >
+                <Item>
+                  <CartPriceDetails
+                    cartProductsPrice={cartProductsPrice}
+                    cartTotalAmount={cartTotalAmount}
+                    numberOfProductsInCart={cartProductsList.length}
+                    handleOrderPlacement={handleOrderPlacement}
+                  />
+                </Item>
+              </Grid>
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={5}
-              lg={5}
-              xl={5}
-              className="cart-right"
+          </Container>
+        ) : (
+          <Box className="empty-cart-container">
+            <Typography
+              variant="h5"
+              sx={{ fontWeight: "regular", fontStyle: "italic" }}
+              className="empty-cart-text"
             >
-              <Item>
-                <CartPriceDetails
-                  cartProductsPrice={cartProductsPrice}
-                  cartTotalAmount={cartTotalAmount}
-                  numberOfProductsInCart={cartProductsList.length}
-                  handleOrderPlacement={handleOrderPlacement}
-                />
-              </Item>
-            </Grid>
-          </Grid>
-        </Container>
-      ) : (
-        <Box className="empty-cart-container">
-          <Typography
-            variant="h5"
-            sx={{ fontWeight: "regular", fontStyle: "italic" }}
-            className="empty-cart-text"
-          >
-            Cart's a bit lonely! Fill it up and let the shopping fun begin
-          </Typography>
-        </Box>
-      )}
-    </Box>
+              Cart's a bit lonely! Fill it up and let the shopping fun begin
+            </Typography>
+          </Box>
+        )}
+      </Box>
+    </>
   );
 };
 
