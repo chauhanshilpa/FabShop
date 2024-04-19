@@ -22,7 +22,7 @@ const OrderDetailsCard = ({ product }: { product: CartProductInterface }) => {
       </Box>
       <Box className="product-data">
         <Typography className="product-name">{product.name}</Typography>
-        {/* <Typography variant="caption">size: {}</Typography> */}
+        <Typography variant="caption" sx={{color: "rgba(0, 0, 0, 0.6)"}}>Quantity: {product.quantity}</Typography>
         <Typography className="product-description">
           {product.description}
         </Typography>

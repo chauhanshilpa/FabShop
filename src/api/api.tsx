@@ -202,8 +202,7 @@ export async function handleCartProductsPrice(userId: string) {
 export async function handleCartTotalAmount(userId: string) {
   const totalAmount =
     cartTotalAmount - (DISCOUNT * cartTotalAmount) / 100 + SHIPPING_CHARGE;
-    cartTotalAmount = totalAmount;
-    console.log("inCart", totalAmount)
+  cartTotalAmount = totalAmount;
   return totalAmount;
 }
 
@@ -256,7 +255,6 @@ export async function userOrdersWithDate(
   orderedProductList: CartProductInterface[],
   customerAddress: Address
 ) {
-  console.log("order",cartTotalAmount);
   let dateTimeString = new Date().toLocaleString();
   let order_id = uuidv4();
   orderedProducts[dateTimeString] = {
