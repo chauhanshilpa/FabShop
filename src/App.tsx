@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/utils/ScrollToTop";
-import Navbar from "./components/header/Navbar";
+import Navbar from "./components/header/navbar/Navbar";
 import Home from "./pages/home_page/Home";
 import SearchedProducts from "./pages/searched_products/SearchedProducts";
 import Category from "./pages/category/Category";
@@ -29,7 +29,7 @@ import {
 } from "./api/api";
 import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
 import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
-import OrderDetails from "./components/order_section/orders_details/OrdersDetails";
+import OrderedItemDetails from "./components/order_section/ordered_item_details/OrderedItemDetails";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -147,10 +147,7 @@ function App() {
           path="/user/Orders"
           element={<Orders ordersData={ordersData} />}
         />
-        <Route
-          path="/order-details"
-          element={<OrderDetails />}
-        />
+        <Route path="/order-details" element={<OrderedItemDetails />} />
         <Route
           path="/checkout"
           element={

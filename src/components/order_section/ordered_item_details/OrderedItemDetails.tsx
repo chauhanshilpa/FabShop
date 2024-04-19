@@ -1,4 +1,4 @@
-import "./OrdersDetails.css";
+import "./OrderDetails.css";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import TogetherOrderedProducts from "./TogetherOrderedProducts";
 import { v4 as uuidv4 } from "uuid";
 
-const OrderDetails = () => {
+const OrderedItemDetails = () => {
   const { state } = useLocation();
   const { productId, singleOrderDetails } = state;
   const { orderId, dateAndTime, orderedProductList, address, cartValue } =
@@ -15,7 +15,7 @@ const OrderDetails = () => {
 
   return (
     <Container className="order-details main">
-      <Box sx={{ marginBottom: "1rem", padding: "10px" }}>
+      <Box sx={{ marginBottom: "1rem"}}>
         <Typography
           variant="body2"
           sx={{
@@ -68,4 +68,4 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default OrderedItemDetails;
