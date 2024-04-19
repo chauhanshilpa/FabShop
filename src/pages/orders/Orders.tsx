@@ -3,10 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import SearchBar from "../../components/search_bar/SearchBar";
-import {OrderInterface} from "../../api/api"
+import { OrderInterface } from "../../api/api";
 import OrderItemCard from "../../components/order_section/order_item_card/OrderItemCard";
-
 interface Props {
   ordersData: OrderInterface;
 }
@@ -28,10 +26,7 @@ const Orders = ({ ordersData }: Props) => {
           </Box>
         ) : (
           <>
-            <Box className="orders-search">
-              <Typography variant="button">Search your orders</Typography>
-              <SearchBar />
-            </Box>
+            <Typography sx={{marginBottom: "1rem", fontWeight: "600", fontSize: "large"}}>Your Orders</Typography>
             <Box className="order-card-container">
               {Object.keys(ordersData).map((dateAndTimeKey) => {
                 const orderDetails = ordersData[dateAndTimeKey];
@@ -52,7 +47,6 @@ const Orders = ({ ordersData }: Props) => {
       </Box>
     </Container>
   );
-}; 
+};
 
 export default Orders;
-

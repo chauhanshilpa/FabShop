@@ -1,10 +1,8 @@
-
-import "./OrdersDetails.css";
 import Card from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { v4 as uuidv4 } from "uuid";
-import OrderDetailsCard from "./OrderDetailsCard";
+import TogetherOrderedProductCard from "./TogetherOrderedProductCard";
 import { CartProductInterface } from "../../../api/api";
 import Divider from "@mui/material/Divider";
 
@@ -30,7 +28,7 @@ const TogetherOrderedProducts = ({
   return (
     <>
       <Card className="first-product">
-        <OrderDetailsCard product={firstProduct} />
+        <TogetherOrderedProductCard product={firstProduct} />
         {otherProducts.length === 0 && (
           <>
             <Divider />
@@ -52,7 +50,7 @@ const TogetherOrderedProducts = ({
           </Typography>
           {otherProducts.map((product: CartProductInterface) => (
             <Box key={uuidv4()} className="single-ordered-product">
-              <OrderDetailsCard product={product} />
+              <TogetherOrderedProductCard product={product} />
             </Box>
           ))}
           <Divider />
