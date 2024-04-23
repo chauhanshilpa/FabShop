@@ -45,7 +45,7 @@ function App() {
     CartProductInterface[]
   >([]);
   const [ordersData, setOrdersData] = useState<OrderInterface>({});
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false)
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(false);
 
   async function getUserId(
@@ -117,11 +117,15 @@ function App() {
       <ScrollToTop />
       <Navbar
         totalProductsInCart={cartProductsList.length}
-        setIsUserLoggedIn={setIsUserLoggedIn}
-        isLoginFormOpen={isLoginFormOpen}
+        isUserLoggedIn={isUserLoggedIn}
         setIsLoginFormOpen={setIsLoginFormOpen}
       />
-      {isLoginFormOpen && <LoginForm />}
+      {isLoginFormOpen && !isUserLoggedIn && (
+        <LoginForm
+          setIsLoginFormOpen={setIsLoginFormOpen}
+          setIsUserLoggedIn={setIsUserLoggedIn}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Home activeUserId={activeUserId} />} />
         <Route path="/search/:text" element={<SearchedProducts />} />

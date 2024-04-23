@@ -60,8 +60,23 @@
   box-shadow: 2px 2px 2px 1px rgb(134, 132, 132);
 }
 
-.login-form:first-child {
+.login-form {
+  position: relative;
   text-align: center;
+}
+
+.login-form .cancel{
+  position: absolute;
+  right: 0;
+  top:0;
+  color: rgb(66, 64, 64);
+  margin: 0.5rem;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.login-form .cancel:hover{
+ color: black;
 }
 
 .input-field {

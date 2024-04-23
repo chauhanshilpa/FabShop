@@ -21,15 +21,13 @@ const ACTIONS = ["Profile", "Wishlists", "Orders", "Logout"];
 
 interface Props {
   totalProductsInCart: number;
-  setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoginFormOpen: boolean;
+  isUserLoggedIn: boolean;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function Navbar({
   totalProductsInCart,
-  setIsUserLoggedIn,
-  isLoginFormOpen,
+  isUserLoggedIn,
   setIsLoginFormOpen,
 }: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -52,7 +50,7 @@ function Navbar({
   };
 
   const handleUserLogin = () => {
-    setIsLoginFormOpen(!isLoginFormOpen);
+    setIsLoginFormOpen(true);
   };
 
   return (
@@ -165,16 +163,19 @@ function Navbar({
           </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="user actions">
-              <Button
-                className="login-button"
-                variant="outlined"
-                onClick={handleUserLogin}
-              >
-                Login
-              </Button>
-              {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Username" src="/static/images/avatar/2.jpg" />
-              </IconButton> */}
+              {isUserLoggedIn ? (
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Username" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              ) : (
+                <Button
+                  className="login-button"
+                  variant="outlined"
+                  onClick={handleUserLogin}
+                >
+                  Login
+                </Button>
+              )}
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
