@@ -19,13 +19,26 @@ import NavbarCart from "./NavbarCart";
 const PAGES = ["Men", "Women", "Kids"];
 const ACTIONS = ["Profile", "Wishlists", "Orders", "Logout"];
 
-function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
+interface Props {
+  totalProductsInCart: number;
+  setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoginFormOpen: boolean;
+  setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Navbar({
+  totalProductsInCart,
+  setIsUserLoggedIn,
+  isLoginFormOpen,
+  setIsLoginFormOpen,
+}: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -36,6 +49,10 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleUserLogin = () => {
+    setIsLoginFormOpen(!isLoginFormOpen);
   };
 
   return (
@@ -148,9 +165,16 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
           </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="user actions">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Button
+                className="login-button"
+                variant="outlined"
+                onClick={handleUserLogin}
+              >
+                Login
+              </Button>
+              {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Username" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              </IconButton> */}
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}

@@ -13,6 +13,9 @@ export const SHIPPING_CHARGE: number = 20;
 
 export const ENTER_KEY: string = "Enter";
 
+export const GOOGLE_CLIENT_ID: string | undefined =
+  process.env.PRIVATE_GOOGLE_CLIENT_ID;
+
 export const STATES_LIST: string[] = [
   "Andaman and Nicobar Islands",
   "Andhra Pradesh",

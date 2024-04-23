@@ -1,0 +1,80 @@
+.login-form-container {
+  display: flex;
+  position: fixed;
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: rgb(249, 249, 249);
+  width: max-content;
+  height: auto;
+  box-shadow: 2px 2px 2px 1px rgb(76, 76, 76);
+  background-image: linear-gradient(
+    150deg,
+    rgb(254, 204, 143),
+    white,
+    white,
+    rgb(254, 204, 143)
+  );
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.login-form button {
+  width: 100%;
+  border-radius: 20px;
+  background-image: linear-gradient(
+    170deg,
+    #cd5c08,
+    rgb(229, 252, 54),
+    rgb(255, 157, 0),
+    rgb(232, 244, 7)
+  );
+  background-size: 180% 180%;
+  margin: 2rem auto;
+  animation: gradient-animation 5s ease infinite;
+  color: rgb(250, 40, 215);
+  font-weight: 600;
+}
+
+.login-form button:hover {
+  color: rgb(220, 5, 236);
+  box-shadow: 2px 2px 2px 1px rgb(134, 132, 132);
+}
+
+.login-form:first-child {
+  text-align: center;
+}
+
+.input-field {
+  margin-top: 1rem;
+  /* background-color: rgb(18, 16, 16); */
+}
+
+@media screen and (min-width: 900px) {
+  .login-form {
+    width: 30%;
+  }
+
+  .login-form .MuiTextField-root {
+    width: 100%;
+  }
+}

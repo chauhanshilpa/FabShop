@@ -6,7 +6,6 @@ import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
 export interface CartProductInterface extends Product {
   quantity: number;
 }
-
 export interface SingleOrderInterface {
   orderId: string;
   dateAndTime: string;
@@ -36,6 +35,7 @@ let cartTotalAmount: number = 0;
 let customerAddresses: CustomerAddressInterface = {};
 let orderedProducts: OrderInterface = {};
 
+// user
 export async function addNewUser(
   email: string,
   name: string,

@@ -30,6 +30,8 @@ import {
 import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
 import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
 import OrderedItemDetails from "./components/order_section/ordered_item_details/OrderedItemDetails";
+import { Login } from "@mui/icons-material";
+import LoginForm from "./components/login/LoginForm";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -43,6 +45,8 @@ function App() {
     CartProductInterface[]
   >([]);
   const [ordersData, setOrdersData] = useState<OrderInterface>({});
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false)
+  const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(false);
 
   async function getUserId(
     email: string,
@@ -111,7 +115,13 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Navbar totalProductsInCart={cartProductsList.length} />
+      <Navbar
+        totalProductsInCart={cartProductsList.length}
+        setIsUserLoggedIn={setIsUserLoggedIn}
+        isLoginFormOpen={isLoginFormOpen}
+        setIsLoginFormOpen={setIsLoginFormOpen}
+      />
+      {isLoginFormOpen && <LoginForm />}
       <Routes>
         <Route path="/" element={<Home activeUserId={activeUserId} />} />
         <Route path="/search/:text" element={<SearchedProducts />} />
