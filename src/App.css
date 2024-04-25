@@ -14,3 +14,26 @@ body {
 .main {
   min-height: 50vh;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  scroll-behavior: smooth;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(167, 166, 166);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(167, 166, 166);
+}

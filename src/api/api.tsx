@@ -37,10 +37,10 @@ let orderedProducts: OrderInterface = {};
 
 // user
 export async function addNewUser(
-  email: string,
   name: string,
+  email: string,
   password: string,
-  contact: number
+  contact: string
 ) {
   const newUserId = uuidv4();
   const newUser = new User(newUserId, email, name, password, contact);
@@ -51,7 +51,7 @@ export async function getActiveUserId(
   email: string,
   name: string,
   password: string,
-  contact: number
+  contact: string
 ) {
   const activeUser = usersList.filter(
     (user) =>

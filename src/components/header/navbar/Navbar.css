@@ -9,6 +9,11 @@
   color: white;
 }
 
+.profile-icon{
+  font-size: xx-large;
+  color: rgb(243, 242, 242);
+}
+
 .toolbar {
   justify-content: space-between;
 }

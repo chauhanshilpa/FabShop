@@ -15,7 +15,6 @@ import Footer from "./components/footer/Footer";
 import { STARTING_PRODUCTS } from "./api/assets/productsData";
 import { Product } from "./api/classModels";
 import {
-  addNewUser,
   getActiveUserId,
   addItemToCart,
   removeItemFromCart,
@@ -27,11 +26,10 @@ import {
   CartProductInterface,
   OrderInterface,
 } from "./api/api";
-import { EMAIL, NAME, PASSWORD, CONTACT } from "./FabShop_constants";
 import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
 import OrderedItemDetails from "./components/order_section/ordered_item_details/OrderedItemDetails";
-import { Login } from "@mui/icons-material";
 import LoginForm from "./components/login/LoginForm";
+import SignUpForm from "./components/signup/SignUpForm";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -47,39 +45,20 @@ function App() {
   const [ordersData, setOrdersData] = useState<OrderInterface>({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(false);
-
-  async function getUserId(
-    email: string,
-    name: string,
-    password: string,
-    contact: number
-  ) {
-    const response = await getActiveUserId(email, name, password, contact);
-    setActiveUserId(response);
-  }
+  const [isSignUpFormOpen, setIsSignUpFormOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const getCartAndWishlist = async () => {
+    const fetchInitialInformation = async () => {
+      // const userId = await getUserId(EMAIL, NAME, PASSWORD, CONTACT);
+      // setActiveUserId(userId);
       const cartProductList = await getCartProductsList(activeUserId);
       setCartProductsList(cartProductList);
       const wishlist = await getWishlist(activeUserId);
       setWishlistProductsList(wishlist);
-    };
-    getCartAndWishlist();
-    const getOrderList = async () => {
       const response = await getUserOrdersList(activeUserId);
       setOrdersData(response);
     };
-    getOrderList();
-    //eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    const signUpAndFetchUserId = async () => {
-      await addNewUser(EMAIL, NAME, PASSWORD, CONTACT);
-      await getUserId(EMAIL, NAME, PASSWORD, CONTACT);
-    };
-    signUpAndFetchUserId();
+    fetchInitialInformation();
     //eslint-disable-next-line
   }, []);
 
@@ -124,6 +103,14 @@ function App() {
         <LoginForm
           setIsLoginFormOpen={setIsLoginFormOpen}
           setIsUserLoggedIn={setIsUserLoggedIn}
+          setIsSignUpFormOpen={setIsSignUpFormOpen}
+        />
+      )}
+      {isSignUpFormOpen && (
+        <SignUpForm
+          setIsSignUpFormOpen={setIsSignUpFormOpen}
+          setIsLoginFormOpen={setIsLoginFormOpen}
+          setActiveUserId={setActiveUserId}
         />
       )}
       <Routes>

@@ -6,14 +6,17 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+
 interface Props {
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function LoginForm({
   setIsLoginFormOpen,
   setIsUserLoggedIn,
+  setIsSignUpFormOpen,
 }: Props) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -32,8 +35,13 @@ export default function LoginForm({
     setPassword(event.target.value);
   };
 
-  const handleLoginButtonClick = () => {
+  const handleUserLogin = () => {
     setIsUserLoggedIn(true);
+  };
+
+  const handleSignUpClick = () => {
+    closeLoginForm();
+    setIsSignUpFormOpen(true);
   };
 
   return (
@@ -64,9 +72,17 @@ export default function LoginForm({
             onChange={handleUserPasswordChange}
           />
         </Box>
-        <Button onClick={handleLoginButtonClick}>LOGIN</Button>
+        <Button onClick={handleUserLogin}>LOGIN</Button>
+        {/*Google login- todo */}
         <Typography variant="caption" sx={{ color: "#343935" }}>
-          Or Sign Up Using
+          Or Login Using Google
+        </Typography>
+        <Typography
+          sx={{ color: "blue", textDecoration: "underline" }}
+          className="sign-up"
+          onClick={handleSignUpClick}
+        >
+          Sign-up
         </Typography>
       </Container>
     </Box>

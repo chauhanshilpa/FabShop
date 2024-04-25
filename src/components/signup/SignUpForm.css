@@ -1,4 +1,4 @@
-.login-form-container {
+.signup-form-container {
   display: flex;
   position: fixed;
   z-index: 9999;
@@ -9,7 +9,7 @@
   margin-top: 0.5rem;
 }
 
-.login-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -40,7 +40,7 @@
   }
 }
 
-.login-form button {
+.signup-form .submit-button {
   width: 100%;
   border-radius: 20px;
   background-image: linear-gradient(
@@ -57,17 +57,17 @@
   font-weight: 600;
 }
 
-.login-form button:hover {
+.signup-form .submit-button:hover {
   color: rgb(220, 5, 236);
   box-shadow: 2px 2px 2px 1px rgb(134, 132, 132);
 }
 
-.login-form {
+.signup-form {
   position: relative;
   text-align: center;
 }
 
-.login-form .cancel {
+.signup-form .cancel {
   position: absolute;
   right: 0;
   top: 0;
@@ -77,41 +77,41 @@
   cursor: pointer;
 }
 
-.login-form .cancel:hover {
+.signup-form .cancel:hover {
   color: black;
 }
 
-.input-field {
+.signup-form .input-field {
   margin-top: 1rem;
   /* background-color: rgb(18, 16, 16); */
 }
 
-.login-form .sign-up {
+.signup-form .login {
   text-align: right;
   cursor: pointer;
   font-size: small;
 }
 
-.login-form .sign-up:hover {
+.signup-form .login:hover {
   color: rgb(116, 39, 249);
 }
 
-@media screen and (min-width: 900px) {
-  .login-form {
+@media screen and (min-width: 640px) {
+  .signup-form {
     width: 30%;
   }
 
-  .login-form .MuiTextField-root {
+  .signup-form .MuiTextField-root {
     width: 100%;
   }
 }
 
 @media screen and (min-width: 600px) and (max-width: 900px) {
-  .login-form {
+  .signup-form {
     width: 60%;
   }
 
-  .login-form .MuiTextField-root {
+  .signup-form .MuiTextField-root {
     width: 100%;
   }
 }
