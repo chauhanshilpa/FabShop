@@ -46,12 +46,14 @@ const SingleProduct = ({
   useEffect(() => {
     (async function () {
       const response = await getUsersBrowsingHistoryList(activeUserId);
-      const isProductInBrowsingHistory = response.some((product) => product.id === productId)
+      const isProductInBrowsingHistory = response.some(
+        (product) => product.id === productId
+      );
       !isProductInBrowsingHistory &&
         setUsersBrowsingHistoryList(activeUserId, product);
     })();
     // eslint-disable-next-line
-  },[]);
+  }, []);
 
   useEffect(() => {
     async function isWishlistIncludesProduct() {
@@ -70,13 +72,26 @@ const SingleProduct = ({
   });
 
   async function handleWishlist() {
-    isProductInWishlist
-      ? await removeFromWishlist(productId)
-      : await addToWishlist(productId);
+    if (activeUserId !== "" || activeUserId === undefined) {
+      isProductInWishlist
+        ? await removeFromWishlist(productId)
+        : await addToWishlist(productId);
+    } else {
+      alert(
+        "Ready to start curating your wishlist? Sign up or log in to get started!"
+      );
+    }
   }
 
   async function handleCart() {
-    isProductInCart ? navigate("/checkout") : await addToCart(productId);
+    console.log(activeUserId)
+    if (activeUserId !== "" || activeUserId === undefined) {
+      isProductInCart ? navigate("/checkout") : await addToCart(productId);
+    } else {
+      alert(
+        "Looks like you're ready to add to your cart! Log in or sign up to make your purchase."
+      );
+    }
   }
 
   return (

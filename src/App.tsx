@@ -30,6 +30,7 @@ import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
 import OrderedItemDetails from "./components/order_section/ordered_item_details/OrderedItemDetails";
 import LoginForm from "./components/login/LoginForm";
 import SignUpForm from "./components/signup/SignUpForm";
+import { Typography } from "@mui/material";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -153,17 +154,19 @@ function App() {
           element={<Orders ordersData={ordersData} />}
         />
         <Route path="/order-details" element={<OrderedItemDetails />} />
-        <Route
-          path="/checkout"
-          element={
-            <Checkout
-              activeUserId={activeUserId}
-              cartProductsList={cartProductsList}
-              addToWishlist={addToWishlist}
-              removeFromCart={removeFromCart}
-            />
-          }
-        />
+        {isUserLoggedIn && (
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                activeUserId={activeUserId}
+                cartProductsList={cartProductsList}
+                addToWishlist={addToWishlist}
+                removeFromCart={removeFromCart}
+              />
+            }
+          />
+        )}
         <Route
           path="/checkout/confirmation"
           element={

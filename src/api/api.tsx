@@ -47,6 +47,10 @@ export async function addNewUser(
   usersList.push(newUser);
 }
 
+export async function isUserLoggedIn(){
+  
+}
+
 export async function getActiveUserId(
   email: string,
   password: string,
