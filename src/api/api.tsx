@@ -49,18 +49,14 @@ export async function addNewUser(
 
 export async function getActiveUserId(
   email: string,
-  name: string,
   password: string,
-  contact: string
 ) {
   const activeUser = usersList.filter(
     (user) =>
       user.email === email &&
-      user.name === name &&
-      user.password === password &&
-      user.contact === contact
+      user.password === password
   )[0];
-  return activeUser.id;
+  return activeUser?.id;
 }
 
 // products

@@ -97,11 +97,14 @@ function App() {
       <Navbar
         totalProductsInCart={cartProductsList.length}
         isUserLoggedIn={isUserLoggedIn}
+        setIsUserLoggedIn={setIsUserLoggedIn}
         setIsLoginFormOpen={setIsLoginFormOpen}
+        setActiveUserId={setActiveUserId}
       />
       {isLoginFormOpen && !isUserLoggedIn && (
         <LoginForm
           setIsLoginFormOpen={setIsLoginFormOpen}
+          setActiveUserId={setActiveUserId}
           setIsUserLoggedIn={setIsUserLoggedIn}
           setIsSignUpFormOpen={setIsSignUpFormOpen}
         />
@@ -109,6 +112,7 @@ function App() {
       {isSignUpFormOpen && (
         <SignUpForm
           setIsSignUpFormOpen={setIsSignUpFormOpen}
+          setIsUserLoggedIn={setIsUserLoggedIn}
           setIsLoginFormOpen={setIsLoginFormOpen}
           setActiveUserId={setActiveUserId}
         />

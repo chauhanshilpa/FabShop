@@ -6,19 +6,22 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { getActiveUserId } from "../../api/api";
 
 interface Props {
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function LoginForm({
   setIsLoginFormOpen,
   setIsUserLoggedIn,
   setIsSignUpFormOpen,
+  setActiveUserId,
 }: Props) {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   function closeLoginForm() {
@@ -26,7 +29,7 @@ export default function LoginForm({
   }
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+    setEmail(event.target.value);
   };
 
   const handleUserPasswordChange = (
@@ -35,13 +38,22 @@ export default function LoginForm({
     setPassword(event.target.value);
   };
 
-  const handleUserLogin = () => {
-    setIsUserLoggedIn(true);
-  };
-
   const handleSignUpClick = () => {
     closeLoginForm();
     setIsSignUpFormOpen(true);
+  };
+
+  const handleUserLogin = async () => {
+    const response = await getActiveUserId(email, password);
+    if (response !== undefined) {
+      setActiveUserId(response);
+      setIsUserLoggedIn(true);
+      console.log(response);
+    }else{
+      alert("No such user exists")
+    }
+    setPassword("");
+    setEmail("");
   };
 
   return (
@@ -55,9 +67,9 @@ export default function LoginForm({
           <TextField
             required
             id="standard-basic"
-            label="Username"
+            label="E-mail"
             variant="standard"
-            value={username}
+            value={email}
             onChange={handleUsernameChange}
           />
         </Box>

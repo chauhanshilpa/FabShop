@@ -17,18 +17,22 @@ import SearchBar from "../search_bar/SearchBar";
 import NavbarCart from "./NavbarCart";
 
 const PAGES = ["Men", "Women", "Kids"];
-const ACTIONS = ["Profile", "Wishlists", "Orders", "Logout"];
+const ACTIONS = ["Profile", "Wishlists", "Orders"];
 
 interface Props {
   totalProductsInCart: number;
   isUserLoggedIn: boolean;
+  setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function Navbar({
   totalProductsInCart,
   isUserLoggedIn,
+  setIsUserLoggedIn,
   setIsLoginFormOpen,
+  setActiveUserId,
 }: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -54,6 +58,12 @@ function Navbar({
     // document.body.style.opacity = "0.2"
     // const a = document.querySelector(".login-form-container")
     //  alert(a)
+  };
+
+  const handleLogoutClick = () => {
+    setAnchorElUser(null);
+    setIsUserLoggedIn(false);
+    setActiveUserId("");
   };
 
   return (
@@ -205,6 +215,11 @@ function Navbar({
                   </MenuItem>
                 </Link>
               ))}
+              <MenuItem onClick={handleLogoutClick}>
+                <Typography textAlign="center" sx={{ color: "black" }}>
+                  Logout
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

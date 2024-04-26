@@ -11,12 +11,14 @@ import { getActiveUserId, addNewUser } from "../../api/api";
 
 interface Props {
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SignUpForm = ({
   setIsSignUpFormOpen,
+  setIsUserLoggedIn,
   setIsLoginFormOpen,
   setActiveUserId,
 }: Props) => {
@@ -33,9 +35,11 @@ const SignUpForm = ({
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
+
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value);
   };
+
   const handleConfirmPasswordChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -63,13 +67,9 @@ const SignUpForm = ({
 
   const handleUserSignup = async () => {
     await addNewUser(username, email, password, contactNumber);
-    const response = await getActiveUserId(
-      email,
-      username,
-      password,
-      contactNumber
-    );
+    const response = await getActiveUserId(email, password);
     setActiveUserId(response);
+    setIsUserLoggedIn(true);
     closeSignUpForm();
   };
 
