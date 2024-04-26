@@ -1,12 +1,5 @@
 // these are some hard coded constants of FabShop
 
-// (temporarily)------------------------------------
-export const EMAIL: string = "user@gmail.com";
-export const NAME: string = "user";
-export const PASSWORD: string = "password";
-export const CONTACT: number = 1234567892;
-//---------------------------------------------------
-
 export const DISCOUNT: number = 15;
 
 export const SHIPPING_CHARGE: number = 20;

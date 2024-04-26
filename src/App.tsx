@@ -91,7 +91,7 @@ function App() {
     const response = await getWishlist(activeUserId);
     setWishlistProductsList(response);
   }
-
+    
   return (
     <>
       <ScrollToTop />

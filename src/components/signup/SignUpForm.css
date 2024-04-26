@@ -1,7 +1,7 @@
 .signup-form-container {
   display: flex;
   position: fixed;
-  z-index: 9999;
+  z-index: 99;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
@@ -24,7 +24,7 @@
     white,
     rgb(252, 198, 206)
   );
-  max-height: 85vh;
+  max-height: 75vh;
   overflow-y: auto;
 }
 
@@ -96,22 +96,18 @@
   color: rgb(116, 39, 249);
 }
 
+.signup-form .MuiTextField-root {
+  width: 100%;
+}
+
 @media screen and (min-width: 640px) {
   .signup-form {
     width: 30%;
-  }
-
-  .signup-form .MuiTextField-root {
-    width: 100%;
   }
 }
 
 @media screen and (min-width: 600px) and (max-width: 900px) {
   .signup-form {
     width: 60%;
-  }
-
-  .signup-form .MuiTextField-root {
-    width: 100%;
   }
 }

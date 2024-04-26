@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import SearchBar from "../search_bar/SearchBar";
 import NavbarCart from "./NavbarCart";
 
@@ -36,6 +36,7 @@ function Navbar({
 }: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -55,15 +56,13 @@ function Navbar({
 
   const handleUserLogin = () => {
     setIsLoginFormOpen(true);
-    // document.body.style.opacity = "0.2"
-    // const a = document.querySelector(".login-form-container")
-    //  alert(a)
   };
 
   const handleLogoutClick = () => {
     setAnchorElUser(null);
     setIsUserLoggedIn(false);
     setActiveUserId("");
+    navigate("/");
   };
 
   return (
@@ -172,7 +171,10 @@ function Navbar({
             <SearchBar />
           </Box>
           <NavLink to="/checkout">
-            <NavbarCart totalProductsInCart={totalProductsInCart} />
+            <NavbarCart
+              totalProductsInCart={totalProductsInCart}
+              isUserLoggedIn={isUserLoggedIn}
+            />
           </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="user actions">
