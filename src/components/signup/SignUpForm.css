@@ -1,0 +1,113 @@
+.signup-form-container {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin-top: 0.5rem;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 5px;
+  background-color: rgb(249, 249, 249);
+  width: max-content;
+  box-shadow: 2px 2px 2px 1px rgb(76, 76, 76);
+  background-image: linear-gradient(
+    150deg,
+    rgb(252, 198, 206),
+    white,
+    white,
+    rgb(252, 198, 206)
+  );
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.signup-form .submit-button {
+  width: 100%;
+  border-radius: 20px;
+  background-image: linear-gradient(
+    170deg,
+    #cd5c08,
+    rgb(229, 252, 54),
+    rgb(255, 157, 0),
+    rgb(232, 244, 7)
+  );
+  background-size: 180% 180%;
+  margin: 2rem auto;
+  animation: gradient-animation 5s ease infinite;
+  color: rgb(250, 40, 215);
+  font-weight: 600;
+}
+
+.signup-form .submit-button:hover {
+  color: rgb(220, 5, 236);
+  box-shadow: 2px 2px 2px 1px rgb(134, 132, 132);
+}
+
+.signup-form {
+  position: relative;
+  text-align: center;
+}
+
+.signup-form .cancel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: rgb(66, 64, 64);
+  margin: 0.5rem;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.signup-form .cancel:hover {
+  color: black;
+}
+
+.signup-form .input-field {
+  margin-top: 1rem;
+  /* background-color: rgb(18, 16, 16); */
+}
+
+.signup-form .login {
+  text-align: right;
+  cursor: pointer;
+  font-size: small;
+}
+
+.signup-form .login:hover {
+  color: rgb(116, 39, 249);
+}
+
+.signup-form .MuiTextField-root {
+  width: 100%;
+}
+
+@media screen and (min-width: 640px) {
+  .signup-form {
+    width: 30%;
+  }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+  .signup-form {
+    width: 60%;
+  }
+}

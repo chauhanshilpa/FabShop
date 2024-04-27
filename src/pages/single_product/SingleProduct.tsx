@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./SingleProduct.css";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -20,6 +20,8 @@ import {
   setUsersBrowsingHistoryList,
   getUsersBrowsingHistoryList,
 } from "../../api/api";
+import ModalComponent from "../../components/modal/ModalComponent";
+
 interface Props {
   activeUserId: string;
   addToCart: (productId: string) => Promise<void>;
@@ -36,6 +38,9 @@ const SingleProduct = ({
 }: Props) => {
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
   const [isProductInCart, setIsProductInCart] = useState(false);
+  const [modalText, setModalText] = useState({ title: "", description: "" });
+
+  const togglePopup = useRef<HTMLButtonElement>(null);
 
   const { state } = useLocation();
   const product: Product = state?.product;
@@ -46,12 +51,14 @@ const SingleProduct = ({
   useEffect(() => {
     (async function () {
       const response = await getUsersBrowsingHistoryList(activeUserId);
-      const isProductInBrowsingHistory = response.some((product) => product.id === productId)
+      const isProductInBrowsingHistory = response.some(
+        (product) => product.id === productId
+      );
       !isProductInBrowsingHistory &&
         setUsersBrowsingHistoryList(activeUserId, product);
     })();
     // eslint-disable-next-line
-  },[]);
+  }, []);
 
   useEffect(() => {
     async function isWishlistIncludesProduct() {
@@ -70,13 +77,30 @@ const SingleProduct = ({
   });
 
   async function handleWishlist() {
-    isProductInWishlist
-      ? await removeFromWishlist(productId)
-      : await addToWishlist(productId);
+    if (activeUserId !== "" || activeUserId === undefined) {
+      isProductInWishlist
+        ? await removeFromWishlist(productId)
+        : await addToWishlist(productId);
+    } else {
+      setModalText({
+        title: "Unlock Your Wishlist",
+        description:
+          "Ready to start curating your wishlist? Sign up or log in to get started!",
+      });
+      togglePopup.current?.click();
+    }
   }
 
   async function handleCart() {
-    isProductInCart ? navigate("/checkout") : await addToCart(productId);
+    if (activeUserId !== "" || activeUserId === undefined) {
+      isProductInCart ? navigate("/checkout") : await addToCart(productId);
+    } else {
+      setModalText({
+        title: "Unlock Your Cart",
+        description: "Create an account to easily save your cart and checkout.",
+      });
+      togglePopup.current?.click();
+    }
   }
 
   return (
@@ -121,6 +145,11 @@ const SingleProduct = ({
               <Typography>{product.price}</Typography>
             </Box>
             <Divider />
+            <ModalComponent
+              togglePopup={togglePopup}
+              title={modalText.title}
+              description={modalText.description}
+            />
             <Box className="buttons common-style">
               <Button
                 className="cart-action-button"

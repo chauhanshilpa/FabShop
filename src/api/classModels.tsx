@@ -3,13 +3,13 @@ export class User {
   email: string;
   name: string;
   password: string;
-  contact: number;
+  contact: string;
   constructor(
     id: string,
     email: string,
     name: string,
     password: string,
-    contact: number
+    contact: string
   ) {
     this.id = id;
     this.email = email;

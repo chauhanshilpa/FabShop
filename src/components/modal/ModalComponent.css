@@ -1,0 +1,22 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 30%;
+  width: auto;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 24;
+  padding: 2rem;
+}
+
+.modal-title {
+  font-size: large;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+.modal-description{
+  color: rgb(74, 74, 74);
+}

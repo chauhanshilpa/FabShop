@@ -7,25 +7,41 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import SearchBar from "../search_bar/SearchBar";
 import NavbarCart from "./NavbarCart";
 
 const PAGES = ["Men", "Women", "Kids"];
-const ACTIONS = ["Profile", "Wishlists", "Orders", "Logout"];
+const ACTIONS = ["Profile", "Wishlists", "Orders"];
 
-function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
+interface Props {
+  totalProductsInCart: number;
+  isUserLoggedIn: boolean;
+  setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+function Navbar({
+  totalProductsInCart,
+  isUserLoggedIn,
+  setIsUserLoggedIn,
+  setIsLoginFormOpen,
+  setActiveUserId,
+}: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -36,6 +52,17 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleUserLogin = () => {
+    setIsLoginFormOpen(true);
+  };
+
+  const handleLogoutClick = () => {
+    setAnchorElUser(null);
+    setIsUserLoggedIn(false);
+    setActiveUserId("");
+    navigate("/");
   };
 
   return (
@@ -144,13 +171,26 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
             <SearchBar />
           </Box>
           <NavLink to="/checkout">
-            <NavbarCart totalProductsInCart={totalProductsInCart} />
+            <NavbarCart
+              totalProductsInCart={totalProductsInCart}
+              isUserLoggedIn={isUserLoggedIn}
+            />
           </NavLink>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="user actions">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Username" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              {isUserLoggedIn ? (
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <AccountCircleIcon className="profile-icon" />
+                </IconButton>
+              ) : (
+                <Button
+                  className="login-button"
+                  variant="outlined"
+                  onClick={handleUserLogin}
+                >
+                  Login
+                </Button>
+              )}
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
@@ -177,6 +217,11 @@ function Navbar({ totalProductsInCart }: { totalProductsInCart: number }) {
                   </MenuItem>
                 </Link>
               ))}
+              <MenuItem onClick={handleLogoutClick}>
+                <Typography textAlign="center" sx={{ color: "black" }}>
+                  Logout
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

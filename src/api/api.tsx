@@ -6,7 +6,6 @@ import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
 export interface CartProductInterface extends Product {
   quantity: number;
 }
-
 export interface SingleOrderInterface {
   orderId: string;
   dateAndTime: string;
@@ -36,31 +35,29 @@ let cartTotalAmount: number = 0;
 let customerAddresses: CustomerAddressInterface = {};
 let orderedProducts: OrderInterface = {};
 
+// user
 export async function addNewUser(
-  email: string,
   name: string,
+  email: string,
   password: string,
-  contact: number
+  contact: string
 ) {
   const newUserId = uuidv4();
   const newUser = new User(newUserId, email, name, password, contact);
   usersList.push(newUser);
 }
 
+
 export async function getActiveUserId(
   email: string,
-  name: string,
   password: string,
-  contact: number
 ) {
   const activeUser = usersList.filter(
     (user) =>
       user.email === email &&
-      user.name === name &&
-      user.password === password &&
-      user.contact === contact
+      user.password === password
   )[0];
-  return activeUser.id;
+  return activeUser?.id;
 }
 
 // products

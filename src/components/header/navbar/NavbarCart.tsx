@@ -14,14 +14,21 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   },
 }));
 
+interface Props {
+  totalProductsInCart: number;
+  isUserLoggedIn: boolean;
+}
+
 const NavbarCart = ({
   totalProductsInCart,
-}: {
-  totalProductsInCart: number;
-}) => {
+  isUserLoggedIn,
+}: Props) => {
   return (
     <IconButton aria-label="navbar-cart">
-      <StyledBadge badgeContent={totalProductsInCart} color="primary">
+      <StyledBadge
+        badgeContent={isUserLoggedIn ? totalProductsInCart: 0}
+        color="primary"
+      >
         <ShoppingCartIcon className="cart-icon" />
       </StyledBadge>
     </IconButton>
