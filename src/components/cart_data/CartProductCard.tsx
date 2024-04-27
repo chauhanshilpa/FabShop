@@ -14,7 +14,7 @@ import {
   handleProductQuantityInCart,
   handleCartProductsPrice,
 } from "../../api/api";
-import PopupComponent from "../popup/PopupComponent";
+import ModalComponent from "../modal/ModalComponent";
 interface Props {
   activeUserId: string;
   product: Product;
@@ -118,7 +118,7 @@ const CartProduct = ({
             <AddCircleOutlineIcon />
           </Button>
         </Box>
-        <PopupComponent
+        <ModalComponent
           togglePopup={togglePopup}
           title={modalText.title}
           description={modalText.description}

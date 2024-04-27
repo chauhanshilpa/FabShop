@@ -14,7 +14,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import PopupComponent from "../popup/PopupComponent";
+import ModalComponent from "../modal/ModalComponent";
 
 interface Props {
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -149,7 +149,7 @@ export default function LoginForm({
               />
             </FormControl>
           </Box>
-          <PopupComponent
+          <ModalComponent
             togglePopup={togglePopup}
             title={modalText.title}
             description={modalText.description}

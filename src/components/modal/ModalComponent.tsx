@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./PopupComponent.css";
+import "./ModalComponent.css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -11,7 +11,7 @@ interface Props {
   description: string;
 }
 
-const PopupComponent = ({ togglePopup, title, description }: Props) => {
+const ModalComponent = ({ togglePopup, title, description }: Props) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -30,16 +30,12 @@ const PopupComponent = ({ togglePopup, title, description }: Props) => {
         aria-describedby="modal-modal-description"
       >
         <Box className="modal">
-          <Typography className="modal-title">
-            {title}
-          </Typography>
-          <Typography className="modal-description">
-            {description}
-          </Typography>
+          <Typography className="modal-title">{title}</Typography>
+          <Typography className="modal-description">{description}</Typography>
         </Box>
       </Modal>
     </>
   );
 };
 
-export default PopupComponent;
+export default ModalComponent;

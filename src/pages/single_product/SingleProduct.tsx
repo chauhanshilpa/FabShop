@@ -20,7 +20,7 @@ import {
   setUsersBrowsingHistoryList,
   getUsersBrowsingHistoryList,
 } from "../../api/api";
-import PopupComponent from "../../components/popup/PopupComponent";
+import ModalComponent from "../../components/modal/ModalComponent";
 
 interface Props {
   activeUserId: string;
@@ -145,7 +145,7 @@ const SingleProduct = ({
               <Typography>{product.price}</Typography>
             </Box>
             <Divider />
-            <PopupComponent
+            <ModalComponent
               togglePopup={togglePopup}
               title={modalText.title}
               description={modalText.description}
