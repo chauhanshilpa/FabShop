@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./SignUpForm.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -15,7 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
+import PopupComponent from "../popup/PopupComponent";
 interface Props {
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,6 +37,9 @@ const SignUpForm = ({
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [modalText, setModalText] = useState({ title: "", description: "" });
+
+  const togglePopup = useRef<HTMLButtonElement>();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -92,14 +95,46 @@ const SignUpForm = ({
   };
 
   const handleSignupSubmit = async () => {
-    if (confirmPassword === password && emailError === false) {
-      await addNewUser(username, email, password, contactNumber);
-      const response = await getActiveUserId(email, password);
-      setActiveUserId(response);
-      setIsUserLoggedIn(true);
-      closeSignUpForm();
-    }else {
-      alert("Some error occured: Please double-check your information and try again.");
+    if (
+      email.length <= 0 ||
+      password.length <= 0 ||
+      username.length <= 0 ||
+      contactNumber.length <= 0
+    ) {
+      setModalText({
+        title: "Missing Information",
+        description:
+          "Please complete all required fields before submitting the form.",
+      });
+      togglePopup.current?.click();
+      return;
+    }
+    if (confirmPassword === password) {
+      if (emailError === false) {
+        await addNewUser(username, email, password, contactNumber);
+        const response = await getActiveUserId(email, password);
+        setActiveUserId(response);
+        setIsUserLoggedIn(true);
+        closeSignUpForm();
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+        setContactNumber("");
+      } else {
+        setModalText({
+          title: "Invalid Email Address",
+          description:
+            "Please enter a valid email in the format 'user@domain.com'.",
+        });
+        togglePopup.current?.click();
+      }
+    } else {
+      setModalText({
+        title: "Password Mismatch",
+        description: "Please re-enter the same password in both fields.",
+      });
+      togglePopup.current?.click();
     }
   };
 
@@ -189,6 +224,11 @@ const SignUpForm = ({
             onChange={handleContactNumberChange}
           />
         </Box>
+        <PopupComponent
+          togglePopup={togglePopup}
+          title={modalText.title}
+          description={modalText.description}
+        />
         <Button className="submit-button" onClick={handleSignupSubmit}>
           SIGNUP
         </Button>

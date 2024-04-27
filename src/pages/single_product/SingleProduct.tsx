@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./SingleProduct.css";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -20,6 +20,8 @@ import {
   setUsersBrowsingHistoryList,
   getUsersBrowsingHistoryList,
 } from "../../api/api";
+import PopupComponent from "../../components/popup/PopupComponent";
+
 interface Props {
   activeUserId: string;
   addToCart: (productId: string) => Promise<void>;
@@ -36,6 +38,9 @@ const SingleProduct = ({
 }: Props) => {
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
   const [isProductInCart, setIsProductInCart] = useState(false);
+  const [modalText, setModalText] = useState({ title: "", description: "" });
+
+  const togglePopup = useRef<HTMLButtonElement>(null);
 
   const { state } = useLocation();
   const product: Product = state?.product;
@@ -77,20 +82,24 @@ const SingleProduct = ({
         ? await removeFromWishlist(productId)
         : await addToWishlist(productId);
     } else {
-      alert(
-        "Ready to start curating your wishlist? Sign up or log in to get started!"
-      );
+      setModalText({
+        title: "Unlock Your Wishlist",
+        description:
+          "Ready to start curating your wishlist? Sign up or log in to get started!",
+      });
+      togglePopup.current?.click();
     }
   }
 
   async function handleCart() {
-    console.log(activeUserId)
     if (activeUserId !== "" || activeUserId === undefined) {
       isProductInCart ? navigate("/checkout") : await addToCart(productId);
     } else {
-      alert(
-        "Looks like you're ready to add to your cart! Log in or sign up to make your purchase."
-      );
+      setModalText({
+        title: "Unlock Your Cart",
+        description: "Create an account to easily save your cart and checkout.",
+      });
+      togglePopup.current?.click();
     }
   }
 
@@ -136,6 +145,11 @@ const SingleProduct = ({
               <Typography>{product.price}</Typography>
             </Box>
             <Divider />
+            <PopupComponent
+              togglePopup={togglePopup}
+              title={modalText.title}
+              description={modalText.description}
+            />
             <Box className="buttons common-style">
               <Button
                 className="cart-action-button"

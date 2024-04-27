@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./CartData.css";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../api/classModels";
@@ -14,6 +14,7 @@ import {
   handleProductQuantityInCart,
   handleCartProductsPrice,
 } from "../../api/api";
+import PopupComponent from "../popup/PopupComponent";
 interface Props {
   activeUserId: string;
   product: Product;
@@ -30,7 +31,11 @@ const CartProduct = ({
   setCartProductsPrice,
 }: Props) => {
   const [productQuantity, setProductQuantity] = useState<number>(1);
-  
+  const [modalText, setModalText] = useState({ title: "", description: "" });
+
+  const togglePopup = useRef<HTMLButtonElement>();
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function getQuantityOfProduct() {
       const response = await getProductQuantityInCart(activeUserId, product.id);
@@ -39,8 +44,6 @@ const CartProduct = ({
     getQuantityOfProduct();
     // eslint-disable-next-line
   }, []);
-
-  const navigate = useNavigate();
 
   function openProduct(product_id: string) {
     navigate(`/product/${product_id}`, { state: { product } });
@@ -75,7 +78,12 @@ const CartProduct = ({
       const response = await handleCartProductsPrice(activeUserId);
       setCartProductsPrice(response);
     } else {
-      alert("You can order maximum ten quantitity of a product at a time.");
+      setModalText({
+        title: "Limited Quantity",
+        description:
+          "You can order maximum ten quantitity of a product at a time.",
+      });
+      togglePopup.current?.click();
     }
   }
 
@@ -110,6 +118,11 @@ const CartProduct = ({
             <AddCircleOutlineIcon />
           </Button>
         </Box>
+        <PopupComponent
+          togglePopup={togglePopup}
+          title={modalText.title}
+          description={modalText.description}
+        />
         <Typography className="remove-from-cart" onClick={removeItemFromCart}>
           remove
         </Typography>

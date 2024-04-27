@@ -50,8 +50,6 @@ function App() {
 
   useEffect(() => {
     const fetchInitialInformation = async () => {
-      // const userId = await getUserId(EMAIL, NAME, PASSWORD, CONTACT);
-      // setActiveUserId(userId);
       const cartProductList = await getCartProductsList(activeUserId);
       setCartProductsList(cartProductList);
       const wishlist = await getWishlist(activeUserId);

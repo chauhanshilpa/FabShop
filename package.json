@@ -20,6 +20,7 @@
     "@types/react-lazy-load-image-component": "^1.6.3",
     "@types/uuid": "^9.0.7",
     "jwt-decode": "^4.0.0",
+    "material-ui-popup-state": "^5.1.0",
     "mui-tel-input": "^5.0.0",
     "razorpay": "^2.9.2",
     "react": "^18.2.0",
