@@ -22,7 +22,7 @@ interface Props {
 const NavbarCart = ({ totalProductsInCart, isUserLoggedIn }: Props) => {
   return (
     <IconButton aria-label="navbar-cart">
-      <StyledBadge badgeContent={!isUserLoggedIn && 0} color="primary">
+      <StyledBadge badgeContent={isUserLoggedIn? totalProductsInCart : 0} color="primary">
         <ShoppingCartIcon className={isUserLoggedIn ? "cart-icon" : "disable-cart"} />
       </StyledBadge>
     </IconButton>
