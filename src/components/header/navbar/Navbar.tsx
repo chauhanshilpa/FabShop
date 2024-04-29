@@ -170,12 +170,20 @@ function Navbar({
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
             <SearchBar />
           </Box>
-          <NavLink to="/checkout">
+          {isUserLoggedIn ? (
+            <NavLink to="/checkout">
+              <NavbarCart
+                totalProductsInCart={totalProductsInCart}
+                isUserLoggedIn={isUserLoggedIn}
+              />
+            </NavLink>
+          ) : (
             <NavbarCart
               totalProductsInCart={totalProductsInCart}
               isUserLoggedIn={isUserLoggedIn}
             />
-          </NavLink>
+          )}
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="user actions">
               {isUserLoggedIn ? (

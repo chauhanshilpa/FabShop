@@ -29,6 +29,9 @@ import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
 import OrderedItemDetails from "./components/order_section/ordered_item_details/OrderedItemDetails";
 import LoginForm from "./components/login/LoginForm";
 import SignUpForm from "./components/signup/SignUpForm";
+import CustomerSupport from "./pages/profile/profile_options/CustomerSupport";
+import UserPaymentsInfo from "./pages/profile/profile_options/UserPaymentsInfo";
+import UserAddresses from "./pages/profile/profile_options/UserAddresses";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -87,7 +90,7 @@ function App() {
     const response = await getWishlist(activeUserId);
     setWishlistProductsList(response);
   }
-    
+
   return (
     <>
       <ScrollToTop />
@@ -133,7 +136,18 @@ function App() {
             />
           }
         />
-        <Route path="/user/Profile" element={<Profile />} />
+        <Route
+          path="/user/Profile"
+          element={
+            <Profile
+              isUserLoggedIn={isUserLoggedIn}
+              activeUserId={activeUserId}
+            />
+          }
+        />
+        <Route path="/customer-support" element={<CustomerSupport />} />
+        <Route path="/payment-information" element={<UserPaymentsInfo />} />
+        <Route path="/my-addresses" element={<UserAddresses />} />
         <Route
           path="/user/Wishlists"
           element={
@@ -150,7 +164,6 @@ function App() {
           element={<Orders ordersData={ordersData} />}
         />
         <Route path="/order-details" element={<OrderedItemDetails />} />
-        {isUserLoggedIn && (
           <Route
             path="/checkout"
             element={
@@ -162,7 +175,6 @@ function App() {
               />
             }
           />
-        )}
         <Route
           path="/checkout/confirmation"
           element={

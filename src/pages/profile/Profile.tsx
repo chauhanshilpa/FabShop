@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import "./Profile.css";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
@@ -9,20 +11,47 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { getActiveUserDetails } from "../../api/api";
 
 /**
  *
  * @returns Account details of user
  */
-const Profile = () => {
+
+interface Props {
+  isUserLoggedIn: boolean;
+  activeUserId: string;
+}
+
+const Profile = ({ isUserLoggedIn, activeUserId }: Props) => {
+  const [activeUser, setActiveUser] = useState({
+    name: "",
+    email: "",
+    contact: "",
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    isUserLoggedIn &&
+      (async function () {
+        const response = await getActiveUserDetails(activeUserId);
+        setActiveUser({ ...response });
+      })();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <Box className="my-account-section">
       <Card className="card">
         <Box className="row-1">
           <Box>
-            <Typography className="first-heading">UserName</Typography>
+            <Typography className="first-heading">
+              {activeUser.name ? activeUser.name : "Username"}
+            </Typography>
             <Typography className="second-heading">
-              phone number | e-mail address
+              {activeUser.contact ? activeUser.contact : "Contact"} &#124;{" "}
+              {activeUser.email ? activeUser.email : "Email"}
             </Typography>
           </Box>
           <Box className="icon">
@@ -33,7 +62,7 @@ const Profile = () => {
         </Box>
       </Card>
       <Card className="card">
-        <Box className="row-2">
+        <Box className="row-2" onClick={() => navigate("/user/Orders")}>
           <Box>
             <LocalMallIcon className="icon" />
           </Box>
@@ -44,7 +73,7 @@ const Profile = () => {
             </Typography>
           </Box>
         </Box>
-        <Box className="row-3">
+        <Box className="row-3" onClick={() => navigate("/customer-support")}>
           <Box>
             <HeadsetMicIcon className="icon" />
           </Box>
@@ -57,7 +86,7 @@ const Profile = () => {
         </Box>
       </Card>
       <Card className="card">
-        <Box className="row-4">
+        <Box className="row-4" onClick={() => navigate("/user/Wishlists")}>
           <Box>
             <FavoriteBorderIcon className="icon" />
           </Box>
@@ -68,7 +97,7 @@ const Profile = () => {
             </Typography>
           </Box>
         </Box>
-        <Box className="row-5">
+        {/* <Box className="row-5">
           <Box>
             <StarBorderIcon className="icon" />
           </Box>
@@ -78,8 +107,8 @@ const Profile = () => {
               Your views about the products
             </Typography>
           </Box>
-        </Box>
-        <Box className="row-6">
+        </Box> */}
+        <Box className="row-6" onClick={()=>navigate("/payment-information")}>
           <Box>
             <AccountBalanceWalletIcon className="icon" />
           </Box>
@@ -90,7 +119,7 @@ const Profile = () => {
             </Typography>
           </Box>
         </Box>
-        <Box className="row-7">
+        <Box className="row-7" onClick={() => navigate("/my-addresses")}>
           <Box>
             <LocationOnIcon className="icon" />
           </Box>

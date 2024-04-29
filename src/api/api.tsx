@@ -47,17 +47,20 @@ export async function addNewUser(
   usersList.push(newUser);
 }
 
-
-export async function getActiveUserId(
-  email: string,
-  password: string,
-) {
+export async function getActiveUserId(email: string, password: string) {
   const activeUser = usersList.filter(
-    (user) =>
-      user.email === email &&
-      user.password === password
+    (user) => user.email === email && user.password === password
   )[0];
-  return activeUser?.id;
+  return activeUser.id;
+}
+
+export async function getActiveUserDetails(userId: string) {
+  const activeUser = usersList.filter((user) => user.id === userId)[0];
+  return {
+    name: activeUser.name,
+    email: activeUser.email,
+    contact: activeUser.contact,
+  };
 }
 
 // products
