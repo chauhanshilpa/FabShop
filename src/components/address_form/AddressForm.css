@@ -5,13 +5,13 @@
   padding-left: 7%;
 }
 
-.checkout-address-save-and-cancel-buttons .save {
+.checkout-address-save-and-cancel-buttons .save-and-deliver {
   margin: 0.5rem;
   padding: 0.5rem;
   background-color: #ffaf03;
 }
 
-.checkout-address-save-and-cancel-buttons .save:hover {
+.checkout-address-save-and-cancel-buttons .save-and-deliver:hover {
   background-color: #ffc436;
 }
 
@@ -22,4 +22,19 @@
 
 .autocomplete-states-field {
   display: inline;
+}
+
+.save-address {
+  margin: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  background-color: #ffaf03;
+}
+
+.save-address:hover {
+  background-color: #ffc436;
+}
+
+.multiline-address{
+  width: 100%;
 }

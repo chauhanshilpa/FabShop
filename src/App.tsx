@@ -32,6 +32,9 @@ import SignUpForm from "./components/signup/SignUpForm";
 import CustomerSupport from "./pages/profile/profile_options/CustomerSupport";
 import UserPaymentsInfo from "./pages/profile/profile_options/UserPaymentsInfo";
 import UserAddresses from "./pages/profile/profile_options/UserAddresses";
+import AboutFabshop from "./pages/profile/profile_options/AboutFabshop";
+import PrivacyPolicy from "./pages/profile/profile_options/PrivacyPolicy";
+import TermsAndConditions from "./pages/profile/profile_options/TermsAndConditions";
 
 function App() {
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
@@ -147,7 +150,13 @@ function App() {
         />
         <Route path="/customer-support" element={<CustomerSupport />} />
         <Route path="/payment-information" element={<UserPaymentsInfo />} />
-        <Route path="/my-addresses" element={<UserAddresses />} />
+        <Route
+          path="/my-addresses"
+          element={<UserAddresses activeUserId={activeUserId} />}
+        />
+        <Route path="/about-Fabshop" element={<AboutFabshop />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-&-conditions" element={<TermsAndConditions />} />
         <Route
           path="/user/Wishlists"
           element={
@@ -164,17 +173,17 @@ function App() {
           element={<Orders ordersData={ordersData} />}
         />
         <Route path="/order-details" element={<OrderedItemDetails />} />
-          <Route
-            path="/checkout"
-            element={
-              <Checkout
-                activeUserId={activeUserId}
-                cartProductsList={cartProductsList}
-                addToWishlist={addToWishlist}
-                removeFromCart={removeFromCart}
-              />
-            }
-          />
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              activeUserId={activeUserId}
+              cartProductsList={cartProductsList}
+              addToWishlist={addToWishlist}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
         <Route
           path="/checkout/confirmation"
           element={

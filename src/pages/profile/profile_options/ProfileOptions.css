@@ -1,0 +1,62 @@
+.sample-page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.sample-page {
+  font-weight: regular;
+  font-style: italic;
+  width: 50%;
+  margin-top: 8rem;
+  color: #2d81cb;
+  text-align: center;
+}
+
+.add-new-address-button {
+  margin: 1rem 0px;
+  padding: 1rem;
+  display: flex;
+  color: green;
+  border: 1px solid green;
+}
+
+.add-new-address-button .add-icon {
+  margin-left: 1rem;
+}
+
+.add-new-address-button:hover {
+  color: #2d81cb;
+  background-color: transparent;
+  border: 1px solid #2d81cb;
+}
+
+.profile-addresses {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-address-form {
+  padding: 1rem;
+}
+
+.profile-addresses > .profile-address-form .MuiTextField-root {
+  margin: 8px;
+}
+
+.profile-addresses .state-textField {
+  width: 25ch;
+}
+
+.empty-address-list-container {
+  display: flex;
+  justify-content: center;
+}
+
+.empty-address-list-text {
+  width: 50%;
+  margin: 8rem auto;
+  color: #cd5c08;
+  text-align: center;
+}

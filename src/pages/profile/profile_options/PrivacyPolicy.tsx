@@ -2,14 +2,15 @@ import "./ProfileOptions.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const CustomerSupport = () => {
+const PrivacyPolicy = () => {
   return (
     <Box className="main sample-page-container">
       <Typography variant="h6" className="sample-page">
-        This is a sample page showcasing customer support services.
+        This is the sample page. Here you can write about the privacy-policies
+        of web-app.
       </Typography>
     </Box>
   );
 };
 
-export default CustomerSupport;
+export default PrivacyPolicy;

@@ -17,8 +17,12 @@ export interface OrderInterface {
   [key: string]: SingleOrderInterface;
 }
 
-interface CustomerAddressInterface {
+// todo
+interface CustomerDeliveryAddressInterface {
   [key: string]: Address;
+}
+export interface SavedAddressesInterface {
+  [key: string]: Address[];
 }
 
 /**
@@ -32,7 +36,9 @@ let browsedProductsList: Product[] = [];
 let wishlist: Product[] = [];
 let cartProductsList: CartProductInterface[] = [];
 let cartTotalAmount: number = 0;
-let customerAddresses: CustomerAddressInterface = {};
+// todo
+let customerDeliveryAddress: CustomerDeliveryAddressInterface = {};
+let customerSavedAddresses: SavedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
 
 // user
@@ -219,8 +225,8 @@ export async function getSearchedProducts(text: string) {
 }
 
 // address
-export async function customerAddressDetails(
-  user_id: string,
+export async function customerAddressDuringOrder(
+  userId: string,
   name: string,
   phoneNumber: string,
   pincode: string,
@@ -231,7 +237,9 @@ export async function customerAddressDetails(
   landmark: string,
   secondPhoneNumber: string
 ) {
-  const completeAddress = new Address(
+  const address_id = uuidv4();
+  const address = new Address(
+    address_id,
     name,
     phoneNumber,
     pincode,
@@ -242,11 +250,46 @@ export async function customerAddressDetails(
     landmark,
     secondPhoneNumber
   );
-  customerAddresses[user_id] = completeAddress;
+  customerDeliveryAddress[userId] = address;
 }
 
-export async function getCustomerAddressDetails(userId: string) {
-  return customerAddresses[userId];
+export async function getCustomerAddressDuringOrder(userId: string) {
+  return customerDeliveryAddress[userId];
+}
+
+export async function saveCustomerAddress(
+  userId: string,
+  name: string,
+  phoneNumber: string,
+  pincode: string,
+  locality: string,
+  streetAddress: string,
+  city: string,
+  state: string | null,
+  landmark: string,
+  secondPhoneNumber: string
+) {
+  const address_id = uuidv4();
+  const address = new Address(
+    address_id,
+    name,
+    phoneNumber,
+    pincode,
+    locality,
+    streetAddress,
+    city,
+    state,
+    landmark,
+    secondPhoneNumber
+  );
+  if (!customerSavedAddresses.hasOwnProperty(userId)) {
+    customerSavedAddresses[userId] = [];
+  }
+  customerSavedAddresses[userId].push({ ...address });
+}
+
+export async function getCustomerSavedAddresses(userId: string) {
+  return customerSavedAddresses[userId];
 }
 
 // orders

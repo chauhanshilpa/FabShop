@@ -38,14 +38,3 @@
   background-color: #ffc436;
 }
 
-.empty-wishlist-container {
-  display: flex;
-  justify-content: center;
-}
-
-.empty-wishlist-container .empty-wishlist-text {
-  width: 50%;
-  margin-top: 8rem;
-  color: #cd5c08;
-  text-align: center;
-}

@@ -148,7 +148,7 @@ const SignUpForm = ({
         <Box className="input-field">
           <TextField
             required
-            id="standard-basic"
+            id="standard-basic-username"
             label="Username"
             variant="standard"
             value={username}
@@ -158,7 +158,7 @@ const SignUpForm = ({
         <Box className="input-field">
           <TextField
             required
-            id="standard-basic"
+            id="standard-basic-email"
             label="E-mail"
             variant="standard"
             name="email"
@@ -199,7 +199,7 @@ const SignUpForm = ({
               Confirm password
             </InputLabel>
             <Input
-              id="standard-adornment-password"
+              id="standard-adornment-confirm-password"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
               type={showConfirmPassword ? "text" : "password"}
