@@ -149,7 +149,10 @@ function App() {
           }
         />
         <Route path="/customer-support" element={<CustomerSupport />} />
-        <Route path="/payment-information" element={<UserPaymentsInfo />} />
+        <Route
+          path="/payment-information"
+          element={<UserPaymentsInfo activeUserId={activeUserId} />}
+        />
         <Route
           path="/my-addresses"
           element={<UserAddresses activeUserId={activeUserId} />}
