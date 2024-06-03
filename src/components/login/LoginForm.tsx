@@ -81,7 +81,7 @@ export default function LoginForm({
     }
     if (emailError === false) {
       const response = await getActiveUserId(email, password);
-      if (response !== undefined) {
+      if (response !== "") {
         setActiveUserId(response);
         setIsUserLoggedIn(true);
         setPassword("");
