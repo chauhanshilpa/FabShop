@@ -15,7 +15,8 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ModalComponent from "../modal/ModalComponent";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 interface Props {
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -36,6 +37,8 @@ export default function LoginForm({
   const [modalText, setModalText] = useState({ title: "", description: "" });
 
   const togglePopup = useRef<HTMLButtonElement>(null);
+
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -104,7 +107,7 @@ export default function LoginForm({
   };
 
   return (
-    <>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <Box className="login-form-container">
         <Container className="login-form">
           <ClearIcon className="cancel" onClick={closeLoginForm} />
@@ -157,10 +160,7 @@ export default function LoginForm({
           <Button className="submit-button" onClick={handleLoginSubmit}>
             LOGIN
           </Button>
-          {/*Google login- todo */}
-          <Typography variant="caption" sx={{ color: "#343935" }}>
-            Or Login Using Google
-          </Typography>
+          <GoogleLoginButton />
           <Typography
             sx={{ color: "blue", textDecoration: "underline" }}
             className="sign-up"
@@ -170,6 +170,6 @@ export default function LoginForm({
           </Typography>
         </Container>
       </Box>
-    </>
+    </GoogleOAuthProvider>
   );
 }

@@ -1,0 +1,17 @@
+.google-login-button:hover{
+ background-color: transparent;
+}
+
+.google-login-button :first-child {
+  color: black;
+  /* background-color: bisque; */
+  padding:5px 5px 0 5px;
+  border-radius: 5%;
+}
+
+.google-login-button img {
+  height: 20px;
+  width: 20px;
+  max-width: max-content;
+  cursor: pointer;
+}

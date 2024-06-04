@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import { MuiTelInput } from "mui-tel-input";
-import { STATES_LIST } from "../../FabShop_constants";
+import { STATES_LIST } from "../../helpers/FabShop_constants";
 import { Address } from "../../api/classModels";
 import {
   customerAddressDuringOrder,

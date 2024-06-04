@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product, Address } from "./classModels";
-import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
+import { DISCOUNT, SHIPPING_CHARGE } from "../helpers/FabShop_constants";
 
 export interface CartProductInterface extends Product {
   quantity: number;
@@ -25,6 +25,13 @@ export interface SavedAddressesInterface {
   [key: string]: Address[];
 }
 
+interface cardCredentials {
+  number: string;
+  name: string;
+  validity: string;
+  CVV: string;
+}
+
 /**
  * A separate file which is created with a thinking that, later I have to integrate backend. Instead making changes in different files, I wrote all logic here so that changes happen to this file only.
  * all logic that a backend do
@@ -36,10 +43,12 @@ let browsedProductsList: Product[] = [];
 let wishlist: Product[] = [];
 let cartProductsList: CartProductInterface[] = [];
 let cartTotalAmount: number = 0;
-// todo
 let customerDeliveryAddress: CustomerDeliveryAddressInterface = {};
 let customerSavedAddresses: SavedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
+// todos
+let savedUpiPaymentsList: string[] = [];
+let savedCardsList: cardCredentials[] = [];
 
 // user
 export async function addNewUser(
@@ -56,8 +65,12 @@ export async function addNewUser(
 export async function getActiveUserId(email: string, password: string) {
   const activeUser = usersList.filter(
     (user) => user.email === email && user.password === password
-  )[0];
-  return activeUser.id;
+  );
+  if (activeUser.length >= 1) {
+    return activeUser[0].id;
+  }else{
+    return "";
+  }
 }
 
 export async function getActiveUserDetails(userId: string) {
@@ -309,6 +322,21 @@ export async function userOrdersWithDate(
   };
 }
 
+// payment
+
 export async function getUserOrdersList(userId: string) {
   return orderedProducts;
 }
+
+export async function PostUpiPayments(userId: string, upiId: string) {
+  savedUpiPaymentsList.push(upiId);
+}
+
+export async function getUpiPayments(userId: string) {
+  return savedUpiPaymentsList;
+}
+
+// todo for card
+export async function PostCardPayments(userId: string, upiId: string) {}
+
+export async function getCardPayments(userId: string) {}
