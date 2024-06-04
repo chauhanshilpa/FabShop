@@ -11,15 +11,18 @@
 .my-account-section .row-6,
 .my-account-section .row-7 {
   display: flex;
+  align-items: center;
   line-height: 4;
   margin: auto;
   height: 50%;
+  cursor: pointer;
 }
 
 .my-account-section .row-1 {
   align-items: center;
   justify-content: space-between;
   margin-left: 1rem;
+  cursor: default;
 }
 
 .my-account-section .first-heading {
@@ -46,5 +49,27 @@
   font-weight: 600;
   color: rgb(76, 75, 75);
   line-height: 2;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+  padding-left: 10px;
+  cursor: pointer;
 }
+
+.my-account-section .card.card-actions *:hover {
+  background-color: rgb(235, 234, 234);
+}
+
+.my-account-section .row-1 .first-heading {
+  color: black;
+  font-size: larger;
+  font-weight: 600;
+}
+
+.my-account-section .row-2:hover,
+.my-account-section .row-3:hover,
+.my-account-section .row-4:hover,
+.my-account-section .row-5:hover,
+.my-account-section .row-6:hover,
+.my-account-section .row-7:hover {
+  background-color: rgb(235, 234, 234);
+}
+

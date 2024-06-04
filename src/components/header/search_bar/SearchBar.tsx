@@ -4,7 +4,7 @@ import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { getSearchedProducts } from "../../../api/api";
-import { ENTER_KEY } from "../../../FabShop_constants";
+import { ENTER_KEY } from "../../../helpers/FabShop_constants";
 import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({

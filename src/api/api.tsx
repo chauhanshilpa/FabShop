@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
 import { User, Product, Address } from "./classModels";
-import { DISCOUNT, SHIPPING_CHARGE } from "../FabShop_constants";
+import { DISCOUNT, SHIPPING_CHARGE } from "../helpers/FabShop_constants";
 
 export interface CartProductInterface extends Product {
   quantity: number;
@@ -17,8 +17,19 @@ export interface OrderInterface {
   [key: string]: SingleOrderInterface;
 }
 
-interface CustomerAddressInterface {
+// todo
+interface CustomerDeliveryAddressInterface {
   [key: string]: Address;
+}
+export interface SavedAddressesInterface {
+  [key: string]: Address[];
+}
+
+interface cardCredentials {
+  number: string;
+  name: string;
+  validity: string;
+  CVV: string;
 }
 
 /**
@@ -32,8 +43,12 @@ let browsedProductsList: Product[] = [];
 let wishlist: Product[] = [];
 let cartProductsList: CartProductInterface[] = [];
 let cartTotalAmount: number = 0;
-let customerAddresses: CustomerAddressInterface = {};
+let customerDeliveryAddress: CustomerDeliveryAddressInterface = {};
+let customerSavedAddresses: SavedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
+// todos
+let savedUpiPaymentsList: string[] = [];
+let savedCardsList: cardCredentials[] = [];
 
 // user
 export async function addNewUser(
@@ -47,17 +62,24 @@ export async function addNewUser(
   usersList.push(newUser);
 }
 
-
-export async function getActiveUserId(
-  email: string,
-  password: string,
-) {
+export async function getActiveUserId(email: string, password: string) {
   const activeUser = usersList.filter(
-    (user) =>
-      user.email === email &&
-      user.password === password
-  )[0];
-  return activeUser?.id;
+    (user) => user.email === email && user.password === password
+  );
+  if (activeUser.length >= 1) {
+    return activeUser[0].id;
+  }else{
+    return "";
+  }
+}
+
+export async function getActiveUserDetails(userId: string) {
+  const activeUser = usersList.filter((user) => user.id === userId)[0];
+  return {
+    name: activeUser.name,
+    email: activeUser.email,
+    contact: activeUser.contact,
+  };
 }
 
 // products
@@ -216,8 +238,8 @@ export async function getSearchedProducts(text: string) {
 }
 
 // address
-export async function customerAddressDetails(
-  user_id: string,
+export async function customerAddressDuringOrder(
+  userId: string,
   name: string,
   phoneNumber: string,
   pincode: string,
@@ -228,7 +250,9 @@ export async function customerAddressDetails(
   landmark: string,
   secondPhoneNumber: string
 ) {
-  const completeAddress = new Address(
+  const address_id = uuidv4();
+  const address = new Address(
+    address_id,
     name,
     phoneNumber,
     pincode,
@@ -239,11 +263,46 @@ export async function customerAddressDetails(
     landmark,
     secondPhoneNumber
   );
-  customerAddresses[user_id] = completeAddress;
+  customerDeliveryAddress[userId] = address;
 }
 
-export async function getCustomerAddressDetails(userId: string) {
-  return customerAddresses[userId];
+export async function getCustomerAddressDuringOrder(userId: string) {
+  return customerDeliveryAddress[userId];
+}
+
+export async function saveCustomerAddress(
+  userId: string,
+  name: string,
+  phoneNumber: string,
+  pincode: string,
+  locality: string,
+  streetAddress: string,
+  city: string,
+  state: string | null,
+  landmark: string,
+  secondPhoneNumber: string
+) {
+  const address_id = uuidv4();
+  const address = new Address(
+    address_id,
+    name,
+    phoneNumber,
+    pincode,
+    locality,
+    streetAddress,
+    city,
+    state,
+    landmark,
+    secondPhoneNumber
+  );
+  if (!customerSavedAddresses.hasOwnProperty(userId)) {
+    customerSavedAddresses[userId] = [];
+  }
+  customerSavedAddresses[userId].push({ ...address });
+}
+
+export async function getCustomerSavedAddresses(userId: string) {
+  return customerSavedAddresses[userId];
 }
 
 // orders
@@ -263,6 +322,21 @@ export async function userOrdersWithDate(
   };
 }
 
+// payment
+
 export async function getUserOrdersList(userId: string) {
   return orderedProducts;
 }
+
+export async function PostUpiPayments(userId: string, upiId: string) {
+  savedUpiPaymentsList.push(upiId);
+}
+
+export async function getUpiPayments(userId: string) {
+  return savedUpiPaymentsList;
+}
+
+// todo for card
+export async function PostCardPayments(userId: string, upiId: string) {}
+
+export async function getCardPayments(userId: string) {}

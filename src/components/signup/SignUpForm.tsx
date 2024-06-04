@@ -16,6 +16,8 @@ import FormControl from "@mui/material/FormControl";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ModalComponent from "../modal/ModalComponent";
+import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 interface Props {
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -40,6 +42,8 @@ const SignUpForm = ({
   const [modalText, setModalText] = useState({ title: "", description: "" });
 
   const togglePopup = useRef<HTMLButtonElement>();
+
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -139,111 +143,111 @@ const SignUpForm = ({
   };
 
   return (
-    <Box className="signup-form-container">
-      <Container className="signup-form">
-        <ClearIcon className="cancel" onClick={closeSignUpForm} />
-        <Typography sx={{ fontSize: "xx-large", fontWeight: "600" }}>
-          Signup
-        </Typography>
-        <Box className="input-field">
-          <TextField
-            required
-            id="standard-basic"
-            label="Username"
-            variant="standard"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </Box>
-        <Box className="input-field">
-          <TextField
-            required
-            id="standard-basic"
-            label="E-mail"
-            variant="standard"
-            name="email"
-            type="email"
-            error={emailError}
-            helperText={emailError && "Please enter a valid email"}
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </Box>
-        <Box className="input-field">
-          <FormControl sx={{ width: "100%" }} variant="standard" required>
-            <InputLabel htmlFor="standard-adornment-password">
-              Password
-            </InputLabel>
-            <Input
-              id="standard-adornment-password"
-              value={password}
-              onChange={handlePasswordChange}
-              type={showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <Box className="signup-form-container">
+        <Container className="signup-form">
+          <ClearIcon className="cancel" onClick={closeSignUpForm} />
+          <Typography sx={{ fontSize: "xx-large", fontWeight: "600" }}>
+            Signup
+          </Typography>
+          <Box className="input-field">
+            <TextField
+              required
+              id="standard-basic-username"
+              label="Username"
+              variant="standard"
+              value={username}
+              onChange={handleUsernameChange}
             />
-          </FormControl>
-        </Box>
-        <Box className="input-field">
-          <FormControl sx={{ width: "100%" }} variant="standard" required>
-            <InputLabel htmlFor="standard-adornment-password">
-              Confirm password
-            </InputLabel>
-            <Input
-              id="standard-adornment-password"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              type={showConfirmPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowConfirmPassword}
-                    onMouseDown={handleMouseDownPassword}
-                  >
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              }
+          </Box>
+          <Box className="input-field">
+            <TextField
+              required
+              id="standard-basic-email"
+              label="E-mail"
+              variant="standard"
+              name="email"
+              type="email"
+              error={emailError}
+              helperText={emailError && "Please enter a valid email"}
+              value={email}
+              onChange={handleEmailChange}
             />
-          </FormControl>
-        </Box>
-        <Box className="input-field">
-          <MuiTelInput
-            defaultCountry={"IN"}
-            value={contactNumber}
-            onChange={handleContactNumberChange}
+          </Box>
+          <Box className="input-field">
+            <FormControl sx={{ width: "100%" }} variant="standard" required>
+              <InputLabel htmlFor="standard-adornment-password">
+                Password
+              </InputLabel>
+              <Input
+                id="standard-adornment-password"
+                value={password}
+                onChange={handlePasswordChange}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Box>
+          <Box className="input-field">
+            <FormControl sx={{ width: "100%" }} variant="standard" required>
+              <InputLabel htmlFor="standard-adornment-password">
+                Confirm password
+              </InputLabel>
+              <Input
+                id="standard-adornment-confirm-password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                type={showConfirmPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowConfirmPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Box>
+          <Box className="input-field">
+            <MuiTelInput
+              defaultCountry={"IN"}
+              value={contactNumber}
+              onChange={handleContactNumberChange}
+            />
+          </Box>
+          <ModalComponent
+            togglePopup={togglePopup}
+            title={modalText.title}
+            description={modalText.description}
           />
-        </Box>
-        <ModalComponent
-          togglePopup={togglePopup}
-          title={modalText.title}
-          description={modalText.description}
-        />
-        <Button className="submit-button" onClick={handleSignupSubmit}>
-          SIGNUP
-        </Button>
-        <Typography variant="caption" sx={{ color: "#343935" }}>
-          Or Sign up Using Google
-        </Typography>
-        <Typography
-          className="login"
-          sx={{ color: "blue", textDecoration: "underline" }}
-          onClick={handleLoginClick}
-        >
-          Login
-        </Typography>
-      </Container>
-    </Box>
+          <Button className="submit-button" onClick={handleSignupSubmit}>
+            SIGNUP
+          </Button>
+          <GoogleLoginButton />
+          <Typography
+            className="login"
+            sx={{ color: "blue", textDecoration: "underline" }}
+            onClick={handleLoginClick}
+          >
+            Login
+          </Typography>
+        </Container>
+      </Box>
+    </GoogleOAuthProvider>
   );
 };
 

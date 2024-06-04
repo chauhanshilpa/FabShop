@@ -61,6 +61,7 @@ export class Product {
   }
 }
 export class Address {
+  id: string;
   name: string;
   phoneNumber: string;
   pincode: string;
@@ -71,6 +72,7 @@ export class Address {
   landmark: string;
   secondPhoneNumber: string;
   constructor(
+    id: string,
     name: string,
     phoneNumber: string,
     pincode: string,
@@ -81,6 +83,7 @@ export class Address {
     landmark: string,
     secondPhoneNumber: string
   ) {
+    this.id = id;
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.pincode = pincode;

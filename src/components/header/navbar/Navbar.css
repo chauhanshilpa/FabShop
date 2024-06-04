@@ -9,6 +9,11 @@
   color: white;
 }
 
+.disable-cart{
+  color: white;
+  cursor: default;
+}
+
 .profile-icon{
   font-size: xx-large;
   color: rgb(243, 242, 242);

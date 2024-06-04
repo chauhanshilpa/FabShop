@@ -1,3 +1,15 @@
 .wishlist {
   margin-top: 0.938rem;
 }
+
+.empty-wishlist-container {
+  display: flex;
+  justify-content: center;
+}
+
+.empty-wishlist-container .empty-wishlist-text {
+  width: 50%;
+  margin: 8rem auto;
+  color: #cd5c08;
+  text-align: center;
+}

@@ -2,7 +2,7 @@ import "./CartData.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import { DISCOUNT, SHIPPING_CHARGE } from "../../FabShop_constants";
+import { DISCOUNT, SHIPPING_CHARGE } from "../../helpers/FabShop_constants";
 import Button from "@mui/material/Button";
 interface Props {
   cartTotalAmount: number;

@@ -5,7 +5,7 @@ import {
   getCartProductsList,
   userOrdersWithDate,
   makeCartEmpty,
-  getCustomerAddressDetails,
+  getCustomerAddressDuringOrder,
   getUserOrdersList,
   CartProductInterface,
   OrderInterface,
@@ -30,7 +30,7 @@ const OrderConfirmation = ({
   useEffect(() => {
     (async function () {
       let orderedProductsList = await getCartProductsList(activeUserId);
-      const customerAddress = await getCustomerAddressDetails(activeUserId);
+      const customerAddress = await getCustomerAddressDuringOrder(activeUserId);
       await userOrdersWithDate(
         activeUserId,
         orderedProductsList,

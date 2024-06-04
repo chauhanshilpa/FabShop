@@ -18,7 +18,7 @@
 
 .empty-cart-container .empty-cart-text {
   width: 50%;
-  margin-top: 8rem;
+  margin: 8rem auto;
   color: #cd5c08;
   text-align: center;
 }
