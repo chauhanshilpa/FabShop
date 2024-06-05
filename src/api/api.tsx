@@ -51,6 +51,12 @@ let savedUpiPaymentsList: string[] = [];
 let savedCardsList: cardCredentials[] = [];
 
 // user
+
+export async function checkUserAvailability(email: string) {
+  const isUserExists = usersList.some((user) => user.email === email);
+  return isUserExists
+}
+
 export async function addNewUser(
   name: string,
   email: string,
@@ -68,7 +74,7 @@ export async function getActiveUserId(email: string, password: string) {
   );
   if (activeUser.length >= 1) {
     return activeUser[0].id;
-  }else{
+  } else {
     return "";
   }
 }

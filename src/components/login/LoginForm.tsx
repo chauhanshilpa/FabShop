@@ -17,6 +17,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ModalComponent from "../modal/ModalComponent";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
+import { jwtDecode } from "jwt-decode";
 interface Props {
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -106,6 +107,15 @@ export default function LoginForm({
     }
   };
 
+  const showUserInformation = async (userInfo: any) => {
+    const credentials = jwtDecode<{ email: string; sub: string }>(
+      userInfo.credential
+    );
+    const response = await getActiveUserId(credentials.email, credentials.sub);
+    setActiveUserId(response);
+    setIsUserLoggedIn(true);
+  };
+
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <Box className="login-form-container">
@@ -160,7 +170,7 @@ export default function LoginForm({
           <Button className="submit-button" onClick={handleLoginSubmit}>
             LOGIN
           </Button>
-          <GoogleLoginButton />
+          <GoogleLoginButton onSuccessFunction={showUserInformation} />
           <Typography
             sx={{ color: "blue", textDecoration: "underline" }}
             className="sign-up"

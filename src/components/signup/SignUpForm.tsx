@@ -7,7 +7,11 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { MuiTelInput } from "mui-tel-input";
-import { getActiveUserId, addNewUser } from "../../api/api";
+import {
+  getActiveUserId,
+  addNewUser,
+  checkUserAvailability,
+} from "../../api/api";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
@@ -18,6 +22,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ModalComponent from "../modal/ModalComponent";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 interface Props {
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -113,6 +118,16 @@ const SignUpForm = ({
       togglePopup.current?.click();
       return;
     }
+    const isUserExists = await checkUserAvailability(email);
+    if (isUserExists) {
+      setModalText({
+        title: "Duplicate Email",
+        description:
+          "User with this email already exists. Try to login instead.",
+      });
+      togglePopup.current?.click();
+      return;
+    }
     if (confirmPassword === password) {
       if (emailError === false) {
         await addNewUser(username, email, password, contactNumber);
@@ -140,6 +155,24 @@ const SignUpForm = ({
       });
       togglePopup.current?.click();
     }
+  };
+
+  const showUserInformation = async (userInfo: any) => {
+    const credentials = jwtDecode<{ name: string; email: string; sub: string }>(
+      userInfo.credential
+    );
+    const isUserExists = await checkUserAvailability(email);
+    if (isUserExists === false) {
+      await addNewUser(
+        credentials.name,
+        credentials.email,
+        credentials.sub,
+        ""
+      );
+    }
+    const response = await getActiveUserId(credentials.email, credentials.sub);
+    setActiveUserId(response);
+    setIsUserLoggedIn(true);
   };
 
   return (
@@ -237,7 +270,7 @@ const SignUpForm = ({
           <Button className="submit-button" onClick={handleSignupSubmit}>
             SIGNUP
           </Button>
-          <GoogleLoginButton />
+          <GoogleLoginButton onSuccessFunction={showUserInformation} />
           <Typography
             className="login"
             sx={{ color: "blue", textDecoration: "underline" }}
