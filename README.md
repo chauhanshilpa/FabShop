@@ -2,6 +2,8 @@
 
 FabShop is a frontend e-commerce platform developed using [React with Typescript](https://react.dev/learn/typescript) and [Material UI](https://mui.com/material-ui/getting-started/). It has a variety of products in the Men, Women and Kids category.
 
+![Fabshop-home-page](https://github.com/chauhanshilpa/FabShop/assets/101130846/90e34d08-eda0-4bee-8c17-ce468ec49339)
+
 <video controls src="public/fabshop_UI_walkthrough_video.mp4" title="Title"></video>
 
 ## Installation
@@ -51,7 +53,7 @@ FabShop is a frontend e-commerce platform developed using [React with Typescript
 - Has persuasive messages if Cart, Wishlist or Orders list is empty.
 
 
-  #### Credits
+## Credits
 
 * payment icons are taken by [flaticons](https://www.flaticon.com/) and [icons8](https://icons8.com/) as png images and others icons are taken from MUI itself.
 
