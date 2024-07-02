@@ -173,6 +173,7 @@ const SignUpForm = ({
     const response = await getActiveUserId(credentials.email, credentials.sub);
     setActiveUserId(response);
     setIsUserLoggedIn(true);
+    closeSignUpForm();
   };
 
   return (

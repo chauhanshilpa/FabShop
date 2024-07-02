@@ -105,6 +105,7 @@ export default function LoginForm({
       });
       togglePopup.current?.click();
     }
+     closeLoginForm();
   };
 
   const showUserInformation = async (userInfo: any) => {
@@ -114,6 +115,7 @@ export default function LoginForm({
     const response = await getActiveUserId(credentials.email, credentials.sub);
     setActiveUserId(response);
     setIsUserLoggedIn(true);
+     closeLoginForm();
   };
 
   return (
