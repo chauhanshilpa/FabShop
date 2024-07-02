@@ -5,6 +5,7 @@ import Link from "@mui/material/Link";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { Link as FooterLink} from "react-router-dom";
 
 function Copyright() {
   return (
@@ -40,13 +41,13 @@ const Footer = () => {
           </Typography>
           <Box className="content">
             <Box>
-              <a href="/category/Men">Men</a>
+              <FooterLink to="/category/Men">Men</FooterLink>
             </Box>
             <Box>
-              <a href="/category/Women">Women</a>
+              <FooterLink to="/category/Women">Women</FooterLink>
             </Box>
             <Box>
-              <a href="/category/Kids">Kids</a>
+              <FooterLink to="/category/Kids">Kids</FooterLink>
             </Box>
           </Box>
         </Box>
