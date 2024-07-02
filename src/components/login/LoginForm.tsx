@@ -6,7 +6,11 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { getActiveUserId } from "../../api/api";
+import {
+  getActiveUserId,
+  addNewUser,
+  checkUserAvailability,
+} from "../../api/api";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
@@ -105,17 +109,26 @@ export default function LoginForm({
       });
       togglePopup.current?.click();
     }
-     closeLoginForm();
+    closeLoginForm();
   };
 
   const showUserInformation = async (userInfo: any) => {
-    const credentials = jwtDecode<{ email: string; sub: string }>(
+    const credentials = jwtDecode<{ name: string; email: string; sub: string }>(
       userInfo.credential
     );
+    const isUserExists = await checkUserAvailability(email);
+    if (isUserExists === false) {
+      await addNewUser(
+        credentials.name,
+        credentials.email,
+        credentials.sub,
+        ""
+      );
+    }
     const response = await getActiveUserId(credentials.email, credentials.sub);
     setActiveUserId(response);
     setIsUserLoggedIn(true);
-     closeLoginForm();
+    closeLoginForm();
   };
 
   return (
