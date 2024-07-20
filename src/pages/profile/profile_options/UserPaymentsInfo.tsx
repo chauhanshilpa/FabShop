@@ -8,7 +8,12 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
-
+import {
+  PaymentInterface,
+  addUpiDetails,
+  addCardDetails,
+  getPaymentDetails,
+} from "../../../api/api";
 interface Props {
   activeUserId: string;
 }
@@ -23,17 +28,43 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const [ownerName, setOwnerName] = useState<string | undefined>();
   const [cardValidity, setCardValidity] = useState<string | undefined>();
   const [cvv, setCvv] = useState<string | undefined>();
+  const [paymentDetails, setPaymentDetails] = useState<PaymentInterface>({});
 
-  const saveUpiPaymentDetails = () => {};
+  const saveCardDetails = async () => {
+    await addCardDetails(
+      activeUserId,
+      cardEntryName,
+      cardNumber,
+      ownerName,
+      cardValidity,
+      cvv
+    );
+    const response = await getPaymentDetails();
+    setPaymentDetails(response);
+    setCardEntryName("");
+    setCardNumber("");
+    setOwnerName("");
+    setCardValidity("");
+    setCvv("");
+  };
 
-  const saveCardDetails = () => {}
+  const saveUpiPaymentDetails = async () => {
+    await addUpiDetails(activeUserId, upiIdEntryName, upiId);
+    const response = await getPaymentDetails();
+    setPaymentDetails(response);
+    setUpiIdEntryName("");
+    setUpiId("");
+  };
 
   return (
     <Container className="profile-saved-payments main">
       <Box sx={{ display: "flex", columnGap: "20px" }}>
         <Button
           className="add-new-card-button"
-          onClick={() => setIsCardDetailsFormOpen(true)}
+          onClick={() => {
+            setIsCardDetailsFormOpen(true);
+            setIsUpiDetailsFormOpen(false);
+          }}
         >
           Save card details
           <Box sx={{ height: "30px", width: "30px" }}>
@@ -45,7 +76,10 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
         </Button>
         <Button
           className="add-new-upi-button"
-          onClick={() => setIsUpiDetailsFormOpen(true)}
+          onClick={() => {
+            setIsUpiDetailsFormOpen(true);
+            setIsCardDetailsFormOpen(false);
+          }}
         >
           Save upi address
           <Box sx={{ height: "30px", width: "30px" }}>
@@ -58,7 +92,10 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
       </Box>
       <Divider />
 
-      {/* cards for payments info */}
+      {/* payment details: todo */}
+      {Object.values(paymentDetails).map(() => (
+        <Box>payment details here</Box>
+      ))}
 
       {/* form to save UPI details */}
       {isCardDetailsFormOpen && (
@@ -137,7 +174,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
             className="close-paymnets-details-form"
             onClick={() => setIsUpiDetailsFormOpen(false)}
           />
-          <Typography variant="h6">Enter your card details here</Typography>
+          <Typography variant="h6">Enter your UPI details here</Typography>
           <Box sx={{ display: "block", width: "100%", marginTop: "1rem" }}>
             <TextField
               id="outlined-basic"

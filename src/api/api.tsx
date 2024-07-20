@@ -21,12 +21,24 @@ export interface OrderInterface {
 interface CustomerDeliveryAddressInterface {
   [key: string]: Address;
 }
-export interface SavedAddressesInterface {
+
+export interface savedAddressesInterface {
   [key: string]: Address[];
 }
+interface savedUpiPaymentsInterface {
+  upiIdEntryName: string;
+  upiId: string | undefined;
+}
+interface savedCardInterface {
+  cardEntryName: string;
+  cardNumber: string | undefined;
+  ownerName: string | undefined;
+  cardValidity: string | undefined;
+  cvv: string | undefined;
+}
 
-interface cardCredentials {
-  
+export interface PaymentInterface {
+  [key: string]: savedUpiPaymentsInterface | savedCardInterface;
 }
 
 /**
@@ -41,17 +53,17 @@ let wishlist: Product[] = [];
 let cartProductsList: CartProductInterface[] = [];
 let cartTotalAmount: number = 0;
 let customerDeliveryAddress: CustomerDeliveryAddressInterface = {};
-let customerSavedAddresses: SavedAddressesInterface = {};
+let customerSavedAddresses: savedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
 // todos
-let savedUpiPaymentsList: string[] = [];
-let savedCardsList: cardCredentials[] = [];
+let savedPaymentDetails: PaymentInterface = {};
+// let savedCardDetails: savedCardInterface = {};
 
 // user
 
 export async function checkUserAvailability(email: string) {
   const isUserExists = usersList.some((user) => user.email === email);
-  return isUserExists
+  return isUserExists;
 }
 
 export async function addNewUser(
@@ -325,9 +337,42 @@ export async function userOrdersWithDate(
   };
 }
 
-// payment
-
 export async function getUserOrdersList(userId: string) {
   return orderedProducts;
 }
 
+// payment
+
+export async function addUpiDetails(
+  userId: string,
+  upiIdEntryName: string,
+  upiId: string | undefined
+) {
+  const newUpiPayment: savedUpiPaymentsInterface = {
+    upiIdEntryName,
+    upiId,
+  };
+  savedPaymentDetails[uuidv4()] = newUpiPayment;
+}
+
+export async function addCardDetails(
+  activeUserId: string,
+  cardEntryName: string,
+  cardNumber: string | undefined,
+  ownerName: string | undefined,
+  cardValidity: string | undefined,
+  cvv: string | undefined
+) {
+  const newCardPayment: savedCardInterface = {
+    cardEntryName,
+    cardNumber,
+    ownerName,
+    cardValidity,
+    cvv,
+  };
+  savedPaymentDetails[uuidv4()] = newCardPayment;
+}
+
+export async function getPaymentDetails() {
+  return savedPaymentDetails;
+}
