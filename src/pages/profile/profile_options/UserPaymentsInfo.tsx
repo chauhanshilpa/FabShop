@@ -7,9 +7,7 @@ import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import CloseIcon from "@mui/icons-material/Close";
-import CardPayment from "../../../components/payments_type/CardPayment";
-import { ENTER_KEY } from "../../../helpers/FabShop_constants";
-import { PostUpiPayments, getUpiPayments } from "../../../api/api"; 
+import Typography from "@mui/material/Typography";
 
 interface Props {
   activeUserId: string;
@@ -18,29 +16,17 @@ interface Props {
 const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const [isCardDetailsFormOpen, setIsCardDetailsFormOpen] = useState(false);
   const [isUpiDetailsFormOpen, setIsUpiDetailsFormOpen] = useState(false);
+  const [upiIdEntryName, setUpiIdEntryName] = useState("");
   const [upiId, setUpiId] = useState<string | undefined>();
-  const [UpiPaymentDetailsCard, setUpiPaymentDetailsCard] = useState<string[]>(
-    []
-  );
-  const [cardPaymentDetailsCard, setCardPaymentDetailsCard] = useState<string[]>([]);
+  const [cardEntryName, setCardEntryName] = useState("");
+  const [cardNumber, setCardNumber] = useState<string | undefined>();
+  const [ownerName, setOwnerName] = useState<string | undefined>();
+  const [cardValidity, setCardValidity] = useState<string | undefined>();
+  const [cvv, setCvv] = useState<string | undefined>();
 
-  const handleNewUpiPaymentDetails = async (event: React.KeyboardEvent<HTMLElement>) => {
-    if (event.key === ENTER_KEY && upiId !== undefined) {
-      setIsUpiDetailsFormOpen(false);
-      await PostUpiPayments(activeUserId, upiId);
-      const response = await getUpiPayments(activeUserId);
-      setUpiPaymentDetailsCard(response);
-    }
-  };
+  const saveUpiPaymentDetails = () => {};
 
-  // const handleNewCardPaymentDetails = (
-  //   event: React.KeyboardEvent<HTMLElement>
-  // ) => {
-  //   if (event.key === ENTER_KEY && upiId !== undefined) {
-  //     setIsCardDetailsFormOpen(false);
-  //     setCardPaymentDetailsCard((prev) => [...prev, upiId]);
-  //   }
-  // };
+  const saveCardDetails = () => {}
 
   return (
     <Container className="profile-saved-payments main">
@@ -72,39 +58,113 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
       </Box>
       <Divider />
 
-      {UpiPaymentDetailsCard.map((upiId) => (
-        <Card
-          className="upi-payment-card"
-          sx={{ width: { xs: "90%", sm: "60%" } }}
-        >
-          {upiId}
-        </Card>
-      ))}
+      {/* cards for payments info */}
 
+      {/* form to save UPI details */}
       {isCardDetailsFormOpen && (
-        <Box className="card-details-form">
-          <CardPayment activeUserId={activeUserId} />
-        </Box>
+        <Card
+          className="card-details-form"
+          sx={{ width: { xs: "80%", sm: "80%" } }}
+        >
+          <CloseIcon
+            className="close-card-details-form"
+            onClick={() => setIsCardDetailsFormOpen(false)}
+          />
+          <Container>
+            <Typography variant="h6">Enter your card details here</Typography>
+            <Box sx={{ display: "block", width: "100%", marginTop: "1rem" }}>
+              <TextField
+                id="outlined-basic"
+                label="Name of the entry"
+                variant="outlined"
+                value={cardEntryName}
+                onChange={(event) => setCardEntryName(event.target.value)}
+                sx={{ width: "50%" }}
+              />
+            </Box>
+            <TextField
+              id="outlined-basic"
+              label="Card Number"
+              variant="outlined"
+              className="text-field"
+              onChange={(event) => setCardNumber(event.target.value)}
+              value={cardNumber}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Name on card"
+              variant="outlined"
+              className="text-field"
+              onChange={(event) => setOwnerName(event.target.value)}
+              value={ownerName}
+            />
+            <Box>
+              <TextField
+                id="outlined-basic"
+                label="Valid Thru(MM/YY)"
+                variant="outlined"
+                className="text-field"
+                onChange={(event) => setCardValidity(event.target.value)}
+                value={cardValidity}
+              />
+              <TextField
+                id="outlined-basic"
+                label="CVV"
+                variant="outlined"
+                className="text-field"
+                onChange={(event) => setCvv(event.target.value)}
+                value={cvv}
+              />
+            </Box>
+            <Button
+              className="save-button"
+              variant="contained"
+              onClick={saveCardDetails}
+            >
+              SAVE CARD
+            </Button>
+          </Container>
+        </Card>
       )}
 
+      {/* form to save UPI details */}
       {isUpiDetailsFormOpen && (
         <Card
           className="upi-details-form"
           sx={{ width: { xs: "90%", sm: "50%" } }}
         >
-          <TextField
-            id="outlined-basic"
-            label="Enter UPI ID here"
-            variant="outlined"
-            value={upiId}
-            onChange={(event) => setUpiId(event.target.value)}
-            onKeyDown={handleNewUpiPaymentDetails}
-            sx={{ width: "100%", marginTop: "1rem" }}
-          />
           <CloseIcon
             className="close-paymnets-details-form"
             onClick={() => setIsUpiDetailsFormOpen(false)}
           />
+          <Typography variant="h6">Enter your card details here</Typography>
+          <Box sx={{ display: "block", width: "100%", marginTop: "1rem" }}>
+            <TextField
+              id="outlined-basic"
+              label="Name of the entry"
+              variant="outlined"
+              value={upiIdEntryName}
+              onChange={(event) => setUpiIdEntryName(event.target.value)}
+              sx={{ width: "50%" }}
+            />
+          </Box>
+          <Box sx={{ display: "block", width: "100%", marginTop: "1rem" }}>
+            <TextField
+              id="outlined-basic"
+              label="Enter UPI ID here"
+              variant="outlined"
+              value={upiId}
+              onChange={(event) => setUpiId(event.target.value)}
+              sx={{ width: "100%" }}
+            />
+          </Box>
+          <Button
+            className="save-button"
+            variant="contained"
+            onClick={saveUpiPaymentDetails}
+          >
+            Save Details
+          </Button>
         </Card>
       )}
     </Container>

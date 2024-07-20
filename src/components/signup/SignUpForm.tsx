@@ -132,6 +132,7 @@ const SignUpForm = ({
       if (emailError === false) {
         await addNewUser(username, email, password, contactNumber);
         const response = await getActiveUserId(email, password);
+        console.log("userId", response)
         setActiveUserId(response);
         setIsUserLoggedIn(true);
         closeSignUpForm();

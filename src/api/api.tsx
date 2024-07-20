@@ -26,10 +26,7 @@ export interface SavedAddressesInterface {
 }
 
 interface cardCredentials {
-  number: string;
-  name: string;
-  validity: string;
-  CVV: string;
+  
 }
 
 /**
@@ -334,15 +331,3 @@ export async function getUserOrdersList(userId: string) {
   return orderedProducts;
 }
 
-export async function PostUpiPayments(userId: string, upiId: string) {
-  savedUpiPaymentsList.push(upiId);
-}
-
-export async function getUpiPayments(userId: string) {
-  return savedUpiPaymentsList;
-}
-
-// todo for card
-export async function PostCardPayments(userId: string, upiId: string) {}
-
-export async function getCardPayments(userId: string) {}
