@@ -29,7 +29,7 @@ interface savedUpiPaymentsInterface {
   upiIdEntryName: string;
   upiId: string | undefined;
 }
-interface savedCardInterface {
+export interface savedCardInterface {
   cardEntryName: string;
   cardNumber: string | undefined;
   ownerName: string | undefined;
@@ -38,7 +38,7 @@ interface savedCardInterface {
 }
 
 export interface PaymentInterface {
-  [key: string]: savedUpiPaymentsInterface | savedCardInterface;
+  [key: string]:  savedUpiPaymentsInterface | savedCardInterface;
 }
 
 /**
@@ -55,9 +55,7 @@ let cartTotalAmount: number = 0;
 let customerDeliveryAddress: CustomerDeliveryAddressInterface = {};
 let customerSavedAddresses: savedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
-// todos
 let savedPaymentDetails: PaymentInterface = {};
-// let savedCardDetails: savedCardInterface = {};
 
 // user
 
@@ -371,6 +369,10 @@ export async function addCardDetails(
     cvv,
   };
   savedPaymentDetails[uuidv4()] = newCardPayment;
+}
+
+export async function deletePaymentDetail(){
+
 }
 
 export async function getPaymentDetails() {

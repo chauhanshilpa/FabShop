@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Container from "@mui/material/Container";
@@ -8,12 +8,18 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
   PaymentInterface,
+  savedCardInterface,
   addUpiDetails,
   addCardDetails,
   getPaymentDetails,
+  deletePaymentDetail,
 } from "../../../api/api";
+import { v4 as uuidv4 } from "uuid";
 interface Props {
   activeUserId: string;
 }
@@ -29,6 +35,13 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const [cardValidity, setCardValidity] = useState<string | undefined>();
   const [cvv, setCvv] = useState<string | undefined>();
   const [paymentDetails, setPaymentDetails] = useState<PaymentInterface>({});
+
+  useEffect(()=>{
+   (async function(){
+    const response = await getPaymentDetails();
+    setPaymentDetails(response);
+  })()
+  },[]);
 
   const saveCardDetails = async () => {
     await addCardDetails(
@@ -46,6 +59,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
     setOwnerName("");
     setCardValidity("");
     setCvv("");
+    setIsCardDetailsFormOpen(false);
   };
 
   const saveUpiPaymentDetails = async () => {
@@ -54,7 +68,14 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
     setPaymentDetails(response);
     setUpiIdEntryName("");
     setUpiId("");
+    setIsUpiDetailsFormOpen(false);
   };
+
+   const handleDeletePaymentDetail = async () => {
+     await deletePaymentDetail();
+     const response = await getPaymentDetails();
+     setPaymentDetails(response);
+   };
 
   return (
     <Container className="profile-saved-payments main">
@@ -91,11 +112,6 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
         </Button>
       </Box>
       <Divider />
-
-      {/* payment details: todo */}
-      {Object.values(paymentDetails).map(() => (
-        <Box>payment details here</Box>
-      ))}
 
       {/* form to save UPI details */}
       {isCardDetailsFormOpen && (
@@ -204,6 +220,73 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
           </Button>
         </Card>
       )}
+
+      {/* payment details: todo */}
+      {Object.values(paymentDetails).map((detailsKey) => (
+        <Box key={uuidv4()}>
+          {/* type narrowing */}
+          {"upiIdEntryName" in detailsKey && (
+            <Card className="upi-payment-details">
+              <Box sx={{ display: "flex" }}>
+                <Box
+                  sx={{ height: "20px", width: "20px", marginRight: "10px" }}
+                >
+                  <Image
+                    src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/upi.png"
+                    alt="UPI"
+                  />
+                </Box>
+                <Box>
+                  <Typography variant="h6">{detailsKey.upiId}</Typography>
+                  <Typography>{detailsKey.upiIdEntryName}</Typography>
+                </Box>
+              </Box>
+              <Tooltip title="Delete">
+                <IconButton onClick={() => handleDeletePaymentDetail()}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            </Card>
+          )}
+          {detailsKey.hasOwnProperty("cardEntryName") && (
+            <Card className="card-payment-details">
+              <Box sx={{ display: "flex" }}>
+                <Box
+                  sx={{ height: "20px", width: "20px", marginRight: "10px" }}
+                >
+                  <Image
+                    src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/atm-card.png"
+                    alt="Credit/Debit Card"
+                  />
+                </Box>
+                {/* type assertions */}
+                <Box>
+                  <Typography variant="h6">
+                    {(detailsKey as savedCardInterface).cardEntryName}
+                  </Typography>
+                  <Typography>
+                    {(detailsKey as savedCardInterface).cardNumber}
+                  </Typography>
+                  <Typography>
+                    {(detailsKey as savedCardInterface).cardValidity}
+                  </Typography>
+                  <Typography>
+                    {(detailsKey as savedCardInterface).cvv}
+                  </Typography>
+                  <Typography>
+                    {(detailsKey as savedCardInterface).ownerName}
+                  </Typography>
+                </Box>
+              </Box>
+              <Tooltip title="Delete">
+                <IconButton onClick={() => handleDeletePaymentDetail()}>
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            </Card>
+          )}
+        </Box>
+      ))}
     </Container>
   );
 };

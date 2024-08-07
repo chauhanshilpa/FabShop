@@ -94,6 +94,8 @@ export default function LoginForm({
         setIsUserLoggedIn(true);
         setPassword("");
         setEmail("");
+        closeLoginForm();
+        return;
       } else {
         setModalText({
           title: "Invalid Credentials",
@@ -109,7 +111,6 @@ export default function LoginForm({
       });
       togglePopup.current?.click();
     }
-    closeLoginForm();
   };
 
   const showUserInformation = async (userInfo: any) => {

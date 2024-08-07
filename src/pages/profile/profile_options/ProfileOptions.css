@@ -85,7 +85,11 @@
   padding: 20px;
 }
 
-.profile-saved-payments .upi-payment-card {
+.profile-saved-payments .upi-payment-details,
+.profile-saved-payments .card-payment-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   margin: 10px;
 }
