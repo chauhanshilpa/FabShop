@@ -25,7 +25,7 @@ interface CustomerDeliveryAddressInterface {
 export interface savedAddressesInterface {
   [key: string]: Address[];
 }
-interface savedUpiPaymentsInterface {
+export interface savedUpiPaymentsInterface {
   upiIdEntryName: string;
   upiId: string | undefined;
 }
@@ -38,7 +38,7 @@ export interface savedCardInterface {
 }
 
 export interface PaymentInterface {
-  [key: string]:  savedUpiPaymentsInterface | savedCardInterface;
+  [key: string]: savedUpiPaymentsInterface | savedCardInterface;
 }
 
 /**
@@ -371,8 +371,10 @@ export async function addCardDetails(
   savedPaymentDetails[uuidv4()] = newCardPayment;
 }
 
-export async function deletePaymentDetail(){
-
+export async function deletePaymentDetail(id: string) {
+  let newPaymentDetails = { ...savedPaymentDetails };
+  delete newPaymentDetails[id];
+  savedPaymentDetails = { ...newPaymentDetails };
 }
 
 export async function getPaymentDetails() {

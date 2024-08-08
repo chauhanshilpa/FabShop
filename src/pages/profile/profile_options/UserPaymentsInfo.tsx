@@ -13,6 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   PaymentInterface,
+  savedUpiPaymentsInterface,
   savedCardInterface,
   addUpiDetails,
   addCardDetails,
@@ -36,12 +37,12 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const [cvv, setCvv] = useState<string | undefined>();
   const [paymentDetails, setPaymentDetails] = useState<PaymentInterface>({});
 
-  useEffect(()=>{
-   (async function(){
-    const response = await getPaymentDetails();
-    setPaymentDetails(response);
-  })()
-  },[]);
+  useEffect(() => {
+    (async function () {
+      const response = await getPaymentDetails();
+      setPaymentDetails(response);
+    })();
+  }, []);
 
   const saveCardDetails = async () => {
     await addCardDetails(
@@ -71,11 +72,11 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
     setIsUpiDetailsFormOpen(false);
   };
 
-   const handleDeletePaymentDetail = async () => {
-     await deletePaymentDetail();
-     const response = await getPaymentDetails();
-     setPaymentDetails(response);
-   };
+  const handleDeletePaymentDetail = async (id: string) => {
+    await deletePaymentDetail(id);
+    const response = await getPaymentDetails();
+    setPaymentDetails({...response});
+  };
 
   return (
     <Container className="profile-saved-payments main">
@@ -222,10 +223,10 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
       )}
 
       {/* payment details: todo */}
-      {Object.values(paymentDetails).map((detailsKey) => (
+      {Object.keys(paymentDetails).map((key) => (
         <Box key={uuidv4()}>
           {/* type narrowing */}
-          {"upiIdEntryName" in detailsKey && (
+          {"upiIdEntryName" in paymentDetails[key] && (
             <Card className="upi-payment-details">
               <Box sx={{ display: "flex" }}>
                 <Box
@@ -237,18 +238,28 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
                   />
                 </Box>
                 <Box>
-                  <Typography variant="h6">{detailsKey.upiId}</Typography>
-                  <Typography>{detailsKey.upiIdEntryName}</Typography>
+                  <Typography variant="h6" id="upiIdEntryName">
+                    {
+                      (paymentDetails[key] as savedUpiPaymentsInterface)
+                        .upiIdEntryName
+                    }
+                  </Typography>
+                  <Typography id="upiId">
+                    UPI Id:&nbsp;
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {(paymentDetails[key] as savedUpiPaymentsInterface).upiId}
+                    </Box>
+                  </Typography>
                 </Box>
               </Box>
               <Tooltip title="Delete">
-                <IconButton onClick={() => handleDeletePaymentDetail()}>
+                <IconButton onClick={() => handleDeletePaymentDetail(key)}>
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
             </Card>
           )}
-          {detailsKey.hasOwnProperty("cardEntryName") && (
+          {paymentDetails[key].hasOwnProperty("cardEntryName") && (
             <Card className="card-payment-details">
               <Box sx={{ display: "flex" }}>
                 <Box
@@ -261,25 +272,37 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
                 </Box>
                 {/* type assertions */}
                 <Box>
-                  <Typography variant="h6">
-                    {(detailsKey as savedCardInterface).cardEntryName}
+                  <Typography variant="h6" id="cardEntryName">
+                    {(paymentDetails[key] as savedCardInterface).cardEntryName}
                   </Typography>
-                  <Typography>
-                    {(detailsKey as savedCardInterface).cardNumber}
+                  <Typography id="ownerName">
+                    Name on card:&nbsp;
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {(paymentDetails[key] as savedCardInterface).ownerName}
+                    </Box>
                   </Typography>
-                  <Typography>
-                    {(detailsKey as savedCardInterface).cardValidity}
+                  <Typography id="cardNumber">
+                    card number:&nbsp;
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {(paymentDetails[key] as savedCardInterface).cardNumber}
+                    </Box>
                   </Typography>
-                  <Typography>
-                    {(detailsKey as savedCardInterface).cvv}
+                  <Typography className="cardValidity">
+                    validity:&nbsp;
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {(paymentDetails[key] as savedCardInterface).cardValidity}
+                    </Box>
                   </Typography>
-                  <Typography>
-                    {(detailsKey as savedCardInterface).ownerName}
+                  <Typography className="cvv">
+                    CVV:&nbsp;
+                    <Box component="span" sx={{ fontWeight: "bold" }}>
+                      {(paymentDetails[key] as savedCardInterface).cvv}
+                    </Box>
                   </Typography>
                 </Box>
               </Box>
               <Tooltip title="Delete">
-                <IconButton onClick={() => handleDeletePaymentDetail()}>
+                <IconButton onClick={() => handleDeletePaymentDetail(key)}>
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
