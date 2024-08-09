@@ -118,7 +118,9 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
       {isCardDetailsFormOpen && (
         <Card
           className="card-details-form"
-          sx={{ width: { xs: "80%", sm: "80%" } }}
+          sx={{
+            width: { xs: "85%", sm: "80%" },
+          }}
         >
           <CloseIcon
             className="close-card-details-form"
@@ -185,7 +187,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
       {isUpiDetailsFormOpen && (
         <Card
           className="upi-details-form"
-          sx={{ width: { xs: "90%", sm: "50%" } }}
+          sx={{ width: { xs: "85%", sm: "50%" } }}
         >
           <CloseIcon
             className="close-paymnets-details-form"
