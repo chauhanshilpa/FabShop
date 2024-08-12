@@ -15,6 +15,8 @@ import IconButton from "@mui/material/IconButton";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import SearchBar from "../search_bar/SearchBar";
 import NavbarCart from "./NavbarCart";
+import { Product } from "../../../api/classModels";
+import { CartProductInterface, OrderInterface } from "../../../api/api";
 
 const PAGES = ["Men", "Women", "Kids"];
 const ACTIONS = ["Profile", "Wishlists", "Orders"];
@@ -25,6 +27,12 @@ interface Props {
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
+  setWishlistProductsList: React.Dispatch<React.SetStateAction<Product[]>>;
+  setCartProductsList: React.Dispatch<
+    React.SetStateAction<CartProductInterface[]>
+  >;
+  setOrdersData: React.Dispatch<React.SetStateAction<OrderInterface>>;
+  setRecentlyViewedProductsList: React.Dispatch<React.SetStateAction<Product[]>>
 }
 
 function Navbar({
@@ -33,6 +41,10 @@ function Navbar({
   setIsUserLoggedIn,
   setIsLoginFormOpen,
   setActiveUserId,
+  setWishlistProductsList,
+  setCartProductsList,
+  setOrdersData,
+  setRecentlyViewedProductsList,
 }: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -62,6 +74,10 @@ function Navbar({
     setAnchorElUser(null);
     setIsUserLoggedIn(false);
     setActiveUserId("");
+    setWishlistProductsList([]);
+    setOrdersData({});
+    setCartProductsList([]);
+    setRecentlyViewedProductsList([]);
     navigate("/");
   };
 

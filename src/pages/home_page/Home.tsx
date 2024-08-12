@@ -3,6 +3,7 @@ import Carousel from "../../components/carousel/react_responsive_carousel/Carous
 import Box from "@mui/material/Box";
 import HomeContents from "../../components/home_components/HomeContents";
 import Container from "@mui/material/Container";
+import { Product } from "../../api/classModels";
 
 const heroImagesList: { src: string; alt: string }[] = [
   {
@@ -19,13 +20,29 @@ const heroImagesList: { src: string; alt: string }[] = [
   },
 ];
 
-const Home = ({ activeUserId }: { activeUserId: string }) => {
+interface Props {
+  activeUserId: string;
+  recentlyViewedProductsList: Product[];
+  setRecentlyViewedProductsList: React.Dispatch<
+    React.SetStateAction<Product[]>
+  >;
+}
+
+const Home = ({
+  activeUserId,
+  recentlyViewedProductsList,
+  setRecentlyViewedProductsList,
+}: Props) => {
   return (
     <Container className="main">
       <Box className="hero-carousel">
         <Carousel carouselImageList={heroImagesList} />
       </Box>
-      <HomeContents activeUserId={activeUserId} />
+      <HomeContents
+        activeUserId={activeUserId}
+        recentlyViewedProductsList={recentlyViewedProductsList}
+        setRecentlyViewedProductsList={setRecentlyViewedProductsList}
+      />
     </Container>
   );
 };

@@ -16,12 +16,12 @@ export interface SingleOrderInterface {
 export interface OrderInterface {
   [key: string]: SingleOrderInterface;
 }
-
-// todo
 interface CustomerDeliveryAddressInterface {
   [key: string]: Address;
 }
-
+interface BrowsedProductsInterface {
+  [key: string]: Product[];
+}
 export interface savedAddressesInterface {
   [key: string]: Address[];
 }
@@ -36,7 +36,6 @@ export interface savedCardInterface {
   cardValidity: string | undefined;
   cvv: string | undefined;
 }
-
 export interface PaymentInterface {
   [key: string]: savedUpiPaymentsInterface | savedCardInterface;
 }
@@ -48,7 +47,7 @@ export interface PaymentInterface {
 
 let usersList: User[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
-let browsedProductsList: Product[] = [];
+let browsedProductsList: BrowsedProductsInterface = {};
 let wishlist: Product[] = [];
 let cartProductsList: CartProductInterface[] = [];
 let cartTotalAmount: number = 0;
@@ -140,18 +139,26 @@ export async function getHomeCardProducts(userId: string) {
 
 // browsing history
 export async function getUsersBrowsingHistoryList(userId: string) {
-  return browsedProductsList;
+  if (browsedProductsList[userId] === undefined)
+    return (browsedProductsList[userId] = []);
+  else return browsedProductsList[userId];
 }
 
 export async function setUsersBrowsingHistoryList(
   userId: string,
   product: Product
 ) {
-  if (browsedProductsList.length > 8) {
-    browsedProductsList.shift();
-    browsedProductsList.push(product);
+  if (browsedProductsList.hasOwnProperty(userId)) {
+    console.log("1");
+    if (browsedProductsList[userId].length > 8) {
+      browsedProductsList[userId].shift();
+      browsedProductsList[userId].push(product);
+    } else {
+      browsedProductsList[userId].push(product);
+    }
   } else {
-    browsedProductsList.push(product);
+    console.log("2");
+    browsedProductsList[userId] = [{ ...product }];
   }
 }
 

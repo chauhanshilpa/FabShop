@@ -12,13 +12,22 @@ import MultiCarousel from "../carousel/react_multi_carousel/MultiCarousel";
 import Typography from "@mui/material/Typography";
 import { v4 as uuidv4 } from "uuid";
 
-const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
+interface Props {
+  activeUserId: string;
+  recentlyViewedProductsList: Product[];
+  setRecentlyViewedProductsList: React.Dispatch<
+    React.SetStateAction<Product[]>
+  >;
+}
+
+const HomeContents = ({
+  activeUserId,
+  recentlyViewedProductsList,
+  setRecentlyViewedProductsList,
+}: Props) => {
   const [homeCardProducts, setHomeCardProducts] = useState<{
     [key: string]: Product[];
   }>({});
-  const [recentlyViewedProductsList, setRecentlyViewedProductsList] = useState<
-    Product[]
-  >([]);
 
   useEffect(() => {
     async function homeCardProducts() {
@@ -27,7 +36,7 @@ const HomeContents = ({ activeUserId }: { activeUserId: string }) => {
       const recentlyViewedProducts = await getUsersBrowsingHistoryList(
         activeUserId
       );
-      setRecentlyViewedProductsList(recentlyViewedProducts);
+      setRecentlyViewedProductsList(recentlyViewedProducts!);
     }
     homeCardProducts();
     // eslint-disable-next-line

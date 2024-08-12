@@ -51,6 +51,9 @@ function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(false);
   const [isSignUpFormOpen, setIsSignUpFormOpen] = useState<boolean>(false);
+  const [recentlyViewedProductsList, setRecentlyViewedProductsList] = useState<
+    Product[]
+  >([]);
 
   useEffect(() => {
     const fetchInitialInformation = async () => {
@@ -103,6 +106,10 @@ function App() {
         setIsUserLoggedIn={setIsUserLoggedIn}
         setIsLoginFormOpen={setIsLoginFormOpen}
         setActiveUserId={setActiveUserId}
+        setWishlistProductsList={setWishlistProductsList}
+        setCartProductsList={setCartProductsList}
+        setOrdersData={setOrdersData}
+        setRecentlyViewedProductsList={setRecentlyViewedProductsList}
       />
       {isLoginFormOpen && !isUserLoggedIn && (
         <LoginForm
@@ -121,7 +128,16 @@ function App() {
         />
       )}
       <Routes>
-        <Route path="/" element={<Home activeUserId={activeUserId} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              activeUserId={activeUserId}
+              recentlyViewedProductsList={recentlyViewedProductsList}
+              setRecentlyViewedProductsList={setRecentlyViewedProductsList}
+            />
+          }
+        />
         <Route path="/search/:text" element={<SearchedProducts />} />
         <Route
           path="/category/:page"

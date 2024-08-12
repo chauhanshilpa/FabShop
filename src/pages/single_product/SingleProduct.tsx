@@ -51,11 +51,13 @@ const SingleProduct = ({
   useEffect(() => {
     (async function () {
       const response = await getUsersBrowsingHistoryList(activeUserId);
+      console.log(response, "response")
       const isProductInBrowsingHistory = response.some(
         (product) => product.id === productId
       );
+      console.log(isProductInBrowsingHistory);
       !isProductInBrowsingHistory &&
-        setUsersBrowsingHistoryList(activeUserId, product);
+        (await setUsersBrowsingHistoryList(activeUserId, product));
     })();
     // eslint-disable-next-line
   }, []);
