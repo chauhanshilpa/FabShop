@@ -17,11 +17,13 @@ import SearchBar from "../search_bar/SearchBar";
 import NavbarCart from "./NavbarCart";
 import { Product } from "../../../api/classModels";
 import { CartProductInterface, OrderInterface } from "../../../api/api";
+import StoreIcon from "@mui/icons-material/Store";
 
 const PAGES = ["Men", "Women", "Kids"];
 const ACTIONS = ["Profile", "Wishlists", "Orders"];
 
 interface Props {
+  setPersonType: React.Dispatch<React.SetStateAction<string>>;
   totalProductsInCart: number;
   isUserLoggedIn: boolean;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,10 +34,13 @@ interface Props {
     React.SetStateAction<CartProductInterface[]>
   >;
   setOrdersData: React.Dispatch<React.SetStateAction<OrderInterface>>;
-  setRecentlyViewedProductsList: React.Dispatch<React.SetStateAction<Product[]>>
+  setRecentlyViewedProductsList: React.Dispatch<
+    React.SetStateAction<Product[]>
+  >;
 }
 
 function Navbar({
+  setPersonType,
   totalProductsInCart,
   isUserLoggedIn,
   setIsUserLoggedIn,
@@ -82,55 +87,77 @@ function Navbar({
   };
 
   return (
-    <AppBar className="navbar">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters className="toolbar">
-          {/* for small screen */}
-          <Box
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
-            className="menu-navbar"
-          >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+    <>
+      <AppBar className="navbar">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters className="toolbar">
+            {/* for small screen */}
+            <Box
+              sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+              className="menu-navbar"
             >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {PAGES.map((page) => (
-                <Link to={`/category/${page}`} key={page}>
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" sx={{ color: "black" }}>
-                      {page}
-                    </Typography>
-                  </MenuItem>
-                </Link>
-              ))}
-            </Menu>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {PAGES.map((page) => (
+                  <Link to={`/category/${page}`} key={page}>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" sx={{ color: "black" }}>
+                        {page}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
+                ))}
+              </Menu>
+              <Box
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                }}
+              >
+                <NavLink to="/">
+                  <Typography
+                    variant="h4"
+                    sx={{
+                      fontWeight: "500",
+                    }}
+                    className="app-logo"
+                  >
+                    FabShop
+                  </Typography>
+                </NavLink>
+              </Box>
+            </Box>
+
+            {/* for other larger screens */}
             <Box
               sx={{
-                display: { xs: "flex", md: "none" },
+                display: { xs: "none", md: "flex" },
+                mr: 1,
               }}
             >
               <NavLink to="/">
@@ -145,120 +172,111 @@ function Navbar({
                 </Typography>
               </NavLink>
             </Box>
-          </Box>
-
-          {/* for other larger screens */}
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-            }}
-          >
-            <NavLink to="/">
-              <Typography
-                variant="h4"
-                sx={{
-                  fontWeight: "500",
-                }}
-                className="app-logo"
-              >
-                FabShop
-              </Typography>
-            </NavLink>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-            }}
-          >
-            {PAGES.map((page) => (
-              <NavLink to={`/category/${page}`} key={page}>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                mr: 1,
+              }}
+            >
+              {PAGES.map((page) => (
+                <NavLink to={`/category/${page}`} key={page}>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    {page}
+                  </Button>
+                </NavLink>
+              ))}
+            </Box>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
+              <SearchBar />
+            </Box>
+            {isUserLoggedIn ? (
+              <NavLink to="/checkout">
+                <NavbarCart
+                  totalProductsInCart={totalProductsInCart}
+                  isUserLoggedIn={isUserLoggedIn}
+                />
               </NavLink>
-            ))}
-          </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "flex" } }}>
-            <SearchBar />
-          </Box>
-          {isUserLoggedIn ? (
-            <NavLink to="/checkout">
+            ) : (
               <NavbarCart
                 totalProductsInCart={totalProductsInCart}
                 isUserLoggedIn={isUserLoggedIn}
               />
-            </NavLink>
-          ) : (
-            <NavbarCart
-              totalProductsInCart={totalProductsInCart}
-              isUserLoggedIn={isUserLoggedIn}
-            />
-          )}
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="user actions">
-              {isUserLoggedIn ? (
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <AccountCircleIcon className="profile-icon" />
-                </IconButton>
-              ) : (
-                <Button
-                  className="login-button"
-                  variant="outlined"
-                  onClick={handleUserLogin}
-                >
-                  Login
-                </Button>
-              )}
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+            )}
+            {/* store icon to login as seller(todo: responsive) */}
+            <Box
+              className="store-icon"
+              onClick={() => {
+                setPersonType("seller");
+                navigate("/seller/landing-page");
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
-              {ACTIONS.map((action) => (
-                <Link to={`/user/${action}`} key={action}>
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center" sx={{ color: "black" }}>
-                      {action}
-                    </Typography>
-                  </MenuItem>
-                </Link>
-              ))}
-              <MenuItem onClick={handleLogoutClick}>
-                <Typography textAlign="center" sx={{ color: "black" }}>
-                  Logout
-                </Typography>
-              </MenuItem>
-            </Menu>
+              <Tooltip title="login as seller">
+                <StoreIcon />
+              </Tooltip>
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="user actions">
+                {isUserLoggedIn ? (
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <AccountCircleIcon className="profile-icon" />
+                  </IconButton>
+                ) : (
+                  <Button
+                    className="login-button"
+                    variant="outlined"
+                    onClick={handleUserLogin}
+                  >
+                    Login
+                  </Button>
+                )}
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {ACTIONS.map((action) => (
+                  <Link to={`/user/${action}`} key={action}>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center" sx={{ color: "black" }}>
+                        {action}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
+                ))}
+                <MenuItem onClick={handleLogoutClick}>
+                  <Typography textAlign="center" sx={{ color: "black" }}>
+                    Logout
+                  </Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+          </Toolbar>
+          <Box
+            sx={{
+              display: { sm: "none" },
+              mb: "10px",
+            }}
+          >
+            <SearchBar />
           </Box>
-        </Toolbar>
-        <Box
-          sx={{
-            display: { sm: "none" },
-            mb: "10px",
-          }}
-        >
-          <SearchBar />
-        </Box>
-      </Container>
-    </AppBar>
+        </Container>
+      </AppBar>
+    </>
   );
 }
 export default Navbar;

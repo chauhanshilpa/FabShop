@@ -1,20 +1,22 @@
-.navbar {
-  background-color: #cd5c08;
-  position: sticky;
+.store-icon {
+  padding: 0.5px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
-.cart-icon {
+.cart-icon, .disable-cart {
   margin: 0.625rem;
   cursor: pointer;
   color: white;
 }
 
-.disable-cart{
-  color: white;
+.disable-cart {
   cursor: default;
 }
 
-.profile-icon{
+.profile-icon {
   font-size: xx-large;
   color: rgb(243, 242, 242);
 }
@@ -31,17 +33,7 @@
 .login-button:hover {
   color: rgb(238, 235, 235);
   border: 2px solid white;
-  box-shadow: 0 5px 2px 0 rgba(249, 249, 249, 0.24),0 17px 50px 0 rgba(238, 237, 237, 0.19);
-}
-
-.app-logo {
-  margin: 0.625rem;
-  color: white;
-  font-weight: 600;
-}
-
-.app-logo:hover {
-  transform: scale(1.2);
+  box-shadow: 0 5px 2px 0 rgba(249, 249, 249, 0.24), 0 17px 50px 0 rgba(238, 237, 237, 0.19);
 }
 
 .menu-navbar {

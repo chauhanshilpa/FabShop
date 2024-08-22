@@ -35,8 +35,10 @@ import UserAddresses from "./pages/profile/profile_options/UserAddresses";
 import AboutFabshop from "./pages/profile/profile_options/AboutFabshop";
 import PrivacyPolicy from "./pages/profile/profile_options/PrivacyPolicy";
 import TermsAndConditions from "./pages/profile/profile_options/TermsAndConditions";
+import SellerLandingPage from "./pages/seller/LandingPage";
 
 function App() {
+  const [personType, setPersonType] = useState("customer");
   const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
   const [allProducts, setAllProducts] = useState<Product[]>([
     ...STARTING_PRODUCTS,
@@ -100,17 +102,20 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Navbar
-        totalProductsInCart={cartProductsList.length}
-        isUserLoggedIn={isUserLoggedIn}
-        setIsUserLoggedIn={setIsUserLoggedIn}
-        setIsLoginFormOpen={setIsLoginFormOpen}
-        setActiveUserId={setActiveUserId}
-        setWishlistProductsList={setWishlistProductsList}
-        setCartProductsList={setCartProductsList}
-        setOrdersData={setOrdersData}
-        setRecentlyViewedProductsList={setRecentlyViewedProductsList}
-      />
+      {personType === "customer" && (
+        <Navbar
+          setPersonType={setPersonType}
+          totalProductsInCart={cartProductsList.length}
+          isUserLoggedIn={isUserLoggedIn}
+          setIsUserLoggedIn={setIsUserLoggedIn}
+          setIsLoginFormOpen={setIsLoginFormOpen}
+          setActiveUserId={setActiveUserId}
+          setWishlistProductsList={setWishlistProductsList}
+          setCartProductsList={setCartProductsList}
+          setOrdersData={setOrdersData}
+          setRecentlyViewedProductsList={setRecentlyViewedProductsList}
+        />
+      )}
       {isLoginFormOpen && !isUserLoggedIn && (
         <LoginForm
           setIsLoginFormOpen={setIsLoginFormOpen}
@@ -213,6 +218,7 @@ function App() {
             />
           }
         />
+        <Route path="/seller/landing-page" element={<SellerLandingPage />} />
       </Routes>
       <Footer />
     </>

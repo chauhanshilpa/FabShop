@@ -11,6 +11,21 @@ body {
   max-height: 7rem;
 }
 
+.navbar {
+  background-color: #cd5c08;
+  position: sticky;
+}
+
+.app-logo {
+  margin: 0.625rem;
+  color: white;
+  font-weight: 600;
+}
+
+.app-logo:hover {
+  transform: scale(1.2);
+}
+
 .main {
   min-height: 50vh;
 }
