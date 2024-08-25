@@ -36,10 +36,13 @@ import AboutFabshop from "./pages/profile/profile_options/AboutFabshop";
 import PrivacyPolicy from "./pages/profile/profile_options/PrivacyPolicy";
 import TermsAndConditions from "./pages/profile/profile_options/TermsAndConditions";
 import SellerLandingPage from "./pages/seller/LandingPage";
+import SellerDashboard from "./pages/seller_dashboard/SellerDashboard";
+import SellerNavbar from "./components/seller/SellerNavbar";
 
 function App() {
   const [personType, setPersonType] = useState("customer");
-  const [activeUserId, setActiveUserId] = useState<string>(""); // hard coded as for now
+  const [activeUserId, setActiveUserId] = useState<string>("");
+  const [activeSellerId, setActiveSellerId] = useState<string>("");
   const [allProducts, setAllProducts] = useState<Product[]>([
     ...STARTING_PRODUCTS,
   ]);
@@ -56,6 +59,15 @@ function App() {
   const [recentlyViewedProductsList, setRecentlyViewedProductsList] = useState<
     Product[]
   >([]);
+
+  useEffect(() => {
+    const pathname = window.location.pathname;
+    if (pathname.includes("seller")) {
+      setPersonType("seller");
+    } else {
+      setPersonType("customer");
+    }
+  }, []);
 
   useEffect(() => {
     const fetchInitialInformation = async () => {
@@ -116,6 +128,7 @@ function App() {
           setRecentlyViewedProductsList={setRecentlyViewedProductsList}
         />
       )}
+      {personType === "seller" && <SellerNavbar />}
       {isLoginFormOpen && !isUserLoggedIn && (
         <LoginForm
           setIsLoginFormOpen={setIsLoginFormOpen}
@@ -218,7 +231,11 @@ function App() {
             />
           }
         />
-        <Route path="/seller/landing-page" element={<SellerLandingPage />} />
+        <Route
+          path="/seller/landing-page"
+          element={<SellerLandingPage setActiveSellerId={setActiveSellerId} />}
+        />
+        <Route path="/seller/dashboard" element={<SellerDashboard />} />
       </Routes>
       <Footer />
     </>

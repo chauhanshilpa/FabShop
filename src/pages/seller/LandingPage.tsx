@@ -1,18 +1,24 @@
-import "./LandingPage.css"
+import "./LandingPage.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import SellerNavbar from "../../components/seller/SellerNavbar";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import SavingsOutlinedIcon from "@mui/icons-material/SavingsOutlined";
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import SellerRegistrationForm from "../../components/seller/SellerRegistrationForm";
+import { useState } from "react";
+import LoginForm from "../../components/login/LoginForm";
 
-const LandingPage = () => {
+interface Props {
+  setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const LandingPage = ({ setActiveSellerId }: Props) => {
+    const [sellerLogin, setSellerLogin] = useState(false);
+
   return (
     <Box className="main">
-      <SellerNavbar />
       <Box className="seller-perks-container">
         <Typography variant="h5" sx={{ fontSize: "x-large" }}>
           Why Sell with Us?
@@ -46,7 +52,11 @@ const LandingPage = () => {
           </Box>
         </Box>
       </Box>
-      <SellerRegistrationForm />
+      {/* <LoginForm setIsLoginFormOpen,
+  setIsUserLoggedIn,
+  setIsSignUpFormOpen,
+  setActiveUserId,/> */}
+      <SellerRegistrationForm setActiveSellerId={setActiveSellerId} />
     </Box>
   );
 };

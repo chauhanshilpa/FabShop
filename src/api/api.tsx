@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
-import { User, Product, Address } from "./classModels";
+import { User, Seller, Product, Address } from "./classModels";
 import { DISCOUNT, SHIPPING_CHARGE } from "../helpers/FabShop_constants";
 
 export interface CartProductInterface extends Product {
@@ -46,6 +46,7 @@ export interface PaymentInterface {
  */
 
 let usersList: User[] = [];
+let sellerList: Seller[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let browsedProductsList: BrowsedProductsInterface = {};
 let wishlist: Product[] = [];
@@ -63,6 +64,23 @@ export async function checkUserAvailability(email: string) {
   return isUserExists;
 }
 
+export async function addNewSeller(
+  sellerName: string,
+  sellerMail: string,
+  password: string,
+  sellerContact: string
+) {
+  const newSellerId = uuidv4();
+  const newSeller = new Seller(
+    newSellerId,
+    sellerName,
+    sellerMail,
+    password,
+    sellerContact
+  );
+  sellerList.push(newSeller);
+}
+
 export async function addNewUser(
   name: string,
   email: string,
@@ -72,6 +90,17 @@ export async function addNewUser(
   const newUserId = uuidv4();
   const newUser = new User(newUserId, email, name, password, contact);
   usersList.push(newUser);
+}
+
+export async function getActiveSellerId(email: string){
+  const activeSeller = sellerList.filter(
+    (seller) => seller.email === email
+  );
+  if (activeSeller.length >= 1) {
+    return activeSeller[0].id;
+  } else {
+    return "";
+  }
 }
 
 export async function getActiveUserId(email: string, password: string) {

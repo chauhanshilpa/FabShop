@@ -31,6 +31,7 @@ function SellerNavbar() {
                 variant="body2"
                 sx={{
                   alignSelf: "flex-end",
+                  marginLeft: "0.4rem",
                   marginBottom: "0.8rem",
                   fontStyle: "italic",
                 }}
@@ -60,6 +61,7 @@ function SellerNavbar() {
               variant="body2"
               sx={{
                 alignSelf: "flex-end",
+                marginLeft: "0.3rem",
                 marginBottom: "0.8rem",
                 fontStyle: "italic",
               }}

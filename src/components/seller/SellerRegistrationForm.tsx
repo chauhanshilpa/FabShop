@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./SellerComponents.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -7,15 +8,31 @@ import { MuiTelInput } from "mui-tel-input";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { jwtDecode } from "jwt-decode";
-import { useState } from "react";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
+import { addNewSeller, getActiveSellerId } from "../../api/api";
+import { useNavigate } from "react-router-dom";
+import FormControl from "@mui/material/FormControl";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import IconButton from "@mui/material/IconButton";
 
-const SellerRegistrationForm = () => {
+interface Props {
+  setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const SellerRegistrationForm = ({ setActiveSellerId }: Props) => {
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
   const [sellerName, setSellerName] = useState("");
   const [sellerMail, setSellerMail] = useState("");
   const [sellerContact, setSellerContact] = useState("");
   const [emailError, setEmailError] = useState(false);
+  const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const showUserInformation = async (userInfo: any) => {
     const credentials = jwtDecode<{
@@ -24,15 +41,15 @@ const SellerRegistrationForm = () => {
       sub: string;
     }>(userInfo.credential);
   };
- 
-   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-     setSellerMail(event.target.value);
-     if (event.target.validity.valid) {
-       setEmailError(false);
-     } else {
-       setEmailError(true);
-     }
-   };
+
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSellerMail(event.target.value);
+    if (event.target.validity.valid) {
+      setEmailError(false);
+    } else {
+      setEmailError(true);
+    }
+  };
 
   const handleContactNumberChange: (
     value: string | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -42,6 +59,13 @@ const SellerRegistrationForm = () => {
         ? eventOrValue
         : eventOrValue.target.value;
     setSellerContact(value);
+  };
+
+  const handleSellerRegister = async () => {
+    await addNewSeller(sellerName, sellerMail, password, sellerContact);
+    const sellerId = await getActiveSellerId(sellerMail);
+    setActiveSellerId(sellerId);
+    navigate("/seller/dashboard");
   };
 
   return (
@@ -75,6 +99,30 @@ const SellerRegistrationForm = () => {
           />
         </Box>
         <Box className="input-field-box">
+          <FormControl sx={{ width: "100%" }} variant="standard" required>
+            <InputLabel htmlFor="standard-adornment-password">
+              Password
+            </InputLabel>
+            <Input
+              id="standard-adornment-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    onMouseDown={(event)=>event.preventDefault()}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </Box>
+        <Box className="input-field-box">
           <MuiTelInput
             defaultCountry={"IN"}
             value={sellerContact}
@@ -88,12 +136,13 @@ const SellerRegistrationForm = () => {
       <Button
         variant="outlined"
         className="seller-register-button"
+        onClick={handleSellerRegister}
       >
         Register
       </Button>
       <Box className="login">
         <Box component="span">
-          Already a user?
+          Already registered?
           <Box
             component="span"
             sx={{

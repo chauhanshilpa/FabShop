@@ -18,6 +18,27 @@ export class User {
     this.contact = contact;
   }
 }
+
+export class Seller {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  contact: string;
+  constructor(
+    id: string,
+    name: string,
+    email: string,
+    password: string,
+    contact: string
+  ) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.contact = contact;
+  }
+}
 export class Image {
   id: string;
   url: string;
