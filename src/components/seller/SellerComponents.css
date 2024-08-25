@@ -1,0 +1,34 @@
+.seller-registration-form {
+    width: 80%;
+    margin: auto;
+    margin-top: 4rem;
+    padding: 1rem;
+}
+
+.seller-registration-form .input-field-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.input-field-box {
+    margin-bottom: 1rem;
+}
+
+.seller-registration-form .login {
+    margin-top: 2rem;
+}
+
+.seller-register-button {
+    color: #ffaf03;
+    border: 1px solid #ffaf03;
+    padding: 0.5rem 2rem;
+    margin-top: 3rem;
+}
+
+.seller-register-button:hover {
+    background-color: #ffaf03;
+    border: 1px solid #ffaf03;
+    color: white;
+}

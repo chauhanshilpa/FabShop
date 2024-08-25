@@ -1,0 +1,26 @@
+.seller-perks-container {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.benefits {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+}
+
+.benefits .single-benefit-box {
+    margin-bottom: 1rem;
+}
+
+.benefits .icon {
+    color: #2d81cb;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.benefits .text {
+    width: 60%;
+    margin: auto;
+}
