@@ -10,6 +10,8 @@ import {
   getActiveUserId,
   addNewUser,
   checkUserAvailability,
+  getActiveSellerId,
+  checkSellerAvailability,
 } from "../../api/api";
 import IconButton from "@mui/material/IconButton";
 import Input from "@mui/material/Input";
@@ -24,7 +26,7 @@ import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { jwtDecode } from "jwt-decode";
 interface Props {
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsUserLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -55,6 +57,7 @@ export default function LoginForm({
 
   function closeLoginForm() {
     setIsLoginFormOpen(false);
+    !setIsUserLoggedIn && setIsSignUpFormOpen(true);
   }
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,10 +91,15 @@ export default function LoginForm({
       return;
     }
     if (emailError === false) {
-      const response = await getActiveUserId(email, password);
+      let response;
+      if (setIsUserLoggedIn) {
+        response = await getActiveUserId(email, password);
+      } else {
+        response = await getActiveSellerId(email, password);
+      }
       if (response !== "") {
         setActiveUserId(response);
-        setIsUserLoggedIn(true);
+        setIsUserLoggedIn && setIsUserLoggedIn(true);
         setPassword("");
         setEmail("");
         closeLoginForm();
@@ -117,18 +125,32 @@ export default function LoginForm({
     const credentials = jwtDecode<{ name: string; email: string; sub: string }>(
       userInfo.credential
     );
-    const isUserExists = await checkUserAvailability(email);
-    if (isUserExists === false) {
-      await addNewUser(
-        credentials.name,
-        credentials.email,
-        credentials.sub,
-        ""
-      );
+    let response;
+    if (setIsUserLoggedIn) {
+      const isUserExists = await checkUserAvailability(email);
+      if (isUserExists === false) {
+        await addNewUser(
+          credentials.name,
+          credentials.email,
+          credentials.sub,
+          ""
+        );
+      }
+      response = await getActiveUserId(credentials.email, credentials.sub);
+    } else {
+      const isSellerExists = await checkSellerAvailability(email);
+      if (isSellerExists === false) {
+        await addNewUser(
+          credentials.name,
+          credentials.email,
+          credentials.sub,
+          ""
+        );
+      }
+      response = await getActiveUserId(credentials.email, credentials.sub);
     }
-    const response = await getActiveUserId(credentials.email, credentials.sub);
     setActiveUserId(response);
-    setIsUserLoggedIn(true);
+    setIsUserLoggedIn && setIsUserLoggedIn(true);
     closeLoginForm();
   };
 

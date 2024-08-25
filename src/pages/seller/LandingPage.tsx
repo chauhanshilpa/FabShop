@@ -15,10 +15,18 @@ interface Props {
 }
 
 const LandingPage = ({ setActiveSellerId }: Props) => {
-    const [sellerLogin, setSellerLogin] = useState(false);
+  const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
+  const [isSignUpFormOpen, setIsSignupFormOpen] = useState(true);
 
   return (
     <Box className="main">
+      {isLoginFormOpen && (
+        <LoginForm
+          setIsLoginFormOpen={setIsLoginFormOpen}
+          setIsSignUpFormOpen={setIsSignupFormOpen}
+          setActiveUserId={setActiveSellerId}
+        />
+      )}
       <Box className="seller-perks-container">
         <Typography variant="h5" sx={{ fontSize: "x-large" }}>
           Why Sell with Us?
@@ -52,11 +60,13 @@ const LandingPage = ({ setActiveSellerId }: Props) => {
           </Box>
         </Box>
       </Box>
-      {/* <LoginForm setIsLoginFormOpen,
-  setIsUserLoggedIn,
-  setIsSignUpFormOpen,
-  setActiveUserId,/> */}
-      <SellerRegistrationForm setActiveSellerId={setActiveSellerId} />
+      {isSignUpFormOpen && (
+        <SellerRegistrationForm
+          setActiveSellerId={setActiveSellerId}
+          setIsLoginFormOpen={setIsLoginFormOpen}
+          setIsSignupFormOpen={setIsSignupFormOpen}
+        />
+      )}
     </Box>
   );
 };

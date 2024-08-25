@@ -59,9 +59,9 @@ let savedPaymentDetails: PaymentInterface = {};
 
 // user
 
-export async function checkUserAvailability(email: string) {
-  const isUserExists = usersList.some((user) => user.email === email);
-  return isUserExists;
+export async function checkSellerAvailability(email: string) {
+  const isSellerExists = sellerList.some((user) => user.email === email);
+  return isSellerExists;
 }
 
 export async function addNewSeller(
@@ -81,6 +81,22 @@ export async function addNewSeller(
   sellerList.push(newSeller);
 }
 
+export async function checkUserAvailability(email: string) {
+  const isUserExists = usersList.some((user) => user.email === email);
+  return isUserExists;
+}
+
+export async function getActiveSellerId(email: string, password: string) {
+  const activeSeller = sellerList.filter(
+    (seller) => seller.email === email && seller.password === password
+  );
+  if (activeSeller.length >= 1) {
+    return activeSeller[0].id;
+  } else {
+    return "";
+  }
+}
+
 export async function addNewUser(
   name: string,
   email: string,
@@ -90,17 +106,6 @@ export async function addNewUser(
   const newUserId = uuidv4();
   const newUser = new User(newUserId, email, name, password, contact);
   usersList.push(newUser);
-}
-
-export async function getActiveSellerId(email: string){
-  const activeSeller = sellerList.filter(
-    (seller) => seller.email === email
-  );
-  if (activeSeller.length >= 1) {
-    return activeSeller[0].id;
-  } else {
-    return "";
-  }
 }
 
 export async function getActiveUserId(email: string, password: string) {
