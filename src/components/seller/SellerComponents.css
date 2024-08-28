@@ -21,14 +21,14 @@
 }
 
 .seller-register-button {
-    color: #ffaf03;
-    border: 1px solid #ffaf03;
+    background-color: #ffaf03;
+    color: white;
+    border: none;
     padding: 0.5rem 2rem;
     margin-top: 3rem;
 }
 
 .seller-register-button:hover {
-    background-color: #ffaf03;
-    border: 1px solid #ffaf03;
-    color: white;
+    background-color: #ffc436;
 }
+

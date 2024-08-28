@@ -64,6 +64,15 @@ export async function checkSellerAvailability(email: string) {
   return isSellerExists;
 }
 
+export async function getActiveSellerDetails(sellerId: string) {
+  const activeSeller = sellerList.filter((user) => user.id === sellerId)[0];
+  return {
+    name: activeSeller.name,
+    email: activeSeller.email,
+    contact: activeSeller.contact,
+  };
+}
+
 export async function addNewSeller(
   sellerName: string,
   sellerMail: string,
@@ -81,12 +90,8 @@ export async function addNewSeller(
   sellerList.push(newSeller);
 }
 
-export async function checkUserAvailability(email: string) {
-  const isUserExists = usersList.some((user) => user.email === email);
-  return isUserExists;
-}
-
 export async function getActiveSellerId(email: string, password: string) {
+  console.log("api", email, password)
   const activeSeller = sellerList.filter(
     (seller) => seller.email === email && seller.password === password
   );
@@ -95,6 +100,11 @@ export async function getActiveSellerId(email: string, password: string) {
   } else {
     return "";
   }
+}
+
+export async function checkUserAvailability(email: string) {
+  const isUserExists = usersList.some((user) => user.email === email);
+  return isUserExists;
 }
 
 export async function addNewUser(

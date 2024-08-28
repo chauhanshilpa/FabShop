@@ -24,6 +24,7 @@ import ModalComponent from "../modal/ModalComponent";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 interface Props {
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,6 +45,8 @@ export default function LoginForm({
   const [modalText, setModalText] = useState({ title: "", description: "" });
 
   const togglePopup = useRef<HTMLButtonElement>(null);
+
+  const navigate = useNavigate();
 
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
 
@@ -103,6 +106,7 @@ export default function LoginForm({
         setPassword("");
         setEmail("");
         closeLoginForm();
+        !setIsUserLoggedIn && navigate("/seller/dashboard");
         return;
       } else {
         setModalText({
@@ -146,6 +150,7 @@ export default function LoginForm({
           credentials.sub,
           ""
         );
+        navigate("/seller/dashboard");
       }
       response = await getActiveUserId(credentials.email, credentials.sub);
     }

@@ -54,6 +54,7 @@ const SellerRegistrationForm = ({
       email: string;
       sub: string;
     }>(userInfo.credential);
+  
     const isSellerExists = await checkSellerAvailability(sellerMail);
     if (isSellerExists === false) {
       await addNewSeller(
@@ -62,6 +63,12 @@ const SellerRegistrationForm = ({
         credentials.sub,
         ""
       );
+      const sellerId = await getActiveSellerId(
+        credentials.email,
+        credentials.sub
+      );
+      setActiveSellerId(sellerId);
+       navigate("/seller/dashboard");
     }
   };
 
@@ -203,7 +210,7 @@ const SellerRegistrationForm = ({
           <GoogleLoginButton onSuccessFunction={showUserInformation} />
         </GoogleOAuthProvider>
         <Button
-          variant="outlined"
+          variant="contained"
           className="seller-register-button"
           onClick={handleSellerRegister}
         >

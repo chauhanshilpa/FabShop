@@ -235,7 +235,10 @@ function App() {
           path="/seller/landing-page"
           element={<SellerLandingPage setActiveSellerId={setActiveSellerId} />}
         />
-        <Route path="/seller/dashboard" element={<SellerDashboard />} />
+        <Route
+          path="/seller/dashboard"
+          element={<SellerDashboard activeSellerId ={activeSellerId}/>}
+        />
       </Routes>
       <Footer />
     </>
