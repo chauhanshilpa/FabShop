@@ -28,12 +28,14 @@ interface Props {
   setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSignupFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSellerLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SellerRegistrationForm = ({
   setActiveSellerId,
   setIsLoginFormOpen,
   setIsSignupFormOpen,
+  setIsSellerLoggedIn,
 }: Props) => {
   const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "";
   const [sellerName, setSellerName] = useState("");
@@ -54,7 +56,7 @@ const SellerRegistrationForm = ({
       email: string;
       sub: string;
     }>(userInfo.credential);
-  
+
     const isSellerExists = await checkSellerAvailability(sellerMail);
     if (isSellerExists === false) {
       await addNewSeller(
@@ -67,8 +69,9 @@ const SellerRegistrationForm = ({
         credentials.email,
         credentials.sub
       );
+      setIsSellerLoggedIn(true);
       setActiveSellerId(sellerId);
-       navigate("/seller/dashboard");
+      navigate("/seller/dashboard");
     }
   };
 
@@ -120,6 +123,7 @@ const SellerRegistrationForm = ({
       await addNewSeller(sellerName, sellerMail, password, sellerContact);
       const sellerId = await getActiveSellerId(sellerMail, password);
       setActiveSellerId(sellerId);
+      setIsSellerLoggedIn(true);
       setSellerName("");
       setSellerMail("");
       setPassword("");

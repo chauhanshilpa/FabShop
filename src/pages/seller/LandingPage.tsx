@@ -12,9 +12,15 @@ import LoginForm from "../../components/login/LoginForm";
 
 interface Props {
   setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
+  setIsSellerLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  personType: string;
 }
 
-const LandingPage = ({ setActiveSellerId }: Props) => {
+const LandingPage = ({
+  personType, 
+  setActiveSellerId,
+  setIsSellerLoggedIn,
+}: Props) => {
   const [isLoginFormOpen, setIsLoginFormOpen] = useState(false);
   const [isSignUpFormOpen, setIsSignupFormOpen] = useState(true);
 
@@ -22,7 +28,9 @@ const LandingPage = ({ setActiveSellerId }: Props) => {
     <Box className="main">
       {isLoginFormOpen && (
         <LoginForm
+          personType={personType}
           setIsLoginFormOpen={setIsLoginFormOpen}
+          setIsUserLoggedIn={setIsSellerLoggedIn}
           setIsSignUpFormOpen={setIsSignupFormOpen}
           setActiveUserId={setActiveSellerId}
         />
@@ -65,6 +73,7 @@ const LandingPage = ({ setActiveSellerId }: Props) => {
           setActiveSellerId={setActiveSellerId}
           setIsLoginFormOpen={setIsLoginFormOpen}
           setIsSignupFormOpen={setIsSignupFormOpen}
+          setIsSellerLoggedIn={setIsSellerLoggedIn}
         />
       )}
     </Box>

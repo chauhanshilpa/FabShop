@@ -10,9 +10,10 @@ import CallIcon from "@mui/icons-material/Call";
 
 interface Props {
   activeSellerId: string;
+  isSellerLoggedIn: boolean;
 }
 
-const SellerProfile = ({ activeSellerId }: Props) => {
+const SellerProfile = ({ activeSellerId, isSellerLoggedIn }: Props) => {
   const [activeSellerDetails, setActiveSellerDetails] = useState({
     name: "",
     email: "",
@@ -21,8 +22,10 @@ const SellerProfile = ({ activeSellerId }: Props) => {
 
   useEffect(() => {
     (async function () {
-      const response = await getActiveSellerDetails(activeSellerId);
-      setActiveSellerDetails({ ...response });
+      if (isSellerLoggedIn) {
+        const response = await getActiveSellerDetails(activeSellerId);
+        setActiveSellerDetails({ ...response });
+      }
     })();
     // eslint-disable-next-line
   }, []);
@@ -41,7 +44,9 @@ const SellerProfile = ({ activeSellerId }: Props) => {
             }}
           >
             <AccountCircleIcon sx={{ marginRight: "1rem" }} />
-            {activeSellerDetails.name}
+              {activeSellerDetails.name
+                ? activeSellerDetails.name
+                : "Sellername"}
           </Typography>
           <Typography
             variant="body2"
@@ -53,7 +58,7 @@ const SellerProfile = ({ activeSellerId }: Props) => {
             }}
           >
             <EmailIcon sx={{ marginRight: "1rem" }} />
-            {activeSellerDetails.email}
+            {activeSellerDetails.email ? activeSellerDetails.email : "Email"}
           </Typography>
           <Typography
             variant="body2"
@@ -62,7 +67,7 @@ const SellerProfile = ({ activeSellerId }: Props) => {
               alignItems: "center",
               marginTop: "1rem",
               marginLeft: "1rem",
-              position: "fixed"
+              position: "fixed",
             }}
           >
             {activeSellerDetails.contact && (

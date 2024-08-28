@@ -91,7 +91,6 @@ export async function addNewSeller(
 }
 
 export async function getActiveSellerId(email: string, password: string) {
-  console.log("api", email, password)
   const activeSeller = sellerList.filter(
     (seller) => seller.email === email && seller.password === password
   );
@@ -130,6 +129,7 @@ export async function getActiveUserId(email: string, password: string) {
 }
 
 export async function getActiveUserDetails(userId: string) {
+  console.log(userId);
   const activeUser = usersList.filter((user) => user.id === userId)[0];
   return {
     name: activeUser.name,
@@ -137,7 +137,6 @@ export async function getActiveUserDetails(userId: string) {
     contact: activeUser.contact,
   };
 }
-
 // products
 
 export async function addNewProduct() {

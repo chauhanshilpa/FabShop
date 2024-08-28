@@ -26,13 +26,15 @@ import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 interface Props {
+  personType? : string;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsUserLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function LoginForm({
+  personType,
   setIsLoginFormOpen,
   setIsUserLoggedIn,
   setIsSignUpFormOpen,
@@ -60,7 +62,7 @@ export default function LoginForm({
 
   function closeLoginForm() {
     setIsLoginFormOpen(false);
-    !setIsUserLoggedIn && setIsSignUpFormOpen(true);
+    setIsSignUpFormOpen(true);
   }
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +97,7 @@ export default function LoginForm({
     }
     if (emailError === false) {
       let response;
-      if (setIsUserLoggedIn) {
+      if (personType === "seller") {
         response = await getActiveUserId(email, password);
       } else {
         response = await getActiveSellerId(email, password);
@@ -130,7 +132,7 @@ export default function LoginForm({
       userInfo.credential
     );
     let response;
-    if (setIsUserLoggedIn) {
+    if (personType === "seller") {
       const isUserExists = await checkUserAvailability(email);
       if (isUserExists === false) {
         await addNewUser(

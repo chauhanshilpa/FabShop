@@ -54,6 +54,7 @@ function App() {
   >([]);
   const [ordersData, setOrdersData] = useState<OrderInterface>({});
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
+  const [isSellerLoggedIn, setIsSellerLoggedIn] = useState<boolean>(false);
   const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(false);
   const [isSignUpFormOpen, setIsSignUpFormOpen] = useState<boolean>(false);
   const [recentlyViewedProductsList, setRecentlyViewedProductsList] = useState<
@@ -233,11 +234,22 @@ function App() {
         />
         <Route
           path="/seller/landing-page"
-          element={<SellerLandingPage setActiveSellerId={setActiveSellerId} />}
+          element={
+            <SellerLandingPage
+              setActiveSellerId={setActiveSellerId}
+              setIsSellerLoggedIn={setIsSellerLoggedIn}
+              personType={personType}
+            />
+          }
         />
         <Route
           path="/seller/dashboard"
-          element={<SellerDashboard activeSellerId ={activeSellerId}/>}
+          element={
+            <SellerDashboard
+              activeSellerId={activeSellerId}
+              isSellerLoggedIn={isSellerLoggedIn}
+            />
+          }
         />
       </Routes>
       <Footer />

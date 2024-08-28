@@ -8,13 +8,14 @@ import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
 interface Props {
   activeSellerId: string;
+  isSellerLoggedIn: boolean;
 }
 
-const SellerDashboard = ({ activeSellerId }: Props) => {
+const SellerDashboard = ({ activeSellerId, isSellerLoggedIn }: Props) => {
   return (
     <Box className="main seller-dashboard">
       <Box>
-        <SellerProfile activeSellerId={activeSellerId} />
+        <SellerProfile activeSellerId={activeSellerId} isSellerLoggedIn={isSellerLoggedIn}/>
         <Tooltip title="launchpad">
           <Button variant="outlined" className="button">
             <RocketLaunchOutlinedIcon />
