@@ -38,6 +38,7 @@ import TermsAndConditions from "./pages/profile/profile_options/TermsAndConditio
 import SellerLandingPage from "./pages/seller/LandingPage";
 import SellerDashboard from "./pages/seller_dashboard/SellerDashboard";
 import SellerNavbar from "./components/seller/SellerNavbar";
+import Launchpad from "./pages/launchpad/Launchpad";
 
 function App() {
   const [personType, setPersonType] = useState("customer");
@@ -251,6 +252,7 @@ function App() {
             />
           }
         />
+        <Route path="/launchpad" element={<Launchpad />} />
       </Routes>
       <Footer />
     </>

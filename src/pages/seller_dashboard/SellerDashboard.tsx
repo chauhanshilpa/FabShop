@@ -6,18 +6,28 @@ import SellerProfile from "../../components/seller/SellerProfile";
 import RocketLaunchOutlinedIcon from "@mui/icons-material/RocketLaunchOutlined";
 import Typography from "@mui/material/Typography";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useNavigate } from "react-router-dom";
 interface Props {
   activeSellerId: string;
   isSellerLoggedIn: boolean;
 }
 
 const SellerDashboard = ({ activeSellerId, isSellerLoggedIn }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <Box className="main seller-dashboard">
       <Box>
-        <SellerProfile activeSellerId={activeSellerId} isSellerLoggedIn={isSellerLoggedIn}/>
+        <SellerProfile
+          activeSellerId={activeSellerId}
+          isSellerLoggedIn={isSellerLoggedIn}
+        />
         <Tooltip title="launchpad">
-          <Button variant="outlined" className="button">
+          <Button
+            variant="outlined"
+            className="button"
+            onClick={() => navigate("/launchpad")}
+          >
             <RocketLaunchOutlinedIcon />
             &nbsp; &nbsp;Launch new Product
           </Button>
