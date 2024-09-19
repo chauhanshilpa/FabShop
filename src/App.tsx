@@ -252,7 +252,7 @@ function App() {
             />
           }
         />
-        <Route path="/launchpad" element={<Launchpad />} />
+        <Route path="/seller/launchpad" element={<Launchpad />} />
       </Routes>
       <Footer />
     </>

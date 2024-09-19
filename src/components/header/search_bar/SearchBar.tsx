@@ -59,6 +59,7 @@ const SearchBar = () => {
   async function handleSearchedProduct(
     event: React.KeyboardEvent<HTMLElement>
   ) {
+    console.log(event)
     if (event.key === ENTER_KEY) {
       const newSearchedProducts = await getSearchedProducts(
         query.trim().toLowerCase()

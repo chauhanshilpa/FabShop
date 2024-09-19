@@ -12,7 +12,7 @@
 
 .wishlist-card .remove-item {
   position: absolute;
-  color: rgb(190, 187, 187);
+  color: rgb(201, 117, 117);
   right: 0;
   margin: 0.313rem;
   z-index: 99;
@@ -20,7 +20,7 @@
 }
 
 .wishlist-card .remove-item:hover {
-  color: rgb(166, 165, 165);
+  color:rgb(223, 79, 79);;
 }
 
 .wishlist-card .card-media img {

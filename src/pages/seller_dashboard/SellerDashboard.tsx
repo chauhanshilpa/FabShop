@@ -26,7 +26,7 @@ const SellerDashboard = ({ activeSellerId, isSellerLoggedIn }: Props) => {
           <Button
             variant="outlined"
             className="button"
-            onClick={() => navigate("/launchpad")}
+            onClick={() => navigate("/seller/launchpad")}
           >
             <RocketLaunchOutlinedIcon />
             &nbsp; &nbsp;Launch new Product

@@ -1,0 +1,30 @@
+.launchpad {
+    margin: 1rem;
+    border: 3px solid rgba(65, 41, 181, .04);
+    background: rgba(65, 41, 181, .1);
+    padding: 1rem;
+    padding-top: 1.3rem;
+    border-radius: 2rem;
+}
+
+.launchpad-heading {
+    text-align: center;
+    color: rgb(75, 75, 75);
+    margin-bottom: 1rem;
+}
+
+.launchpad .input,
+.browse-file {
+    margin: 1rem 4rem;
+    background-color: rgb(246, 246, 246);
+    border: none;
+}
+
+.launchpad .input-line-1,
+.launchpad .input-line-2,
+.launchpad .input-line-3,
+.launchpad .input-line-4 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

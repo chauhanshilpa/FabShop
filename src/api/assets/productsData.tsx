@@ -304,7 +304,7 @@ export const STARTING_PRODUCTS: Product[] = [
   {
     id: "7fc583fd-6b2b-4364-a8c1-1cfff271fa7b",
     category: "Men",
-    type: "Watch",
+    type: "watch",
     sub_category: "Boy",
     price: 4999,
     image: {
