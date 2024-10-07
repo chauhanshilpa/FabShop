@@ -6,9 +6,11 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Typography from "@mui/material/Typography";
 import { MuiFileInput } from "mui-file-input";
 import AutocompleteAndAddNewInput from "../../components/Input/AutocompleteAndAddNewInput";
-
-const categoryList = ["Men", "Women", "Kids"];
-const subCategoryList = ["Girls", "Boys"];
+import {
+  CATEGORY_LIST,
+  SUB_CATEGORY_LIST,
+  ProductTypeInterface,
+} from "../../helpers/FabShop_constants";
 
 const Launchpad = () => {
   const [category, setCategory] = useState<string | null>(null);
@@ -16,18 +18,19 @@ const Launchpad = () => {
   const [subCategory, setSubCategory] = useState<string | null>(null);
   const [subCategoryInputValue, setSubCategoryInputValue] = useState("");
   const [name, setName] = useState("");
-  const [type, setType] = useState("");
+  const [productType, setProductType] = useState<ProductTypeInterface | null>(
+    null
+  );
   const [price, setPrice] = useState("");
   const [ratings, setRatings] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  // const [file, setFile] = useState("");
-  const [value, setValue] = useState<File | null>(null);
+  const [browsedImage, setBrowsedImage] = useState<File | null>(null);
 
   const handleChange = (newValue: File | null) => {
-    setValue(newValue);
+    setBrowsedImage(newValue);
   };
-console.log(category)
+
   return (
     <Box className="main launchpad">
       <Typography variant="h4" className="launchpad-heading">
@@ -45,7 +48,7 @@ console.log(category)
             setCategoryInputValue(newInputValue);
           }}
           id="controllable-states-demo"
-          options={categoryList}
+          options={CATEGORY_LIST}
           sx={{ width: 300 }}
           renderInput={(params) => (
             <TextField {...params} label="Choose category" />
@@ -62,13 +65,16 @@ console.log(category)
             setSubCategoryInputValue(newInputValue);
           }}
           id="controllable-states-demo"
-          options={subCategoryList}
+          options={SUB_CATEGORY_LIST}
           sx={{ width: 300 }}
           renderInput={(params) => (
             <TextField {...params} label="Choose sub-category" />
           )}
         />
-        <AutocompleteAndAddNewInput />
+        <AutocompleteAndAddNewInput
+          productType={productType}
+          setProductType={setProductType}
+        />
       </Box>
       <Box className="input-line-2">
         <TextField
@@ -100,7 +106,7 @@ console.log(category)
       </Box>
       <Box className="input-line-3">
         <MuiFileInput
-          value={value}
+          value={browsedImage}
           onChange={handleChange}
           placeholder="&#128194;&nbsp;Insert a file"
           className="browse-file"

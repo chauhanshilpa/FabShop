@@ -1,5 +1,10 @@
 // these are some hard coded constants of FabShop
 
+export interface ProductTypeInterface {
+  inputValue?: string;
+  title: string;
+}
+
 export const DISCOUNT: number = 15;
 
 export const SHIPPING_CHARGE: number = 20;
@@ -46,4 +51,30 @@ export const STATES_LIST: string[] = [
   "Uttarakhand",
   "Uttar Pradesh",
   "West Bengal",
+];
+
+export const CATEGORY_LIST: string[] = ["Men", "Women", "Kids"];
+export const SUB_CATEGORY_LIST: string[] = ["Girls", "Boys"];
+
+export const PRODUCT_TYPE: readonly ProductTypeInterface[] = [
+  { title: "shirt" },
+  { title: "t-shirt" },
+  { title: "top" },
+  { title: "frock" },
+  { title: "footwear" },
+  { title: "bag" },
+  { title: "watch" },
+  {
+    title: "dress",
+  },
+  { title: "jeans" },
+  { title: "shorts" },
+  {
+    title: "hoodie",
+  },
+  {
+    title: "co-ords",
+  },
+  { title: "trouser" },
+  { title: "jumpsuit" },
 ];

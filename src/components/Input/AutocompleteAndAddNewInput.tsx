@@ -2,28 +2,36 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import { v4 as uuidv4 } from "uuid";
+import {
+  PRODUCT_TYPE,
+  ProductTypeInterface,
+} from "../../helpers/FabShop_constants";
 
-const filter = createFilterOptions<FilmOptionType>();
+const filter = createFilterOptions<ProductTypeInterface>();
+interface Props {
+  productType: ProductTypeInterface | null;
+  setProductType: React.Dispatch<
+    React.SetStateAction<ProductTypeInterface | null>
+  >;
+}
 
-const AutocompleteAndAddNewInput = () => {
-  const [value, setValue] = React.useState<FilmOptionType | null>(null);
-
+const AutocompleteAndAddNewInput = ({ productType, setProductType }: Props) => {
   return (
     <Autocomplete
       className="input"
-      value={value}
+      value={productType}
       onChange={(event, newValue) => {
         if (typeof newValue === "string") {
-          setValue({
+          setProductType({
             title: newValue,
           });
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
-          setValue({
+          setProductType({
             title: newValue.inputValue,
           });
         } else {
-          setValue(newValue);
+          setProductType(newValue);
         }
       }}
       filterOptions={(options, params) => {
@@ -47,7 +55,7 @@ const AutocompleteAndAddNewInput = () => {
       clearOnBlur
       handleHomeEndKeys
       id="free-solo-with-text-demo"
-      options={top100Films}
+      options={PRODUCT_TYPE}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
         if (typeof option === "string") {
@@ -74,33 +82,5 @@ const AutocompleteAndAddNewInput = () => {
     />
   );
 };
-
-interface FilmOptionType {
-  inputValue?: string;
-  title: string;
-}
-
-const top100Films: readonly FilmOptionType[] = [
-  { title: "shirt" },
-  { title: "t-shirt" },
-  { title: "top" },
-  { title: "frock" },
-  { title: "footwear" },
-  { title: "bag" },
-  { title: "watch" },
-  {
-    title: "dress",
-  },
-  { title: "jeans" },
-  { title: "shorts" },
-  {
-    title: "hoodie",
-  },
-  {
-    title: "co-ords",
-  },
-  { title: "trouser" },
-  { title: "jumpsuit" },
-];
 
 export default AutocompleteAndAddNewInput;
