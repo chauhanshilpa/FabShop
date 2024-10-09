@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Launchpad.css";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -6,6 +6,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import Typography from "@mui/material/Typography";
 import { MuiFileInput } from "mui-file-input";
 import AutocompleteAndAddNewInput from "../../components/Input/AutocompleteAndAddNewInput";
+import NumberInput from "../../components/Input/NumberInput";
 import {
   CATEGORY_LIST,
   SUB_CATEGORY_LIST,
@@ -21,16 +22,23 @@ const Launchpad = () => {
   const [productType, setProductType] = useState<ProductTypeInterface | null>(
     null
   );
+  const [type, setType] = useState<string>("");
   const [price, setPrice] = useState("");
-  const [ratings, setRatings] = useState("");
+  const [ratings, setRatings] = useState<number | undefined>(undefined);
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [browsedImage, setBrowsedImage] = useState<File | null>(null);
 
+  useEffect(() => {
+    if (productType) {
+      setType(productType.title);
+    }
+  }, [productType]);
+
   const handleChange = (newValue: File | null) => {
     setBrowsedImage(newValue);
   };
-
+  console.log(typeof ratings);
   return (
     <Box className="main launchpad">
       <Typography variant="h4" className="launchpad-heading">
@@ -95,14 +103,22 @@ const Launchpad = () => {
           value={price}
           onChange={(event) => setPrice(event.target.value)}
         />
-        <TextField
+        {/* <TextField
+          className="input"
+          id="outlined-basic"
+          label="Ratings"
+          variant="outlined"
+        > */}
+        <NumberInput />
+        {/* </TextField> */}
+        {/* <TextField
           className="input"
           id="outlined-basic"
           label="Ratings"
           variant="outlined"
           value={ratings}
           onChange={(event) => setRatings(event.target.value)}
-        />
+        /> */}
       </Box>
       <Box className="input-line-3">
         <MuiFileInput
