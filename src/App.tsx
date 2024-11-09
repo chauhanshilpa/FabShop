@@ -248,7 +248,7 @@ function App() {
           }
         />
         <Route
-          path="/seller/dashboard"
+          path="/seller/dashboard/:activeSellerId"
           element={
             <SellerDashboard
               activeSellerId={activeSellerId}

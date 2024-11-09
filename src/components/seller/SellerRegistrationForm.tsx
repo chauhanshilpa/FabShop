@@ -71,7 +71,7 @@ const SellerRegistrationForm = ({
       );
       setIsSellerLoggedIn(true);
       setActiveSellerId(sellerId);
-      navigate("/seller/dashboard");
+      navigate(`/seller/dashboard/${sellerId}`);
     }
   };
 
@@ -128,7 +128,7 @@ const SellerRegistrationForm = ({
       setSellerMail("");
       setPassword("");
       setSellerContact("");
-      navigate("/seller/dashboard");
+      navigate(`/seller/dashboard/${sellerId}`);
     } else {
       setModalText({
         title: "Invalid Email Address",

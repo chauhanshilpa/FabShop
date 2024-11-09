@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import {
   getActiveUserId,
   addNewUser,
+  addNewSeller,
   checkUserAvailability,
   getActiveSellerId,
   checkSellerAvailability,
@@ -26,7 +27,7 @@ import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 interface Props {
-  personType? : string;
+  personType?: string;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -62,7 +63,7 @@ export default function LoginForm({
 
   function closeLoginForm() {
     setIsLoginFormOpen(false);
-    setIsSignUpFormOpen(true);
+    setIsSignUpFormOpen(false);
   }
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -133,6 +134,19 @@ export default function LoginForm({
     );
     let response;
     if (personType === "seller") {
+      const isSellerExists = await checkSellerAvailability(email);
+      if (isSellerExists === false) {
+        await addNewSeller(
+          credentials.name,
+          credentials.email,
+          credentials.sub,
+          ""
+        );
+      }
+      const sellerId = await getActiveSellerId(credentials.email, credentials.sub);
+      navigate(`/seller/dashboard/${sellerId}`);
+      response = sellerId
+    } else {
       const isUserExists = await checkUserAvailability(email);
       if (isUserExists === false) {
         await addNewUser(
@@ -143,22 +157,10 @@ export default function LoginForm({
         );
       }
       response = await getActiveUserId(credentials.email, credentials.sub);
-    } else {
-      const isSellerExists = await checkSellerAvailability(email);
-      if (isSellerExists === false) {
-        await addNewUser(
-          credentials.name,
-          credentials.email,
-          credentials.sub,
-          ""
-        );
-        navigate("/seller/dashboard");
-      }
-      response = await getActiveUserId(credentials.email, credentials.sub);
+      setIsUserLoggedIn && setIsUserLoggedIn(true);
     }
-    setActiveUserId(response);
-    setIsUserLoggedIn && setIsUserLoggedIn(true);
     closeLoginForm();
+    setActiveUserId(response);
   };
 
   return (
