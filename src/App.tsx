@@ -12,7 +12,6 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import Orders from "./pages/orders/Orders";
 import Checkout from "./pages/checkout/checkout_main/Checkout";
 import Footer from "./components/footer/Footer";
-import { STARTING_PRODUCTS } from "./api/assets/productsData";
 import { Product } from "./api/classModels";
 import {
   addItemToCart,
@@ -24,6 +23,7 @@ import {
   getUserOrdersList,
   CartProductInterface,
   OrderInterface,
+  fetchAllProducts,
 } from "./api/api";
 import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
 import OrderedItemDetails from "./components/order_section/ordered_item_details/OrderedItemDetails";
@@ -44,9 +44,7 @@ function App() {
   const [personType, setPersonType] = useState("customer");
   const [activeUserId, setActiveUserId] = useState<string>("");
   const [activeSellerId, setActiveSellerId] = useState<string>("");
-  const [allProducts, setAllProducts] = useState<Product[]>([
-    ...STARTING_PRODUCTS,
-  ]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [wishlistProductsList, setWishlistProductsList] = useState<Product[]>(
     []
   );
@@ -73,6 +71,8 @@ function App() {
 
   useEffect(() => {
     const fetchInitialInformation = async () => {
+      const productList = await fetchAllProducts();
+      setAllProducts(productList);
       const cartProductList = await getCartProductsList(activeUserId);
       setCartProductsList(cartProductList);
       const wishlist = await getWishlist(activeUserId);
@@ -106,12 +106,16 @@ function App() {
       setWishlistProductsList(response);
     }
   }
-
   async function removeFromWishlist(productId: string) {
     await removeItemFromWishlist(activeUserId, productId);
     const response = await getWishlist(activeUserId);
     setWishlistProductsList(response);
   }
+
+   const refreshProducts = async () => {
+    const updatedProducts = await fetchAllProducts();
+    setAllProducts(updatedProducts);
+  };
 
   return (
     <>
@@ -252,7 +256,10 @@ function App() {
             />
           }
         />
-        <Route path="/seller/launchpad" element={<Launchpad />} />
+        <Route
+          path="/seller/launchpad"
+          element={<Launchpad refreshProducts={refreshProducts} />}
+        />
       </Routes>
       <Footer />
     </>

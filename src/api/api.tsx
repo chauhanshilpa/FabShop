@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
-import { User, Seller, Product, Address } from "./classModels";
+import { User, Seller, Product, Address, Image } from "./classModels";
 import { DISCOUNT, SHIPPING_CHARGE } from "../helpers/FabShop_constants";
 
 export interface CartProductInterface extends Product {
@@ -57,7 +57,7 @@ let customerSavedAddresses: savedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
 let savedPaymentDetails: PaymentInterface = {};
 
-// user
+// seller and user
 
 export async function checkSellerAvailability(email: string) {
   const isSellerExists = sellerList.some((user) => user.email === email);
@@ -129,7 +129,6 @@ export async function getActiveUserId(email: string, password: string) {
 }
 
 export async function getActiveUserDetails(userId: string) {
-  console.log(userId);
   const activeUser = usersList.filter((user) => user.id === userId)[0];
   return {
     name: activeUser.name,
@@ -137,10 +136,36 @@ export async function getActiveUserDetails(userId: string) {
     contact: activeUser.contact,
   };
 }
-// products
 
-export async function addNewProduct() {
-  console.log("This will add new product");
+export async function addNewProduct(
+  category: string,
+  subCategory: string,
+  productType: string,
+  price: number,
+  imageUrl: string,
+  name: string,
+  description: string
+) {
+  const imageId = uuidv4();
+  const productId = uuidv4();
+  const ratings = 0;
+  const newProduct = new Product(
+    productId,
+    category,
+    subCategory,
+    productType,
+    price,
+    imageId,
+    imageUrl,
+    name,
+    description,
+    ratings
+  );
+  allProducts.push(newProduct);
+}
+
+export async function fetchAllProducts(){
+ return [...allProducts];
 }
 
 export async function getHomeCardProducts(userId: string) {
