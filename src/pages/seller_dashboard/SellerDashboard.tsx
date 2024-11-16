@@ -9,10 +9,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 interface Props {
   activeSellerId: string;
+  setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
   isSellerLoggedIn: boolean;
 }
 
-const SellerDashboard = ({ activeSellerId, isSellerLoggedIn }: Props) => {
+const SellerDashboard = ({ activeSellerId, setActiveSellerId, isSellerLoggedIn }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -33,20 +34,30 @@ const SellerDashboard = ({ activeSellerId, isSellerLoggedIn }: Props) => {
           </Button>
         </Tooltip>
       </Box>
-      <Typography
+      <Box
         sx={{
           display: "flex",
           alignItems: "center",
           marginTop: "1rem",
           marginLeft: "1rem",
-          color: "red",
-          letterSpacing: "3px",
-          fontWeight: "600",
         }}
       >
-        <LogoutIcon sx={{ marginRight: "1rem" }} />
-        Logout
-      </Typography>
+        <Typography
+          sx={{
+            color: "red",
+            letterSpacing: "3px",
+            fontWeight: "600",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            navigate("/seller/landing-page");
+            setActiveSellerId("");
+          }}
+        >
+          <LogoutIcon sx={{ marginRight: "1rem" }} />
+          Logout
+        </Typography>
+      </Box>
     </Box>
   );
 };

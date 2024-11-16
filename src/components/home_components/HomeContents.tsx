@@ -91,7 +91,7 @@ const HomeContents = ({
             </Grid>
           ))}
       </Grid>
-      {recentlyViewedProductsList.length > 0 && (
+      {activeUserId !== "" && recentlyViewedProductsList.length > 0 && (
         <Box className="recently-viewed-products-carousel">
           <Typography
             variant="subtitle1"

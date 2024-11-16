@@ -1,5 +1,6 @@
 .product-card {
   cursor: pointer;
+  min-height: 27.72rem;
 }
 
 .product-card .pricing {

@@ -12,8 +12,7 @@ import {
   ProductTypeInterface,
 } from "../../helpers/FabShop_constants";
 import Button from "@mui/material/Button";
-import { addNewProduct, fetchAllProducts } from "../../api/api";
-import { Product } from "../../api/classModels";
+import { addNewProduct } from "../../api/api";
 interface Props {
   refreshProducts: () => Promise<void>;
 }
@@ -41,8 +40,9 @@ const Launchpad = ({ refreshProducts }: Props) => {
 
   const handleChange = (newValue: File | null) => {
     setBrowsedImage(newValue);
-    // const fileUrl = URL.createObjectURL(newValue as File);
-    //  console.log(newValue, fileUrl);
+    const fileUrl = URL.createObjectURL(newValue as File);
+    // console.log(newValue?.type.includes("image"));
+    setImageUrl(fileUrl);
   };
 
   const launchProduct = async () => {
@@ -56,7 +56,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
       description
     );
     // const allProducts = await fetchAllProducts();
-     await refreshProducts();
+    await refreshProducts();
     // setAllProducts([...allProducts]);
   };
 

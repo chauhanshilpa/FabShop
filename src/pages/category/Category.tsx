@@ -9,11 +9,9 @@ import ProductsList from "../../components/products_list/ProductsList";
 
 const Category = ({ allProducts }: { allProducts: Product[] }) => {
   let { page } = useParams();
-  console.log("allProducts:", allProducts);
   const filteredProducts = allProducts.filter(
     ({ category }) => category === page
   );
-  console.log("filteredProducts:", filteredProducts);
 
   return (
     <Box className="main">

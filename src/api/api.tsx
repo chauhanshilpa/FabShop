@@ -217,7 +217,6 @@ export async function setUsersBrowsingHistoryList(
   product: Product
 ) {
   if (browsedProductsList.hasOwnProperty(userId)) {
-    console.log("1");
     if (browsedProductsList[userId].length > 8) {
       browsedProductsList[userId].shift();
       browsedProductsList[userId].push(product);
@@ -225,7 +224,6 @@ export async function setUsersBrowsingHistoryList(
       browsedProductsList[userId].push(product);
     }
   } else {
-    console.log("2");
     browsedProductsList[userId] = [{ ...product }];
   }
 }

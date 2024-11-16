@@ -68,7 +68,7 @@ function App() {
       setPersonType("customer");
     }
   }, []);
-
+  
   useEffect(() => {
     const fetchInitialInformation = async () => {
       const productList = await fetchAllProducts();
@@ -112,15 +112,17 @@ function App() {
     setWishlistProductsList(response);
   }
 
-   const refreshProducts = async () => {
+  const refreshProducts = async () => {
     const updatedProducts = await fetchAllProducts();
     setAllProducts(updatedProducts);
   };
-
+  
   return (
     <>
       <ScrollToTop />
-      {personType === "customer" && (
+      {personType === "seller" ? (
+        <SellerNavbar setPersonType={setPersonType} setActiveSellerId={setActiveSellerId}/>
+      ) : (
         <Navbar
           setPersonType={setPersonType}
           totalProductsInCart={cartProductsList.length}
@@ -134,7 +136,6 @@ function App() {
           setRecentlyViewedProductsList={setRecentlyViewedProductsList}
         />
       )}
-      {personType === "seller" && <SellerNavbar />}
       {isLoginFormOpen && !isUserLoggedIn && (
         <LoginForm
           setIsLoginFormOpen={setIsLoginFormOpen}
@@ -252,13 +253,18 @@ function App() {
           element={
             <SellerDashboard
               activeSellerId={activeSellerId}
+              setActiveSellerId={setActiveSellerId}
               isSellerLoggedIn={isSellerLoggedIn}
             />
           }
         />
         <Route
           path="/seller/launchpad"
-          element={<Launchpad refreshProducts={refreshProducts} />}
+          element={
+            <Launchpad
+              refreshProducts={refreshProducts}
+            />
+          }
         />
       </Routes>
       <Footer />

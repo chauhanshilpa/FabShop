@@ -8,12 +8,10 @@ body {
 }
 
 .navbar {
-  max-height: 7rem;
-}
-
-.navbar {
+  max-height: 6.9rem;
   background-color: #cd5c08;
   position: sticky;
+  padding: 0.2rem;
 }
 
 .app-logo {
