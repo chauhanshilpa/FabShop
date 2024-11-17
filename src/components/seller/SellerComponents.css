@@ -31,3 +31,12 @@
 .seller-register-button:hover {
     background-color: #ffc436;
 }
+
+.switch-to-customer-button {
+    color: white;
+    border: 1px solid white;
+}
+
+.switch-to-customer-button:hover {
+    box-shadow: 4px 1px rgb(181, 180, 180);
+}

@@ -54,6 +54,7 @@ export const STATES_LIST: string[] = [
 ];
 
 export const CATEGORY_LIST: string[] = ["Men", "Women", "Kids"];
+
 export const SUB_CATEGORY_LIST: string[] = ["Girls", "Boys"];
 
 export const PRODUCT_TYPE: readonly ProductTypeInterface[] = [

@@ -9,9 +9,14 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   setPersonType: React.Dispatch<React.SetStateAction<string>>;
   setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
+  setIsSellerLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function SellerNavbar({ setPersonType, setActiveSellerId }: Props) {
+function SellerNavbar({
+  setPersonType,
+  setActiveSellerId,
+  setIsSellerLoggedIn,
+}: Props) {
   const navigate = useNavigate();
 
   return (
@@ -43,6 +48,7 @@ function SellerNavbar({ setPersonType, setActiveSellerId }: Props) {
                 onClick={() => {
                   navigate("/seller/landing-page");
                   setActiveSellerId("");
+                  setIsSellerLoggedIn(false);
                 }}
               >
                 FabShop
@@ -61,10 +67,12 @@ function SellerNavbar({ setPersonType, setActiveSellerId }: Props) {
             </Box>
             <Box>
               <Button
-                sx={{ color: "white", border: "1px solid white" }}
+                className="switch-to-customer-button"
                 onClick={() => {
                   navigate("/");
                   setPersonType("customer");
+                  setActiveSellerId("");
+                  setIsSellerLoggedIn(false);
                 }}
               >
                 Switch to customer
@@ -97,6 +105,7 @@ function SellerNavbar({ setPersonType, setActiveSellerId }: Props) {
                 onClick={() => {
                   navigate("/seller/landing-page");
                   setActiveSellerId("");
+                  setIsSellerLoggedIn(false);
                 }}
               >
                 FabShop
@@ -115,10 +124,12 @@ function SellerNavbar({ setPersonType, setActiveSellerId }: Props) {
             </Box>
             <Box>
               <Button
-                sx={{ color: "white", border: "1px solid white" }}
+                className="switch-to-customer-button"
                 onClick={() => {
                   navigate("/");
                   setPersonType("customer");
+                  setActiveSellerId("");
+                  setIsSellerLoggedIn(false);
                 }}
               >
                 Switch to customer

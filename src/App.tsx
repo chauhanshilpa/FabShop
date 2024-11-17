@@ -68,7 +68,7 @@ function App() {
       setPersonType("customer");
     }
   }, []);
-  
+
   useEffect(() => {
     const fetchInitialInformation = async () => {
       const productList = await fetchAllProducts();
@@ -116,12 +116,16 @@ function App() {
     const updatedProducts = await fetchAllProducts();
     setAllProducts(updatedProducts);
   };
-  
+
   return (
     <>
       <ScrollToTop />
       {personType === "seller" ? (
-        <SellerNavbar setPersonType={setPersonType} setActiveSellerId={setActiveSellerId}/>
+        <SellerNavbar
+          setPersonType={setPersonType}
+          setActiveSellerId={setActiveSellerId}
+          setIsSellerLoggedIn={setIsSellerLoggedIn}
+        />
       ) : (
         <Navbar
           setPersonType={setPersonType}
@@ -260,11 +264,7 @@ function App() {
         />
         <Route
           path="/seller/launchpad"
-          element={
-            <Launchpad
-              refreshProducts={refreshProducts}
-            />
-          }
+          element={<Launchpad refreshProducts={refreshProducts} />}
         />
       </Routes>
       <Footer />

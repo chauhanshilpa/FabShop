@@ -78,7 +78,9 @@ const AutocompleteAndAddNewInput = ({ productType, setProductType }: Props) => {
       }}
       sx={{ width: 300 }}
       freeSolo
-      renderInput={(params) => <TextField {...params} label="Type" />}
+      renderInput={(params) => (
+        <TextField {...params} label="Type" color="success" />
+      )}
     />
   );
 };

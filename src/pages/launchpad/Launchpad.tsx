@@ -31,6 +31,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [browsedImage, setBrowsedImage] = useState<File | null>(null);
+  const [imageUrlActiveField, setImageUrlActiveField] = useState("");
 
   useEffect(() => {
     if (productType) {
@@ -41,7 +42,6 @@ const Launchpad = ({ refreshProducts }: Props) => {
   const handleChange = (newValue: File | null) => {
     setBrowsedImage(newValue);
     const fileUrl = URL.createObjectURL(newValue as File);
-    // console.log(newValue?.type.includes("image"));
     setImageUrl(fileUrl);
   };
 
@@ -55,9 +55,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
       name,
       description
     );
-    // const allProducts = await fetchAllProducts();
     await refreshProducts();
-    // setAllProducts([...allProducts]);
   };
 
   return (
@@ -80,7 +78,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
           options={CATEGORY_LIST}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Choose category" />
+            <TextField {...params} label="Choose category" color="success" />
           )}
         />
         <Autocomplete
@@ -97,7 +95,11 @@ const Launchpad = ({ refreshProducts }: Props) => {
           options={SUB_CATEGORY_LIST}
           sx={{ width: 300 }}
           renderInput={(params) => (
-            <TextField {...params} label="Choose sub-category" />
+            <TextField
+              {...params}
+              label="Choose sub-category"
+              color="success"
+            />
           )}
         />
         <AutocompleteAndAddNewInput
@@ -114,6 +116,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
           variant="outlined"
           value={name}
           onChange={(event) => setName(event.target.value)}
+          color="success"
         />
         <TextField
           className="input"
@@ -123,6 +126,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
           variant="outlined"
           value={price}
           onChange={(event) => setPrice(event.target.value)}
+          color="success"
         />
       </Box>
       <Box className="input-line-3">
@@ -131,6 +135,11 @@ const Launchpad = ({ refreshProducts }: Props) => {
           onChange={handleChange}
           placeholder="&#128194;&nbsp;Insert a file"
           className="browse-file"
+          color="success"
+          style={{
+            filter: imageUrlActiveField === "textField" ? "blur(2px)" : "none",
+          }}
+          onClick={() => setImageUrlActiveField("fileInput")}
         />
         <TextField
           sx={{ width: "60%" }}
@@ -138,7 +147,15 @@ const Launchpad = ({ refreshProducts }: Props) => {
           id="outlined-required"
           label="Image url"
           value={imageUrl}
-          onChange={(event) => setImageUrl(event.target.value)}
+          color="success"
+          style={{
+            filter: imageUrlActiveField === "fileInput" ? "blur(2px)" : "none",
+          }}
+          onChange={(event) => {
+            setImageUrl(event.target.value);
+            setBrowsedImage(null);
+          }}
+          onClick={() => setImageUrlActiveField("textField")}
         />
       </Box>
       <Box className="input-line-4">
@@ -152,6 +169,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           defaultValue="This is a sample description"
+          color="success"
         />
       </Box>
       <Box className="launch-button-Box">
