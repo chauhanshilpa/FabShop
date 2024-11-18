@@ -99,18 +99,17 @@ export default function LoginForm({
     if (emailError === false) {
       let response;
       if (personType === "seller") {
-        response = await getActiveUserId(email, password);
-      } else {
         response = await getActiveSellerId(email, password);
+      } else {
+        response = await getActiveUserId(email, password);
       }
       if (response !== "") {
         setActiveUserId(response);
         setIsUserLoggedIn && setIsUserLoggedIn(true);
         setPassword("");
         setEmail("");
+        personType === "seller" && navigate(`/seller/dashboard/${response}`);
         closeLoginForm();
-        !setIsUserLoggedIn && navigate("/seller/dashboard");
-        return;
       } else {
         setModalText({
           title: "Invalid Credentials",
@@ -134,7 +133,7 @@ export default function LoginForm({
     );
     let response;
     if (personType === "seller") {
-      const isSellerExists = await checkSellerAvailability(email);
+      const isSellerExists = await checkSellerAvailability(email)
       if (isSellerExists === false) {
         await addNewSeller(
           credentials.name,
@@ -167,7 +166,9 @@ export default function LoginForm({
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <Box className="login-form-container">
         <Container className="login-form">
-          <ClearIcon className="cancel" onClick={closeLoginForm} />
+          {personType !== "seller" && (
+            <ClearIcon className="cancel" onClick={closeLoginForm} />
+          )}
           <Typography sx={{ fontSize: "xx-large", fontWeight: "600" }}>
             Login
           </Typography>

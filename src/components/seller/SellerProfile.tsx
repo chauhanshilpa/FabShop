@@ -33,49 +33,44 @@ const SellerProfile = ({ activeSellerId, isSellerLoggedIn }: Props) => {
   return (
     <Box sx={{ background: "transparent" }}>
       <Box sx={{ width: 250 }} role="presentation">
-        <List>
-          <Typography
-            variant="body2"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "1rem",
-              marginLeft: "1rem",
-            }}
-          >
-            <AccountCircleIcon sx={{ marginRight: "1rem" }} />
-              {activeSellerDetails.name
-                ? activeSellerDetails.name
-                : "Sellername"}
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "1rem",
-              marginLeft: "1rem",
-            }}
-          >
-            <EmailIcon sx={{ marginRight: "1rem" }} />
-            {activeSellerDetails.email ? activeSellerDetails.email : "Email"}
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "1rem",
-              marginLeft: "1rem",
-              position: "fixed",
-            }}
-          >
-            {activeSellerDetails.contact && (
-              <CallIcon sx={{ marginRight: "1rem" }} />
-            )}
-            {activeSellerDetails.contact}
-          </Typography>
-        </List>
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "1rem",
+            marginLeft: "1rem",
+          }}
+        >
+          <AccountCircleIcon sx={{ marginRight: "1rem" }} />
+          {activeSellerDetails.name ? activeSellerDetails.name : "Sellername"}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "1rem",
+            marginLeft: "1rem",
+          }}
+        >
+          <EmailIcon sx={{ marginRight: "1rem" }} />
+          {activeSellerDetails.email ? activeSellerDetails.email : "Email"}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: "1rem",
+            marginLeft: "1rem",
+          }}
+        >
+          {activeSellerDetails.contact && (
+            <CallIcon sx={{ marginRight: "1rem" }} />
+          )}
+          {activeSellerDetails.contact}
+        </Typography>
       </Box>
     </Box>
   );
