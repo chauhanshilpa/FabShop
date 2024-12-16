@@ -13,6 +13,7 @@ import {
 } from "../../helpers/FabShop_constants";
 import Button from "@mui/material/Button";
 import { addNewProduct } from "../../api/api";
+import image from "../../api/assets/launch--successfull.gif";
 interface Props {
   refreshProducts: () => Promise<void>;
 }
@@ -32,6 +33,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
   const [imageUrl, setImageUrl] = useState("");
   const [browsedImage, setBrowsedImage] = useState<File | null>(null);
   const [imageUrlActiveField, setImageUrlActiveField] = useState("");
+  const [launchSuccessfull, setLauchSuccessfull] = useState(false);
 
   useEffect(() => {
     if (productType) {
@@ -55,6 +57,9 @@ const Launchpad = ({ refreshProducts }: Props) => {
       name,
       description
     );
+    // show emoji or gif for successfull launch
+    setLauchSuccessfull(true);
+    //
     await refreshProducts();
   };
 
@@ -172,6 +177,21 @@ const Launchpad = ({ refreshProducts }: Props) => {
           color="success"
         />
       </Box>
+      {launchSuccessfull && (
+        <>
+          <img
+            src={image}
+            alt=""
+            style={{
+              position: "absolute",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "30%",
+            }}
+            className="suceess_launch_image"
+          />
+        </>
+      )}
       <Box className="launch-button-Box">
         <Button className="launch-button" onClick={launchProduct}>
           Launch Now&nbsp;🚀
