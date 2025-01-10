@@ -49,6 +49,18 @@
     background-color: transparent;
 }
 
-.suceess_launch_image{
-    
+.success_launch_image {
+    position: relative;
+    animation-name: cheering;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes cheering {
+    from {
+        top: 160%;
+    }
+    to {
+        top: 0%;
+    }
 }

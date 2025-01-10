@@ -13,7 +13,8 @@ import {
 } from "../../helpers/FabShop_constants";
 import Button from "@mui/material/Button";
 import { addNewProduct } from "../../api/api";
-import image from "../../api/assets/launch--successfull.gif";
+import balloonGif from "../../api/assets/launch-successfull.gif";
+import cheerAudio from "../../api/assets/cheering-claps.mp3";
 interface Props {
   refreshProducts: () => Promise<void>;
 }
@@ -57,8 +58,13 @@ const Launchpad = ({ refreshProducts }: Props) => {
       name,
       description
     );
-    // show emoji or gif for successfull launch
     setLauchSuccessfull(true);
+    let audio = new Audio(cheerAudio)
+    audio.play();
+    setTimeout(()=>{
+    setLauchSuccessfull(false);
+    audio.pause();
+    },3000)
     //
     await refreshProducts();
   };
@@ -178,19 +184,17 @@ const Launchpad = ({ refreshProducts }: Props) => {
         />
       </Box>
       {launchSuccessfull && (
-        <>
-          <img
-            src={image}
-            alt=""
-            style={{
-              position: "absolute",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "30%",
-            }}
-            className="suceess_launch_image"
-          />
-        </>
+        <img
+          src={balloonGif}
+          alt="balloons for cheering successfull product launch"
+          style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "30%",
+          }}
+          className="success_launch_image"
+        />
       )}
       <Box className="launch-button-Box">
         <Button className="launch-button" onClick={launchProduct}>
