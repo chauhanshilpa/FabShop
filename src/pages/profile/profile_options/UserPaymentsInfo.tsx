@@ -75,7 +75,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const handleDeletePaymentDetail = async (id: string) => {
     await deletePaymentDetail(id);
     const response = await getPaymentDetails();
-    setPaymentDetails({...response});
+    setPaymentDetails({ ...response });
   };
 
   return (
@@ -224,94 +224,115 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
         </Card>
       )}
 
-      {/* payment details: todo */}
-      {Object.keys(paymentDetails).map((key) => (
-        <Box key={uuidv4()}>
-          {/* type narrowing */}
-          {"upiIdEntryName" in paymentDetails[key] && (
-            <Card className="upi-payment-details">
-              <Box sx={{ display: "flex" }}>
-                <Box
-                  sx={{ height: "20px", width: "20px", marginRight: "10px" }}
-                >
-                  <Image
-                    src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/upi.png"
-                    alt="UPI"
-                  />
-                </Box>
-                <Box>
-                  <Typography variant="h6" id="upiIdEntryName">
-                    {
-                      (paymentDetails[key] as savedUpiPaymentsInterface)
-                        .upiIdEntryName
-                    }
-                  </Typography>
-                  <Typography id="upiId">
-                    UPI Id:&nbsp;
-                    <Box component="span" sx={{ fontWeight: "bold" }}>
-                      {(paymentDetails[key] as savedUpiPaymentsInterface).upiId}
-                    </Box>
-                  </Typography>
-                </Box>
-              </Box>
-              <Tooltip title="Delete">
-                <IconButton onClick={() => handleDeletePaymentDetail(key)}>
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            </Card>
-          )}
-          {paymentDetails[key].hasOwnProperty("cardEntryName") && (
-            <Card className="card-payment-details">
-              <Box sx={{ display: "flex" }}>
-                <Box
-                  sx={{ height: "20px", width: "20px", marginRight: "10px" }}
-                >
-                  <Image
-                    src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/atm-card.png"
-                    alt="Credit/Debit Card"
-                  />
-                </Box>
-                {/* type assertions */}
-                <Box>
-                  <Typography variant="h6" id="cardEntryName">
-                    {(paymentDetails[key] as savedCardInterface).cardEntryName}
-                  </Typography>
-                  <Typography id="ownerName">
-                    Name on card:&nbsp;
-                    <Box component="span" sx={{ fontWeight: "bold" }}>
-                      {(paymentDetails[key] as savedCardInterface).ownerName}
-                    </Box>
-                  </Typography>
-                  <Typography id="cardNumber">
-                    card number:&nbsp;
-                    <Box component="span" sx={{ fontWeight: "bold" }}>
-                      {(paymentDetails[key] as savedCardInterface).cardNumber}
-                    </Box>
-                  </Typography>
-                  <Typography className="cardValidity">
-                    validity:&nbsp;
-                    <Box component="span" sx={{ fontWeight: "bold" }}>
-                      {(paymentDetails[key] as savedCardInterface).cardValidity}
-                    </Box>
-                  </Typography>
-                  <Typography className="cvv">
-                    CVV:&nbsp;
-                    <Box component="span" sx={{ fontWeight: "bold" }}>
-                      {(paymentDetails[key] as savedCardInterface).cvv}
-                    </Box>
-                  </Typography>
-                </Box>
-              </Box>
-              <Tooltip title="Delete">
-                <IconButton onClick={() => handleDeletePaymentDetail(key)}>
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            </Card>
-          )}
+      {!isCardDetailsFormOpen && Object.keys(paymentDetails).length <= 0 ? (
+        <Box className="empty-payment-list-container">
+          <Typography
+            variant="h5"
+            sx={{ fontWeight: "regular", fontStyle: "italic" }}
+            className="empty-payment-list-text"
+          >
+            You haven't saved any payment info yet. Add one to make checkout
+            easier!
+          </Typography>
         </Box>
-      ))}
+      ) : (
+        Object.keys(paymentDetails).map((key) => (
+          <Box key={uuidv4()}>
+            {/* type narrowing */}
+            {"upiIdEntryName" in paymentDetails[key] && (
+              <Card className="upi-payment-details">
+                <Box sx={{ display: "flex" }}>
+                  <Box
+                    sx={{ height: "20px", width: "20px", marginRight: "10px" }}
+                  >
+                    <Image
+                      src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/upi.png"
+                      alt="UPI"
+                    />
+                  </Box>
+                  <Box>
+                    <Typography variant="h6" id="upiIdEntryName">
+                      {
+                        (paymentDetails[key] as savedUpiPaymentsInterface)
+                          .upiIdEntryName
+                      }
+                    </Typography>
+                    <Typography id="upiId">
+                      UPI Id:&nbsp;
+                      <Box component="span" sx={{ fontWeight: "bold" }}>
+                        {
+                          (paymentDetails[key] as savedUpiPaymentsInterface)
+                            .upiId
+                        }
+                      </Box>
+                    </Typography>
+                  </Box>
+                </Box>
+                <Tooltip title="Delete">
+                  <IconButton onClick={() => handleDeletePaymentDetail(key)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </Card>
+            )}
+            {paymentDetails[key].hasOwnProperty("cardEntryName") && (
+              <Card className="card-payment-details">
+                <Box sx={{ display: "flex" }}>
+                  <Box
+                    sx={{ height: "20px", width: "20px", marginRight: "10px" }}
+                  >
+                    <Image
+                      src="https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/atm-card.png"
+                      alt="Credit/Debit Card"
+                    />
+                  </Box>
+                  {/* type assertions */}
+                  <Box>
+                    <Typography variant="h6" id="cardEntryName">
+                      {
+                        (paymentDetails[key] as savedCardInterface)
+                          .cardEntryName
+                      }
+                    </Typography>
+                    <Typography id="ownerName">
+                      Name on card:&nbsp;
+                      <Box component="span" sx={{ fontWeight: "bold" }}>
+                        {(paymentDetails[key] as savedCardInterface).ownerName}
+                      </Box>
+                    </Typography>
+                    <Typography id="cardNumber">
+                      card number:&nbsp;
+                      <Box component="span" sx={{ fontWeight: "bold" }}>
+                        {(paymentDetails[key] as savedCardInterface).cardNumber}
+                      </Box>
+                    </Typography>
+                    <Typography className="cardValidity">
+                      validity:&nbsp;
+                      <Box component="span" sx={{ fontWeight: "bold" }}>
+                        {
+                          (paymentDetails[key] as savedCardInterface)
+                            .cardValidity
+                        }
+                      </Box>
+                    </Typography>
+                    <Typography className="cvv">
+                      CVV:&nbsp;
+                      <Box component="span" sx={{ fontWeight: "bold" }}>
+                        {(paymentDetails[key] as savedCardInterface).cvv}
+                      </Box>
+                    </Typography>
+                  </Box>
+                </Box>
+                <Tooltip title="Delete">
+                  <IconButton onClick={() => handleDeletePaymentDetail(key)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </Card>
+            )}
+          </Box>
+        ))
+      )}
     </Container>
   );
 };

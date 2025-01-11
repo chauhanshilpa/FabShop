@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -12,6 +12,10 @@ import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import {
+  getCustomerSavedAddresses,
+  deleteSavedAddress,
+} from "../../../api/api";
 // import EditNoteIcon from "@mui/icons-material/EditNote";
 interface Props {
   activeUserId: string;
@@ -20,17 +24,26 @@ interface Props {
 const UserAddresses = ({ activeUserId }: Props) => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState<boolean>(false);
   const [userAddresses, setUserAddresses] = useState<Address[]>([]);
+
+  useEffect(() => {
+    (async function () {
+      const response = await getCustomerSavedAddresses(activeUserId);
+      console.log(response)
+      if (response) {
+        setUserAddresses([...response]);
+      }
+    })();
+    // eslint-disable-next-line
+  }, []);
+
   const OpenAddressForm = () => {
     setIsAddressFormOpen(true);
   };
 
-  const handleDeleteAddress = (addressId: string) => {
-    let addresses = [...userAddresses];
-    const indexOfAddressToDelete = addresses.findIndex(
-      (address) => address.id === addressId
-    );
-    addresses.splice(indexOfAddressToDelete, 1);
-    setUserAddresses(addresses);
+  const handleDeleteAddress = async(addressId: string) => {
+    await deleteSavedAddress(addressId, activeUserId);
+    const response = await getCustomerSavedAddresses(activeUserId);
+    setUserAddresses([ ...response ]);
   };
 
   const handleEditAddress = () => {

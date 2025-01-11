@@ -391,6 +391,15 @@ export async function getCustomerSavedAddresses(userId: string) {
   return customerSavedAddresses[userId];
 }
 
+export async function deleteSavedAddress(addressId: string, userId: string) {
+  let newAddres = { ...customerSavedAddresses };
+  let addressListOfTheUser = newAddres[userId];
+  let indexOfAddressToDelete = addressListOfTheUser.findIndex(address=> address.id === addressId)
+  addressListOfTheUser.splice(indexOfAddressToDelete, 1)
+  customerSavedAddresses = { ...newAddres };
+  return addressListOfTheUser;
+}
+
 // orders
 export async function userOrdersWithDate(
   userId: string,
