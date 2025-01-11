@@ -15,8 +15,6 @@ import Button from "@mui/material/Button";
 import { addNewProduct } from "../../api/api";
 import balloonGif from "../../api/assets/launch-successfull.gif";
 import cheerAudio from "../../api/assets/cheering-claps.mp3";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import { Translate } from "@mui/icons-material";
 interface Props {
   refreshProducts: () => Promise<void>;
 }
@@ -37,7 +35,6 @@ const Launchpad = ({ refreshProducts }: Props) => {
   const [browsedImage, setBrowsedImage] = useState<File | null>(null);
   const [imageUrlActiveField, setImageUrlActiveField] = useState("");
   const [launchSuccessfull, setLauchSuccessfull] = useState(false);
-  const [showVerifiedIcon, setShowVerifiedIcon] = useState(false);
 
   useEffect(() => {
     if (productType) {
@@ -88,41 +85,19 @@ const Launchpad = ({ refreshProducts }: Props) => {
       name,
       description
     );
-    await refreshProducts();
     setLauchSuccessfull(true);
     let audio = new Audio(cheerAudio);
     audio.play();
-
-    await delay(2000);
-    // these three line will run after a delay of 2 second
-    setLauchSuccessfull(false);
+    setTimeout(() => {
+      setLauchSuccessfull(false);
+    }, 2000);
     refreshInputsToInitialState();
-    setShowVerifiedIcon(true);
-
-    // these two line will run after a delay of 1 second after above is resolved
-    await delay(1000);
-    audio.pause();
-
-    // these two line will run after a delay of 2 second after above is resolved
-    await delay(1000);
-    setShowVerifiedIcon(false);
+    await refreshProducts();
   };
 
   return (
     <>
       <Box className="main launchpad">
-        {showVerifiedIcon && (
-          <VerifiedIcon
-            className="verified-icon"
-            sx={{
-              position: "absolute",
-              left: "44%",
-              top: "60%",
-              transform: "translate(-60%, -44%)",
-              zIndex: "99",
-            }}
-          />
-        )}
         <Typography variant="h4" className="launchpad-heading">
           Launch New Product
         </Typography>
@@ -161,7 +136,9 @@ const Launchpad = ({ refreshProducts }: Props) => {
               subCategory !== null &&
               subCategoryInputValue !== "" &&
               category !== "Kids" &&
-              categoryInputValue !== "Kids" && category !== null && category !== "" 
+              categoryInputValue !== "Kids" &&
+              category !== null &&
+              category !== ""
                 ? true
                 : false
             }
@@ -254,6 +231,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: "30%",
+              zIndex: "100",
             }}
             className="success_launch_image"
           />
