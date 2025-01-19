@@ -61,26 +61,30 @@ const SingleProduct = ({
   }, []);
 
   useEffect(() => {
-    async function isWishlistIncludesProduct() {
-      const response = await getWishlist(activeUserId);
-      const isWishlisted = response.some((product) => product.id === productId);
-      setIsProductInWishlist(isWishlisted);
-    }
-    isWishlistIncludesProduct();
-
-    async function isCartIncludesProduct() {
-      const response = await getCartProductsList(activeUserId);
-      const isInCart = response.some((product) => product.id === productId);
-      setIsProductInCart(isInCart);
-    }
-    isCartIncludesProduct();
+    (async function () {
+      await isWishlistIncludesProduct();
+      await isCartIncludesProduct();
+    })();
   });
+
+  async function isWishlistIncludesProduct() {
+    const response = await getWishlist(activeUserId);
+    const isWishlisted = response.some((product) => product.id === productId);
+    setIsProductInWishlist(isWishlisted);
+  }
+
+  async function isCartIncludesProduct() {
+    const response = await getCartProductsList(activeUserId);
+    const isInCart = response.some((product) => product.id === productId);
+    setIsProductInCart(isInCart);
+  }
 
   async function handleWishlist() {
     if (activeUserId !== "" || activeUserId === undefined) {
       isProductInWishlist
         ? await removeFromWishlist(productId)
         : await addToWishlist(productId);
+      await isWishlistIncludesProduct();
     } else {
       setModalText({
         title: "Unlock Your Wishlist",
@@ -94,6 +98,7 @@ const SingleProduct = ({
   async function handleCart() {
     if (activeUserId !== "" || activeUserId === undefined) {
       isProductInCart ? navigate("/checkout") : await addToCart(productId);
+      await isCartIncludesProduct();
     } else {
       setModalText({
         title: "Unlock Your Cart",

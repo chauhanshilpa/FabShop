@@ -39,6 +39,7 @@ import SellerLandingPage from "./pages/seller/LandingPage";
 import SellerDashboard from "./pages/seller_dashboard/SellerDashboard";
 import SellerNavbar from "./components/seller/SellerNavbar";
 import Launchpad from "./pages/launchpad/Launchpad";
+import ProductList from "./components/products_list/ProductsList";
 
 function App() {
   const [personType, setPersonType] = useState("customer");
@@ -72,28 +73,30 @@ function App() {
   useEffect(() => {
     const fetchInitialInformation = async () => {
       const productList = await fetchAllProducts();
-      setAllProducts(productList);
-      const cartProductList = await getCartProductsList(activeUserId);
-      setCartProductsList(cartProductList);
-      const wishlist = await getWishlist(activeUserId);
-      setWishlistProductsList(wishlist);
-      const response = await getUserOrdersList(activeUserId);
-      setOrdersData(response);
+      setAllProducts([...productList]);
+      if (isUserLoggedIn) {
+        const cartProductList = await getCartProductsList(activeUserId);
+        setCartProductsList([...cartProductList]);
+        const wishlist = await getWishlist(activeUserId);
+        setWishlistProductsList([...wishlist]);
+        const response = await getUserOrdersList(activeUserId);
+        setOrdersData(response);
+      }
     };
     fetchInitialInformation();
     //eslint-disable-next-line
-  }, []);
+  }, [activeUserId]);
 
   async function addToCart(productId: string) {
     await addItemToCart(activeUserId, productId);
     const response = await getCartProductsList(activeUserId);
-    setCartProductsList(response);
+    setCartProductsList([...response]);
   }
 
   async function removeFromCart(productId: string) {
     await removeItemFromCart(activeUserId, productId);
     const response = await getCartProductsList(activeUserId);
-    setCartProductsList(response);
+    setCartProductsList([...response]);
   }
 
   async function addToWishlist(productId: string) {
@@ -103,18 +106,18 @@ function App() {
     if (!isWishlisted) {
       await addItemToWishlist(activeUserId, productId);
       const response = await getWishlist(activeUserId);
-      setWishlistProductsList(response);
+      setWishlistProductsList([...response]);
     }
   }
   async function removeFromWishlist(productId: string) {
     await removeItemFromWishlist(activeUserId, productId);
     const response = await getWishlist(activeUserId);
-    setWishlistProductsList(response);
+    setWishlistProductsList([...response]);
   }
 
   const refreshProducts = async () => {
     const updatedProducts = await fetchAllProducts();
-    setAllProducts(updatedProducts);
+    setAllProducts([...updatedProducts]);
   };
 
   return (

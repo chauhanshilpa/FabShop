@@ -786,7 +786,7 @@ export const STARTING_PRODUCTS: Product[] = [
     category: "Men",
     type: "footwear shoes",
     sub_category: "Boys",
-    price: 69,
+    price: 769,
     image: {
       id: "60c66ce7-9e7a-47e0-bde4-e22ab947f7a9",
       url: "https://fabshop-images.s3.ap-south-1.amazonaws.com/fabshop+images/img_53.jpg",

@@ -28,7 +28,6 @@ const UserAddresses = ({ activeUserId }: Props) => {
   useEffect(() => {
     (async function () {
       const response = await getCustomerSavedAddresses(activeUserId);
-      console.log(response)
       if (response) {
         setUserAddresses([...response]);
       }

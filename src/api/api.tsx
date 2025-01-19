@@ -6,6 +6,9 @@ import { DISCOUNT, SHIPPING_CHARGE } from "../helpers/FabShop_constants";
 export interface CartProductInterface extends Product {
   quantity: number;
 }
+interface AllUserCartProducts {
+  [key: string]: CartProductInterface[];
+}
 export interface SingleOrderInterface {
   orderId: string;
   dateAndTime: string;
@@ -40,6 +43,14 @@ export interface PaymentInterface {
   [key: string]: savedUpiPaymentsInterface | savedCardInterface;
 }
 
+export interface AllUserWishlist {
+  [key: string]: Product[];
+}
+
+export interface CartTotalAmount {
+  [key: string]: number;
+}
+
 /**
  * A separate file which is created with a thinking that, later I have to integrate backend. Instead making changes in different files, I wrote all logic here so that changes happen to this file only.
  * all logic that a backend do
@@ -50,8 +61,9 @@ let sellerList: Seller[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let browsedProductsList: BrowsedProductsInterface = {};
 let wishlist: Product[] = [];
-let cartProductsList: CartProductInterface[] = [];
-let cartTotalAmount: number = 0;
+let allUsersWishlist: AllUserWishlist = {};
+let allUserCartProducts: AllUserCartProducts = {};
+let cartTotalAmount: CartTotalAmount = {};
 let customerDeliveryAddress: CustomerDeliveryAddressInterface = {};
 let customerSavedAddresses: savedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
@@ -164,8 +176,8 @@ export async function addNewProduct(
   allProducts.push(newProduct);
 }
 
-export async function fetchAllProducts(){
- return [...allProducts];
+export async function fetchAllProducts() {
+  return [...allProducts];
 }
 
 export async function getHomeCardProducts(userId: string) {
@@ -232,6 +244,7 @@ export async function setUsersBrowsingHistoryList(
 export async function addItemToWishlist(userId: string, productId: string) {
   const product = allProducts.filter((product) => product.id === productId)[0];
   wishlist.push(product);
+  allUsersWishlist[userId] = [...wishlist];
 }
 
 export async function removeItemFromWishlist(
@@ -242,72 +255,109 @@ export async function removeItemFromWishlist(
     (product) => product.id === productId
   );
   wishlist.splice(productIndex, productIndex + 1);
+  allUsersWishlist[userId] = [...wishlist];
 }
 
 export async function getWishlist(userId: string) {
-  const newWishlist = [...wishlist];
-  return newWishlist;
+  const newWishlist = { ...allUsersWishlist };
+  if (newWishlist[userId]) {
+    return newWishlist[userId];
+  } else {
+    return [];
+  }
 }
 
 // cart
 export async function addItemToCart(userId: string, productId: string) {
   const product = allProducts.filter((product) => product.id === productId)[0];
-  cartProductsList.push({ ...product, quantity: 1 });
+  let newAllUserCartProducts = { ...allUserCartProducts };
+  let newCartProductsList = newAllUserCartProducts[userId];
+  if (!newCartProductsList) {
+    newCartProductsList = [];
+  }
+  newCartProductsList.push({ ...product, quantity: 1 });
+  allUserCartProducts[userId] = newCartProductsList;
 }
 
 export async function removeItemFromCart(userId: string, productId: string) {
-  const productIndex = cartProductsList.findIndex(
+  let newAllUserCartProducts = { ...allUserCartProducts };
+  let newCartProductsList = [...newAllUserCartProducts[userId]];
+  const productIndex = newCartProductsList.findIndex(
     (product) => product.id === productId
   );
-  cartProductsList.splice(productIndex, productIndex + 1);
+  newCartProductsList.splice(productIndex, productIndex + 1);
+  allUserCartProducts[userId] = newCartProductsList;
 }
 
 export async function getCartProductsList(userId: string) {
-  const newCartProductsList = [...cartProductsList];
-  return newCartProductsList;
+  const newCartProductsList = { ...allUserCartProducts };
+  if (newCartProductsList[userId]) {
+    return newCartProductsList[userId];
+  } else {
+    return [];
+  }
 }
+//-----------------------------------------
 
 export async function makeCartEmpty(userId: string) {
-  cartProductsList = [];
-  cartTotalAmount = 0;
+  let newAllUserCartProducts = { ...allUserCartProducts };
+  let newCartProductsList = [...newAllUserCartProducts[userId]];
+  newCartProductsList = [];
+  allUserCartProducts[userId] = newCartProductsList;
+  cartTotalAmount[userId] = 0;
 }
 
-// product quantity in cart
 export async function handleProductQuantityInCart(
   userId: string,
   productId: string,
   quantity: number
 ) {
-  const newCartProductsList = [...cartProductsList];
+  const newAllUserCartProducts = { ...allUserCartProducts };
+  const newCartProductsList = [...newAllUserCartProducts[userId]];
+  // cartTotalAmount[userId] = 0;
   const product = newCartProductsList.filter(
     (product) => product.id === productId
   )[0];
-  product.quantity = quantity;
+  product.quantity = quantity; 
 }
 
 export async function getProductQuantityInCart(
   userId: string,
   productId: string
 ) {
-  const newCartProductsList = [...cartProductsList];
-  const product = newCartProductsList.filter(
-    (product) => product.id === productId
-  )[0];
-  return product.quantity;
+  const newAllUserCartProducts = { ...allUserCartProducts };
+  if (newAllUserCartProducts[userId]) {
+    const newCartProductsList = [...newAllUserCartProducts[userId]];
+    const product = newCartProductsList.filter(
+      (product) => product.id === productId
+    )[0];
+    return product.quantity;
+  }
+  return 0;
 }
 
-// cart's value
 export async function handleCartProductsPrice(userId: string) {
-  cartTotalAmount = cartProductsList.reduce((accumulator, product) => {
-    return accumulator + product.price * product.quantity;
-  }, 0);
-  return cartTotalAmount;
+  let newAllUserCartProducts = { ...allUserCartProducts };
+  if (
+    newAllUserCartProducts[userId] &&
+    newAllUserCartProducts[userId].length > 0
+  ) {
+    let newCartProductsList = [...newAllUserCartProducts[userId]];
+    const totalAmount = newCartProductsList.reduce((accumulator, product) => {
+      return accumulator + product.price * product.quantity;
+    }, 0);
+    cartTotalAmount[userId] = totalAmount;
+    return totalAmount;
+  }
+  return 0;
 }
 
 export async function handleCartTotalAmount(userId: string) {
   const totalAmount =
-    cartTotalAmount - (DISCOUNT * cartTotalAmount) / 100 + SHIPPING_CHARGE;
-  cartTotalAmount = totalAmount;
+    cartTotalAmount[userId] -
+    (DISCOUNT * cartTotalAmount[userId]) / 100 +
+    SHIPPING_CHARGE;
+  cartTotalAmount[userId] = totalAmount;
   return totalAmount;
 }
 
@@ -394,8 +444,10 @@ export async function getCustomerSavedAddresses(userId: string) {
 export async function deleteSavedAddress(addressId: string, userId: string) {
   let newAddres = { ...customerSavedAddresses };
   let addressListOfTheUser = newAddres[userId];
-  let indexOfAddressToDelete = addressListOfTheUser.findIndex(address=> address.id === addressId)
-  addressListOfTheUser.splice(indexOfAddressToDelete, 1)
+  let indexOfAddressToDelete = addressListOfTheUser.findIndex(
+    (address) => address.id === addressId
+  );
+  addressListOfTheUser.splice(indexOfAddressToDelete, 1);
   customerSavedAddresses = { ...newAddres };
   return addressListOfTheUser;
 }
@@ -413,7 +465,7 @@ export async function userOrdersWithDate(
     dateAndTime: dateTimeString,
     orderedProductList: orderedProductList,
     address: customerAddress,
-    cartValue: cartTotalAmount,
+    cartValue: cartTotalAmount[userId],
   };
 }
 
