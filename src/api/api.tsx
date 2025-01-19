@@ -60,7 +60,7 @@ let usersList: User[] = [];
 let sellerList: Seller[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let browsedProductsList: BrowsedProductsInterface = {};
-let wishlist: Product[] = [];
+// let wishlist: Product[] = [];
 let allUsersWishlist: AllUserWishlist = {};
 let allUserCartProducts: AllUserCartProducts = {};
 let cartTotalAmount: CartTotalAmount = {};
@@ -242,24 +242,26 @@ export async function setUsersBrowsingHistoryList(
 
 // wishlist
 export async function addItemToWishlist(userId: string, productId: string) {
+  if (!allUsersWishlist[userId]) {
+    allUsersWishlist[userId] = [];
+  }
   const product = allProducts.filter((product) => product.id === productId)[0];
-  wishlist.push(product);
-  allUsersWishlist[userId] = [...wishlist];
+  allUsersWishlist[userId].push(product);
 }
 
 export async function removeItemFromWishlist(
   userId: string,
   productId: string
 ) {
-  const productIndex = wishlist.findIndex(
+  const productIndex = allUsersWishlist[userId].findIndex(
     (product) => product.id === productId
   );
-  wishlist.splice(productIndex, productIndex + 1);
-  allUsersWishlist[userId] = [...wishlist];
+  allUsersWishlist[userId].splice(productIndex, productIndex + 1);
 }
 
 export async function getWishlist(userId: string) {
   const newWishlist = { ...allUsersWishlist };
+  console.log(allUsersWishlist);
   if (newWishlist[userId]) {
     return newWishlist[userId];
   } else {
@@ -318,7 +320,7 @@ export async function handleProductQuantityInCart(
   const product = newCartProductsList.filter(
     (product) => product.id === productId
   )[0];
-  product.quantity = quantity; 
+  product.quantity = quantity;
 }
 
 export async function getProductQuantityInCart(

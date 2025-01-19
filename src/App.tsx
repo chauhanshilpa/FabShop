@@ -100,15 +100,18 @@ function App() {
   }
 
   async function addToWishlist(productId: string) {
+    console.log("add")
     const isWishlisted = wishlistProductsList.some(
       (product) => product.id === productId
     );
+    console.log(isWishlisted)
     if (!isWishlisted) {
       await addItemToWishlist(activeUserId, productId);
       const response = await getWishlist(activeUserId);
       setWishlistProductsList([...response]);
     }
   }
+  
   async function removeFromWishlist(productId: string) {
     await removeItemFromWishlist(activeUserId, productId);
     const response = await getWishlist(activeUserId);

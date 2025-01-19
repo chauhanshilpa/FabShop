@@ -65,7 +65,8 @@ const SingleProduct = ({
       await isWishlistIncludesProduct();
       await isCartIncludesProduct();
     })();
-  });
+    // eslint-disable-next-line
+  },[]);
 
   async function isWishlistIncludesProduct() {
     const response = await getWishlist(activeUserId);
@@ -93,6 +94,7 @@ const SingleProduct = ({
       });
       togglePopup.current?.click();
     }
+    console.log(isProductInWishlist)
   }
 
   async function handleCart() {
