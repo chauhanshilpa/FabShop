@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { STARTING_PRODUCTS } from "./assets/productsData";
-import { User, Seller, Product, Address, Image } from "./classModels";
+import { User, Seller, Product, Address } from "./classModels";
 import { DISCOUNT, SHIPPING_CHARGE } from "../helpers/FabShop_constants";
 
 export interface CartProductInterface extends Product {
@@ -17,7 +17,7 @@ export interface SingleOrderInterface {
   cartValue: number;
 }
 export interface OrderInterface {
-  [key: string]: SingleOrderInterface;
+  [key: string]: SingleOrderInterface[];
 }
 interface CustomerDeliveryAddressInterface {
   [key: string]: Address;
@@ -60,7 +60,6 @@ let usersList: User[] = [];
 let sellerList: Seller[] = [];
 let allProducts: Product[] = [...STARTING_PRODUCTS];
 let browsedProductsList: BrowsedProductsInterface = {};
-// let wishlist: Product[] = [];
 let allUsersWishlist: AllUserWishlist = {};
 let allUserCartProducts: AllUserCartProducts = {};
 let cartTotalAmount: CartTotalAmount = {};
@@ -261,7 +260,6 @@ export async function removeItemFromWishlist(
 
 export async function getWishlist(userId: string) {
   const newWishlist = { ...allUsersWishlist };
-  console.log(allUsersWishlist);
   if (newWishlist[userId]) {
     return newWishlist[userId];
   } else {
@@ -462,17 +460,31 @@ export async function userOrdersWithDate(
 ) {
   let dateTimeString = new Date().toLocaleString();
   let order_id = uuidv4();
-  orderedProducts[dateTimeString] = {
-    orderId: order_id,
-    dateAndTime: dateTimeString,
-    orderedProductList: orderedProductList,
-    address: customerAddress,
-    cartValue: cartTotalAmount[userId],
-  };
+  if (!orderedProducts[userId]) {
+    orderedProducts[userId] = [];
+  }
+  function checkIfOrderAlreadyExistToPreventDoubleRendering() {
+    const isOrdered = orderedProducts[userId].some(
+      (order) => order.dateAndTime === dateTimeString
+    );
+    !isOrdered &&
+      orderedProducts[userId].push({
+        orderId: order_id,
+        dateAndTime: dateTimeString,
+        orderedProductList: orderedProductList,
+        address: customerAddress,
+        cartValue: cartTotalAmount[userId],
+      });
+  }
+  checkIfOrderAlreadyExistToPreventDoubleRendering();
 }
 
 export async function getUserOrdersList(userId: string) {
-  return orderedProducts;
+  if (orderedProducts[userId]) {
+    return orderedProducts[userId];
+  } else {
+    return [];
+  }
 }
 
 // payment

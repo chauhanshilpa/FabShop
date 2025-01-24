@@ -3,10 +3,10 @@ import { v4 as uuidv4 } from "uuid";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { OrderInterface } from "../../api/api";
+import { SingleOrderInterface } from "../../api/api";
 import OrderItemCard from "../../components/order_section/order_item_card/OrderItemCard";
 interface Props {
-  ordersData: OrderInterface;
+  ordersData: SingleOrderInterface[];
 }
 
 const Orders = ({ ordersData }: Props) => {
@@ -26,20 +26,26 @@ const Orders = ({ ordersData }: Props) => {
           </Box>
         ) : (
           <>
-            <Typography sx={{marginBottom: "1rem", fontWeight: "600", fontSize: "large"}}>Your Orders</Typography>
+            <Typography
+              sx={{
+                marginBottom: "1rem",
+                fontWeight: "600",
+                fontSize: "large",
+              }}
+            >
+              Your Orders
+            </Typography>
             <Box className="order-card-container">
-              {Object.keys(ordersData).map((dateAndTimeKey) => {
-                const orderDetails = ordersData[dateAndTimeKey];
-                return ordersData[dateAndTimeKey].orderedProductList.map(
-                  (orderedProduct) => (
-                    <OrderItemCard
-                      key={uuidv4()}
-                      productId={orderedProduct.id}
-                      cartProduct={orderedProduct}
-                      singleOrderDetails={orderDetails}
-                    />
-                  )
-                );
+              {ordersData.map((singleOrder) => {
+                const orderDetails = singleOrder;
+                return singleOrder.orderedProductList.map((orderedProduct) => (
+                  <OrderItemCard
+                    key={uuidv4()}
+                    productId={orderedProduct.id}
+                    cartProduct={orderedProduct}
+                    singleOrderDetails={orderDetails}
+                  />
+                ));
               })}
             </Box>
           </>

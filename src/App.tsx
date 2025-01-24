@@ -22,7 +22,7 @@ import {
   getWishlist,
   getUserOrdersList,
   CartProductInterface,
-  OrderInterface,
+  SingleOrderInterface,
   fetchAllProducts,
 } from "./api/api";
 import OrderConfirmation from "./pages/order_confirmation/OrderConfirmation";
@@ -39,7 +39,6 @@ import SellerLandingPage from "./pages/seller/LandingPage";
 import SellerDashboard from "./pages/seller_dashboard/SellerDashboard";
 import SellerNavbar from "./components/seller/SellerNavbar";
 import Launchpad from "./pages/launchpad/Launchpad";
-import ProductList from "./components/products_list/ProductsList";
 
 function App() {
   const [personType, setPersonType] = useState("customer");
@@ -52,7 +51,7 @@ function App() {
   const [cartProductsList, setCartProductsList] = useState<
     CartProductInterface[]
   >([]);
-  const [ordersData, setOrdersData] = useState<OrderInterface>({});
+  const [ordersData, setOrdersData] = useState<SingleOrderInterface[]>([]);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [isSellerLoggedIn, setIsSellerLoggedIn] = useState<boolean>(false);
   const [isLoginFormOpen, setIsLoginFormOpen] = useState<boolean>(false);
@@ -100,11 +99,9 @@ function App() {
   }
 
   async function addToWishlist(productId: string) {
-    console.log("add")
     const isWishlisted = wishlistProductsList.some(
       (product) => product.id === productId
     );
-    console.log(isWishlisted)
     if (!isWishlisted) {
       await addItemToWishlist(activeUserId, productId);
       const response = await getWishlist(activeUserId);

@@ -16,7 +16,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import SearchBar from "../search_bar/SearchBar";
 import NavbarCart from "./NavbarCart";
 import { Product } from "../../../api/classModels";
-import { CartProductInterface, OrderInterface } from "../../../api/api";
+import { CartProductInterface, SingleOrderInterface } from "../../../api/api";
 import StoreIcon from "@mui/icons-material/Store";
 
 const PAGES = ["Men", "Women", "Kids"];
@@ -33,7 +33,7 @@ interface Props {
   setCartProductsList: React.Dispatch<
     React.SetStateAction<CartProductInterface[]>
   >;
-  setOrdersData: React.Dispatch<React.SetStateAction<OrderInterface>>;
+  setOrdersData: React.Dispatch<React.SetStateAction<SingleOrderInterface[]>>;
   setRecentlyViewedProductsList: React.Dispatch<
     React.SetStateAction<Product[]>
   >;
@@ -79,7 +79,7 @@ function Navbar({
     setIsUserLoggedIn(false);
     setActiveUserId("");
     setWishlistProductsList([]);
-    setOrdersData({});
+    setOrdersData([]);
     setCartProductsList([]);
     setRecentlyViewedProductsList([]);
     navigate("/");

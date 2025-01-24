@@ -8,7 +8,7 @@ import {
   getCustomerAddressDuringOrder,
   getUserOrdersList,
   CartProductInterface,
-  OrderInterface,
+  SingleOrderInterface,
 } from "../../api/api";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import Typography from "@mui/material/Typography";
@@ -18,7 +18,7 @@ interface Props {
   setCartProductsList: React.Dispatch<
     React.SetStateAction<CartProductInterface[]>
   >;
-  setOrdersData: React.Dispatch<React.SetStateAction<OrderInterface>>;
+  setOrdersData: React.Dispatch<React.SetStateAction<SingleOrderInterface[]>>;
 }
 
 const OrderConfirmation = ({
