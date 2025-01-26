@@ -376,6 +376,7 @@ export async function getSearchedProducts(text: string) {
 // address
 export async function customerAddressDuringOrder(
   userId: string,
+  address_id: string,
   name: string,
   phoneNumber: string,
   pincode: string,
@@ -386,7 +387,6 @@ export async function customerAddressDuringOrder(
   landmark: string,
   secondPhoneNumber: string
 ) {
-  const address_id = uuidv4();
   const address = new Address(
     address_id,
     name,

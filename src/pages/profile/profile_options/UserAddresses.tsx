@@ -79,7 +79,7 @@ const UserAddresses = ({ activeUserId }: Props) => {
         </Box>
       ) : (
         userAddresses.map((address) => (
-          <Card sx={{ padding: "1rem", margin: "1rem" }} key={uuidv4()}>
+          <Card sx={{ padding: "1rem", marginBottom: "1rem"}} key={uuidv4()}>
             <Typography sx={{ fontWeight: "550" }}>{address.name}</Typography>
             <Typography>{address.streetAddress}</Typography>
             <Typography>{address.landmark}</Typography>

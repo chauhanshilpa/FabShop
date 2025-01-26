@@ -7,6 +7,7 @@ import Paper from "@mui/material/Paper";
 import CartPriceDetails from "../../../components/cart_data/CartPriceDetails";
 import AddressForm from "../../../components/address_form/AddressForm";
 import ScrollToTop from "../../../components/utils/ScrollToTop";
+import SavedAddress from "./SavedAddress";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -57,6 +58,11 @@ export default function Address({
                   setActiveStep={setActiveStep}
                 />
               </Item>
+              <SavedAddress
+                activeUserId={activeUserId}
+                activeStep={activeStep}
+                setActiveStep={setActiveStep}
+              />
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
               <Item>

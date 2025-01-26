@@ -97,7 +97,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  margin: 10px;
+  margin: 0.5rem 0 0.5rem;
 }
 
 .profile-saved-payments .close-paymnets-details-form,

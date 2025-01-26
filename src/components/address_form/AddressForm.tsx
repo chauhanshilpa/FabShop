@@ -13,6 +13,7 @@ import {
   saveCustomerAddress,
   getCustomerSavedAddresses,
 } from "../../api/api";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   activeUserId: string;
@@ -125,8 +126,10 @@ const AddressForm = ({
       const prevStep = activeStep;
       setActiveStep(prevStep + 1);
     }
+    const addressId = uuidv4();
     await customerAddressDuringOrder(
       activeUserId,
+      addressId,
       customerName,
       phoneNumber,
       pincode,

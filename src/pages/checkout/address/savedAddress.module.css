@@ -1,0 +1,25 @@
+.choose_address_container{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.heading{
+    font-size: larger;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    margin-left: 3.5rem;
+    color: #484848; 
+}
+
+.proceed_button {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    padding-inline: 1rem;
+    background-color: #ffaf03;
+    color: white;
+    margin-left: 3.7rem;
+}
+
+.proceed_button:hover {
+    background-color: #ffc436;
+}
