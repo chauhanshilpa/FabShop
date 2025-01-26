@@ -21,6 +21,7 @@ import {
   deletePaymentDetail,
 } from "../../../api/api";
 import { v4 as uuidv4 } from "uuid";
+import { titleCase } from "../../../helpers/titleCaseFunction";
 interface Props {
   activeUserId: string;
 }
@@ -134,7 +135,9 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
                 label="Name of the entry"
                 variant="outlined"
                 value={cardEntryName}
-                onChange={(event) => setCardEntryName(event.target.value)}
+                onChange={(event) =>
+                  setCardEntryName(titleCase(event.target.value))
+                }
                 sx={{ width: "50%" }}
               />
             </Box>
@@ -200,7 +203,9 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
               label="Name of the entry"
               variant="outlined"
               value={upiIdEntryName}
-              onChange={(event) => setUpiIdEntryName(event.target.value)}
+              onChange={(event) =>
+                setUpiIdEntryName(titleCase(event.target.value))
+              }
               sx={{ width: "50%" }}
             />
           </Box>

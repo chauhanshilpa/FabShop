@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./AddressForm.css";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -14,13 +14,15 @@ import {
   getCustomerSavedAddresses,
 } from "../../api/api";
 import { v4 as uuidv4 } from "uuid";
-
+import { titleCase } from "../../helpers/titleCaseFunction";
 interface Props {
   activeUserId: string;
   activeStep?: number;
   setActiveStep?: React.Dispatch<React.SetStateAction<number>>;
   setIsAddressFormOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   setUserAddresses?: React.Dispatch<React.SetStateAction<Address[]>>;
+  addressFormType?: string;
+  toEditAddressId?: string;
 }
 
 const states = {
@@ -33,6 +35,8 @@ const AddressForm = ({
   setActiveStep,
   setIsAddressFormOpen,
   setUserAddresses,
+  addressFormType,
+  toEditAddressId,
 }: Props) => {
   const [customerName, setCustomerName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -45,19 +49,29 @@ const AddressForm = ({
   const [landmark, setLandmark] = useState<string>("");
   const [secondPhoneNumber, setSecondPhoneNumber] = useState<string>("");
 
-  function titleCase(string: string) {
-    var wordsList = string.split(" ");
-    for (let i = 0; i < wordsList.length; i++) {
-      let word = wordsList[i];
-      if (word.charAt(0).toUpperCase() === word.charAt(0)) {
-        wordsList[i] = word;
-      } else {
-        wordsList[i] =
-          word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
-      }
+  useEffect(() => {
+    if (addressFormType === "edit") {
+      (async function () {
+        const customerSavedAddresses = await getCustomerSavedAddresses(
+          activeUserId
+        );
+        let selectedAddress = customerSavedAddresses.filter(
+          (address) => address.id === toEditAddressId
+        )[0];
+        setCustomerName(selectedAddress.name);
+        setPhoneNumber(selectedAddress.phoneNumber);
+        setPincode(selectedAddress.pincode);
+        setLocality(selectedAddress.locality);
+        setStreetAddress(selectedAddress.streetAddress);
+        setCity(selectedAddress.city);
+        setState(selectedAddress.state);
+        setInputState(selectedAddress.state as string);
+        setLandmark(selectedAddress.landmark);
+        setSecondPhoneNumber(selectedAddress.secondPhoneNumber);
+      })();
     }
-    return wordsList.join(" ");
-  }
+    // eslint-disable-next-line
+  }, [addressFormType]);
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
@@ -150,8 +164,13 @@ const AddressForm = ({
   }
 
   async function handleAddressSave() {
+    let addressId: string =
+      addressFormType === "edit" && toEditAddressId
+        ? toEditAddressId
+        : uuidv4();
     await saveCustomerAddress(
       activeUserId,
+      addressId,
       customerName,
       phoneNumber,
       pincode,

@@ -408,6 +408,7 @@ export async function getCustomerAddressDuringOrder(userId: string) {
 
 export async function saveCustomerAddress(
   userId: string,
+  address_id: string,
   name: string,
   phoneNumber: string,
   pincode: string,
@@ -418,7 +419,18 @@ export async function saveCustomerAddress(
   landmark: string,
   secondPhoneNumber: string
 ) {
-  const address_id = uuidv4();
+  if (!customerSavedAddresses.hasOwnProperty(userId)) {
+    customerSavedAddresses[userId] = [];
+  }
+  let isAddressToEditExists = customerSavedAddresses[userId].some(
+    (address) => address.id === address_id
+  );
+  if (isAddressToEditExists) {
+    let addressIndexForEdit = customerSavedAddresses[userId].findIndex(
+      (address) => address.id === address_id
+    );
+    customerSavedAddresses[userId].splice(addressIndexForEdit, 1);
+  }
   const address = new Address(
     address_id,
     name,
@@ -431,9 +443,6 @@ export async function saveCustomerAddress(
     landmark,
     secondPhoneNumber
   );
-  if (!customerSavedAddresses.hasOwnProperty(userId)) {
-    customerSavedAddresses[userId] = [];
-  }
   customerSavedAddresses[userId].push({ ...address });
 }
 
@@ -442,13 +451,13 @@ export async function getCustomerSavedAddresses(userId: string) {
 }
 
 export async function deleteSavedAddress(addressId: string, userId: string) {
-  let newAddres = { ...customerSavedAddresses };
-  let addressListOfTheUser = newAddres[userId];
+  let newAddress = { ...customerSavedAddresses };
+  let addressListOfTheUser = newAddress[userId];
   let indexOfAddressToDelete = addressListOfTheUser.findIndex(
     (address) => address.id === addressId
   );
   addressListOfTheUser.splice(indexOfAddressToDelete, 1);
-  customerSavedAddresses = { ...newAddres };
+  customerSavedAddresses = { ...newAddress };
   return addressListOfTheUser;
 }
 

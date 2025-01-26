@@ -16,7 +16,7 @@ import {
   getCustomerSavedAddresses,
   deleteSavedAddress,
 } from "../../../api/api";
-// import EditNoteIcon from "@mui/icons-material/EditNote";
+import EditIcon from "@mui/icons-material/Edit";
 interface Props {
   activeUserId: string;
 }
@@ -24,6 +24,8 @@ interface Props {
 const UserAddresses = ({ activeUserId }: Props) => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState<boolean>(false);
   const [userAddresses, setUserAddresses] = useState<Address[]>([]);
+  const [addressFormType, setAddressFormType] = useState("");
+  const [toEditAddressId, setToEditAddressId] = useState("")
 
   useEffect(() => {
     (async function () {
@@ -45,8 +47,10 @@ const UserAddresses = ({ activeUserId }: Props) => {
     setUserAddresses([ ...response ]);
   };
 
-  const handleEditAddress = () => {
-    alert("edited");
+  const handleEditAddress = (addressId: string) => {
+    setIsAddressFormOpen(true);
+    setAddressFormType("edit");
+    setToEditAddressId(addressId);
   };
 
   return (
@@ -62,6 +66,8 @@ const UserAddresses = ({ activeUserId }: Props) => {
               activeUserId={activeUserId}
               setIsAddressFormOpen={setIsAddressFormOpen}
               setUserAddresses={setUserAddresses}
+              addressFormType={addressFormType}
+              toEditAddressId={toEditAddressId}
             />
           </Card>
         </Box>
@@ -79,7 +85,7 @@ const UserAddresses = ({ activeUserId }: Props) => {
         </Box>
       ) : (
         userAddresses.map((address) => (
-          <Card sx={{ padding: "1rem", marginBottom: "1rem"}} key={uuidv4()}>
+          <Card sx={{ padding: "1rem", marginBottom: "1rem" }} key={uuidv4()}>
             <Typography sx={{ fontWeight: "550" }}>{address.name}</Typography>
             <Typography>{address.streetAddress}</Typography>
             <Typography>{address.landmark}</Typography>
@@ -98,11 +104,11 @@ const UserAddresses = ({ activeUserId }: Props) => {
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
-              {/* <Tooltip title="Edit">
-                <IconButton onClick={handleEditAddress}>
-                  <EditNoteIcon />
+              <Tooltip title="Edit">
+                <IconButton onClick={() => handleEditAddress(address.id)}>
+                  <EditIcon />
                 </IconButton>
-              </Tooltip> */}
+              </Tooltip>
             </Box>
           </Card>
         ))
