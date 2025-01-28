@@ -23,6 +23,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ModalComponent from "../modal/ModalComponent";
+import { titleCase } from "../../helpers/titleCaseFunction";
 
 interface Props {
   setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
@@ -161,7 +162,7 @@ const SellerRegistrationForm = ({
               label="your name"
               variant="standard"
               value={sellerName}
-              onChange={(event) => setSellerName(event.target.value)}
+              onChange={(event) => setSellerName(titleCase(event.target.value))}
             />
           </Box>
           <Box className="input-field-box">

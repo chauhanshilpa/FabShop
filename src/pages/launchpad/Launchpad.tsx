@@ -15,6 +15,7 @@ import Button from "@mui/material/Button";
 import { addNewProduct } from "../../api/api";
 import balloonGif from "../../api/assets/launch-successfull.gif";
 import cheerAudio from "../../api/assets/cheering-claps.mp3";
+import { titleCase } from "../../helpers/titleCaseFunction";
 interface Props {
   refreshProducts: () => Promise<void>;
 }
@@ -163,7 +164,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
             label="Name"
             variant="outlined"
             value={name}
-            onChange={(event) => setName(event.target.value)}
+            onChange={(event) => setName(titleCase(event.target.value))}
             color="success"
           />
           <TextField
@@ -217,7 +218,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
             multiline
             rows={4}
             value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            onChange={(event) => setDescription(titleCase(event.target.value))}
             defaultValue="This is a sample description"
             color="success"
           />
