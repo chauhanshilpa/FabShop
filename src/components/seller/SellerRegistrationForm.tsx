@@ -1,10 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./SellerComponents.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { jwtDecode } from "jwt-decode";
@@ -46,10 +46,26 @@ const SellerRegistrationForm = ({
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
   const [modalText, setModalText] = useState({ title: "", description: "" });
+  const [areAllFieldValid, setAreAllFieldvalid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const togglePopup = useRef<HTMLButtonElement>();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (function () {
+      const isValidPhoneNumber = matchIsValidTel(sellerContact);
+      const isValidSellerName = sellerName.length > 2;
+      const isValidPassword = password.length > 2;
+      if (isValidPhoneNumber && isValidSellerName && isValidPassword) {
+        setAreAllFieldvalid(true);
+      } else {
+        setAreAllFieldvalid(false); 
+      }
+    })();
+    // eslint-disable-next-line
+  }, [sellerName, sellerContact, password]);
 
   const showUserInformation = async (userInfo: any) => {
     const credentials = jwtDecode<{
@@ -121,15 +137,19 @@ const SellerRegistrationForm = ({
       return;
     }
     if (emailError === false) {
-      await addNewSeller(sellerName, sellerMail, password, sellerContact);
-      const sellerId = await getActiveSellerId(sellerMail, password);
-      setActiveSellerId(sellerId);
-      setIsSellerLoggedIn(true);
-      setSellerName("");
-      setSellerMail("");
-      setPassword("");
-      setSellerContact("");
-      navigate(`/seller/dashboard/${sellerId}`);
+      if (matchIsValidTel(sellerContact)) {
+        await addNewSeller(sellerName, sellerMail, password, sellerContact);
+        const sellerId = await getActiveSellerId(sellerMail, password);
+        setActiveSellerId(sellerId);
+        setIsSellerLoggedIn(true);
+        setSellerName("");
+        setSellerMail("");
+        setPassword("");
+        setSellerContact("");
+        navigate(`/seller/dashboard/${sellerId}`);
+      } else {
+        alert("Enter correct Contact number");
+      }
     } else {
       setModalText({
         title: "Invalid Email Address",
@@ -218,6 +238,7 @@ const SellerRegistrationForm = ({
           variant="contained"
           className="seller-register-button"
           onClick={handleSellerRegister}
+          disabled={areAllFieldValid ? false : true}
         >
           Register
         </Button>
