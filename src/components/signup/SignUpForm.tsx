@@ -6,7 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import {
   getActiveUserId,
   addNewUser,
@@ -131,16 +131,20 @@ const SignUpForm = ({
     }
     if (confirmPassword === password) {
       if (emailError === false) {
-        await addNewUser(username, email, password, contactNumber);
-        const response = await getActiveUserId(email, password);
-        setActiveUserId(response);
-        setIsUserLoggedIn(true);
-        closeSignUpForm();
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-        setContactNumber("");
+        if (matchIsValidTel(contactNumber)) {
+          await addNewUser(username, email, password, contactNumber);
+          const response = await getActiveUserId(email, password);
+          setActiveUserId(response);
+          setIsUserLoggedIn(true);
+          closeSignUpForm();
+          setUsername("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          setContactNumber("");
+        } else {
+          alert("number not valid");
+        }
       } else {
         setModalText({
           title: "Invalid Email Address",
