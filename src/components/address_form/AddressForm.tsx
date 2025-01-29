@@ -76,7 +76,6 @@ const AddressForm = ({
   }, [addressFormType]);
 
   useEffect(() => {
-    console.log("Checking validity");
     checkValidity();
     // eslint-disable-next-line
   }, [
@@ -111,7 +110,7 @@ const AddressForm = ({
     ) {
       setAreAllFieldvalid(true);
       return true;
-    }else{
+    } else {
       setAreAllFieldvalid(false);
       return false;
     }
@@ -219,19 +218,24 @@ const AddressForm = ({
       addressFormType === "edit" && toEditAddressId
         ? toEditAddressId
         : uuidv4();
-    await saveCustomerAddress(
-      activeUserId,
-      addressId,
-      customerName,
-      phoneNumber,
-      pincode,
-      locality,
-      streetAddress,
-      city,
-      state,
-      landmark,
-      secondPhoneNumber
-    );
+    if (areAllFieldValid) {
+      await saveCustomerAddress(
+        activeUserId,
+        addressId,
+        customerName,
+        phoneNumber,
+        pincode,
+        locality,
+        streetAddress,
+        city,
+        state,
+        landmark,
+        secondPhoneNumber
+      );
+    } else {
+      alert("not valid data");
+    }
+
     if (setIsAddressFormOpen !== undefined && setUserAddresses !== undefined) {
       const response = await getCustomerSavedAddresses(activeUserId);
       setIsAddressFormOpen(false);
@@ -360,6 +364,7 @@ const AddressForm = ({
           variant="contained"
           className="save-address"
           onClick={handleAddressSave}
+          disabled={areAllFieldValid ? false : true}
         >
           Save Address
         </Button>
