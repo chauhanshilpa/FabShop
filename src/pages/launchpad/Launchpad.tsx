@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import { addNewProduct } from "../../api/api";
 import balloonGif from "../../api/assets/launch-successfull.gif";
 import cheerAudio from "../../api/assets/cheering-claps.mp3";
-import { titleCase } from "../../helpers/commonFunctions";
+import { prevent_e_onInputTypeNumber, titleCase } from "../../helpers/commonFunctions";
 interface Props {
   refreshProducts: () => Promise<void>;
 }
@@ -174,6 +174,9 @@ const Launchpad = ({ refreshProducts }: Props) => {
             label="Price"
             variant="outlined"
             value={price}
+            onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+              prevent_e_onInputTypeNumber(event)
+            }
             onChange={(event) => setPrice(event.target.value)}
             color="success"
           />

@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
-import { validCard } from "../../helpers/commonFunctions";
+import { prevent_e_onInputTypeNumber, validCard } from "../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
 }
@@ -84,6 +84,9 @@ const CardPayment = ({ activeUserId }: Props) => {
           variant="outlined"
           className="text-field"
           type="number"
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+            prevent_e_onInputTypeNumber(event)
+          }
           onChange={handleCardNumberChange}
           value={cardNumber}
         />
@@ -109,6 +112,9 @@ const CardPayment = ({ activeUserId }: Props) => {
           <TextField
             required
             type="number"
+            onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+              prevent_e_onInputTypeNumber(event)
+            }
             id="outlined-basic"
             label="CVV"
             variant="outlined"

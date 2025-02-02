@@ -25,6 +25,7 @@ import {
   titleCase,
   validUpi,
   validCard,
+  prevent_e_onInputTypeNumber,
 } from "../../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
@@ -206,6 +207,9 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
               label="Card Number"
               variant="outlined"
               className="text-field"
+              onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+                prevent_e_onInputTypeNumber(event)
+              }
               onChange={handleCardNumberChange}
               value={cardNumber}
             />
@@ -235,6 +239,9 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
                 label="CVV"
                 variant="outlined"
                 className="text-field"
+                onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+                  prevent_e_onInputTypeNumber(event)
+                }
                 onChange={handleCvvChange}
                 value={cvv}
               />

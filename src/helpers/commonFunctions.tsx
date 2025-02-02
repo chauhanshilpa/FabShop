@@ -12,6 +12,14 @@ export function titleCase(string: string) {
   return wordsList.join(" ");
 }
 
+export function prevent_e_onInputTypeNumber(
+  event: React.KeyboardEvent<HTMLInputElement>
+) {
+  if (event.key.toLowerCase() === "e") {
+    event.preventDefault();
+  }
+}
+
 export function validUpi(upiId: string) {
   if (
     upiId.includes("@") &&
@@ -46,7 +54,7 @@ export function validCard(
     let currentYear = new Date().getFullYear();
     const arrayOfValidityDate = cardValidity.split("/");
     let cardValidityMonth = arrayOfValidityDate[0];
-    let cardValidityYear = arrayOfValidityDate[1]; 
+    let cardValidityYear = arrayOfValidityDate[1];
     if (
       (+currentMonth <= +cardValidityMonth &&
         +currentYear <= +cardValidityYear) ||

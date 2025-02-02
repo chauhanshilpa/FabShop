@@ -100,6 +100,7 @@ const SavedAddress = ({ activeUserId, activeStep, setActiveStep }: Props) => {
             </Box>
           ))}
           <Button
+            variant="contained"
             className={styles.proceed_button}
             onClick={handleProceedButton}
             disabled={selectedAddressId ? false : true}
@@ -109,8 +110,9 @@ const SavedAddress = ({ activeUserId, activeStep, setActiveStep }: Props) => {
           <Button
             variant="outlined"
             color="error"
-            className="cancel"
+            className={styles.cancel}
             onClick={goToPreviousMove}
+            disabled={selectedAddressId ? false : true}
           >
             CANCEL
           </Button>

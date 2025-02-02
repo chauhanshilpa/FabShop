@@ -14,7 +14,10 @@ import {
   getCustomerSavedAddresses,
 } from "../../api/api";
 import { v4 as uuidv4 } from "uuid";
-import { titleCase } from "../../helpers/commonFunctions";
+import {
+  prevent_e_onInputTypeNumber,
+  titleCase,
+} from "../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
   activeStep?: number;
@@ -133,9 +136,10 @@ const AddressForm = ({
   };
 
   const handlePincodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length <= 6) {
-      setPincode(event.target.value);
-    }
+    let value = event.target.value;
+    if (value.includes("e") || value.length > 6) return;
+
+    setPincode(value);
   };
 
   const handleLocalityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -280,6 +284,9 @@ const AddressForm = ({
           type="number"
           variant="standard"
           value={pincode}
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+            prevent_e_onInputTypeNumber(event)
+          }
           onChange={handlePincodeChange}
         />
         <TextField
@@ -345,6 +352,9 @@ const AddressForm = ({
           id="outlined-number"
           label="Alternate Phone (Optional)"
           type="number"
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+            prevent_e_onInputTypeNumber(event)
+          }
           variant="standard"
           value={secondPhoneNumber}
           onChange={handleSecondPhoneNumber}
@@ -379,7 +389,7 @@ const AddressForm = ({
           onClick={handleAddressSave}
           disabled={areAllFieldValid ? false : true}
         >
-          {addressFormType === "edit" ? "Update Address": "Save Address"} 
+          {addressFormType === "edit" ? "Update Address" : "Save Address"}
         </Button>
       )}
     </Container>
