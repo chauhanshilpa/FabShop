@@ -15,7 +15,12 @@ import Button from "@mui/material/Button";
 import { addNewProduct } from "../../api/api";
 import balloonGif from "../../api/assets/launch-successfull.gif";
 import cheerAudio from "../../api/assets/cheering-claps.mp3";
-import { prevent_e_onInputTypeNumber, titleCase } from "../../helpers/commonFunctions";
+import {
+  prevent_e_onInputTypeNumber,
+  titleCase,
+  validLaunchpadInputs,
+} from "../../helpers/commonFunctions";
+
 interface Props {
   refreshProducts: () => Promise<void>;
 }
@@ -36,6 +41,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
   const [browsedImage, setBrowsedImage] = useState<File | null>(null);
   const [imageUrlActiveField, setImageUrlActiveField] = useState("");
   const [launchSuccessfull, setLauchSuccessfull] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     if (productType) {
@@ -53,10 +59,35 @@ const Launchpad = ({ refreshProducts }: Props) => {
     }
   }, [category, categoryInputValue]);
 
-  const handleChange = (newValue: File | null) => {
+  useEffect(() => {
+    const isValid = validLaunchpadInputs(
+      category ?? "",
+      subCategory ?? "",
+      name,
+      productTypeTitle,
+      price,
+      description,
+      imageUrl
+    );
+    isValid ? setIsValid(true) : setIsValid(false);
+  }, [
+    category,
+    subCategory,
+    name,
+    productTypeTitle,
+    price,
+    description,
+    imageUrl,
+  ]);
+
+  const handleFileChange = (newValue: File | null) => {
     setBrowsedImage(newValue);
-    const fileUrl = URL.createObjectURL(newValue as File);
-    setImageUrl(fileUrl);
+    if (newValue) {
+      const fileUrl = URL.createObjectURL(newValue);
+      setImageUrl(fileUrl);
+    } else {
+      setImageUrl(""); // Reset image URL if no file is selected
+    }
   };
 
   const refreshInputsToInitialState = () => {
@@ -72,9 +103,6 @@ const Launchpad = ({ refreshProducts }: Props) => {
     setImageUrl("");
     setBrowsedImage(null);
   };
-
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms));
 
   const launchProduct = async () => {
     await addNewProduct(
@@ -169,6 +197,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
           />
           <TextField
             className="input"
+            type="number"
             required
             id="outlined-basic"
             label="Price"
@@ -184,7 +213,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
         <Box className="input-line-3">
           <MuiFileInput
             value={browsedImage}
-            onChange={handleChange}
+            onChange={handleFileChange}
             placeholder="&#128194;&nbsp;Insert a file"
             className="browse-file"
             color="success"
@@ -241,7 +270,12 @@ const Launchpad = ({ refreshProducts }: Props) => {
           />
         )}
         <Box className="launch-button-Box">
-          <Button className="launch-button" onClick={launchProduct}>
+          <Button
+            className="launch-button"
+            variant="contained"
+            onClick={launchProduct}
+            disabled={isValid ? false : true}
+          >
             Launch Now&nbsp;🚀
           </Button>
         </Box>

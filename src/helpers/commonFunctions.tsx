@@ -1,3 +1,5 @@
+import validator from "validator";
+
 export function titleCase(string: string) {
   var wordsList = string.split(" ");
   for (let i = 0; i < wordsList.length; i++) {
@@ -68,6 +70,43 @@ export function validCard(
   }
   let isCardNumberValid = cardNumber.split("").length === 16 ? true : false;
   if (isDateValid && isCardNumberValid && isOwnerNameValid && isValidCvv) {
+    return true;
+  }
+  return false;
+}
+
+export function validLaunchpadInputs(
+  category: string,
+  subCategory: string,
+  productName: string,
+  productType: string,
+  price: string,
+  description: string,
+  imgUrl: string
+) {
+  let isImageUrlValid = false;
+  if (imgUrl.startsWith("blob")) {
+    let blobUrl = imgUrl.split(":").splice(1).join("").toString();
+    imgUrl = blobUrl;
+    isImageUrlValid = true;
+  } else {
+    isImageUrlValid = validator.isURL(imgUrl);
+  }
+  const isCategoryValid = category.length > 0;
+  const isSubCategoryValid = subCategory.length > 0;
+  const isProductTypeValid = productType.length > 1;
+  const isProductNameValid = productName.length > 1;
+  const isPriceValid = price.length > 0;
+  const isDescriptionValid = description.length >= 8;
+  if (
+    isCategoryValid &&
+    isSubCategoryValid &&
+    isProductTypeValid &&
+    isProductNameValid &&
+    isPriceValid &&
+    isDescriptionValid &&
+    isImageUrlValid
+  ) {
     return true;
   }
   return false;
