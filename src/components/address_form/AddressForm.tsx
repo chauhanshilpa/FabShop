@@ -201,6 +201,19 @@ const AddressForm = ({
         landmark,
         secondPhoneNumber
       );
+      await saveCustomerAddress(
+        activeUserId,
+        addressId,
+        customerName,
+        phoneNumber,
+        pincode,
+        locality,
+        streetAddress,
+        city,
+        state,
+        landmark,
+        secondPhoneNumber
+      );
     } else {
       alert("fields are not valid");
     }
@@ -366,7 +379,7 @@ const AddressForm = ({
           onClick={handleAddressSave}
           disabled={areAllFieldValid ? false : true}
         >
-          Save Address
+          {addressFormType === "edit" ? "Update Address": "Save Address"} 
         </Button>
       )}
     </Container>
