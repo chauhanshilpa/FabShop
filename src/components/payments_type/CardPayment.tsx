@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./PaymentList.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import { useNavigate } from "react-router-dom";
+import { validCard } from "../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
 }
@@ -16,14 +17,28 @@ const CardPayment = ({ activeUserId }: Props) => {
   const [NameOnCard, setNameOnCard] = useState<string>("");
   const [cardValidity, setCardValidity] = useState<string>("");
   const [CVV, setCVV] = useState<string>("");
+  const [isCardValid, setIsCardValid] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (cardValidity.length === 7) {
+      const isValid = validCard(cardNumber, NameOnCard, cardValidity, CVV);
+      isValid ? setIsCardValid(true) : setIsCardValid(false);
+    } else {
+      setIsCardValid(false);
+    }
+  }, [cardNumber, NameOnCard, cardValidity, CVV]);
 
   async function handleOrderConfirmation() {
     navigate("/checkout/confirmation");
   }
 
   function handleCardNumberChange(event: React.ChangeEvent<HTMLInputElement>) {
+    let value = event.target.value;
+    if (value.length > 16) {
+      return;
+    }
     setCardNumber(event.target.value);
   }
 
@@ -34,11 +49,26 @@ const CardPayment = ({ activeUserId }: Props) => {
   function handleCardValidityChange(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
-    setCardValidity(event.target.value);
+    let value = event.target.value.replace(/[^\d/]/g, ""); // Keep digits and slash
+
+    // Check if backspace was used to remove slash
+    if (value.length === 3 && value.includes("/")) {
+      value = `${value.slice(0, 2)}`;
+    }
+
+    if (value.length > 7) return;
+    if (value.length === 3) {
+      value = `${value.slice(0, 2)}/${value.slice(2)}`;
+    }
+    setCardValidity(value);
   }
 
   function handleChangeCVV(event: React.ChangeEvent<HTMLInputElement>) {
-    setCVV(event.target.value);
+    let value = event.target.value;
+    if (value.length > 3) {
+      return;
+    }
+    setCVV(value);
   }
 
   return (
@@ -48,14 +78,17 @@ const CardPayment = ({ activeUserId }: Props) => {
           Enter your card details here
         </Typography>
         <TextField
+          required
           id="outlined-basic"
           label="Card Number"
           variant="outlined"
           className="text-field"
+          type="number"
           onChange={handleCardNumberChange}
           value={cardNumber}
         />
         <TextField
+          required
           id="outlined-basic"
           label="Name on card"
           variant="outlined"
@@ -65,6 +98,7 @@ const CardPayment = ({ activeUserId }: Props) => {
         />
         <Box className="validity-and-CVV">
           <TextField
+            required
             id="outlined-basic"
             label="Valid Thru(MM/YY)"
             variant="outlined"
@@ -73,6 +107,8 @@ const CardPayment = ({ activeUserId }: Props) => {
             value={cardValidity}
           />
           <TextField
+            required
+            type="number"
             id="outlined-basic"
             label="CVV"
             variant="outlined"
@@ -82,19 +118,15 @@ const CardPayment = ({ activeUserId }: Props) => {
           />
         </Box>
         <Button
+          variant="contained"
           onClick={handleOrderConfirmation}
-          disabled={
-            cardNumber.length > 1 &&
-            NameOnCard.length > 1 &&
-            cardValidity.length > 1 &&
-            CVV.length > 1
-              ? false
-              : true
-          }
+          className="card-payment-button"
+          disabled={isCardValid ? false : true}
         >
           PAY NOW
         </Button>
         {/* <Button
+            variant="contained"
             onClick={handleCardSave}
           >
             SAVE CARD

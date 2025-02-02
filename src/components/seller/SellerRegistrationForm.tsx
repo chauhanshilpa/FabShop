@@ -23,7 +23,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ModalComponent from "../modal/ModalComponent";
-import { titleCase } from "../../helpers/titleCaseFunction";
+import { titleCase } from "../../helpers/commonFunctions";
 
 interface Props {
   setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;

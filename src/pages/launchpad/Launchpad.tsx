@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import { addNewProduct } from "../../api/api";
 import balloonGif from "../../api/assets/launch-successfull.gif";
 import cheerAudio from "../../api/assets/cheering-claps.mp3";
-import { titleCase } from "../../helpers/titleCaseFunction";
+import { titleCase } from "../../helpers/commonFunctions";
 interface Props {
   refreshProducts: () => Promise<void>;
 }

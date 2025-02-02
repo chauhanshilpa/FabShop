@@ -23,7 +23,7 @@ import ModalComponent from "../modal/ModalComponent";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import { titleCase } from "../../helpers/titleCaseFunction";
+import { titleCase } from "../../helpers/commonFunctions";
 interface Props {
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;

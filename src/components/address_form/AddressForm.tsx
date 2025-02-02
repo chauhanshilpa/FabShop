@@ -14,7 +14,7 @@ import {
   getCustomerSavedAddresses,
 } from "../../api/api";
 import { v4 as uuidv4 } from "uuid";
-import { titleCase } from "../../helpers/titleCaseFunction";
+import { titleCase } from "../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
   activeStep?: number;
