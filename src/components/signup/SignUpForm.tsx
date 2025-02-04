@@ -143,7 +143,12 @@ const SignUpForm = ({
           setConfirmPassword("");
           setContactNumber("");
         } else {
-          alert("number not valid");
+          setModalText({
+            title: "Invalid Contact",
+            description:
+              "Please enter a valid contact number",
+          });
+          togglePopup.current?.click();
         }
       } else {
         setModalText({
