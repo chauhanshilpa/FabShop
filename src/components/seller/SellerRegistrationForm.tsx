@@ -47,7 +47,6 @@ const SellerRegistrationForm = ({
   const [showPassword, setShowPassword] = useState(false);
   const [modalText, setModalText] = useState({ title: "", description: "" });
   const [areAllFieldValid, setAreAllFieldvalid] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const togglePopup = useRef<HTMLButtonElement>();
 
@@ -61,7 +60,7 @@ const SellerRegistrationForm = ({
       if (isValidPhoneNumber && isValidSellerName && isValidPassword) {
         setAreAllFieldvalid(true);
       } else {
-        setAreAllFieldvalid(false); 
+        setAreAllFieldvalid(false);
       }
     })();
     // eslint-disable-next-line
@@ -136,20 +135,16 @@ const SellerRegistrationForm = ({
       togglePopup.current?.click();
       return;
     }
-    if (emailError === false) {
-      if (matchIsValidTel(sellerContact)) {
-        await addNewSeller(sellerName, sellerMail, password, sellerContact);
-        const sellerId = await getActiveSellerId(sellerMail, password);
-        setActiveSellerId(sellerId);
-        setIsSellerLoggedIn(true);
-        setSellerName("");
-        setSellerMail("");
-        setPassword("");
-        setSellerContact("");
-        navigate(`/seller/dashboard/${sellerId}`);
-      } else {
-        alert("Enter correct Contact number");
-      }
+    if (emailError === false && areAllFieldValid) {
+      await addNewSeller(sellerName, sellerMail, password, sellerContact);
+      const sellerId = await getActiveSellerId(sellerMail, password);
+      setActiveSellerId(sellerId);
+      setIsSellerLoggedIn(true);
+      setSellerName("");
+      setSellerMail("");
+      setPassword("");
+      setSellerContact("");
+      navigate(`/seller/dashboard/${sellerId}`);
     } else {
       setModalText({
         title: "Invalid Email Address",

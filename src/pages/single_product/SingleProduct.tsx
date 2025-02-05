@@ -94,7 +94,6 @@ const SingleProduct = ({
       });
       togglePopup.current?.click();
     }
-    console.log(isProductInWishlist)
   }
 
   async function handleCart() {

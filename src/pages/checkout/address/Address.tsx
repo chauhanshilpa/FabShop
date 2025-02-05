@@ -8,7 +8,6 @@ import CartPriceDetails from "../../../components/cart_data/CartPriceDetails";
 import AddressForm from "../../../components/address_form/AddressForm";
 import ScrollToTop from "../../../components/utils/ScrollToTop";
 import SavedAddress from "./SavedAddress";
-import { useEffect } from "react";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

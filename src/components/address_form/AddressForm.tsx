@@ -52,7 +52,6 @@ const AddressForm = ({
   const [landmark, setLandmark] = useState<string>("");
   const [secondPhoneNumber, setSecondPhoneNumber] = useState<string>("");
   const [areAllFieldValid, setAreAllFieldvalid] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (addressFormType === "edit") {

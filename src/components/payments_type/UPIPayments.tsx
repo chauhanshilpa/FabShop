@@ -26,7 +26,7 @@ const UPIPayments = ({ activeUserId }: Props) => {
 
   useEffect(() => {
     const isValid = validUpi(upiId);
-    isValid ? setIsUpiValid(true): setIsUpiValid(false);
+    isValid ? setIsUpiValid(true) : setIsUpiValid(false);
   }, [upiId]);
 
   async function handleOrderConfirmation() {
@@ -101,6 +101,16 @@ const UPIPayments = ({ activeUserId }: Props) => {
               variant="outlined"
               value={upiId}
               onChange={handleUpiIdChange}
+              // sx={{
+              //   "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused":
+              //     {
+              //       color: isUpiValid ? "auto" : "red",
+              //     },
+              //   "& .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+              //     {
+              //       borderColor: isUpiValid ? "auto" : "red",
+              //     },
+              // }}
             />
             <Button
               variant="contained"

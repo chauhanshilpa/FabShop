@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./SellerComponents.css";
 import Box from "@mui/material/Box";
-import List from "@mui/material/List";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { getActiveSellerDetails } from "../../api/api";
 import Typography from "@mui/material/Typography";

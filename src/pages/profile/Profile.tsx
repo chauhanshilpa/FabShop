@@ -8,7 +8,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-// import StarBorderIcon from "@mui/icons-material/StarBorder";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { getActiveUserDetails } from "../../api/api";
@@ -97,17 +96,6 @@ const Profile = ({ isUserLoggedIn, activeUserId }: Props) => {
             </Typography>
           </Box>
         </Box>
-        {/* <Box className="row-5">
-          <Box>
-            <StarBorderIcon className="icon" />
-          </Box>
-          <Box>
-            <Typography className="first-heading">My Reviews</Typography>
-            <Typography className="second-heading">
-              Your views about the products
-            </Typography>
-          </Box>
-        </Box> */}
         <Box className="row-6" onClick={() => navigate("/payment-information")}>
           <Box>
             <AccountBalanceWalletIcon className="icon" />
