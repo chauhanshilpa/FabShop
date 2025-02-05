@@ -6,7 +6,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import {
   getActiveUserId,
   addNewUser,
@@ -23,6 +23,7 @@ import ModalComponent from "../modal/ModalComponent";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import { titleCase } from "../../helpers/commonFunctions";
 interface Props {
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -62,7 +63,7 @@ const SignUpForm = ({
   };
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
+    setUsername(titleCase(event.target.value));
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,16 +131,25 @@ const SignUpForm = ({
     }
     if (confirmPassword === password) {
       if (emailError === false) {
-        await addNewUser(username, email, password, contactNumber);
-        const response = await getActiveUserId(email, password);
-        setActiveUserId(response);
-        setIsUserLoggedIn(true);
-        closeSignUpForm();
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-        setContactNumber("");
+        if (matchIsValidTel(contactNumber)) {
+          await addNewUser(username, email, password, contactNumber);
+          const response = await getActiveUserId(email, password);
+          setActiveUserId(response);
+          setIsUserLoggedIn(true);
+          closeSignUpForm();
+          setUsername("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          setContactNumber("");
+        } else {
+          setModalText({
+            title: "Invalid Contact",
+            description:
+              "Please enter a valid contact number",
+          });
+          togglePopup.current?.click();
+        }
       } else {
         setModalText({
           title: "Invalid Email Address",

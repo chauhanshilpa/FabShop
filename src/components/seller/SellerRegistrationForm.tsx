@@ -1,10 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./SellerComponents.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import GoogleLoginButton from "../../helpers/Google/GoogleLoginButton";
 import { jwtDecode } from "jwt-decode";
@@ -23,6 +23,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import ModalComponent from "../modal/ModalComponent";
+import { titleCase } from "../../helpers/commonFunctions";
 
 interface Props {
   setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
@@ -45,10 +46,25 @@ const SellerRegistrationForm = ({
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
   const [modalText, setModalText] = useState({ title: "", description: "" });
+  const [areAllFieldValid, setAreAllFieldvalid] = useState(false);
 
   const togglePopup = useRef<HTMLButtonElement>();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    (function () {
+      const isValidPhoneNumber = matchIsValidTel(sellerContact);
+      const isValidSellerName = sellerName.length > 2;
+      const isValidPassword = password.length > 2;
+      if (isValidPhoneNumber && isValidSellerName && isValidPassword) {
+        setAreAllFieldvalid(true);
+      } else {
+        setAreAllFieldvalid(false);
+      }
+    })();
+    // eslint-disable-next-line
+  }, [sellerName, sellerContact, password]);
 
   const showUserInformation = async (userInfo: any) => {
     const credentials = jwtDecode<{
@@ -119,7 +135,7 @@ const SellerRegistrationForm = ({
       togglePopup.current?.click();
       return;
     }
-    if (emailError === false) {
+    if (emailError === false && areAllFieldValid) {
       await addNewSeller(sellerName, sellerMail, password, sellerContact);
       const sellerId = await getActiveSellerId(sellerMail, password);
       setActiveSellerId(sellerId);
@@ -161,7 +177,7 @@ const SellerRegistrationForm = ({
               label="your name"
               variant="standard"
               value={sellerName}
-              onChange={(event) => setSellerName(event.target.value)}
+              onChange={(event) => setSellerName(titleCase(event.target.value))}
             />
           </Box>
           <Box className="input-field-box">
@@ -217,6 +233,7 @@ const SellerRegistrationForm = ({
           variant="contained"
           className="seller-register-button"
           onClick={handleSellerRegister}
+          disabled={areAllFieldValid ? false : true}
         >
           Register
         </Button>

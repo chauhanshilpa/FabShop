@@ -1,14 +1,14 @@
-.choose_address_container{
+.choose_address_container {
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
-.heading{
+.heading {
     font-size: larger;
     font-weight: 700;
     margin-bottom: 1rem;
     margin-left: 3.5rem;
-    color: #484848; 
+    color: #484848;
 }
 
 .proceed_button {
@@ -22,4 +22,9 @@
 
 .proceed_button:hover {
     background-color: #ffc436;
+}
+
+.cancel {
+    margin: 0.5rem;
+    padding: 0.5rem;
 }

@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
-import { MuiTelInput } from "mui-tel-input";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { STATES_LIST } from "../../helpers/FabShop_constants";
 import { Address } from "../../api/classModels";
 import {
@@ -14,7 +14,10 @@ import {
   getCustomerSavedAddresses,
 } from "../../api/api";
 import { v4 as uuidv4 } from "uuid";
-import { titleCase } from "../../helpers/titleCaseFunction";
+import {
+  prevent_e_onInputTypeNumber,
+  titleCase,
+} from "../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
   activeStep?: number;
@@ -48,6 +51,7 @@ const AddressForm = ({
   const [inputState, setInputState] = useState<string>("");
   const [landmark, setLandmark] = useState<string>("");
   const [secondPhoneNumber, setSecondPhoneNumber] = useState<string>("");
+  const [areAllFieldValid, setAreAllFieldvalid] = useState(false);
 
   useEffect(() => {
     if (addressFormType === "edit") {
@@ -73,6 +77,47 @@ const AddressForm = ({
     // eslint-disable-next-line
   }, [addressFormType]);
 
+  useEffect(() => {
+    checkValidity();
+    // eslint-disable-next-line
+  }, [
+    customerName,
+    phoneNumber,
+    pincode,
+    locality,
+    streetAddress,
+    city,
+    state,
+    inputState,
+    landmark,
+    secondPhoneNumber,
+  ]);
+
+  function checkValidity() {
+    const isValidPhoneNumber = matchIsValidTel(phoneNumber);
+    const isValidPinCode = pincode.length === 6;
+    const isValidCustomerName = customerName.length > 2;
+    const isValidLocality = locality.length > 2;
+    const isValidStreetAddress = streetAddress.length > 2;
+    const isValidCityName = city.length > 2;
+    const isValidStateName = state !== null && state.length > 2;
+    if (
+      isValidPhoneNumber &&
+      isValidPinCode &&
+      isValidCustomerName &&
+      isValidLocality &&
+      isValidStreetAddress &&
+      isValidCityName &&
+      isValidStateName
+    ) {
+      setAreAllFieldvalid(true);
+      return true;
+    } else {
+      setAreAllFieldvalid(false);
+      return false;
+    }
+  }
+
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = event.target.value;
     let customerName = titleCase(value);
@@ -90,9 +135,10 @@ const AddressForm = ({
   };
 
   const handlePincodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length <= 6) {
-      setPincode(event.target.value);
-    }
+    let value = event.target.value;
+    if (value.includes("e") || value.length > 6) return;
+
+    setPincode(value);
   };
 
   const handleLocalityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -132,7 +178,10 @@ const AddressForm = ({
   const handleSecondPhoneNumber = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSecondPhoneNumber(event.target.value);
+    let value = event.target.value;
+    if (value.length <= 10) {
+      setSecondPhoneNumber(value);
+    }
   };
 
   async function handleNextMove() {
@@ -140,20 +189,37 @@ const AddressForm = ({
       const prevStep = activeStep;
       setActiveStep(prevStep + 1);
     }
-    const addressId = uuidv4();
-    await customerAddressDuringOrder(
-      activeUserId,
-      addressId,
-      customerName,
-      phoneNumber,
-      pincode,
-      locality,
-      streetAddress,
-      city,
-      state,
-      landmark,
-      secondPhoneNumber
-    );
+    if (areAllFieldValid) {
+      const addressId = uuidv4();
+      await customerAddressDuringOrder(
+        activeUserId,
+        addressId,
+        customerName,
+        phoneNumber,
+        pincode,
+        locality,
+        streetAddress,
+        city,
+        state,
+        landmark,
+        secondPhoneNumber
+      );
+      await saveCustomerAddress(
+        activeUserId,
+        addressId,
+        customerName,
+        phoneNumber,
+        pincode,
+        locality,
+        streetAddress,
+        city,
+        state,
+        landmark,
+        secondPhoneNumber
+      );
+    } else {
+      alert("fields are not valid");
+    }
   }
 
   function goToPreviousMove() {
@@ -168,19 +234,24 @@ const AddressForm = ({
       addressFormType === "edit" && toEditAddressId
         ? toEditAddressId
         : uuidv4();
-    await saveCustomerAddress(
-      activeUserId,
-      addressId,
-      customerName,
-      phoneNumber,
-      pincode,
-      locality,
-      streetAddress,
-      city,
-      state,
-      landmark,
-      secondPhoneNumber
-    );
+    if (areAllFieldValid) {
+      await saveCustomerAddress(
+        activeUserId,
+        addressId,
+        customerName,
+        phoneNumber,
+        pincode,
+        locality,
+        streetAddress,
+        city,
+        state,
+        landmark,
+        secondPhoneNumber
+      );
+    } else {
+      alert("not valid data");
+    }
+
     if (setIsAddressFormOpen !== undefined && setUserAddresses !== undefined) {
       const response = await getCustomerSavedAddresses(activeUserId);
       setIsAddressFormOpen(false);
@@ -212,6 +283,9 @@ const AddressForm = ({
           type="number"
           variant="standard"
           value={pincode}
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+            prevent_e_onInputTypeNumber(event)
+          }
           onChange={handlePincodeChange}
         />
         <TextField
@@ -277,6 +351,9 @@ const AddressForm = ({
           id="outlined-number"
           label="Alternate Phone (Optional)"
           type="number"
+          onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+            prevent_e_onInputTypeNumber(event)
+          }
           variant="standard"
           value={secondPhoneNumber}
           onChange={handleSecondPhoneNumber}
@@ -287,17 +364,7 @@ const AddressForm = ({
           <Box className="checkout-address-save-and-cancel-buttons">
             <Button
               variant="contained"
-              // disabled={
-              //   customerName.length > 2 &&
-              //   phoneNumber.length > 1 &&
-              //   pincode.length > 1 &&
-              //   locality.length > 2 &&
-              //   streetAddress.length > 2 &&
-              //   city.length > 2 &&
-              //   inputState.length > 1
-              //     ? false
-              //     : true
-              // }
+              disabled={areAllFieldValid ? false : true}
               className="save-and-deliver"
               onClick={handleNextMove}
             >
@@ -319,8 +386,9 @@ const AddressForm = ({
           variant="contained"
           className="save-address"
           onClick={handleAddressSave}
+          disabled={areAllFieldValid ? false : true}
         >
-          Save Address
+          {addressFormType === "edit" ? "Update Address" : "Save Address"}
         </Button>
       )}
     </Container>

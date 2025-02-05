@@ -21,7 +21,12 @@ import {
   deletePaymentDetail,
 } from "../../../api/api";
 import { v4 as uuidv4 } from "uuid";
-import { titleCase } from "../../../helpers/titleCaseFunction";
+import {
+  titleCase,
+  validUpi,
+  validCard,
+  prevent_e_onInputTypeNumber,
+} from "../../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
 }
@@ -30,13 +35,15 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const [isCardDetailsFormOpen, setIsCardDetailsFormOpen] = useState(false);
   const [isUpiDetailsFormOpen, setIsUpiDetailsFormOpen] = useState(false);
   const [upiIdEntryName, setUpiIdEntryName] = useState("");
-  const [upiId, setUpiId] = useState<string | undefined>();
+  const [upiId, setUpiId] = useState<string>("");
   const [cardEntryName, setCardEntryName] = useState("");
-  const [cardNumber, setCardNumber] = useState<string | undefined>();
-  const [ownerName, setOwnerName] = useState<string | undefined>();
-  const [cardValidity, setCardValidity] = useState<string | undefined>();
-  const [cvv, setCvv] = useState<string | undefined>();
+  const [cardNumber, setCardNumber] = useState<string>("");
+  const [ownerName, setOwnerName] = useState<string>("");
+  const [cardValidity, setCardValidity] = useState<string>("");
+  const [cvv, setCvv] = useState<string>("");
   const [paymentDetails, setPaymentDetails] = useState<PaymentInterface>({});
+  const [isCardValid, setIsCardValid] = useState(false);
+  const [isUpiValid, setIsUpiValid] = useState(false);
 
   useEffect(() => {
     (async function () {
@@ -44,6 +51,20 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
       setPaymentDetails(response);
     })();
   }, []);
+
+  useEffect(() => {
+    if (cardValidity.length === 7) {
+      const isValid = validCard(cardNumber, ownerName, cardValidity, cvv);
+      isValid ? setIsCardValid(true) : setIsCardValid(false);
+    } else {
+      setIsCardValid(false);
+    }
+  }, [cardEntryName, cardNumber, ownerName, cardValidity, cvv]);
+
+  useEffect(() => {
+    const isValid = validUpi(upiId);
+    isValid ? setIsUpiValid(true) : setIsUpiValid(false);
+  }, [upiIdEntryName, upiId]);
 
   const saveCardDetails = async () => {
     await addCardDetails(
@@ -77,6 +98,43 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
     await deletePaymentDetail(id);
     const response = await getPaymentDetails();
     setPaymentDetails({ ...response });
+  };
+
+  const handleCardNumberChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    let value = event.target.value;
+    if (value.length > 16) {
+      return;
+    }
+    setCardNumber(value);
+  };
+
+  const handleCvvChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    let value = event.target.value;
+    if (value.length > 3) {
+      return;
+    }
+    setCvv(event.target.value);
+  };
+
+  const handleCardValidityChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    let value = event.target.value.replace(/[^\d/]/g, ""); // Keep digits and slash
+
+    // Check if backspace was used to remove slash
+    if (value.length === 3 && value.includes("/")) {
+      value = `${value.slice(0, 2)}`;
+    }
+
+    if (value.length > 7) return;
+    if (value.length === 3) {
+      value = `${value.slice(0, 2)}/${value.slice(2)}`;
+    }
+    setCardValidity(value);
   };
 
   return (
@@ -131,6 +189,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
             <Typography variant="h6">Enter your card details here</Typography>
             <Box sx={{ display: "block", width: "100%", marginTop: "1rem" }}>
               <TextField
+                required
                 id="outlined-basic"
                 label="Name of the entry"
                 variant="outlined"
@@ -142,14 +201,20 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
               />
             </Box>
             <TextField
+              required
+              type="number"
               id="outlined-basic"
               label="Card Number"
               variant="outlined"
               className="text-field"
-              onChange={(event) => setCardNumber(event.target.value)}
+              onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+                prevent_e_onInputTypeNumber(event)
+              }
+              onChange={handleCardNumberChange}
               value={cardNumber}
             />
             <TextField
+              required
               id="outlined-basic"
               label="Name on card"
               variant="outlined"
@@ -159,25 +224,32 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
             />
             <Box>
               <TextField
+                required
                 id="outlined-basic"
                 label="Valid Thru(MM/YY)"
                 variant="outlined"
                 className="text-field"
-                onChange={(event) => setCardValidity(event.target.value)}
+                onChange={handleCardValidityChange}
                 value={cardValidity}
               />
               <TextField
+                required
+                type="number"
                 id="outlined-basic"
                 label="CVV"
                 variant="outlined"
                 className="text-field"
-                onChange={(event) => setCvv(event.target.value)}
+                onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
+                  prevent_e_onInputTypeNumber(event)
+                }
+                onChange={handleCvvChange}
                 value={cvv}
               />
             </Box>
             <Button
-              className="save-button"
+              className="profile-saved-payments-save-button"
               variant="contained"
+              disabled={isCardValid ? false : true}
               onClick={saveCardDetails}
             >
               SAVE CARD
@@ -199,6 +271,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
           <Typography variant="h6">Enter your UPI details here</Typography>
           <Box sx={{ display: "block", width: "100%", marginTop: "1rem" }}>
             <TextField
+              required
               id="outlined-basic"
               label="Name of the entry"
               variant="outlined"
@@ -211,6 +284,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
           </Box>
           <Box sx={{ display: "block", width: "100%", marginTop: "1rem" }}>
             <TextField
+              required
               id="outlined-basic"
               label="Enter UPI ID here"
               variant="outlined"
@@ -220,8 +294,9 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
             />
           </Box>
           <Button
-            className="save-button"
+            className="profile-saved-payments-save-button"
             variant="contained"
+            disabled={isUpiValid ? false : true}
             onClick={saveUpiPaymentDetails}
           >
             Save Details

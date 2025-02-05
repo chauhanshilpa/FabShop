@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./PaymentList.css";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
@@ -12,15 +12,22 @@ import Container from "@mui/material/Container";
 import Image from "../Image/Image";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
+import { validUpi } from "../../helpers/commonFunctions";
 interface Props {
   activeUserId: string;
 }
 
 const UPIPayments = ({ activeUserId }: Props) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [upiId, setUpiId] = useState<string>("")
+  const [upiId, setUpiId] = useState<string>("");
+  const [isUpiValid, setIsUpiValid] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const isValid = validUpi(upiId);
+    isValid ? setIsUpiValid(true) : setIsUpiValid(false);
+  }, [upiId]);
 
   async function handleOrderConfirmation() {
     navigate("/checkout/confirmation");
@@ -88,13 +95,31 @@ const UPIPayments = ({ activeUserId }: Props) => {
         {selectedOption && (
           <Box className="UPI-Id-form">
             <TextField
+              required
               id="outlined-basic"
               label="Enter UPI ID here"
               variant="outlined"
               value={upiId}
               onChange={handleUpiIdChange}
+              // sx={{
+              //   "& .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused":
+              //     {
+              //       color: isUpiValid ? "auto" : "red",
+              //     },
+              //   "& .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+              //     {
+              //       borderColor: isUpiValid ? "auto" : "red",
+              //     },
+              // }}
             />
-            <Button onClick={handleOrderConfirmation} disabled={upiId.length > 0 ? false : true}>PAY NOW</Button>
+            <Button
+              variant="contained"
+              className="UPI-payments-button"
+              onClick={handleOrderConfirmation}
+              disabled={isUpiValid ? false : true}
+            >
+              PAY NOW
+            </Button>
           </Box>
         )}
       </Container>
