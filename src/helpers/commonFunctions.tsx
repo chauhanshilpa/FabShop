@@ -1,7 +1,7 @@
 import validator from "validator";
 
 export function titleCase(string: string) {
-  var wordsList = string.split(" ");
+  let wordsList = string.split(" ");
   for (let i = 0; i < wordsList.length; i++) {
     let word = wordsList[i];
     if (word.charAt(0).toUpperCase() === word.charAt(0)) {
@@ -12,6 +12,12 @@ export function titleCase(string: string) {
     }
   }
   return wordsList.join(" ");
+}
+
+export function sentenceCase(string: string) {
+  let sentenceCase =
+    string.slice(0, 1).toUpperCase() + string.slice(1, string.length);
+  return sentenceCase;
 }
 
 export function prevent_e_onInputTypeNumber(

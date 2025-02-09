@@ -17,6 +17,7 @@ import balloonGif from "../../api/assets/launch-successfull.gif";
 import cheerAudio from "../../api/assets/cheering-claps.mp3";
 import {
   prevent_e_onInputTypeNumber,
+  sentenceCase,
   titleCase,
   validLaunchpadInputs,
 } from "../../helpers/commonFunctions";
@@ -250,7 +251,7 @@ const Launchpad = ({ refreshProducts }: Props) => {
             multiline
             rows={4}
             value={description}
-            onChange={(event) => setDescription(titleCase(event.target.value))}
+            onChange={(event) => setDescription(sentenceCase(event.target.value))}
             defaultValue="This is a sample description"
             color="success"
           />
