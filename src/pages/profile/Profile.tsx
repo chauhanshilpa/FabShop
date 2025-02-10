@@ -49,7 +49,7 @@ const Profile = ({ isUserLoggedIn, activeUserId }: Props) => {
               {activeUser.name ? activeUser.name : "Username"}
             </Typography>
             <Typography className="second-heading">
-              {activeUser.contact ? activeUser.contact : "Contact"} &#124;{" "}
+              {activeUser.contact && <>activeUser.contact &#124; </>}
               {activeUser.email ? activeUser.email : "Email"}
             </Typography>
           </Box>

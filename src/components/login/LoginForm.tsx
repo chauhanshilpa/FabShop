@@ -32,6 +32,7 @@ interface Props {
   setIsUserLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setIsSignUpFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
+  setIsSellerLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function LoginForm({
@@ -40,6 +41,7 @@ export default function LoginForm({
   setIsUserLoggedIn,
   setIsSignUpFormOpen,
   setActiveUserId,
+  setIsSellerLoggedIn,
 }: Props) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -133,7 +135,7 @@ export default function LoginForm({
     );
     let response;
     if (personType === "seller") {
-      const isSellerExists = await checkSellerAvailability(email)
+      const isSellerExists = await checkSellerAvailability(credentials.email);
       if (isSellerExists === false) {
         await addNewSeller(
           credentials.name,
@@ -142,11 +144,15 @@ export default function LoginForm({
           ""
         );
       }
-      const sellerId = await getActiveSellerId(credentials.email, credentials.sub);
+      setIsSellerLoggedIn && setIsSellerLoggedIn(true);
+      const sellerId = await getActiveSellerId(
+        credentials.email,
+        credentials.sub
+      );
       navigate(`/seller/dashboard/${sellerId}`);
-      response = sellerId
+      response = sellerId;
     } else {
-      const isUserExists = await checkUserAvailability(email);
+      const isUserExists = await checkUserAvailability(credentials.email);
       if (isUserExists === false) {
         await addNewUser(
           credentials.name,

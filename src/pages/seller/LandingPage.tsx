@@ -33,6 +33,7 @@ const LandingPage = ({
           setIsUserLoggedIn={setIsSellerLoggedIn}
           setIsSignUpFormOpen={setIsSignupFormOpen}
           setActiveUserId={setActiveSellerId}
+          setIsSellerLoggedIn={setIsSellerLoggedIn}
         />
       )}
       <Box className="seller-perks-container">

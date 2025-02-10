@@ -171,7 +171,7 @@ const SignUpForm = ({
     const credentials = jwtDecode<{ name: string; email: string; sub: string }>(
       userInfo.credential
     );
-    const isUserExists = await checkUserAvailability(email);
+    const isUserExists = await checkUserAvailability(credentials.email);
     if (isUserExists === false) {
       await addNewUser(
         credentials.name,

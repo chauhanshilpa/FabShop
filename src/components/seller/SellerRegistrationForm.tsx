@@ -72,8 +72,7 @@ const SellerRegistrationForm = ({
       email: string;
       sub: string;
     }>(userInfo.credential);
-
-    const isSellerExists = await checkSellerAvailability(sellerMail);
+    const isSellerExists = await checkSellerAvailability(credentials.email);
     if (isSellerExists === false) {
       await addNewSeller(
         credentials.name,
