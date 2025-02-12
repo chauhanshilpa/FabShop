@@ -79,3 +79,18 @@ export const PRODUCT_TYPE: readonly ProductTypeInterface[] = [
   { title: "trouser" },
   { title: "jumpsuit" },
 ];
+
+export const POPULAR_SEARCHES = [
+  { product: "Dresses", value: "glittered dress" },
+  { product: "Bodysuit", value: "bodysuit" },
+  { product: "T-Shirts", value: "t-shirt" },
+  { product: "Sandals", value: "sandal" },
+  { product: "Handbags", value: "handbag" },
+  { product: "Watches", value: "watch" },
+  { product: "Bags", value: "bag" },
+  { product: "Shoes", value: "shoes" },
+  { product: "Tops", value: "top" },
+  { product: "Jeans", value: "jeans" },
+  { product: "Shorts", value: "shorts" },
+  { product: "Shirt", value: "shirt" },
+];

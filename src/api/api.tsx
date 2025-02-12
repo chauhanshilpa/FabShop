@@ -366,9 +366,13 @@ export async function getSearchedProducts(text: string) {
   const searchedProducts = allProducts.filter(
     (product) =>
       product.category.toLowerCase().includes(text.toLowerCase()) ||
+      product.category.toLowerCase() === text.toLowerCase() ||
       product.type.toLowerCase().includes(text.toLowerCase()) ||
+      product.type.toLowerCase() === text.toLowerCase() ||
       product.sub_category.toLowerCase().includes(text.toLowerCase()) ||
-      product.name.includes(text.toLowerCase())
+      product.sub_category.toLowerCase() === text.toLowerCase() ||
+      product.name.includes(text.toLowerCase()) ||
+      product.name.toLowerCase() === text.toLowerCase()
   );
   return searchedProducts;
 }

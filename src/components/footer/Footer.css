@@ -8,6 +8,13 @@
 .footer .icon {
   cursor: pointer;
   margin-right: 20px;
+  color: #5A5A5A;
+}
+
+.footer .icon:hover{
+  cursor: pointer;
+  margin-right: 20px;
+  color: #454545;
 }
 
 .footer a {
