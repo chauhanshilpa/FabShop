@@ -37,6 +37,8 @@ interface Props {
   setRecentlyViewedProductsList: React.Dispatch<
     React.SetStateAction<Product[]>
   >;
+  isSellerLoggedIn: boolean;
+  activeSellerId: string;
 }
 
 function Navbar({
@@ -50,6 +52,8 @@ function Navbar({
   setCartProductsList,
   setOrdersData,
   setRecentlyViewedProductsList,
+  isSellerLoggedIn,
+  activeSellerId,
 }: Props) {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -209,7 +213,11 @@ function Navbar({
               className="store-icon"
               onClick={() => {
                 setPersonType("seller");
-                navigate("/seller/landing-page");
+                if (isSellerLoggedIn) {
+                  navigate(`/seller/dashboard/${activeSellerId}`);
+                } else {
+                  navigate("/seller/landing-page");
+                }
               }}
             >
               <Tooltip title="login as seller">

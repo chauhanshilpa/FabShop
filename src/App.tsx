@@ -127,8 +127,8 @@ function App() {
       {personType === "seller" ? (
         <SellerNavbar
           setPersonType={setPersonType}
-          setActiveSellerId={setActiveSellerId}
-          setIsSellerLoggedIn={setIsSellerLoggedIn}
+          isSellerLoggedIn={isSellerLoggedIn}
+          activeSellerId={activeSellerId}
         />
       ) : (
         <Navbar
@@ -142,6 +142,8 @@ function App() {
           setCartProductsList={setCartProductsList}
           setOrdersData={setOrdersData}
           setRecentlyViewedProductsList={setRecentlyViewedProductsList}
+          isSellerLoggedIn={isSellerLoggedIn}
+          activeSellerId={activeSellerId}
         />
       )}
       {isLoginFormOpen && !isUserLoggedIn && (
@@ -263,6 +265,7 @@ function App() {
               activeSellerId={activeSellerId}
               setActiveSellerId={setActiveSellerId}
               isSellerLoggedIn={isSellerLoggedIn}
+              setIsSellerLoggedIn={setIsSellerLoggedIn}
             />
           }
         />

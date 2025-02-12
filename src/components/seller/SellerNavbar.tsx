@@ -8,16 +8,24 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   setPersonType: React.Dispatch<React.SetStateAction<string>>;
-  setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
-  setIsSellerLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  isSellerLoggedIn: boolean;
+  activeSellerId: string;
 }
 
 function SellerNavbar({
   setPersonType,
-  setActiveSellerId,
-  setIsSellerLoggedIn,
+  isSellerLoggedIn,
+  activeSellerId,
 }: Props) {
   const navigate = useNavigate();
+
+  function handleLogoClick() {
+    if (isSellerLoggedIn) {
+      navigate(`/seller/dashboard/${activeSellerId}`);
+    } else {
+      navigate("/seller/landing-page");
+    }
+  }
 
   return (
     <>
@@ -45,11 +53,7 @@ function SellerNavbar({
                   cursor: "pointer",
                 }}
                 className="app-logo"
-                onClick={() => {
-                  navigate("/seller/landing-page");
-                  setActiveSellerId("");
-                  setIsSellerLoggedIn(false);
-                }}
+                onClick={handleLogoClick}
               >
                 FabShop
               </Typography>
@@ -71,8 +75,6 @@ function SellerNavbar({
                 onClick={() => {
                   navigate("/");
                   setPersonType("customer");
-                  setActiveSellerId("");
-                  setIsSellerLoggedIn(false);
                 }}
               >
                 Switch to customer
@@ -102,11 +104,7 @@ function SellerNavbar({
                   cursor: "pointer",
                 }}
                 className="app-logo"
-                onClick={() => {
-                  navigate("/seller/landing-page");
-                  setActiveSellerId("");
-                  setIsSellerLoggedIn(false);
-                }}
+                onClick={handleLogoClick}
               >
                 FabShop
               </Typography>
@@ -128,8 +126,6 @@ function SellerNavbar({
                 onClick={() => {
                   navigate("/");
                   setPersonType("customer");
-                  setActiveSellerId("");
-                  setIsSellerLoggedIn(false);
                 }}
               >
                 Switch to customer

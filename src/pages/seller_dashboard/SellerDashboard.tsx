@@ -11,9 +11,15 @@ interface Props {
   activeSellerId: string;
   setActiveSellerId: React.Dispatch<React.SetStateAction<string>>;
   isSellerLoggedIn: boolean;
+  setIsSellerLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SellerDashboard = ({ activeSellerId, setActiveSellerId, isSellerLoggedIn }: Props) => {
+const SellerDashboard = ({
+  activeSellerId,
+  setActiveSellerId,
+  isSellerLoggedIn,
+  setIsSellerLoggedIn,
+}: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -52,6 +58,7 @@ const SellerDashboard = ({ activeSellerId, setActiveSellerId, isSellerLoggedIn }
           onClick={() => {
             navigate("/seller/landing-page");
             setActiveSellerId("");
+            setIsSellerLoggedIn(false);
           }}
         >
           <LogoutIcon sx={{ marginRight: "1rem" }} />
