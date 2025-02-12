@@ -11,7 +11,8 @@ import Profile from "./pages/profile/Profile";
 import Wishlist from "./pages/wishlist/Wishlist";
 import Orders from "./pages/orders/Orders";
 import Checkout from "./pages/checkout/checkout_main/Checkout";
-import Footer from "./components/footer/Footer";
+import CustomerFooter from "./components/customer-footer/Footer";
+import SellerFooter from "./components/seller-footer/Footer";
 import { Product } from "./api/classModels";
 import {
   addItemToCart,
@@ -108,7 +109,7 @@ function App() {
       setWishlistProductsList([...response]);
     }
   }
-  
+
   async function removeFromWishlist(productId: string) {
     await removeItemFromWishlist(activeUserId, productId);
     const response = await getWishlist(activeUserId);
@@ -270,7 +271,7 @@ function App() {
           element={<Launchpad refreshProducts={refreshProducts} />}
         />
       </Routes>
-      <Footer />
+      {personType === "seller" ? <SellerFooter /> : <CustomerFooter />}
     </>
   );
 }
