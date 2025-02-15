@@ -1,7 +1,14 @@
-.seller-dashboard :nth-child(1) {
+.seller-dashboard .row-1 {
+    position: sticky;
+    top: 4.28rem;
+    background-color: rgb(248, 248, 248);
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    z-index: 98;
+    width: 100%;
+    margin-bottom: 1rem;
+    /* box-shadow: 2px 2px 5px rgb(166, 164, 164); */
 }
 
 .seller-dashboard .button {

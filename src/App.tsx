@@ -271,7 +271,7 @@ function App() {
         />
         <Route
           path="/seller/launchpad"
-          element={<Launchpad refreshProducts={refreshProducts} />}
+          element={<Launchpad refreshProducts={refreshProducts} activeSellerId={activeSellerId}/>}
         />
       </Routes>
       {personType === "seller" ? <SellerFooter /> : <CustomerFooter />}

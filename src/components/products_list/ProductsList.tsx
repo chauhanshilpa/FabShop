@@ -5,11 +5,19 @@ import Grid from "@mui/material/Grid";
 import { Product } from "../../api/classModels";
 import { Typography } from "@mui/material";
 
-const ProductList = ({ productsList }: { productsList: Product[] }) => {
+interface Props {
+  productsList: Product[];
+  userType?: string;
+}
+const ProductList = ({ productsList, userType }: Props) => {
   return (
     <Container className="products-list">
       {productsList.length === 0 ? (
-        <Typography variant="body2" sx={{lineHeight: "8"}}>No Product To Display😣</Typography>
+        <Typography variant="body2" sx={{ lineHeight: "8" }}>
+          {userType
+            ? "You have not launched any products yet. Start adding your products to showcase them here!"
+            : "No Product To Display😣"}
+        </Typography>
       ) : (
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {productsList.map((product) => (

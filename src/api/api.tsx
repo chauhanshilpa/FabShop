@@ -51,6 +51,10 @@ export interface CartTotalAmount {
   [key: string]: number;
 }
 
+export interface allSellersProductListInterface {
+  [key: string]: Product[];
+}
+
 /**
  * A separate file which is created with a thinking that, later I have to integrate backend. Instead making changes in different files, I wrote all logic here so that changes happen to this file only.
  * all logic that a backend do
@@ -67,9 +71,9 @@ let customerDeliveryAddress: CustomerDeliveryAddressInterface = {};
 let customerSavedAddresses: savedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
 let savedPaymentDetails: PaymentInterface = {};
+let allSellersProductList: allSellersProductListInterface = {};
 
 // seller and user
-
 export async function checkSellerAvailability(email: string) {
   const isSellerExists = sellerList.some((user) => user.email === email);
   return isSellerExists;
@@ -173,6 +177,7 @@ export async function addNewProduct(
     ratings
   );
   allProducts.push(newProduct);
+  return newProduct;
 }
 
 export async function fetchAllProducts() {
@@ -540,4 +545,34 @@ export async function deletePaymentDetail(id: string) {
 
 export async function getPaymentDetails() {
   return savedPaymentDetails;
+}
+
+export async function saveLaunchProductsWithSellerId(
+  sellerId: string,
+  category: string,
+  subCategory: string,
+  productType: string,
+  price: number,
+  imageUrl: string,
+  name: string,
+  description: string
+) {
+  const product = await addNewProduct(
+    category,
+    subCategory,
+    productType,
+    price,
+    imageUrl,
+    name,
+    description
+  );
+  if (allSellersProductList[sellerId]) {
+    allSellersProductList[sellerId].push({ ...product });
+  } else {
+    allSellersProductList[sellerId] = [{ ...product }];
+  }
+}
+
+export async function getSellerProducts(sellerId: string) {
+  return allSellersProductList[sellerId] ? allSellersProductList[sellerId] : [];
 }

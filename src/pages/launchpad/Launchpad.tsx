@@ -12,7 +12,7 @@ import {
   ProductTypeInterface,
 } from "../../helpers/FabShop_constants";
 import Button from "@mui/material/Button";
-import { addNewProduct } from "../../api/api";
+import { addNewProduct, saveLaunchProductsWithSellerId } from "../../api/api";
 import balloonGif from "../../api/assets/launch-successfull.gif";
 import cheerAudio from "../../api/assets/cheering-claps.mp3";
 import {
@@ -24,9 +24,10 @@ import {
 
 interface Props {
   refreshProducts: () => Promise<void>;
+  activeSellerId: string;
 }
 
-const Launchpad = ({ refreshProducts }: Props) => {
+const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
   const [category, setCategory] = useState<string | null>(null);
   const [categoryInputValue, setCategoryInputValue] = useState("");
   const [subCategory, setSubCategory] = useState<string | null>(null);
@@ -121,6 +122,16 @@ const Launchpad = ({ refreshProducts }: Props) => {
     setTimeout(() => {
       setLauchSuccessfull(false);
     }, 2000);
+    await saveLaunchProductsWithSellerId(
+      activeSellerId,
+      category as string,
+      subCategory as string,
+      productTypeTitle,
+      Number(price),
+      imageUrl,
+      name,
+      description
+    );
     refreshInputsToInitialState();
     await refreshProducts();
   };
@@ -251,8 +262,9 @@ const Launchpad = ({ refreshProducts }: Props) => {
             multiline
             rows={4}
             value={description}
-            onChange={(event) => setDescription(sentenceCase(event.target.value))}
-            defaultValue="This is a sample description"
+            onChange={(event) =>
+              setDescription(sentenceCase(event.target.value))
+            }
             color="success"
           />
         </Box>
