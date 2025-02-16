@@ -1,37 +1,38 @@
-.footer {
-    margin-top: 50px;
+.seller-footer {
+    margin-top: 60px;
     padding-left: 2rem;
     padding-right: 2rem;
     color: #5F5F5F;
+    bottom: 0;
 }
 
-.footer .icon {
+.seller-footer .icon {
     cursor: pointer;
     margin-right: 20px;
     color: #5A5A5A;
 }
 
-.footer .icon:hover {
+.seller-footer .icon:hover {
     cursor: pointer;
     margin-right: 20px;
     color: #454545;
 }
 
-.footer a {
+.seller-footer a {
     line-height: 1.4;
 }
 
-.footer a:hover {
+.seller-footer a:hover {
     color: rgb(8, 8, 78);
 }
 
-.footer .row-1 {
+.seller-footer .row-1 {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1.5rem;
 }
 
-.footer .heading {
+.seller-footer .heading {
     font-weight: 700;
     margin-bottom: 2rem;
     line-height: 3;

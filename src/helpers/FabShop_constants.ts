@@ -94,3 +94,18 @@ export const POPULAR_SEARCHES = [
   { product: "Shorts", value: "shorts" },
   { product: "Shirt", value: "shirt" },
 ];
+
+export const POPULAR_CATEGORIES_TO_SELL = [
+  "Dresses",
+  "Bodysuit",
+  "T-Shirts",
+  "Sandals",
+  "Handbags",
+  "Watches",
+  "Bags",
+  "Shoes",
+  "Tops",
+  "Jeans",
+  "Shorts",
+  "Shirt"
+];
