@@ -29,7 +29,7 @@ const SellerDashboard = ({
   useEffect(() => {
     (async function () {
       const response = await getSellerProducts(activeSellerId);
-      setSellerProducts([...response]);
+      response && setSellerProducts([...response]);
     })();
     //eslint-disable-next-line
   }, []);

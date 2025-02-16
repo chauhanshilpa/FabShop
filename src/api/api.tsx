@@ -72,9 +72,9 @@ let customerSavedAddresses: savedAddressesInterface = {};
 let orderedProducts: OrderInterface = {};
 let savedPaymentDetails: PaymentInterface = {};
 let allSellersProductList: allSellersProductListInterface = {};
+let newAddedProduct: Product;
 
 // user
-
 export async function checkUserAvailability(email: string) {
   const isUserExists = usersList.some((user) => user.email === email);
   return isUserExists;
@@ -165,24 +165,19 @@ export async function saveLaunchProductsWithSellerId(
   name: string,
   description: string
 ) {
-  const product = await addNewProduct(
-    category,
-    subCategory,
-    productType,
-    price,
-    imageUrl,
-    name,
-    description
-  );
   if (allSellersProductList[sellerId]) {
-    allSellersProductList[sellerId].push({ ...product });
+    allSellersProductList[sellerId].push({ ...newAddedProduct });
   } else {
-    allSellersProductList[sellerId] = [{ ...product }];
+    allSellersProductList[sellerId] = [{ ...newAddedProduct }];
   }
 }
 
 export async function getSellerProducts(sellerId: string) {
-  return allSellersProductList[sellerId] ? allSellersProductList[sellerId] : [];
+  if (allSellersProductList[sellerId]) {
+    return allSellersProductList[sellerId];
+  } else {
+    return [];
+  }
 }
 
 // product
@@ -211,8 +206,8 @@ export async function addNewProduct(
     description,
     ratings
   );
+   newAddedProduct = newProduct;
   allProducts.push(newProduct);
-  return newProduct;
 }
 
 export async function fetchAllProducts() {
@@ -581,4 +576,3 @@ export async function deletePaymentDetail(id: string) {
 export async function getPaymentDetails() {
   return savedPaymentDetails;
 }
-
