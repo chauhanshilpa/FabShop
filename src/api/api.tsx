@@ -73,7 +73,46 @@ let orderedProducts: OrderInterface = {};
 let savedPaymentDetails: PaymentInterface = {};
 let allSellersProductList: allSellersProductListInterface = {};
 
-// seller and user
+// user
+
+export async function checkUserAvailability(email: string) {
+  const isUserExists = usersList.some((user) => user.email === email);
+  return isUserExists;
+}
+
+export async function addNewUser(
+  name: string,
+  email: string,
+  password: string,
+  contact: string
+) {
+  const newUserId = uuidv4();
+  const newUser = new User(newUserId, email, name, password, contact);
+  usersList.push(newUser);
+}
+
+export async function getActiveUserId(email: string, password: string) {
+  const activeUser = usersList.filter(
+    (user) => user.email === email && user.password === password
+  );
+  if (activeUser.length >= 1) {
+    return activeUser[0].id;
+  } else {
+    return "";
+  }
+}
+
+export async function getActiveUserDetails(userId: string) {
+  const activeUser = usersList.filter((user) => user.id === userId)[0];
+  return {
+    name: activeUser.name,
+    email: activeUser.email,
+    contact: activeUser.contact,
+  };
+}
+
+// seller
+
 export async function checkSellerAvailability(email: string) {
   const isSellerExists = sellerList.some((user) => user.email === email);
   return isSellerExists;
@@ -116,41 +155,37 @@ export async function getActiveSellerId(email: string, password: string) {
   }
 }
 
-export async function checkUserAvailability(email: string) {
-  const isUserExists = usersList.some((user) => user.email === email);
-  return isUserExists;
-}
-
-export async function addNewUser(
+export async function saveLaunchProductsWithSellerId(
+  sellerId: string,
+  category: string,
+  subCategory: string,
+  productType: string,
+  price: number,
+  imageUrl: string,
   name: string,
-  email: string,
-  password: string,
-  contact: string
+  description: string
 ) {
-  const newUserId = uuidv4();
-  const newUser = new User(newUserId, email, name, password, contact);
-  usersList.push(newUser);
-}
-
-export async function getActiveUserId(email: string, password: string) {
-  const activeUser = usersList.filter(
-    (user) => user.email === email && user.password === password
+  const product = await addNewProduct(
+    category,
+    subCategory,
+    productType,
+    price,
+    imageUrl,
+    name,
+    description
   );
-  if (activeUser.length >= 1) {
-    return activeUser[0].id;
+  if (allSellersProductList[sellerId]) {
+    allSellersProductList[sellerId].push({ ...product });
   } else {
-    return "";
+    allSellersProductList[sellerId] = [{ ...product }];
   }
 }
 
-export async function getActiveUserDetails(userId: string) {
-  const activeUser = usersList.filter((user) => user.id === userId)[0];
-  return {
-    name: activeUser.name,
-    email: activeUser.email,
-    contact: activeUser.contact,
-  };
+export async function getSellerProducts(sellerId: string) {
+  return allSellersProductList[sellerId] ? allSellersProductList[sellerId] : [];
 }
+
+// product
 
 export async function addNewProduct(
   category: string,
@@ -547,32 +582,3 @@ export async function getPaymentDetails() {
   return savedPaymentDetails;
 }
 
-export async function saveLaunchProductsWithSellerId(
-  sellerId: string,
-  category: string,
-  subCategory: string,
-  productType: string,
-  price: number,
-  imageUrl: string,
-  name: string,
-  description: string
-) {
-  const product = await addNewProduct(
-    category,
-    subCategory,
-    productType,
-    price,
-    imageUrl,
-    name,
-    description
-  );
-  if (allSellersProductList[sellerId]) {
-    allSellersProductList[sellerId].push({ ...product });
-  } else {
-    allSellersProductList[sellerId] = [{ ...product }];
-  }
-}
-
-export async function getSellerProducts(sellerId: string) {
-  return allSellersProductList[sellerId] ? allSellersProductList[sellerId] : [];
-}

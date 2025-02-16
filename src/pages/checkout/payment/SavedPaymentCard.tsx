@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { Box, Card, Typography, Radio, Button } from "@mui/material";
-import { Address } from "../../../api/classModels";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import {
-  getCustomerSavedAddresses,
-  customerAddressDuringOrder,
   getPaymentDetails,
   PaymentInterface,
   savedCardInterface,
