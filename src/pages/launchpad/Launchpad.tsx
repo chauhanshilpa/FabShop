@@ -21,7 +21,7 @@ import {
   titleCase,
   validLaunchpadInputs,
 } from "../../helpers/commonFunctions";
-
+import { useNavigate } from "react-router-dom";
 interface Props {
   refreshProducts: () => Promise<void>;
   activeSellerId: string;
@@ -44,6 +44,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
   const [imageUrlActiveField, setImageUrlActiveField] = useState("");
   const [launchSuccessfull, setLauchSuccessfull] = useState(false);
   const [isValid, setIsValid] = useState(false);
+  const [isLaunchButtonClicked, setIsLaunchButtonClicked] = useState(false);
 
   useEffect(() => {
     if (productType) {
@@ -82,6 +83,8 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
     imageUrl,
   ]);
 
+  const navigate = useNavigate();
+
   const handleFileChange = (newValue: File | null) => {
     setBrowsedImage(newValue);
     if (newValue) {
@@ -107,6 +110,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
   };
 
   const launchProduct = async () => {
+    setIsLaunchButtonClicked(true);
     await addNewProduct(
       category as string,
       subCategory as string,
@@ -148,10 +152,12 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
             value={category}
             onChange={(event: any, newValue: string | null) => {
               setCategory(newValue);
+              setIsLaunchButtonClicked(false);
             }}
             inputValue={categoryInputValue}
             onInputChange={(event, newInputValue) => {
               setCategoryInputValue(newInputValue);
+              setIsLaunchButtonClicked(false);
             }}
             id="controllable-states-demo"
             options={CATEGORY_LIST}
@@ -165,10 +171,12 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
             value={subCategory}
             onChange={(event: any, newValue: string | null) => {
               setSubCategory(newValue);
+              setIsLaunchButtonClicked(false);
             }}
             inputValue={subCategoryInputValue}
             onInputChange={(event, newInputValue) => {
               setSubCategoryInputValue(newInputValue);
+              setIsLaunchButtonClicked(false);
             }}
             id="controllable-states-demo launchpad_subCategoryInput"
             options={SUB_CATEGORY_LIST}
@@ -204,7 +212,10 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
             label="Name"
             variant="outlined"
             value={name}
-            onChange={(event) => setName(titleCase(event.target.value))}
+            onChange={(event) => {
+              setName(titleCase(event.target.value));
+              setIsLaunchButtonClicked(false);
+            }}
             color="success"
           />
           <TextField
@@ -218,7 +229,10 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
             onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) =>
               prevent_e_onInputTypeNumber(event)
             }
-            onChange={(event) => setPrice(event.target.value)}
+            onChange={(event) => {
+              setPrice(event.target.value);
+              setIsLaunchButtonClicked(false);
+            }}
             color="success"
           />
         </Box>
@@ -249,6 +263,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
             onChange={(event) => {
               setImageUrl(event.target.value);
               setBrowsedImage(null);
+              setIsLaunchButtonClicked(false);
             }}
             onClick={() => setImageUrlActiveField("textField")}
           />
@@ -262,9 +277,10 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
             multiline
             rows={4}
             value={description}
-            onChange={(event) =>
-              setDescription(sentenceCase(event.target.value))
-            }
+            onChange={(event) => {
+              setDescription(sentenceCase(event.target.value));
+              setIsLaunchButtonClicked(false);
+            }}
             color="success"
           />
         </Box>
@@ -291,6 +307,42 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
           >
             Launch Now&nbsp;🚀
           </Button>
+        </Box>
+        <Box className="text-after-launch">
+          {isLaunchButtonClicked && (
+            <>
+              <Typography sx={{ fontWeight: "bold", color: "#4C585B" }}>
+                Click
+                <b
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() =>
+                    navigate(`/seller/dashboard/${activeSellerId}`)
+                  }
+                >
+                  &nbsp;Fabshop logo&nbsp;
+                </b>
+                to see launched product
+              </Typography>
+              <Typography
+                sx={{
+                  fontWeight: "bold",
+                  color: "#4C585B",
+                  cursor: "pointer",
+                  "&:hover": {
+                    color: "#658147",
+                  },
+                }}
+                onClick={() => {
+                  setIsLaunchButtonClicked(false);
+                  window.scrollTo(0, 0);
+                }}
+              >
+                or launch new product
+              </Typography>
+            </>
+          )}
         </Box>
       </Box>
     </>

@@ -53,7 +53,7 @@ const OrderedItemDetails = () => {
           {address.city}, {address.state}
         </Typography>
         <Typography>
-          {address.phoneNumber}, {address.secondPhoneNumber}
+          {address.phoneNumber}{address.secondPhoneNumber &&`, ${address.secondPhoneNumber}`}
         </Typography>
       </Card>
       <Box className="together-ordered-products">

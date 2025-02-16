@@ -60,7 +60,13 @@
     from {
         top: 160%;
     }
+
     to {
         top: 0%;
     }
 }
+
+.text-after-launch{
+ text-align: center;
+}
+
