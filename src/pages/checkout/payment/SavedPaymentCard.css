@@ -1,0 +1,32 @@
+.saved-payment-container-during-checkout {
+    margin-top: 1rem;
+}
+
+.saved-upi-payment-details,
+.saved-card-payment-details {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.saved-upi-payment-details,
+.saved-card-payment-details {
+    padding: 1rem;
+}
+
+.proceed_button {
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    padding-inline: 1rem;
+    background-color: #ffaf03;
+    color: white;
+    margin-left: 3.5rem;
+}
+
+.proceed_button:hover {
+    background-color: #ffc436;
+}
+
+.cancel_button {
+    margin: 0.5rem;
+    padding: 0.5rem;
+}

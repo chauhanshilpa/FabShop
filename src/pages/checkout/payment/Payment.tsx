@@ -11,6 +11,7 @@ import CardPayment from "../../../components/payments_type/CardPayment";
 import UPIPayments from "../../../components/payments_type/UPIPayments";
 import CashOnDeliveryPayment from "../../../components/payments_type/CashOnDeliveryPayment";
 import ScrollToTop from "../../../components/utils/ScrollToTop";
+import SavedPaymentCard from "./SavedPaymentCard";
 interface Props {
   activeUserId: string;
 }
@@ -102,6 +103,7 @@ export default function Payment({ activeUserId }: Props) {
             {openUPIPayment && <UPIPayments activeUserId={activeUserId} />}
           </Grid>
         </Grid>
+        <SavedPaymentCard activeUserId={activeUserId} />
       </Container>
     </>
   );
