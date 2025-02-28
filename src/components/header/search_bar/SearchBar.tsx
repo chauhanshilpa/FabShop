@@ -44,6 +44,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+/**
+ * 
+ * @returns search bar
+ */
 const SearchBar = () => {
   const [query, setQuery] = useState<string>("");
 

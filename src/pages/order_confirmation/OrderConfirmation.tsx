@@ -21,12 +21,17 @@ interface Props {
   setOrdersData: React.Dispatch<React.SetStateAction<SingleOrderInterface[]>>;
 }
 
+/**
+ * 
+ * @returns confirmation page to show sucees order placement.
+ */
 const OrderConfirmation = ({
   activeUserId,
   setCartProductsList,
   setOrdersData,
 }: Props) => {
 
+  // runs whenever confirmation page opens.
   useEffect(() => {
     (async function () {
       let orderedProductsList = await getCartProductsList(activeUserId);

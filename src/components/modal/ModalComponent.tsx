@@ -11,6 +11,10 @@ interface Props {
   description: string;
 }
 
+/**
+ * 
+ * @returns a reusable component to show some message/notification/alert.
+ */
 const ModalComponent = ({ togglePopup, title, description }: Props) => {
   const [open, setOpen] = useState(false);
 

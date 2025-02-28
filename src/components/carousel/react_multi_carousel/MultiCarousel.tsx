@@ -23,6 +23,10 @@ const responsive = {
   },
 };
 
+/**
+ * 
+ * @returns carousel where we can add multiple products (here for today's deals)
+ */
 const MultiCarousel = ({ listOfProducts }: { listOfProducts: Product[] }) => {
   return (
     <Carousel

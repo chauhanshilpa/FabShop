@@ -12,6 +12,10 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ * 
+ * @returns card payment with a form to fill card detail and 'PAY NOW' button.
+ */
 const CardPayment = ({ activeUserId }: Props) => {
   const [cardNumber, setCardNumber] = useState<string>("");
   const [NameOnCard, setNameOnCard] = useState<string>("");

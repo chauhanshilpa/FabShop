@@ -11,6 +11,10 @@ interface Props {
   handleOrderPlacement: () => void;
 }
 
+/**
+ * 
+ * @returns section in cart which gives details or cart's total price.
+ */
 const CartPriceDetails = ({
   cartTotalAmount,
   cartProductsPrice,

@@ -21,6 +21,10 @@ function Copyright() {
   );
 }
 
+/**
+ * 
+ * @returns customer footer.
+ */
 const Footer = () => {
   const navigate = useNavigate();
 

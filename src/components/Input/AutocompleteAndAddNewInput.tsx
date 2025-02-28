@@ -15,6 +15,10 @@ interface Props {
   >;
 }
 
+/**
+ * 
+ * @returns input for autocomplete where we can also add new input (here for launchpad)
+ */
 const AutocompleteAndAddNewInput = ({ productType, setProductType }: Props) => {
   return (
     <Autocomplete

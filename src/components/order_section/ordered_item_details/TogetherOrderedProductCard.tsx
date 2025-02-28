@@ -5,7 +5,15 @@ import Typography from "@mui/material/Typography";
 import { CartProductInterface } from "../../../api/api";
 import { useNavigate } from "react-router-dom";
 
-const TogetherOrderedProductCard = ({ product }: { product: CartProductInterface }) => {
+/**
+ *
+ * @returns product card for a single product on together ordered product page in orders.
+ */
+const TogetherOrderedProductCard = ({
+  product,
+}: {
+  product: CartProductInterface;
+}) => {
   const navigate = useNavigate();
 
   function openProduct(product_id: string) {
@@ -22,7 +30,9 @@ const TogetherOrderedProductCard = ({ product }: { product: CartProductInterface
       </Box>
       <Box className="product-data">
         <Typography className="product-name">{product.name}</Typography>
-        <Typography variant="caption" sx={{color: "rgba(0, 0, 0, 0.6)"}}>Quantity: {product.quantity}</Typography>
+        <Typography variant="caption" sx={{ color: "rgba(0, 0, 0, 0.6)" }}>
+          Quantity: {product.quantity}
+        </Typography>
         <Typography className="product-description">
           {product.description}
         </Typography>

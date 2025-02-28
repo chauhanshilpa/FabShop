@@ -28,6 +28,10 @@ const stepStyle = {
   "& .MuiStepLabel-label.Mui-completed": { color: "#20BD99" },
 };
 
+/**
+ * 
+ * @returns checkout process with 3 steps: cart, address and payment.
+ */
 export default function Checkout({
   activeUserId,
   cartProductsList,

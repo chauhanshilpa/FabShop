@@ -41,6 +41,15 @@ import SellerDashboard from "./pages/seller_dashboard/SellerDashboard";
 import SellerNavbar from "./components/seller/SellerNavbar";
 import Launchpad from "./pages/launchpad/Launchpad";
 
+/**
+ * 
+ * @returns main component where are routes are defined.
+ * A scroll to top component so that a new page always opens from top.
+ * Respective Navbars for seller and customer.
+ * Login and signup form is user is not logged in.
+ * Respective Footer for seller and customer.
+ * 
+ */
 function App() {
   const [personType, setPersonType] = useState("customer");
   const [activeUserId, setActiveUserId] = useState<string>("");
@@ -61,6 +70,9 @@ function App() {
     Product[]
   >([]);
 
+  /**
+   * Changes personType or user type(customer or seller) according to the pathname in url.
+   */
   useEffect(() => {
     const pathname = window.location.pathname;
     if (pathname.includes("seller")) {
@@ -70,6 +82,9 @@ function App() {
     }
   }, []);
 
+  /**
+   * fetches initial information. Ex- cart products, wishlist products, orders if user is logged in has these data. It also fetches all the products existing in app.
+   */
   useEffect(() => {
     const fetchInitialInformation = async () => {
       const productList = await fetchAllProducts();
@@ -87,18 +102,33 @@ function App() {
     //eslint-disable-next-line
   }, [activeUserId]);
 
+  /**
+   *
+   * @param productId        unique id of product
+   * Adds a product to cart and immediately set cart products.
+   */
   async function addToCart(productId: string) {
     await addItemToCart(activeUserId, productId);
     const response = await getCartProductsList(activeUserId);
     setCartProductsList([...response]);
   }
 
+  /**
+   *
+   * @param productId       unique id of product
+   * Removes a product from cart and immediately set cart products.
+   */
   async function removeFromCart(productId: string) {
     await removeItemFromCart(activeUserId, productId);
     const response = await getCartProductsList(activeUserId);
     setCartProductsList([...response]);
   }
 
+  /**
+   *
+   * @param productId       unique id of product
+   * Add product to wishlist and immediately set wishlist.
+   */
   async function addToWishlist(productId: string) {
     const isWishlisted = wishlistProductsList.some(
       (product) => product.id === productId
@@ -110,12 +140,20 @@ function App() {
     }
   }
 
+  /**
+   *
+   * @param productId       unique id of product
+   * Removes product from wishlist and immediately set wishlist.
+   */
   async function removeFromWishlist(productId: string) {
     await removeItemFromWishlist(activeUserId, productId);
     const response = await getWishlist(activeUserId);
     setWishlistProductsList([...response]);
   }
 
+  /**
+   * refresh all product list after a new product is launched.
+   */
   const refreshProducts = async () => {
     const updatedProducts = await fetchAllProducts();
     setAllProducts([...updatedProducts]);
@@ -271,7 +309,12 @@ function App() {
         />
         <Route
           path="/seller/launchpad"
-          element={<Launchpad refreshProducts={refreshProducts} activeSellerId={activeSellerId}/>}
+          element={
+            <Launchpad
+              refreshProducts={refreshProducts}
+              activeSellerId={activeSellerId}
+            />
+          }
         />
       </Routes>
       {personType === "seller" ? <SellerFooter /> : <CustomerFooter />}

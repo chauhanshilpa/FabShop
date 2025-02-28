@@ -9,6 +9,10 @@ interface Props {
   ordersData: SingleOrderInterface[];
 }
 
+/**
+ * 
+ * @returns all ordered product list.
+ */
 const Orders = ({ ordersData }: Props) => {
   return (
     <Container>

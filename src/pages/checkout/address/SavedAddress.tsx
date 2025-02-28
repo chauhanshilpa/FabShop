@@ -14,10 +14,15 @@ interface Props {
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
+/**
+ * 
+ * @returns saved addresses list and card.
+ */
 const SavedAddress = ({ activeUserId, activeStep, setActiveStep }: Props) => {
   const [userAddresses, setUserAddresses] = useState<Address[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState("");
 
+  //fetches customer address on every component render.
   useEffect(() => {
     (async function () {
       const response = await getCustomerSavedAddresses(activeUserId);
@@ -28,10 +33,12 @@ const SavedAddress = ({ activeUserId, activeStep, setActiveStep }: Props) => {
     // eslint-disable-next-line
   }, []);
 
+  //sets selected addressId
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedAddressId(event.target.value);
   };
 
+  //sends customer address to DB during order and increase step by 1
   async function handleProceedButton() {
     let customerSavedAddresses = await getCustomerSavedAddresses(activeUserId);
     let selectedAddress = customerSavedAddresses.filter(
@@ -54,6 +61,7 @@ const SavedAddress = ({ activeUserId, activeStep, setActiveStep }: Props) => {
     setActiveStep(prevStep + 1);
   }
 
+  //go once step back
   function goToPreviousMove() {
     const prevStep = activeStep;
     setActiveStep(prevStep - 1);

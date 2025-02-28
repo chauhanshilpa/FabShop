@@ -16,6 +16,10 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ * 
+ * @returns payment step in checkout process. It has 3 options: COD, UPI payment and card payment.
+ */
 export default function Payment({ activeUserId }: Props) {
   const [openCashOnDeliverPayment, setOpenCashOnDeliverPayment] =
     useState(false);

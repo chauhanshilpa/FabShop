@@ -8,6 +8,10 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ * 
+ * @returns COD card with confirm button.
+ */
 const CashOnDeliveryPayment = ({ activeUserId }: Props) => {
   const navigate = useNavigate();
 

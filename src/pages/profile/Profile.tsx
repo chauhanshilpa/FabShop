@@ -22,6 +22,10 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ *
+ * @returns profile of user having several sections- My Orders, Customer Support, Wishlistsection which showcase name, My Payments, My Addresses, about us, privacy policy, terms and condition and top section containing contact, mail and user profile.
+ */
 const Profile = ({ isUserLoggedIn, activeUserId }: Props) => {
   const [activeUser, setActiveUser] = useState({
     name: "",
@@ -31,6 +35,7 @@ const Profile = ({ isUserLoggedIn, activeUserId }: Props) => {
 
   const navigate = useNavigate();
 
+  //it fetches active user details like name, email, contact to show in profile section.
   useEffect(() => {
     isUserLoggedIn &&
       (async function () {

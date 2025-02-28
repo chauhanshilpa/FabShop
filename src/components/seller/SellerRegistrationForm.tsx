@@ -32,6 +32,10 @@ interface Props {
   setIsSellerLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ * 
+ * @returns seller registration form with google login and login form hyperlink.
+ */
 const SellerRegistrationForm = ({
   setActiveSellerId,
   setIsLoginFormOpen,
@@ -238,7 +242,7 @@ const SellerRegistrationForm = ({
         </Button>
         <Box className="login">
           <Box component="span">
-            Already registered?
+            Already registered?&nbsp;
             <Box
               component="span"
               sx={{

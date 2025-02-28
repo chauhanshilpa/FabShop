@@ -31,6 +31,10 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ * 
+ * @returns psaved ayment information of user- Card details and UPI details.
+ */
 const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const [isCardDetailsFormOpen, setIsCardDetailsFormOpen] = useState(false);
   const [isUpiDetailsFormOpen, setIsUpiDetailsFormOpen] = useState(false);
@@ -45,6 +49,7 @@ const UserPaymentsInfo = ({ activeUserId }: Props) => {
   const [isCardValid, setIsCardValid] = useState(false);
   const [isUpiValid, setIsUpiValid] = useState(false);
 
+  //It fetches saved payment details while opening page.
   useEffect(() => {
     (async function () {
       const response = await getPaymentDetails();

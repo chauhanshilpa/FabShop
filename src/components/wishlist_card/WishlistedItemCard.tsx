@@ -18,6 +18,10 @@ interface Props {
   addToCart: (productId: string) => Promise<void>;
 }
 
+/**
+ * 
+ * @returns card of wishlisted product
+ */
 const WishlistedItemCard = ({
   activeUserId,
   product,

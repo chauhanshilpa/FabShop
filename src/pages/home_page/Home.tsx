@@ -28,6 +28,10 @@ interface Props {
   >;
 }
 
+/**
+ * 
+ * @returns Home carousel and HomeContents which shows cards with products.
+ */
 const Home = ({
   activeUserId,
   recentlyViewedProductsList,

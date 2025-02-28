@@ -5,8 +5,7 @@ import Link from "@mui/material/Link";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Link as FooterLink, useNavigate } from "react-router-dom";
-import { getSearchedProducts } from "../../api/api";
+import { Link as FooterLink } from "react-router-dom";
 import { POPULAR_CATEGORIES_TO_SELL } from "../../helpers/FabShop_constants";
 
 function Copyright() {
@@ -21,14 +20,11 @@ function Copyright() {
   );
 }
 
+/**
+ * 
+ * @returns seller footer.
+ */
 const Footer = () => {
-  const navigate = useNavigate();
-
-  async function handlePopularSearchItemClick(product: string, value: string) {
-    const newSearchedProducts = await getSearchedProducts(value.trim());
-    navigate(`/search/${product}`, { state: { newSearchedProducts } });
-  }
-
   return (
     <Box
       component="footer"

@@ -27,6 +27,10 @@ interface Props {
   handleOrderPlacement: () => void;
 }
 
+/**
+ * 
+ * @returns address page containing address form and list of saved addresses.
+ */
 export default function Address({
   activeUserId,
   activeStep,

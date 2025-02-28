@@ -12,6 +12,10 @@ interface Props {
   addToCart: (productId: string) => Promise<void>;
 }
 
+/**
+ *
+ * @returns list of product in a card with add to add to card and cancel option for every individual product.
+ */
 const Wishlist = ({
   activeUserId,
   wishlistProductsList,

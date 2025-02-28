@@ -4,6 +4,10 @@ interface Props {
   onSuccessFunction: any
 }
 
+/**
+ * 
+ * @returns google login button on login/signup form.
+ */
 const GoogleLoginButton = ({ onSuccessFunction }: Props) => {
   return (
     <GoogleLogin

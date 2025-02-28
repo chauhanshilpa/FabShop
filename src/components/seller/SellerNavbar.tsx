@@ -12,6 +12,10 @@ interface Props {
   activeSellerId: string;
 }
 
+/**
+ *
+ * @returns navbar for seller containing brand icon and a switch to customer button.
+ */
 function SellerNavbar({
   setPersonType,
   isSellerLoggedIn,

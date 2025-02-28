@@ -4,6 +4,10 @@ import Image from "../../Image/Image";
 import Box from "@mui/material/Box";
 import { v4 as uuidv4 } from "uuid";
 
+/**
+ * 
+ * @returns hero carousel
+ */
 const ReactCarousel = ({
   carouselImageList,
 }: {

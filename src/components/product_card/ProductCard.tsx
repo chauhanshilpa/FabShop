@@ -7,6 +7,11 @@ import Image from "../Image/Image";
 import Typography from "@mui/material/Typography";
 import { Product } from "../../api/classModels";
 
+/**
+ * 
+ * @returns a product card containing name, some descprion, image, price.
+ * It is not a individual product. It shows for product list.
+ */
 const ProductCard = ({ product }: { product: Product }) => {
   const navigate = useNavigate();
 

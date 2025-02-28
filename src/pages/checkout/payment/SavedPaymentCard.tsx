@@ -15,10 +15,15 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ * 
+ * @returns all saved cards for payments to show on payment page during checkout.
+ */
 const SavedPaymentCard = ({ activeUserId }: Props) => {
   const [paymentDetails, setPaymentDetails] = useState<PaymentInterface>({});
   const [selectedPaymentId, setSelectedPaymentId] = useState("");
 
+  //runs whenever page runs. Fetch payment details to show all saved payments.
   useEffect(() => {
     (async function () {
       const response = await getPaymentDetails();

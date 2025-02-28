@@ -32,6 +32,10 @@ const states = {
   options: STATES_LIST,
 };
 
+/**
+ * 
+ * @returns reusable address form to save address.
+ */
 const AddressForm = ({
   activeUserId,
   activeStep,

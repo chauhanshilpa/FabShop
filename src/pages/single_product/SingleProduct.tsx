@@ -30,6 +30,10 @@ interface Props {
   removeFromWishlist: (productId: string) => Promise<void>;
 }
 
+/**
+ *
+ * @returns a single product which showcase image, name, ratings, price and detailed description of a particular product. Shows delivery option and has add to card and add to wishlist buttons.
+ */
 const SingleProduct = ({
   activeUserId,
   addToCart,
@@ -48,6 +52,7 @@ const SingleProduct = ({
   const productId: string = product_id!;
   const navigate = useNavigate();
 
+  //gets and set browsed products.
   useEffect(() => {
     (async function () {
       const response = await getUsersBrowsingHistoryList(activeUserId);
@@ -66,20 +71,23 @@ const SingleProduct = ({
       await isCartIncludesProduct();
     })();
     // eslint-disable-next-line
-  },[]);
+  }, []);
 
+  //to show conditional text and color for wishlist button
   async function isWishlistIncludesProduct() {
     const response = await getWishlist(activeUserId);
     const isWishlisted = response.some((product) => product.id === productId);
     setIsProductInWishlist(isWishlisted);
   }
 
+  //to show conditional text and color for cart button
   async function isCartIncludesProduct() {
     const response = await getCartProductsList(activeUserId);
     const isInCart = response.some((product) => product.id === productId);
     setIsProductInCart(isInCart);
   }
 
+  //add or remove after clicking wishlist button depends on existence in wishlist.
   async function handleWishlist() {
     if (activeUserId !== "" || activeUserId === undefined) {
       isProductInWishlist
@@ -96,6 +104,7 @@ const SingleProduct = ({
     }
   }
 
+  //add product to cart and if already in cart then navigate to cart and shows text accordingly.
   async function handleCart() {
     if (activeUserId !== "" || activeUserId === undefined) {
       isProductInCart ? navigate("/checkout") : await addToCart(productId);

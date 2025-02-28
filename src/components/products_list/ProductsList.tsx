@@ -9,6 +9,11 @@ interface Props {
   productsList: Product[];
   userType?: string;
 }
+
+/**
+ *
+ * @returns a reusable component which maps product list to showcase product and if product list length is 0 on a page then it display text
+ */
 const ProductList = ({ productsList, userType }: Props) => {
   return (
     <Container className="products-list">

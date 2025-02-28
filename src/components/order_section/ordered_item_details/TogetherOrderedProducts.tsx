@@ -12,6 +12,10 @@ interface Props {
   totalAmountOfOrder: number;
 }
 
+/**
+ * 
+ * @returns products which are ordered together.
+ */
 const TogetherOrderedProducts = ({
   productId,
   orderedProductList,

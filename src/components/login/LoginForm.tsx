@@ -35,6 +35,10 @@ interface Props {
   setIsSellerLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ *
+ * @returns a reusable login form having fields for mail and password and google login.
+ */
 export default function LoginForm({
   personType,
   setIsLoginFormOpen,

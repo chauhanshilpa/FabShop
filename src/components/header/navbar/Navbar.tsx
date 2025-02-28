@@ -41,6 +41,10 @@ interface Props {
   activeSellerId: string;
 }
 
+/**
+ *
+ * @returns Navbar for customer containing brand icon, navigation for Men, Women, Kids categories. A search bar for quick product discovery. Cart icon to visit cart, store icon to switch as a seller. Login button if user is not logged in. If logged in that shows a profile icon to view profile.
+ */
 function Navbar({
   setPersonType,
   totalProductsInCart,

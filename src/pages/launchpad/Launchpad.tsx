@@ -14,7 +14,7 @@ import {
 import Button from "@mui/material/Button";
 import { addNewProduct, saveLaunchProductsWithSellerId } from "../../api/api";
 import balloonGif from "../../api/assets/launch-successfull.gif";
-import cheerAudio from "../../api/assets/cheering-claps.mp3";
+// import cheerAudio from "../../api/assets/cheering-claps.mp3";
 import {
   prevent_e_onInputTypeNumber,
   sentenceCase,
@@ -27,6 +27,10 @@ interface Props {
   activeSellerId: string;
 }
 
+/**
+ * 
+ * @returns launchpad for seller to launch new product.
+ */
 const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
   const [category, setCategory] = useState<string | null>(null);
   const [categoryInputValue, setCategoryInputValue] = useState("");
@@ -52,6 +56,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
     }
   }, [productType]);
 
+  //if categories are men and women, it automatically select sub categories.
   useEffect(() => {
     if (categoryInputValue === "Men") {
       setSubCategoryInputValue("Boys");
@@ -62,6 +67,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
     }
   }, [category, categoryInputValue]);
 
+  //checks if all inputs are valid and set setIsValid accordingly.
   useEffect(() => {
     const isValid = validLaunchpadInputs(
       category ?? "",
@@ -85,6 +91,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
 
   const navigate = useNavigate();
 
+  //runs when you browse a image.
   const handleFileChange = (newValue: File | null) => {
     setBrowsedImage(newValue);
     if (newValue) {
@@ -95,6 +102,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
     }
   };
 
+  //after launch it refreshes all inputs
   const refreshInputsToInitialState = () => {
     setCategory(null);
     setCategoryInputValue("");
@@ -109,6 +117,7 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
     setBrowsedImage(null);
   };
 
+  //it runs while clicking launch button. It add the product in all products and sets a seller id with that product in a different variable.
   const launchProduct = async () => {
     setIsLaunchButtonClicked(true);
     await addNewProduct(
@@ -121,8 +130,8 @@ const Launchpad = ({ refreshProducts, activeSellerId }: Props) => {
       description
     );
     setLauchSuccessfull(true);
-    let audio = new Audio(cheerAudio);
-    audio.play();
+    // let audio = new Audio(cheerAudio);
+    // audio.play();
     setTimeout(() => {
       setLauchSuccessfull(false);
     }, 2000);

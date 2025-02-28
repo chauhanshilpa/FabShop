@@ -9,6 +9,10 @@ interface Props {
   homeCardProducts: { [key: string]: Product[] };
 }
 
+/**
+ * 
+ * @returns Single card for home page
+ */
 const HomeCards = ({ heading, homeCardProducts }: Props) => {
   return (
     <Card className="home-card">

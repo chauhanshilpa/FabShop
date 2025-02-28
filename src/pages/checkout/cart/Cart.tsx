@@ -27,6 +27,10 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+/**
+ * 
+ * @returns cart page
+ */
 const Cart = ({
   activeUserId,
   cartProductsList,

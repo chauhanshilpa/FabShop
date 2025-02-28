@@ -12,6 +12,10 @@ interface Props {
   isSellerLoggedIn: boolean;
 }
 
+/**
+ * 
+ * @returns profile of seller containing name, contact details and email of seller.
+ */
 const SellerProfile = ({ activeSellerId, isSellerLoggedIn }: Props) => {
   const [activeSellerDetails, setActiveSellerDetails] = useState({
     name: "",

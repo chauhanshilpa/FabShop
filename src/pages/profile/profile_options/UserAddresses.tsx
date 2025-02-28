@@ -21,12 +21,17 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ * 
+ * @returns saved address of user.
+ */
 const UserAddresses = ({ activeUserId }: Props) => {
   const [isAddressFormOpen, setIsAddressFormOpen] = useState<boolean>(false);
   const [userAddresses, setUserAddresses] = useState<Address[]>([]);
   const [addressFormType, setAddressFormType] = useState("");
   const [toEditAddressId, setToEditAddressId] = useState("")
 
+  //it gets customer saved address whenever page opens/runs.
   useEffect(() => {
     (async function () {
       const response = await getCustomerSavedAddresses(activeUserId);

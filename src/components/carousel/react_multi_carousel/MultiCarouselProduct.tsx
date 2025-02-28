@@ -3,6 +3,10 @@ import Image from "../../Image/Image";
 import Box from "@mui/material/Box";
 import { Product } from "../../../api/classModels";
 
+/**
+ * 
+ * @returns single product in multicarousel component
+ */
 const MultiCarouselProduct = ({ product }: { product: Product }) => {
   const navigate = useNavigate();
 

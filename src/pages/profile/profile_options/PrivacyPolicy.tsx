@@ -2,6 +2,10 @@ import "./ProfileOptions.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+/**
+ * 
+ * @returns sample page for privacy policy.
+ */
 const PrivacyPolicy = () => {
   return (
     <Box className="main sample-page-container">

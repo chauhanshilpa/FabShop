@@ -18,6 +18,10 @@ interface Props {
   isUserLoggedIn: boolean;
 }
 
+/**
+ * 
+ * @returns navbar cart icon with a badge to display number of products in cart
+ */
 const NavbarCart = ({ totalProductsInCart, isUserLoggedIn }: Props) => {
   return (
     <StyledBadge

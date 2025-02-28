@@ -8,6 +8,10 @@ interface Props {
   product: Product;
 }
 
+/**
+ * 
+ * @returns one products in card
+ */
 const HomeCardProduct = ({ product }: Props) => {
   const navigate = useNavigate();
 

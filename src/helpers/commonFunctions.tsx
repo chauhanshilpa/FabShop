@@ -1,5 +1,7 @@
 import validator from "validator";
 
+// all the common function that are being used accross the application.
+
 export function titleCase(string: string) {
   let wordsList = string.split(" ");
   for (let i = 0; i < wordsList.length; i++) {

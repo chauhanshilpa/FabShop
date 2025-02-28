@@ -18,6 +18,10 @@ interface Props {
   setIsSellerLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+/**
+ *
+ * @returns seller dashboard which contains seller information, launched product list by seller, a launch button and a logout button.
+ */
 const SellerDashboard = ({
   activeSellerId,
   setActiveSellerId,
@@ -26,6 +30,7 @@ const SellerDashboard = ({
 }: Props) => {
   const [sellerProducts, setSellerProducts] = useState<Product[]>([]);
 
+  //fetches seller products and sets them while opening page.
   useEffect(() => {
     (async function () {
       const response = await getSellerProducts(activeSellerId);

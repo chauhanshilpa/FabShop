@@ -31,6 +31,10 @@ interface Props {
   setActiveUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 
+/**
+ *
+ * @returns a signup form having fields username, email, password, contact number and google login.
+ */
 const SignUpForm = ({
   setIsSignUpFormOpen,
   setIsUserLoggedIn,
@@ -145,8 +149,7 @@ const SignUpForm = ({
         } else {
           setModalText({
             title: "Invalid Contact",
-            description:
-              "Please enter a valid contact number",
+            description: "Please enter a valid contact number",
           });
           togglePopup.current?.click();
         }

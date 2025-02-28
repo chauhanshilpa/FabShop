@@ -17,6 +17,10 @@ interface Props {
   activeUserId: string;
 }
 
+/**
+ * 
+ * @returns a card/form to fill upi details and 'PAY NOW' button.
+ */
 const UPIPayments = ({ activeUserId }: Props) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [upiId, setUpiId] = useState<string>("");

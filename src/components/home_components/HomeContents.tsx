@@ -20,6 +20,10 @@ interface Props {
   >;
 }
 
+/**
+ * 
+ * @returns home page with cards having products including carousel of "Today's deals" and browsing history.
+ */
 const HomeContents = ({
   activeUserId,
   recentlyViewedProductsList,

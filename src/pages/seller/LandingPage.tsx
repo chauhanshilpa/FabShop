@@ -16,8 +16,12 @@ interface Props {
   personType: string;
 }
 
+/**
+ *
+ * @returns seller landing page showing some benefits, register form and login form.
+ */
 const LandingPage = ({
-  personType, 
+  personType,
   setActiveSellerId,
   setIsSellerLoggedIn,
 }: Props) => {

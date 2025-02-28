@@ -12,6 +12,10 @@ interface Props {
   singleOrderDetails: SingleOrderInterface;
 }
  
+/**
+ * 
+ * @returns a card of one ordered item.
+ */
 const OrderItemCard = ({ cartProduct, productId, singleOrderDetails }: Props) => {
   const navigate = useNavigate();
   

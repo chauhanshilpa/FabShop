@@ -7,8 +7,13 @@ import { Product } from "../../api/classModels";
 import Image from "../../components/Image/Image";
 import ProductsList from "../../components/products_list/ProductsList";
 
+/**
+ *
+ * @returns product list based on category which in result showcases all product cards of a category.
+ */
 const Category = ({ allProducts }: { allProducts: Product[] }) => {
   let { page } = useParams();
+  //filter products according to category
   const filteredProducts = allProducts.filter(
     ({ category }) => category === page
   );

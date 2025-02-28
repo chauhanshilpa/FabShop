@@ -23,6 +23,10 @@ interface Props {
   setCartProductsPrice: React.Dispatch<React.SetStateAction<number>>;
 }
 
+/**
+ *
+ * @returns a single product in card with some details and increase, decrease quantity and remove, save to wishlist button.
+ */
 const CartProduct = ({
   activeUserId,
   product,

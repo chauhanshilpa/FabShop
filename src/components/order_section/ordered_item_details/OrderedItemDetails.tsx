@@ -7,6 +7,10 @@ import { useLocation } from "react-router-dom";
 import TogetherOrderedProducts from "./TogetherOrderedProducts";
 import { v4 as uuidv4 } from "uuid";
 
+/**
+ * 
+ * @returns details of a order like it's order ID, time when it was ordered, address used during order and other items ordered with the item.
+ */
 const OrderedItemDetails = () => {
   const { state } = useLocation();
   const { productId, singleOrderDetails } = state;
