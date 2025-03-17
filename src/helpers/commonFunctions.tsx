@@ -111,3 +111,7 @@ export function validLaunchpadInputs(
   }
   return false;
 }
+
+function cherry_pick1(){
+  return true;
+}
