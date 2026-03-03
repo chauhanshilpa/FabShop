@@ -29,11 +29,14 @@
   flex-direction: column;
   height: 7rem;
   cursor: pointer;
+  position: relative;
 }
 
 .home-content-row-1 .home-card-images img {
   position: absolute;
   height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 .multi-products-carousel,
